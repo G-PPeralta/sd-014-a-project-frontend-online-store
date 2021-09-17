@@ -19,5 +19,4 @@ export async function getProductsFromCategoryAndQuery(/* categoryId, query */) {
   // categoria:   https://api.mercadolibre.com/sites/MLB/search?category=$CATEGORY_ID
   // Para buscar itens de uma categoria por termo:
   //  https://api.mercadolibre.com/sites/MLB/search?category=$CATEGORY_ID&q=$QUERY <<< Compara aqui
-  
 }
