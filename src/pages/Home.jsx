@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 import trybeLogo from '../images/trybeLogo.png';
@@ -23,9 +22,8 @@ class Home extends React.Component {
 
   handleChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
-    value.length > 0
-      ? this.setState({ shouldShow: false })
-      : this.setState({ shouldShow: true });
+    if (value.length > 0) this.setState({ shouldShow: false });
+    else this.setState({ shouldShow: true });
   }
 
   handleSelect = (event) => {
@@ -55,13 +53,13 @@ class Home extends React.Component {
           align-items-center
           shadow-sm
           "
-          style={ { backgroundColor: '#326C53' } }
+          style={ { backgroundColor: '#326c53' } }
         >
           <img
             src={ trybeLogo }
             alt="Logo da Trybe"
             className="mb-1"
-            style={ { width: '70px', height: 'auto' } }
+            style={ { width: '70px' } }
           />
           <div className="d-flex">
             <input
