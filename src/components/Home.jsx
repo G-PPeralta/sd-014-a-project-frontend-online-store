@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import MarketButton from './MarketButton';
 import ListaDeProdutos from './ListaDeProdutos';
-import MarketButton from './MarketButton';
-
 
 class Home extends Component {
   render() {
