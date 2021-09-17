@@ -23,6 +23,11 @@ class Home extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleSelect = (event) => {
+    this.handleChange(event);
+    this.getProducts();
+  }
+
   getProducts() {
     const { search, category } = this.state;
     this.setState(async () => {
@@ -35,7 +40,7 @@ class Home extends React.Component {
     const { search, products } = this.state;
     return (
       <main className="d-flex justify-content-start">
-        <Categories onChange={ this.handleChange } />
+        <Categories onChange={ this.handleSelect } />
         <section className="d-flex flex-column">
           <input
             data-testid="query-input"
