@@ -9,6 +9,7 @@ class MyCart extends React.Component {
     };
   }
 
+  // retonar mensagem do carrinho
   emptyCartMessage = () => 'Seu carrinho está vazio'
 
   render() {
