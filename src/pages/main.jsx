@@ -1,8 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ListaDeCategorias from '../components/ListaDeCategorias';
+import { getCategories } from '../services/api';
 
 class main extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      categories: [],
+    };
+  }
+
+  componentDidMount() {
+    getCategories().then((dados) => this.setState({ categories: dados }));
+  }
+
   render() {
+    const { categories } = this.state;
     return (
       <div data-testid="home-initial-message">
         <h2>Digite algum termo de pesquisa ou escolha uma categoria.</h2>
@@ -15,6 +29,12 @@ class main extends React.Component {
             carrinho
           </button>
         </Link>
+        {categories
+          .map((categoria) => (
+            <ListaDeCategorias
+              key={ categoria.id }
+              categoria={ categoria }
+            />)) }
       </div>
     );
   }
