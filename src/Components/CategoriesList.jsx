@@ -1,0 +1,49 @@
+import React from 'react';
+import { getCategories } from '../services/api';
+
+class CategoriesList extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      itemsCategories: [],
+    };
+    this.callsApi = this.callsApi.bind(this);
+  }
+
+  componentDidMount() {
+    this.callsApi();
+  }
+
+  async callsApi() {
+    const displayCategories = await getCategories();
+    this.setState({
+      itemsCategories: displayCategories,
+    });
+  }
+
+  render() {
+    const { itemsCategories } = this.state;
+    return (
+      <section>
+        <ul>
+          { itemsCategories.map((categorie) => (
+            <div key={ categorie.id }>
+              <label htmlFor="categories">
+                <input
+                  type="radio"
+                  name="categoria"
+                  id={ categorie.id }
+                  data-testid="category"
+                  key={ categorie.name }
+                />
+                { categorie.name }
+              </label>
+            </div>
+          ))}
+        </ul>
+      </section>
+    );
+  }
+}
+
+export default CategoriesList;
