@@ -1,13 +1,13 @@
 import React from 'react';
 
 import './App.css';
+import SearchInput from './components/SearchInput';
 
 function App() {
   return (
-    <div className="App" data-testid="home-initial-message">
-      <input />
-      Digite algum termo de pesquisa ou escolha uma categoria.
-    </div>
+    <main>
+      <SearchInput />
+    </main>
   );
 }
 
