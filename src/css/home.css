@@ -1,0 +1,10 @@
+.card-product img {
+  height: 100px;
+  width: 80px;
+}
+
+.card-product {
+  border: 1px solid black;
+  height: 280px;
+  width: 240px;
+}
