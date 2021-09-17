@@ -7,8 +7,8 @@ class ShoppingCartLink extends React.Component {
     return (
       <div>
         <Link
-        to="/shopping-cart"
-        data-testid="shopping-cart-button"
+          to="/shopping-cart"
+          data-testid="shopping-cart-button"
         >
           <ShoppingCartImg />
         </Link>

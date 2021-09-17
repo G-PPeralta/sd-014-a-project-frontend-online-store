@@ -8,4 +8,4 @@ class ShoppingCartImg extends React.Component {
   }
 }
 
-export default ShoppingCartImg
+export default ShoppingCartImg;

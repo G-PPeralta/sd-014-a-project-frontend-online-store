@@ -6,7 +6,7 @@ class ShoppingCart extends React.Component {
     return (
       <div>
         <ShoppingCartImg />
-        <p data-testid="shopping-cart-empty-message">"Seu carrinho está vazio"</p>
+        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       </div>
     );
   }
