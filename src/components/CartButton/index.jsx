@@ -11,7 +11,6 @@ class CartButton extends React.Component {
         >
           Carrinho
         </Link>
-        <p data-testid="shopping-cart-empty-message" />
       </div>
     );
   }

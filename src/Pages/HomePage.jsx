@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import CartButton from './CartButton';
+import CartButton from '../components/CartButton';
 
 export default class HomePage extends Component {
   render() {
     return (
       <div data-testid="home-initial-message">
         <input type="text" />
-        <CartButton />
+        <h3>Digite algum termo de pesquisa ou escolha uma categoria.</h3>
+        <div>
+          <CartButton />
+        </div>
       </div>
     );
   }

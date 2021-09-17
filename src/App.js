@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import CartList from './components/CartList';
-import HomePage from './components/HomePage';
+import CartList from './Pages/CartList';
+import HomePage from './Pages/HomePage';
 
 function App() {
   return (
