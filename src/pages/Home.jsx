@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { BsSearch } from 'react-icons/bs';
+import CartButton from '../components/CartButton';
 
 import Categories from '../components/Categories';
 import HomeMessage from '../components/HomeMessage';
@@ -10,6 +10,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 class Home extends React.Component {
   constructor() {
     super();
+    document.title = 'Home';
     this.state = {
       search: '',
       category: '',
@@ -52,6 +53,7 @@ class Home extends React.Component {
             <BsSearch />
           </button>
           <HomeMessage />
+          <CartButton />
           <ProductList products={ products } />
         </section>
       </main>
