@@ -1,6 +1,8 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { getCategories } from './services/api';
+import Home from './pages/home';
 
 class App extends React.Component {
   constructor() {
@@ -26,6 +28,7 @@ class App extends React.Component {
     const { results } = this.state;
     return (
       <div className="App">
+        <Home data-testid="home-initial-message" />
         <header className="App-header">
 
           <span>{ results }</span>
