@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
+import trybeLogo from '../images/trybeLogo.png';
 import CartButton from '../components/CartButton';
-
 import Categories from '../components/Categories';
 import HomeMessage from '../components/HomeMessage';
 import ProductList from '../components/ProductList';
@@ -15,12 +16,16 @@ class Home extends React.Component {
       search: '',
       category: '',
       products: [],
+      shouldShow: true,
     };
     this.getProducts = this.getProducts.bind(this);
   }
 
   handleChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
+    value.length > 0
+      ? this.setState({ shouldShow: false })
+      : this.setState({ shouldShow: true });
   }
 
   handleSelect = (event) => {
@@ -37,31 +42,75 @@ class Home extends React.Component {
   }
 
   render() {
-    const { search, products } = this.state;
+    const { search, products, shouldShow } = this.state;
     return (
-      <main className="d-flex justify-content-start">
-        <Categories onChange={ this.handleSelect } />
-        <section className="d-flex flex-column">
-          <input
-            data-testid="query-input"
-            type="text"
-            placeholder="Busca"
-            name="search"
-            value={ search }
-            onChange={ this.handleChange }
+      <div
+        style={ { backgroundColor: '#f9f9f9' } }
+        className="d-flex flex-column w-100"
+      >
+        <header
+          className="d-flex
+          w-100
+          justify-content-around
+          align-items-center
+          shadow-sm
+          "
+          style={ { backgroundColor: '#326C53' } }
+        >
+          <img
+            src={ trybeLogo }
+            alt="Logo da Trybe"
+            className="mb-1"
+            style={ { width: '70px', height: 'auto' } }
           />
-          <button
-            type="button"
-            onClick={ this.getProducts }
-            data-testid="query-button"
-          >
-            <BsSearch />
-          </button>
-          <HomeMessage />
+          <div className="d-flex">
+            <input
+              data-testid="query-input"
+              type="text"
+              className="form-control"
+              style={ { width: '800px' } }
+              placeholder="Busca"
+              name="search"
+              value={ search }
+              onChange={ this.handleChange }
+            />
+            <button
+              type="button"
+              className="btn btn-primary ms-2"
+              onClick={ this.getProducts }
+              data-testid="query-button"
+            >
+              <BsSearch />
+            </button>
+          </div>
           <CartButton />
-          <ProductList products={ products } />
-        </section>
-      </main>
+        </header>
+        <main
+          className="d-flex my-3 m-auto"
+          style={ { width: '85%' } }
+        >
+          <Categories
+            onChange={ this.handleSelect }
+            className="d-flex
+            flex-column
+            border
+            p-4
+            m-2
+            rounded
+            h-75
+            "
+          />
+          <section
+            className="d-flex
+          flex-column
+          w-75
+          align-items-center"
+          >
+            {shouldShow && <HomeMessage />}
+            <ProductList products={ products } />
+          </section>
+        </main>
+      </div>
     );
   }
 }

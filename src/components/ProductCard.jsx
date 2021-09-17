@@ -1,17 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card, Button } from 'react-bootstrap';
 
 class ProductCard extends React.Component {
   render() {
     const { product } = this.props;
     return (
-      <div className="card" data-testid="product">
-        <img src={ product.thumbnail } className="card-img-top" alt="..." />
-        <div className="card-body">
-          <h3 className="card-title">{ product.title }</h3>
-          <p className="card-text">{ product.price }</p>
-        </div>
-      </div>
+      <Card
+        data-testid="product"
+        style={ { width: '12rem' } }
+        className="m-2"
+      >
+        <Card.Img variant="top" src={ product.thumbnail } />
+        <Card.Body>
+          <p><strong>{ product.title }</strong></p>
+          <Card.Text>
+            R$
+            { product.price }
+          </Card.Text>
+          <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      </Card>
     );
   }
 }

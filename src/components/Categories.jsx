@@ -24,11 +24,14 @@ class Categories extends React.Component {
   }
 
   render() {
-    const { onChange } = this.props;
+    const { onChange, className } = this.props;
     const { categories } = this.state;
     return (
-      <section className="d-flex flex-column">
-        <h5>Categorias:</h5>
+      <section
+        className={ className }
+        style={ { backgroundColor: 'white' } }
+      >
+        <h5 className="mb-3">Categorias:</h5>
         { categories.map((category) => (<Category
           key={ category.id }
           title={ category.name }
@@ -42,6 +45,7 @@ class Categories extends React.Component {
 
 Categories.propTypes = {
   onChange: PropTypes.func,
+  className: PropTypes.string,
 }.isRequired;
 
 export default Categories;
