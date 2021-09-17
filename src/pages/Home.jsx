@@ -19,10 +19,12 @@ class Home extends React.Component {
   }
 
   fetchApi(response) {
-    this.setState({
-      responseApi: response,
-      apiFetched: true,
-    });
+    this.setState(
+      { responseApi: response },
+      () => {
+        this.setState({ apiFetched: true });
+      },
+    );
   }
 
   render() {
