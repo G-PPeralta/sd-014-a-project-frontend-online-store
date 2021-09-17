@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Category from './Category';
 
@@ -23,18 +24,24 @@ class Categories extends React.Component {
   }
 
   render() {
+    const { onChange } = this.props;
     const { categories } = this.state;
     return (
-      <section className="">
-        <h1>Categorias:</h1>
+      <section className="d-flex flex-column">
+        <h5>Categorias:</h5>
         { categories.map((category) => (<Category
           key={ category.id }
           title={ category.name }
           id={ category.id }
+          onChange={ onChange }
         />)) }
       </section>
     );
   }
 }
+
+Categories.propTypes = {
+  onChange: PropTypes.func,
+}.isRequired;
 
 export default Categories;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class Category extends React.Component {
   render() {
     const { title, id } = this.props;
+    const { onChange } = this.props;
     return (
       <label data-testid="category" htmlFor={ id }>
         { title }
@@ -11,6 +12,7 @@ class Category extends React.Component {
           type="radio"
           name="category"
           id={ id }
+          onChange={ onChange }
           value={ id }
         />
       </label>
