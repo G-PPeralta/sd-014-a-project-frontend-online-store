@@ -1,15 +1,13 @@
 const linkBase = 'https://api.mercadolibre.com/sites/MLB/';
 
 async function getApi(search) {
-  try {
-    const response = await fetch(search);
-    const responseJson = await response.json();
-    console.log(responseJson);
-    return responseJson;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+  // try {
+  const response = await fetch(search);
+  const responseJson = await response.json();
+  return responseJson;
+  // } catch (error) {
+  // return null;
+  // }
 }
 
 export async function getCategories() {
