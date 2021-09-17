@@ -9,7 +9,6 @@ class MyCart extends React.Component {
     };
   }
 
-  // Verifica se mensagem deve ser mostrada
   emptyCartMessage = () => 'Seu carrinho está vazio'
 
   render() {
