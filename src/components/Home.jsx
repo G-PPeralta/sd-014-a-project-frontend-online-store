@@ -10,37 +10,22 @@ class Home extends Component {
       retornoCategory: [],
       productList: [],
       searchProduct: '',
-      categoriaSelecionada: 'MLB5672',
+      categoriaSelecionada: '',
     };
     this.searchInput = this.searchInput.bind(this);
     this.chamarApi = this.chamarApi.bind(this);
     this.addCotegory = this.addCotegory.bind(this);
-    this.test = this.test.bind(this);
   }
 
   componentDidMount() {
-    this.test();
+    getCategories().then((result) => this.setState({ retornoCategory: result }));
+    // this.chamarApi();
   }
 
-  componentDidUpdate() {
-    this.chamarApi();
-  }
-
-  async test() {
-    const t1 = await getCategories();
-    const t2 = await t1;
-    return this.setState({
-      retornoCategory: t2,
-    });
-  }
-
-  async chamarApi() {
+  chamarApi() {
     const { searchProduct, categoriaSelecionada } = this.state;
-    const t1 = await getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct);
-    const t2 = await t1.results;
-    return this.setState({
-      productList: t2,
-    });
+    getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
+      .then((result) => this.setState({ productList: result.results }));
   }
 
   searchInput(event) {
