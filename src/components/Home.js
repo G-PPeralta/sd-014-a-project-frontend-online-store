@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import ProductList from './ProductList';
 import SearchComponent from './SearchComponent';
+import Categories from './Categories';
 import '../css/home.css';
 
 class Home extends Component {
@@ -13,9 +14,23 @@ class Home extends Component {
       input: '',
       lista: [],
       submit: false,
+      listCategories: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.listCategories();
+  }
+
+  listCategories() {
+    this.setState(async()=> {
+      const categories = await getCategories();
+      this.setState ({
+        listCategories : categories,
+      })
+    })
   }
 
   handleChange({ target }) {
@@ -37,7 +52,7 @@ class Home extends Component {
   }
 
   render() {
-    const { input, lista, submit } = this.state;
+    const { input, lista, submit, listCategories } = this.state;
     return (
       <div data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
@@ -46,6 +61,8 @@ class Home extends Component {
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
+        <Categories listCategories={ listCategories } />
+        
         { submit && <ProductList lista={ lista } /> }
       </div>
     );
