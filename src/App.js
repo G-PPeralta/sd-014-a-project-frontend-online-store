@@ -4,7 +4,6 @@ import './App.css';
 import main from './pages/main';
 import shoppingCart from './pages/shoppingCart';
 
-
 function App() {
   return (
     <div className="App">

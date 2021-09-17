@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-function shoppingCart() {
+class shoppingCart extends React.Component {
+  render() {
     return (
-        <div>
-            
-        </div>
-    )
+      <div>
+      </div>
+    );
+  }
 }
 
-export default shoppingCart
+export default shoppingCart;
