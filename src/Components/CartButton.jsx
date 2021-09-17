@@ -12,3 +12,4 @@ class CartButton extends React.Component {
 }
 
 export default CartButton;
+// FUNCIONA AAAAAAAA
