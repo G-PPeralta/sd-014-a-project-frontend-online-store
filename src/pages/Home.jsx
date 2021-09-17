@@ -1,20 +1,66 @@
 import React from 'react';
+import { BsSearch } from 'react-icons/bs';
 import CartButton from '../components/CartButton';
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
+import Categories from '../components/Categories';
+import HomeMessage from '../components/HomeMessage';
+import ProductList from '../components/ProductList';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
+class Home extends React.Component {
+  constructor() {
+    super();
     document.title = 'Home';
+    this.state = {
+      search: '',
+      category: '',
+      products: [],
+    };
+    this.getProducts = this.getProducts.bind(this);
+  }
+
+  handleChange = ({ target: { value, name } }) => {
+    this.setState({ [name]: value });
+  }
+
+  handleSelect = (event) => {
+    this.handleChange(event);
+    this.getProducts();
+  }
+
+  getProducts() {
+    const { search, category } = this.state;
+    this.setState(async () => {
+      const products = await getProductsFromCategoryAndQuery(category, search);
+      this.setState({ products: products.results });
+    });
   }
 
   render() {
+    const { search, products } = this.state;
     return (
-      <main>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <CartButton />
+      <main className="d-flex justify-content-start">
+        <Categories onChange={ this.handleSelect } />
+        <section className="d-flex flex-column">
+          <input
+            data-testid="query-input"
+            type="text"
+            placeholder="Busca"
+            name="search"
+            value={ search }
+            onChange={ this.handleChange }
+          />
+          <button
+            type="button"
+            onClick={ this.getProducts }
+            data-testid="query-button"
+          >
+            <BsSearch />
+          </button>
+          <HomeMessage />
+          <CartButton />
+          <ProductList products={ products } />
+        </section>
       </main>
     );
   }
