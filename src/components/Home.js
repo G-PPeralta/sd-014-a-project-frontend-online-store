@@ -24,15 +24,6 @@ class Home extends Component {
     this.listCategories();
   }
 
-  listCategories() {
-    this.setState(async()=> {
-      const categories = await getCategories();
-      this.setState ({
-        listCategories : categories,
-      })
-    })
-  }
-
   handleChange({ target }) {
     const { name, value } = target;
     this.setState({
@@ -51,6 +42,15 @@ class Home extends Component {
     });
   }
 
+  listCategories() {
+    this.setState(async () => {
+      const categories = await getCategories();
+      this.setState({
+        listCategories: categories,
+      });
+    });
+  }
+
   render() {
     const { input, lista, submit, listCategories } = this.state;
     return (
@@ -62,7 +62,7 @@ class Home extends Component {
           onClick={ this.handleClick }
         />
         <Categories listCategories={ listCategories } />
-        
+
         { submit && <ProductList lista={ lista } /> }
       </div>
     );
