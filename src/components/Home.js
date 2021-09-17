@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
 import SearchComponent from './SearchComponent';
-import '../css/home.css'
+import '../css/home.css';
 
 class Home extends Component {
   constructor(props) {
