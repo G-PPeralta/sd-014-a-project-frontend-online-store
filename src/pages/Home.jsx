@@ -4,7 +4,7 @@ import { BsSearch } from 'react-icons/bs';
 
 import Categories from '../components/Categories';
 import HomeMessage from '../components/HomeMessage';
-import ProductList from '../components/ProductCard';
+import ProductList from '../components/ProductList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
@@ -14,55 +14,45 @@ class Home extends React.Component {
       search: '',
       category: '',
       products: [],
-      hideProducts: true,
     };
     this.getProducts = this.getProducts.bind(this);
   }
 
-  handleSearch = ({ target: { value } }) => {
-    this.setState({ search: value });
+  handleChange = ({ target: { value, name } }) => {
+    this.setState({ [name]: value });
   }
 
-  handleSelect = ({ target: { value } }) => {
-    this.setState({ category: value });
-  }
-
-  handleClick = () => {
+  getProducts() {
     const { search, category } = this.state;
-    this.getProducts(category, search);
-  }
-
-  async getProducts(query, category) {
     this.setState(async () => {
-      const requestProducts = await getProductsFromCategoryAndQuery(query, category);
-      const products = requestProducts.results;
-      this.setState({ products });
-      this.setState({ hideProducts: false });
+      const products = await getProductsFromCategoryAndQuery(category, search);
+      this.setState({ products: products.results });
     });
   }
 
   render() {
-    const { search, hideProducts, products } = this.state;
+    const { search, products } = this.state;
     return (
       <main className="d-flex justify-content-start">
-        <Categories onChange={ this.handleSelect } />
+        <Categories onChange={ this.handleChange } />
         <section className="d-flex flex-column">
-          <form>
-            <input
-              type="text"
-              value={ search }
-              data-testid="query-input"
-              onChange={ this.handleSearch }
-            />
-            <button
-              type="button"
-              data-testid="query-button"
-              onClick={ this.handleClick }
-            >
-              <BsSearch />
-            </button>
-          </form>
-          {hideProducts ? <HomeMessage /> : <ProductList products={ products } />}
+          <input
+            data-testid="query-input"
+            type="text"
+            placeholder="Busca"
+            name="search"
+            value={ search }
+            onChange={ this.handleChange }
+          />
+          <button
+            type="button"
+            onClick={ this.getProducts }
+            data-testid="query-button"
+          >
+            <BsSearch />
+          </button>
+          <HomeMessage />
+          <ProductList products={ products } />
         </section>
       </main>
     );
