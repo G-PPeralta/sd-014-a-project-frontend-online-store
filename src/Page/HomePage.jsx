@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CartButton from '../components/CartButton';
 import MenuCategory from '../components/MenuCategory';
 import { getCategories } from '../services/api';
 
@@ -21,14 +22,16 @@ export default class HomePage extends Component {
 
   render() {
     const { produtos } = this.state;
+
     return (
-      <>
-        <div data-testid="home-initial-message">
-          <input type="text" />
-          <h3> Digite algum termo de pesquisa ou escolha uma categoria. </h3>
+      <div data-testid="home-initial-message">
+        <input type="text" />
+        <h3>Digite algum termo de pesquisa ou escolha uma categoria.</h3>
+        <div>
+          <CartButton />
         </div>
         {produtos && <MenuCategory produtos={ produtos } />}
-      </>
+      </div>
     );
   }
 }
