@@ -1,41 +1,21 @@
 import React from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import PropTypes from 'prop-types';
 
 class ListaDeProdutos extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      searchProduct: '',
-      productList: [],
-    };
-    this.searchInput = this.searchInput.bind(this);
-    this.chamarApi = this.chamarApi.bind(this);
-  }
-
-  chamarApi() {
-    const { searchProduct } = this.state;
-    getProductsFromCategoryAndQuery('', searchProduct)
-      .then((result) => this.setState({ productList: result.results }));
-  }
-
-  searchInput(event) {
-    this.setState({ searchProduct: event.target.value });
-  }
-
   render() {
-    const { searchProduct, productList } = this.state;
+    const { searchProduct, productList, chamarApi, searchInput } = this.props;
     return (
       <>
         <input
           data-testid="query-input"
           type="text"
           value={ searchProduct }
-          onChange={ this.searchInput }
+          onChange={ searchInput }
         />
         <button
           data-testid="query-button"
           type="submit"
-          onClick={ this.chamarApi }
+          onClick={ chamarApi }
         >
           Pesquisar
         </button>
@@ -48,5 +28,12 @@ class ListaDeProdutos extends React.Component {
     );
   }
 }
+
+ListaDeProdutos.propTypes = {
+  searchProduct: PropTypes.string,
+  productList: PropTypes.array,
+  chamarApi: PropTypes.func,
+  searchInput: PropTypes.func,
+}.isRequired;
 
 export default ListaDeProdutos;
