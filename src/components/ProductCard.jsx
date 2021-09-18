@@ -5,8 +5,17 @@ import { Card } from 'react-bootstrap';
 import AddToCardButton from './AddToCardButton';
 
 class ProductCard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      homeIs: true,
+    };
+  }
+
   render() {
     const { product, offCart } = this.props;
+    const { homeIs } = this.state;
     const id = offCart ? 'product-detail-link' : 'shopping-cart-product-name';
     return (
       <Card
@@ -31,7 +40,7 @@ class ProductCard extends React.Component {
             </Card.Text>
           </Card.Body>
         </Link>
-        { offCart && <AddToCardButton product={ product } />}
+        { offCart && <AddToCardButton homeIs={ homeIs } product={ product } /> }
       </Card>
     );
   }

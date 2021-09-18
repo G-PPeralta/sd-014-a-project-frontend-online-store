@@ -10,9 +10,11 @@ class AddToCardButton extends React.Component {
   }
 
   render() {
+    const { homeIs } = this.props;
+    const data = homeIs ? 'product-add-to-cart' : 'product-detail-add-to-cart';
     return (
       <button
-        data-testid="product-add-to-cart"
+        data-testid={ data }
         type="button"
         className="border-top-0
           border

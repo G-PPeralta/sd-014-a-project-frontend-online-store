@@ -11,11 +11,16 @@ class ProductDetails extends React.Component {
     super(props);
     const { location: { state: { product } } } = this.props;
     document.title = product.title;
+
+    this.state = {
+      homeIs: false,
+    };
   }
 
   render() {
     const { location: { state: { product } } } = this.props;
     const { title, price, thumbnail, attributes } = product;
+    const { homeIs } = this.state;
     return (
       <div>
         <Header>
@@ -44,7 +49,7 @@ class ProductDetails extends React.Component {
                   </li>
                 ))}
               </Card.Text>
-              <AddToCardButton />
+              <AddToCardButton product={ product } homeIs={ homeIs } />
             </Card.Body>
           </Card>
           <Card.Footer>
