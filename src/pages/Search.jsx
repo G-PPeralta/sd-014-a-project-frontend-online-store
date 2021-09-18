@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 import InputGen from '../components/InputGen';
@@ -20,6 +21,11 @@ class Search extends Component {
     const { searchText } = this.state;
     return (
       <div>
+        <header>
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">
+            Carrinho
+          </Link>
+        </header>
         <InputGen
           config={ ['text', 'searchText', 'search-text-input', searchText, false,
             this.handleChange, 'Faça sua pesquisa'] }
