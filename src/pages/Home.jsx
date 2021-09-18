@@ -1,48 +1,42 @@
 import React, { Component } from 'react';
-import CartButton from '../components/CartButton';
-import { getCategories } from '../services/api';
-import Categories from '../component/Categories';
+import * as api from '../services/api';
+import ProductList from '../components/ProductList';
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
       categories: [],
+      searchTextHome: '',
+      categoriaDeProduto: '',
     };
     this.callGetCategories = this.callGetCategories.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.callGetCategories();
   }
 
+  // handleChange = ({ target }) => this.setState({
+  //   [target.name]: target.value,
+  // });
+
   async callGetCategories() {
-    const categories = await getCategories();
+    const categories = await api.getCategories();
     this.setState({
       categories,
     });
   }
 
   render() {
-    const { categories } = this.state;
     return (
-      <div>
-        <form>
-          <label htmlFor="searchTextHome">
-            <input type="text" name="searchTextHome" id="searchTextHome" />
-          </label>
-          <CartButton />
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        </form>
-        { categories.map((category) => (
-          <Categories
-            key={ category.id }
-            category={ category }
-          />
-        ))}
-      </div>
+      <>
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        <ProductList />
+      </>
     );
   }
 }
