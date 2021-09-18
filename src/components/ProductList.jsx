@@ -16,6 +16,7 @@ class ProductList extends Component {
       searchText: '',
       categoriaDeProduto: '',
       categories: [],
+      categoriasDaApi: [],
     };
 
     this.callGetCategories = this.callGetCategories.bind(this);
