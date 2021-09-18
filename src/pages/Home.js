@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import * as api from '../services/api';
 import Categories from '../components/Categories';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
+
+import '../styles/Home.css';
 
 export default class Home extends React.Component {
   constructor() {
@@ -19,31 +21,27 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { isLoading } = this.state;
-    if (isLoading) {
-      this.getProducts();
-    }
+    this.getProducts();
   }
 
   handleInput = ({ target: { name, value } }) => { this.setState({ [name]: value }); }
 
-  handleRadio = ({ target: { checked, value } }) => {
+  handleRadio = ({ target: { checked, id } }) => {
     if (checked) {
-      this.setState({ category: value });
+      this.setState({ category: id });
     }
   }
 
   handleClick = () => {
-    const { category, searchText } = this.state;
-
     this.setState({ isLoading: true });
-    this.getProducts(category, searchText);
+    this.getProducts();
   }
 
   getProducts = async () => {
     const { category, searchText } = this.state;
-    const products = await getProductsFromCategoryAndQuery(category, searchText);
-    this.setState({ isLoading: false, products: products.results });
+    const products = await api.getProductsFromCategoryAndQuery(category, searchText);
+    const results = products ? products.results : [];
+    this.setState({ isLoading: false, products: results });
   }
 
   results = () => {
@@ -59,37 +57,41 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const MIN_NAME_LENGTH = 3;
     const { isLoading, category, searchText } = this.state;
 
     return (
-      <main data-testid="home-initial-message">
-        <section>
-          <input
-            type="text"
-            data-testid="query-input"
-            id="query-input"
-            name="searchText"
-            value={ searchText }
-            onChange={ this.handleInput }
-            placeholder="Termo de pesquisa"
-          />
-          <button
-            type="submit"
-            data-testid="query-button"
-            onClick={ this.handleClick }
-            disabled={ searchText.length < MIN_NAME_LENGTH }
-          >
-            Pesquisar
-          </button>
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <span role="img" aria-label="shopping-cart">&#128722;</span>
-          </Link>
-        </section>
-        <section>
-          { isLoading ? <Loading /> : this.results() }
-        </section>
+      <main data-testid="home-initial-message" className="flex">
         <Categories category={ category } onChange={ this.handleRadio } />
+        <section className="lado-direito">
+          <article>
+            <input
+              className="search"
+              type="text"
+              data-testid="query-input"
+              id="query-input"
+              name="searchText"
+              value={ searchText }
+              onChange={ this.handleInput }
+              placeholder="Termo de pesquisa"
+            />
+            <button
+              type="submit"
+              data-testid="query-button"
+              id="query-button"
+              onClick={ this.handleClick }
+            >
+              Pesquisar
+            </button>
+            <Link to="/cart" data-testid="shopping-cart-button">
+              <span id="shopping-cart" role="img" aria-label="shopping-cart">
+                &#128722;
+              </span>
+            </Link>
+          </article>
+          <article>
+            { isLoading ? <Loading /> : this.results() }
+          </article>
+        </section>
       </main>
     );
   }

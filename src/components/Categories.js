@@ -29,16 +29,18 @@ export default class Categories extends React.Component {
     const { category, onChange } = this.props;
     return (
       categories.map(({ name, id }) => (
-        <div data-testid="category" key={ id }>
-          <input
-            type="radio"
-            name="category"
-            id={ id }
-            value={ name }
-            checked={ category === name }
-            onChange={ onChange }
-          />
-          <label htmlFor={ id }>{ name }</label>
+        <div key={ id }>
+          <label data-testid="category" htmlFor={ id }>
+            <input
+              type="radio"
+              name="category"
+              id={ id }
+              value={ name }
+              checked={ category === id }
+              onChange={ onChange }
+            />
+            { name }
+          </label>
         </div>
       ))
     );
@@ -48,7 +50,7 @@ export default class Categories extends React.Component {
     const { isLoading } = this.state;
 
     return (
-      <aside>
+      <aside className="lado-esquerdo">
         { isLoading ? <Loading /> : this.showCategories() }
       </aside>
     );
