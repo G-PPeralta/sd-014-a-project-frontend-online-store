@@ -1,10 +1,10 @@
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
-import trybeLogo from '../images/trybeLogo.png';
 import CartButton from '../components/CartButton';
 import Categories from '../components/Categories';
 import HomeMessage from '../components/HomeMessage';
 import ProductList from '../components/ProductList';
+import Header from '../components/Header';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
@@ -46,7 +46,7 @@ class Home extends React.Component {
         style={ { backgroundColor: '#f9f9f9' } }
         className="d-flex flex-column w-100"
       >
-        <header
+        <Header
           className="d-flex
           w-100
           justify-content-around
@@ -55,12 +55,6 @@ class Home extends React.Component {
           "
           style={ { backgroundColor: '#326c53' } }
         >
-          <img
-            src={ trybeLogo }
-            alt="Logo da Trybe"
-            className="mb-1"
-            style={ { width: '70px' } }
-          />
           <div className="d-flex">
             <input
               data-testid="query-input"
@@ -82,7 +76,7 @@ class Home extends React.Component {
             </button>
           </div>
           <CartButton />
-        </header>
+        </Header>
         <main
           className="d-flex my-3 m-auto"
           style={ { width: '85%' } }

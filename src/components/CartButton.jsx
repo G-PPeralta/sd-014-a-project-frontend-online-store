@@ -8,7 +8,7 @@ export default class CartButton extends Component {
       <Link
         data-testid="shopping-cart-button"
         to="/cart"
-        className="btn btn-primary h-auto py-2 px-3"
+        className="btn btn-primary h-auto py-2 px-3 ms-3"
       >
         <FaShoppingCart className="fs-5" />
       </Link>

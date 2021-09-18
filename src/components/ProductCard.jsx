@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import { FaShoppingCart } from 'react-icons/fa';
 
 class ProductCard extends React.Component {
   render() {
     const { product } = this.props;
     return (
-      <Link
-        data-testid="product-detail-link"
-        to={ { pathname: `/details/${product.id}`,
-          state: { product } } }
+      <Card
+        data-testid="product"
+        style={ { width: '15rem', height: '26rem' } }
+        className="m-2 mb-4"
       >
-        <Card
-          data-testid="product"
-          style={ { width: '12rem' } }
-          className="m-2"
+        <Link
+          data-testid="product-detail-link"
+          to={ { pathname: `/details/${product.id}`,
+            state: { product } } }
+          className="text-decoration-none text-dark"
         >
           <Card.Img variant="top" src={ product.thumbnail } />
           <Card.Body>
@@ -24,10 +26,24 @@ class ProductCard extends React.Component {
               R$
               { product.price }
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
           </Card.Body>
-        </Card>
-      </Link>
+        </Link>
+        <button
+          type="button"
+          className="border-top-0
+          border
+          rounded-bottom
+          bg-primary
+          text-white
+          p-2
+          w-100
+          "
+        >
+          Adicionar ao carrinho
+          {' '}
+          <FaShoppingCart />
+        </button>
+      </Card>
     );
   }
 }

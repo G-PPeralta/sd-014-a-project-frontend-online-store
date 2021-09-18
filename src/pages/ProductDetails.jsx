@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import HomeButton from '../components/HomeButton';
 import CartButton from '../components/CartButton';
+import Header from '../components/Header';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -15,29 +16,40 @@ class ProductDetails extends React.Component {
     const { location: { state: { product } } } = this.props;
     const { title, price, thumbnail, attributes } = product;
     return (
-      <main>
-        <header>
-          <HomeButton />
-          <CartButton />
-        </header>
-        <Card>
-          <Card.Img variant="top" src={ thumbnail } />
-          <Card.Body>
-            <Card.Title data-testid="product-detail-name">{ title }</Card.Title>
-            <ul>
-              { attributes.map((att) => (
-                <li key={ att.id }>
-                  <Card.Text>
+      <div>
+        <Header>
+          <div>
+            <h5 className="text-white">{title}</h5>
+          </div>
+          <div>
+            <HomeButton />
+            <CartButton />
+          </div>
+        </Header>
+        <main style={ { width: '80%' } } className="d-flex flex-column m-auto mt-3">
+          <Card className="d-flex flex-row border-bottom-0 w-100 p-3">
+            <Card.Img
+              style={ { width: '200px' } }
+              className="img-thumbnail"
+              variant="top"
+              src={ thumbnail }
+            />
+            <Card.Body className="m-3">
+              <h4 data-testid="product-detail-name">{ title }</h4>
+              <Card.Text>
+                { attributes.map((att) => (
+                  <li key={ att.id }>
                     { `${att.name}: ${att.value_name}`}
-                  </Card.Text>
-                </li>))}
-            </ul>
-          </Card.Body>
+                  </li>
+                ))}
+              </Card.Text>
+            </Card.Body>
+          </Card>
           <Card.Footer>
             <h5 className="text-muted">{ `R$ ${price}` }</h5>
           </Card.Footer>
-        </Card>
-      </main>
+        </main>
+      </div>
     );
   }
 }
