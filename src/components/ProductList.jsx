@@ -16,7 +16,6 @@ class ProductList extends Component {
       searchText: '',
       categoriaDeProduto: '',
       categories: [],
-      categoriasDaApi: [],
     };
 
     this.callGetCategories = this.callGetCategories.bind(this);
@@ -33,8 +32,12 @@ class ProductList extends Component {
     this.setState({ searchText: event.target.value });
   }
 
-  handleCategory(event) {
-    this.setState({ categoriaDeProduto: event.target.value });
+  async handleCategory(event) {
+    await this.setState({ categoriaDeProduto: event.target.value });
+    const { resultQuery } = this.state;
+    if (resultQuery.length > 0) {
+      await this.callApi();
+    }
   }
 
   async callApi() {
