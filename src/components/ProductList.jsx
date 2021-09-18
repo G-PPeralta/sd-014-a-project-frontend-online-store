@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import * as api from '../services/api';
-
-// import ProductCard from './ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from './CartButton';
-import Categories from '../components/Categories';
+
+const numberFormat = (value) => new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+}).format(value);
 
 class ProductList extends Component {
   constructor() {
@@ -17,12 +18,14 @@ class ProductList extends Component {
       categories: [],
     };
 
-    // this.callGetProductsFromCategoryAndQuery = this
-      // .callGetProductsFromCategoryAndQuery.bind(this);
     this.callGetCategories = this.callGetCategories.bind(this);
     this.callApi = this.callApi.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
+  }
+
+  componentDidMount() {
+    this.callGetCategories();
   }
 
   handleChange(event) {
@@ -31,13 +34,12 @@ class ProductList extends Component {
 
   handleCategory(event) {
     this.setState({ categoriaDeProduto: event.target.value });
-    alert('oi');
   }
 
-  callApi() {
+  async callApi() {
     const { searchText, categoriaDeProduto } = this.state;
-    getProductsFromCategoryAndQuery(searchText, categoriaDeProduto)
-      .then((result) => this.setState({ resultQuery: result.results }));
+    const results = await getProductsFromCategoryAndQuery(categoriaDeProduto, searchText);
+    this.setState({ resultQuery: results.results });
   }
 
   async callGetCategories() {
@@ -47,48 +49,64 @@ class ProductList extends Component {
     });
   }
 
-  componentDidMount() {
-    this.callGetCategories();
-  }
-
   render() {
-    const { categories } = this.state;
+    const { categories, resultQuery } = this.state;
     return (
-      <div>
-        <label htmlFor="searchText">
-          <input
-            type="text"
-            name="searchText"
-            id="searchText"
-            data-testid="query-input"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          data-testid="query-button"
-          type="submit"
-          onClick={ this.callApi }
-        >
-          Pesquisar Produtos
-        </button>
-        <CartButton />
-        <nav className="side-nav-categories">
-          { categories.map((category) => (
-            <Categories
-              key={ category.id }
-              category={ category }
-              onClick={ this.handleCategory }
-            />
-          ))}
-        </nav>
+      <div className="main-cols">
+        <div className="display-flex">
+          <div className="search-bar">
+            <label htmlFor="searchText">
+              <input
+                type="text"
+                name="searchText"
+                id="searchText"
+                data-testid="query-input"
+                onChange={ this.handleChange }
+                className="search-text"
+              />
+            </label>
+            <button
+              data-testid="query-button"
+              type="submit"
+              onClick={ this.callApi }
+              className="search-button"
+            >
+              Pesquisar Produtos
+            </button>
+            <CartButton className="cartIcon" />
+          </div>
+        </div>
+        <div className="display-flex">
+          <nav className="side-nav-categories">
+            {categories.map((category) => (
+              <div className="category-div" key={ category.id }>
+                <input
+                  data-test-id={ category.name }
+                  value={ category.id }
+                  type="radio"
+                  name="categoriaDeProduto"
+                  onChange={ this.handleCategory }
+                />
+                <span className="radio-sp" data-testid="category">{ category.name }</span>
+              </div>
+            ))}
+          </nav>
+          <section className="product-list">
+            {resultQuery.map((result) => (
+              <div className="category-div" key={ result.id } data-testid="product">
+                <section className="product-card">
+                  <p className="pc-title">{ result.title }</p>
+                  <img className="pc-img" src={ result.thumbnail } alt={ result.title } />
+                  <p className="pc-price">{ numberFormat(result.price) }</p>
+                  <p className="pc-id">{ result.id }</p>
+                </section>
+              </div>
+            ))}
+          </section>
+        </div>
       </div>
     );
   }
 }
-
-ProductList.propTypes = {
-  searchText: PropTypes.string.isRequired,
-  categoriaDeProduto: PropTypes.string.isRequired,
-};
 
 export default ProductList;
