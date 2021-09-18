@@ -5,17 +5,22 @@ class InputGen extends Component {
   render() {
     const { config } = this.props;
     const [type, name, dataTestId, value, checked, onChange, labelText,
-      className] = config;
+      className, placeholder] = config;
 
     if (checked === false) {
       return (
-        <label htmlFor={ dataTestId } data-testid={ `${dataTestId}-label` }>
+        <label
+          htmlFor={ dataTestId }
+          className={ className }
+          data-testid={ `${dataTestId}-label` }
+        >
           <span>{ labelText }</span>
           <input
             type={ type }
             name={ name }
             data-testid={ dataTestId }
             value={ value }
+            placeholder={ placeholder }
             onChange={ onChange }
             className={ className }
           />
