@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 import HomeButton from '../components/HomeButton';
 import CartButton from '../components/CartButton';
 import Header from '../components/Header';
+import AddToCardButton from '../components/AddToCardButton';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class ProductDetails extends React.Component {
                   </li>
                 ))}
               </Card.Text>
+              <AddToCardButton />
             </Card.Body>
           </Card>
           <Card.Footer>

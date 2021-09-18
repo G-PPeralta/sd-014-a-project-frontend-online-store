@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import { FaShoppingCart } from 'react-icons/fa';
+import AddToCardButton from './AddToCardButton';
 
 class ProductCard extends React.Component {
   render() {
@@ -28,21 +28,7 @@ class ProductCard extends React.Component {
             </Card.Text>
           </Card.Body>
         </Link>
-        <button
-          type="button"
-          className="border-top-0
-          border
-          rounded-bottom
-          bg-primary
-          text-white
-          p-2
-          w-100
-          "
-        >
-          Adicionar ao carrinho
-          {' '}
-          <FaShoppingCart />
-        </button>
+        <AddToCardButton />
       </Card>
     );
   }
