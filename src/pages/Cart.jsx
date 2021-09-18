@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import HomeButton from '../components/HomeButton';
 import { getproducts } from '../services/shopCartManag';
-import ProductList from '../components/cart/ProductList';
-
+import ProductList from '../components/ProductList';
 
 class Cart extends Component {
   constructor(props) {

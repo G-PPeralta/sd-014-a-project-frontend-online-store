@@ -3,10 +3,10 @@ const PRODUCTS_KEY = 'products';
 if (!JSON.parse(localStorage.getItem(PRODUCTS_KEY))) {
   localStorage.setItem(PRODUCTS_KEY, JSON.stringify([]));
 }
-const readproducts = () => JSON.parse(localStorage.getItem(PRODUCTS_KEY));
+const readproducts = () => JSON.parse(localStorage.getItem(PRODUCTS_KEY)); // JavaScript tem uma função incorporada para converter strings JSON em objetos JavaScript:
 
 const saveproducts = (products) => localStorage
-  .setItem(PRODUCTS_KEY, JSON.stringify(products));
+  .setItem(PRODUCTS_KEY, JSON.stringify(products)); // JavaScript também tem uma função incorporada para converter um objeto em uma string JSON:
 
 export const getproducts = () => {
   const products = readproducts();
@@ -14,30 +14,23 @@ export const getproducts = () => {
 };
 
 export const addProduct = (product) => {
-  if (product) {
-    const products = readproducts();
-    saveproducts([...products, product]);
+  const productNew = { ...product, counter: 1 };
+  const products = readproducts();
+  const check = products.some((elemente) => elemente.id === productNew.id);
+  if (!check) {
+    saveproducts([...products, productNew]);
+  } else {
+    const array = products.map((s) => {
+      if (s.id === productNew.id) {
+        s.counter += 1;
+      }
+      return s;
+    });
+    saveproducts(array);
   }
 };
 
 export const removeProduct = (product) => {
   const products = readproducts();
   saveproducts(products.filter((s) => s.id !== product.id));
-};
-
-export const counterProduct = (product) => {
-  const products = readproducts();
-  products.reduce((acc, productId) => (
-    if(acc.lenght === 0){
-      const {[productId]: 1 }puch acc
-      return(acc)
-    }
-    if()
-  ), []);
-
-
-
-  
-
-  saveproducts();
 };

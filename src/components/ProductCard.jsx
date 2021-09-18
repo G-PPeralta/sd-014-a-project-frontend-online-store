@@ -5,7 +5,6 @@ import { Card } from 'react-bootstrap';
 import AddToCardButton from './AddToCardButton';
 
 class ProductCard extends React.Component {
-
   render() {
     const { product, offCart } = this.props;
     const id = offCart ? 'product-detail-link' : 'shopping-cart-product-name';
@@ -24,7 +23,9 @@ class ProductCard extends React.Component {
           <Card.Img variant="top" src={ product.thumbnail } />
           <Card.Body>
             <p><strong>{ product.title }</strong></p>
-            <Card.Text data-testid="shopping-cart-product-quantity">
+            {!offCart
+              && <p data-testid="shopping-cart-product-quantity">{product.counter}</p>}
+            <Card.Text>
               R$
               { product.price }
             </Card.Text>
