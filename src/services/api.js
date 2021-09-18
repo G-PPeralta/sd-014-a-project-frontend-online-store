@@ -18,7 +18,15 @@ export async function getCategories() {
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
-  const CATEGORY_QUERY_ITEMS = `${BASE_URL}search?category=${categoryId}&q=${query}`;
+  const CATEGORY_ENDPOINT = `${BASE_URL}search?category=${categoryId}`;
+  const QUERY_ENDPOINT = `${BASE_URL}search?q=${query}`;
+  const CATEGORY_QUERY_ENDPOINT = `${BASE_URL}search?category=${categoryId}&q=${query}`;
 
-  return callAPI(CATEGORY_QUERY_ITEMS);
+  if (categoryId && !query) {
+    return callAPI(CATEGORY_ENDPOINT);
+  }
+  if (!categoryId && query) {
+    return callAPI(QUERY_ENDPOINT);
+  }
+  return callAPI(CATEGORY_QUERY_ENDPOINT);
 }
