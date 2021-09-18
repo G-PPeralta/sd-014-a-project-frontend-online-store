@@ -1,11 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FaShoppingCart } from 'react-icons/fa';
+import { addProduct } from '../services/shopCartManag';
 
-export default function AddToCardButton() {
-  return (
-    <button
-      type="button"
-      className="border-top-0
+class AddToCardButton extends React.Component {
+  handleClick = () => {
+    const { product } = this.props;
+    addProduct(product);
+  }
+
+  render() {
+    return (
+      <button
+        data-testid="product-add-to-cart"
+        type="button"
+        className="border-top-0
           border
           rounded-bottom
           bg-primary
@@ -13,10 +22,18 @@ export default function AddToCardButton() {
           p-2
           w-100
           "
-    >
-      Adicionar ao carrinho
-      {' '}
-      <FaShoppingCart />
-    </button>
-  );
+        onClick={ this.handleClick }
+      >
+        Adicionar ao carrinho
+        {' '}
+        <FaShoppingCart />
+      </button>
+    );
+  }
 }
+
+AddToCardButton.propTypes = {
+  product: PropTypes.object.isRequired,
+}.isRequired;
+
+export default AddToCardButton;

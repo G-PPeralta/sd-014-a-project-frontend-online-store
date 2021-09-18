@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import AddToCardButton from './AddToCardButton';
 
 class ProductCard extends React.Component {
-
   render() {
     const { product, offCart } = this.props;
     const id = offCart ? 'product-detail-link' : 'shopping-cart-product-name';
@@ -30,7 +28,6 @@ class ProductCard extends React.Component {
             </Card.Text>
           </Card.Body>
         </Link>
-        { offCart && <AddToCardButton product={ product } />}
       </Card>
     );
   }

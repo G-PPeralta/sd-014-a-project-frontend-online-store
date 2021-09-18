@@ -16,6 +16,7 @@ class Home extends React.Component {
       category: '',
       products: [],
       shouldShow: true,
+      offCart: true,
     };
     this.getProducts = this.getProducts.bind(this);
   }
@@ -40,7 +41,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { search, products, shouldShow } = this.state;
+    const { search, products, shouldShow, offCart } = this.state;
     return (
       <div
         style={ { backgroundColor: '#f9f9f9' } }
@@ -99,7 +100,7 @@ class Home extends React.Component {
           align-items-center"
           >
             {shouldShow && <HomeMessage />}
-            <ProductList products={ products } />
+            <ProductList products={ products } offCart={ offCart } />
           </section>
         </main>
       </div>
