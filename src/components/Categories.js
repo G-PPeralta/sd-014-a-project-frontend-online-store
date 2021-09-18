@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { getCategories } from '../services/api';
 import Loading from './Loading';
 
@@ -24,9 +26,20 @@ export default class Categories extends React.Component {
 
   showCategories = () => {
     const { categories } = this.state;
+    const { category, onChange } = this.props;
     return (
       categories.map(({ name, id }) => (
-        <p data-testid="category" key={ id } id={ id }>{ name }</p>
+        <div data-testid="category" key={ id }>
+          <input
+            type="radio"
+            name="category"
+            id={ id }
+            value={ name }
+            checked={ category === name }
+            onChange={ onChange }
+          />
+          <label htmlFor={ id }>{ name }</label>
+        </div>
       ))
     );
   }
@@ -41,3 +54,12 @@ export default class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  category: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
+
+Categories.defaultProps = {
+  category: null,
+};
