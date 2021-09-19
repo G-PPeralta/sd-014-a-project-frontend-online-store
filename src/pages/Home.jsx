@@ -6,7 +6,7 @@ class Home extends React.Component {
     return (
       <header data-testid="home-initial-message">
         <CategoriesList />
-        Digite algum termo de pesquisa ou escolha uma categoria.
+        <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
       </header>
     );
   }
