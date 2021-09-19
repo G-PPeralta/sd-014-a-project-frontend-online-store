@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from './CartButton';
@@ -26,6 +27,7 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.callGetCategories();
+    this.handleCategory();
   }
 
   handleChange(event) {
@@ -33,17 +35,25 @@ class ProductList extends Component {
   }
 
   async handleCategory(event) {
-    await this.setState({ categoriaDeProduto: event.target.value });
-    const { resultQuery } = this.state;
-    if (resultQuery.length > 0) {
-      await this.callApi();
+    if (event) {
+      await this.setState({ categoriaDeProduto: event.target.value });
     }
+
+    await this.callApi();
   }
 
   async callApi() {
     const { searchText, categoriaDeProduto } = this.state;
-    const results = await getProductsFromCategoryAndQuery(categoriaDeProduto, searchText);
-    this.setState({ resultQuery: results.results });
+    try {
+      const results = await getProductsFromCategoryAndQuery(
+        categoriaDeProduto, searchText,
+      );
+      if (results) {
+        this.setState({ resultQuery: results.results });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async callGetCategories() {
@@ -54,7 +64,11 @@ class ProductList extends Component {
   }
 
   render() {
-    const { categories, resultQuery } = this.state;
+    const { categories, resultQuery, searchText, categoriaDeProduto } = this.state;
+    const apiProps = {
+      searchText,
+      categoriaDeProduto,
+    };
     return (
       <div className="main-cols">
         <div className="display-flex">
@@ -97,13 +111,30 @@ class ProductList extends Component {
           </nav>
           <section className="product-list">
             {resultQuery.map((result) => (
-              <div className="category-div" key={ result.id } data-testid="product">
-                <section className="product-card">
-                  <p className="pc-title">{ result.title }</p>
-                  <img className="pc-img" src={ result.thumbnail } alt={ result.title } />
-                  <p className="pc-price">{ numberFormat(result.price) }</p>
-                  <p className="pc-id">{ result.id }</p>
-                </section>
+              <div
+                className="category-div"
+                key={ result.id }
+                data-testid="product"
+              >
+                <Link
+                // to={ `/productDetails/${result.id}` }
+                  data-testid="product-detail-link"
+                  to={ {
+                    pathname: `/productDetails/${result.id}`,
+                    apiProps,
+                  } }
+                >
+                  <section className="product-card">
+                    <p className="pc-title">{ result.title }</p>
+                    <img
+                      className="pc-img"
+                      src={ result.thumbnail }
+                      alt={ result.title }
+                    />
+                    <p className="pc-price">{ numberFormat(result.price) }</p>
+                    <p className="pc-id">{ result.id }</p>
+                  </section>
+                </Link>
               </div>
             ))}
           </section>
