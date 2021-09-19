@@ -19,10 +19,12 @@ class Home extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.clickCategories = this.clickCategories.bind(this);
   }
 
   componentDidMount() {
     this.listCategories();
+    this.getListFromAPI();
   }
 
   handleChange({ target }) {
@@ -33,13 +35,15 @@ class Home extends Component {
   }
 
   handleClick() {
+    this.getListFromAPI();
+  }
+
+  getListFromAPI= async () => {
     const { input, category } = this.state;
-    this.setState(async () => {
-      const listaProdutos = await getProductsFromCategoryAndQuery(category, input);
-      this.setState({
-        lista: listaProdutos.results,
-        submit: true,
-      });
+    const listaProdutos = await getProductsFromCategoryAndQuery(category, input);
+    this.setState({
+      lista: listaProdutos.results,
+      submit: true,
     });
   }
 
@@ -50,6 +54,13 @@ class Home extends Component {
         listCategories: categories,
       });
     });
+  }
+
+  clickCategories({ target: { id } }) {
+    this.setState({
+      category: id,
+    });
+    this.getListFromAPI();
   }
 
   render() {
@@ -65,9 +76,15 @@ class Home extends Component {
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        <Categories listCategories={ listCategories } />
+        <div className="d-flex">
+          <Categories
+            listCategories={ listCategories }
+            clickCategories={ this.clickCategories }
+          />
 
-        { submit && <ProductList lista={ lista } /> }
+          { true && <ProductList lista={ lista } /> }
+
+        </div>
       </div>
     );
   }
