@@ -26,6 +26,7 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.callGetCategories();
+    this.handleCategory();
   }
 
   handleChange(event) {
@@ -33,17 +34,25 @@ class ProductList extends Component {
   }
 
   async handleCategory(event) {
-    await this.setState({ categoriaDeProduto: event.target.value });
-    const { resultQuery } = this.state;
-    if (resultQuery.length > 0) {
-      await this.callApi();
+    if (event) {
+      await this.setState({ categoriaDeProduto: event.target.value });
     }
+
+    await this.callApi();
   }
 
   async callApi() {
     const { searchText, categoriaDeProduto } = this.state;
-    const results = await getProductsFromCategoryAndQuery(categoriaDeProduto, searchText);
-    this.setState({ resultQuery: results.results });
+    try {
+      const results = await getProductsFromCategoryAndQuery(
+        categoriaDeProduto, searchText,
+      );
+      if (results) {
+        this.setState({ resultQuery: results.results });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async callGetCategories() {
