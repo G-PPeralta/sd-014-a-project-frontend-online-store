@@ -14,7 +14,6 @@ class Home extends Component {
       category: '',
       input: '',
       lista: [],
-      submit: false,
       listCategories: [],
     };
     this.handleChange = this.handleChange.bind(this);
@@ -43,7 +42,6 @@ class Home extends Component {
     const listaProdutos = await getProductsFromCategoryAndQuery(category, input);
     this.setState({
       lista: listaProdutos.results,
-      submit: true,
     });
   }
 
@@ -64,7 +62,7 @@ class Home extends Component {
   }
 
   render() {
-    const { input, lista, submit, listCategories } = this.state;
+    const { input, lista, listCategories } = this.state;
     return (
       <div data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
@@ -82,7 +80,7 @@ class Home extends Component {
             clickCategories={ this.clickCategories }
           />
 
-          { true && <ProductList lista={ lista } /> }
+          <ProductList lista={ lista } />
 
         </div>
       </div>
