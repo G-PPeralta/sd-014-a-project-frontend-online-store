@@ -27,6 +27,7 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.callGetCategories();
+    this.handleCategory();
   }
 
   handleChange(event) {
@@ -34,17 +35,25 @@ class ProductList extends Component {
   }
 
   async handleCategory(event) {
-    await this.setState({ categoriaDeProduto: event.target.value });
-    const { resultQuery } = this.state;
-    if (resultQuery.length > 0) {
-      await this.callApi();
+    if (event) {
+      await this.setState({ categoriaDeProduto: event.target.value });
     }
+
+    await this.callApi();
   }
 
   async callApi() {
     const { searchText, categoriaDeProduto } = this.state;
-    const results = await getProductsFromCategoryAndQuery(categoriaDeProduto, searchText);
-    this.setState({ resultQuery: results.results });
+    try {
+      const results = await getProductsFromCategoryAndQuery(
+        categoriaDeProduto, searchText,
+      );
+      if (results) {
+        this.setState({ resultQuery: results.results });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async callGetCategories() {
@@ -55,10 +64,10 @@ class ProductList extends Component {
   }
 
   render() {
-    const { categories, resultQuery } = this.state;
+    const { categories, resultQuery, searchText, categoriaDeProduto } = this.state;
     const apiProps = {
-      categories,
-      resultQuery,
+      searchText,
+      categoriaDeProduto,
     };
     return (
       <div className="main-cols">
@@ -103,11 +112,14 @@ class ProductList extends Component {
           <section className="product-list">
             {resultQuery.map((result) => (
               <Link
-                to={ `/productDetails/${result.id}` }
+                // to={ `/productDetails/${result.id}` }
+                to={ {
+                  pathname: `/productDetails/${result.id}`,
+                  apiProps,
+                } }
                 className="category-div"
                 key={ result.id }
                 data-testid="product-detail-link"
-                apiProps={ apiProps }
               >
                 <section className="product-card">
                   <p className="pc-title">{ result.title }</p>
