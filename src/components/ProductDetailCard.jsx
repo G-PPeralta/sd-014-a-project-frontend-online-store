@@ -4,7 +4,7 @@ import FadeIn from 'react-fade-in';
 import { Card } from 'react-bootstrap';
 import AddToCardButton from './AddToCardButton';
 
-export default function CardProductDetail(props) {
+export default function ProductDetailCard(props) {
   const { product, homeIs } = props;
   const { title, price, thumbnail, attributes } = product;
   return (
@@ -31,13 +31,15 @@ export default function CardProductDetail(props) {
         </Card>
         <Card.Footer>
           <h5 className="text-muted">{ `R$ ${price}` }</h5>
+          { product.shipping.free_shipping
+              && (<p data-testid="free-shipping">Frete Grátis</p>) }
         </Card.Footer>
       </main>
     </FadeIn>
   );
 }
 
-CardProductDetail.propTypes = {
+ProductDetailCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -47,6 +49,9 @@ CardProductDetail.propTypes = {
       name: PropTypes.string.isRequired,
       value_name: PropTypes.string.isRequired,
     })).isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
   homeIs: PropTypes.bool.isRequired,
 };

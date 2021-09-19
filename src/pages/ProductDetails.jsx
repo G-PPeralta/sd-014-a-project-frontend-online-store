@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import HomeButton from '../components/HomeButton';
 import CartButton from '../components/CartButton';
 import Header from '../components/Header';
-import CardProductDetail from '../components/CardProductDetail';
+import ProductDetailCard from '../components/ProductDetailCard';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class ProductDetails extends React.Component {
             <CartButton />
           </div>
         </Header>
-        <CardProductDetail product={ product } homeIs={ homeIs } />
+        <ProductDetailCard product={ product } homeIs={ homeIs } />
       </div>
     );
   }

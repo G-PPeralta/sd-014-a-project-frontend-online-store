@@ -16,9 +16,9 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { product, offCart, handleQuantityButtonsClick } = this.props;
+    const { product, offCart: inHome, handleQuantityButtonsClick } = this.props;
     const { homeIs } = this.state;
-    const id = offCart ? 'product-detail-link' : 'shopping-cart-product-name';
+    const id = inHome ? 'product-detail-link' : 'shopping-cart-product-name';
     return (
       <FadeIn>
         <Card
@@ -36,7 +36,9 @@ class ProductCard extends React.Component {
               <p className="font-bold">
                 {product.title}
               </p>
-              {!offCart && (
+              { product.shipping.free_shipping
+              && (<p data-testid="free-shipping">Frete Grátis</p>) }
+              {!inHome && (
                 <p data-testid="shopping-cart-product-quantity">
                   {product.counter}
                 </p>
@@ -44,7 +46,7 @@ class ProductCard extends React.Component {
               <Card.Text>{`R$ ${product.price}`}</Card.Text>
             </Card.Body>
           </Link>
-          {!offCart && (
+          {!inHome && (
             <>
               <button
                 data-testid="product-increase-quantity"
@@ -79,7 +81,7 @@ class ProductCard extends React.Component {
               </button>
             </>
           )}
-          {offCart && <AddToCardButton homeIs={ homeIs } product={ product } />}
+          {inHome && <AddToCardButton homeIs={ homeIs } product={ product } />}
         </Card>
       </FadeIn>
     );
