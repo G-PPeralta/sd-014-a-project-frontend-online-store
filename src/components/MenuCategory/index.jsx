@@ -4,12 +4,16 @@ import MenuItem from './MenuItem';
 
 export default class MenuCategory extends React.Component {
   render() {
-    const { produtos } = this.props;
+    const { categorias, handleRadio, selected } = this.props;
+
     return (
       <div>
-        {produtos.map((produto) => (<MenuItem
-          key={ produto.id }
-          produto={ produto.name }
+        {categorias.map((categoria) => (<MenuItem
+          key={ categoria.id }
+          categoria={ categoria.name }
+          identifier={ categoria.id }
+          handleRadio={ handleRadio }
+          selected={ selected }
         />))}
       </div>
     );
@@ -17,8 +21,10 @@ export default class MenuCategory extends React.Component {
 }
 
 MenuCategory.propTypes = {
-  produtos: PropTypes.arrayOf(PropTypes.shape({
+  categorias: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.string,
   })).isRequired,
+  handleRadio: PropTypes.func.isRequired,
+  selected: PropTypes.string.isRequired,
 };
