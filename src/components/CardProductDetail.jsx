@@ -43,7 +43,7 @@ CardProductDetail.propTypes = {
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
     attributes: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       value_name: PropTypes.string.isRequired,
     })).isRequired,

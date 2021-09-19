@@ -34,3 +34,13 @@ export const removeProduct = (product) => {
   const products = readproducts();
   saveproducts(products.filter((s) => s.id !== product.id));
 };
+
+export const decreaseProduct = (product) => {
+  const products = readproducts();
+  const expectedProduct = products.find((item) => item.id === product.id);
+  const filteredProducts = products.filter((item) => item.id !== product.id);
+  const newExpectedProduct = { ...expectedProduct,
+    counter: expectedProduct.counter -= 1 };
+  const newProducts = [...filteredProducts, newExpectedProduct];
+  saveproducts(newProducts);
+};

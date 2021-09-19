@@ -4,6 +4,7 @@ import FadeIn from 'react-fade-in';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import AddToCardButton from './AddToCardButton';
+import { addProduct, decreaseProduct, removeProduct } from '../services/shopCartManag';
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -15,14 +16,14 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { product, offCart } = this.props;
+    const { product, offCart, handleQuantityButtonsClick } = this.props;
     const { homeIs } = this.state;
     const id = offCart ? 'product-detail-link' : 'shopping-cart-product-name';
     return (
       <FadeIn>
         <Card
           data-testid="product"
-          style={ { width: '15rem', height: '26rem' } }
+          style={ { width: '15rem', height: '28rem' } }
           className="m-2 mb-4"
         >
           <Link
@@ -40,12 +41,44 @@ class ProductCard extends React.Component {
                   {product.counter}
                 </p>
               )}
-              <Card.Text>
-                R$
-                {product.price}
-              </Card.Text>
+              <Card.Text>{`R$ ${product.price}`}</Card.Text>
             </Card.Body>
           </Link>
+          {!offCart && (
+            <>
+              <button
+                data-testid="product-increase-quantity"
+                name="increase"
+                onClick={ () => {
+                  addProduct(product);
+                  handleQuantityButtonsClick('increase', product);
+                } }
+                type="button"
+              >
+                +
+              </button>
+              <button
+                data-testid="product-decrease-quantity"
+                disabled={ product.counter === 1 }
+                onClick={ () => {
+                  decreaseProduct(product);
+                  handleQuantityButtonsClick('decrease', product);
+                } }
+                type="button"
+              >
+                -
+              </button>
+              <button
+                onClick={ () => {
+                  removeProduct(product);
+                  handleQuantityButtonsClick('', product);
+                } }
+                type="button"
+              >
+                X
+              </button>
+            </>
+          )}
           {offCart && <AddToCardButton homeIs={ homeIs } product={ product } />}
         </Card>
       </FadeIn>
