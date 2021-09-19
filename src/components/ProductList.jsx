@@ -111,23 +111,31 @@ class ProductList extends Component {
           </nav>
           <section className="product-list">
             {resultQuery.map((result) => (
-              <Link
-                // to={ `/productDetails/${result.id}` }
-                to={ {
-                  pathname: `/productDetails/${result.id}`,
-                  apiProps,
-                } }
+              <div
                 className="category-div"
                 key={ result.id }
-                data-testid="product-detail-link"
+                data-testid="product"
               >
-                <section className="product-card">
-                  <p className="pc-title">{ result.title }</p>
-                  <img className="pc-img" src={ result.thumbnail } alt={ result.title } />
-                  <p className="pc-price">{ numberFormat(result.price) }</p>
-                  <p className="pc-id">{ result.id }</p>
-                </section>
-              </Link>
+                <Link
+                // to={ `/productDetails/${result.id}` }
+                  data-testid="product-detail-link"
+                  to={ {
+                    pathname: `/productDetails/${result.id}`,
+                    apiProps,
+                  } }
+                >
+                  <section className="product-card">
+                    <p className="pc-title">{ result.title }</p>
+                    <img
+                      className="pc-img"
+                      src={ result.thumbnail }
+                      alt={ result.title }
+                    />
+                    <p className="pc-price">{ numberFormat(result.price) }</p>
+                    <p className="pc-id">{ result.id }</p>
+                  </section>
+                </Link>
+              </div>
             ))}
           </section>
         </div>
