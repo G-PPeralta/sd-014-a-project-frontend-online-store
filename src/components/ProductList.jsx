@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from './CartButton';
@@ -55,6 +56,10 @@ class ProductList extends Component {
 
   render() {
     const { categories, resultQuery } = this.state;
+    const apiProps = {
+      categories,
+      resultQuery,
+    };
     return (
       <div className="main-cols">
         <div className="display-flex">
@@ -97,14 +102,20 @@ class ProductList extends Component {
           </nav>
           <section className="product-list">
             {resultQuery.map((result) => (
-              <div className="category-div" key={ result.id } data-testid="product">
+              <Link
+                to={ `/productDetails/${result.id}` }
+                className="category-div"
+                key={ result.id }
+                data-testid="product-detail-link"
+                apiProps={ apiProps }
+              >
                 <section className="product-card">
                   <p className="pc-title">{ result.title }</p>
                   <img className="pc-img" src={ result.thumbnail } alt={ result.title } />
                   <p className="pc-price">{ numberFormat(result.price) }</p>
                   <p className="pc-id">{ result.id }</p>
                 </section>
-              </div>
+              </Link>
             ))}
           </section>
         </div>
