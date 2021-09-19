@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from './CartButton';
+import Cart from '../pages/Cart';
 
 const numberFormat = (value) => new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -17,12 +18,14 @@ class ProductList extends Component {
       searchText: '',
       categoriaDeProduto: '',
       categories: [],
+      xablau: [],
     };
 
     this.callGetCategories = this.callGetCategories.bind(this);
     this.callApi = this.callApi.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +43,20 @@ class ProductList extends Component {
     }
 
     await this.callApi();
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    const { xablau } = this.state;
+    xablau.push({
+      prodId: event.target.className,
+      name: event.target.name,
+      prodPrice: event.target.value,
+    });
+    this.setState({
+      xablau,
+    });
+    console.log(xablau);
   }
 
   async callApi() {
@@ -64,7 +81,8 @@ class ProductList extends Component {
   }
 
   render() {
-    const { categories, resultQuery, searchText, categoriaDeProduto } = this.state;
+    const { categories,
+      resultQuery, searchText, categoriaDeProduto, xablau } = this.state;
     const apiProps = {
       searchText,
       categoriaDeProduto,
@@ -117,7 +135,6 @@ class ProductList extends Component {
                 data-testid="product"
               >
                 <Link
-                // to={ `/productDetails/${result.id}` }
                   data-testid="product-detail-link"
                   to={ {
                     pathname: `/productDetails/${result.id}`,
@@ -125,7 +142,12 @@ class ProductList extends Component {
                   } }
                 >
                   <section className="product-card">
-                    <p className="pc-title">{ result.title }</p>
+                    <p
+                      className="pc-title"
+                      data-testid="shopping-cart-product-name"
+                    >
+                      { result.title }
+                    </p>
                     <img
                       className="pc-img"
                       src={ result.thumbnail }
@@ -135,9 +157,22 @@ class ProductList extends Component {
                     <p className="pc-id">{ result.id }</p>
                   </section>
                 </Link>
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  name={ result.title }
+                  value={ result.price }
+                  className={ result.id }
+                  onClick={ this.handleClick }
+                >
+                  +
+                </button>
               </div>
             ))}
           </section>
+          <div>
+            <Cart cartList={ xablau } />
+          </div>
         </div>
       </div>
     );
