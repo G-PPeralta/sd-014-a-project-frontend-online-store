@@ -13,12 +13,15 @@ class Home extends React.Component {
     document.title = 'Home';
     this.state = {
       search: '',
-      category: '',
       products: [],
       shouldShow: true,
       offCart: true,
     };
     this.getProducts = this.getProducts.bind(this);
+  }
+
+  componentDidMount() {
+    this.getProducts();
   }
 
   handleChange = ({ target: { value, name } }) => {
@@ -27,17 +30,25 @@ class Home extends React.Component {
     else this.setState({ shouldShow: true });
   }
 
-  handleSelect = (event) => {
-    this.handleChange(event);
-    this.getProducts();
+  handleClick(event) {
+    const { target } = event;
+    const { value } = target;
+    this.setState({ shouldShow: false });
+    this.getProducts(value);
   }
 
-  getProducts() {
-    const { search, category } = this.state;
-    this.setState(async () => {
-      const products = await getProductsFromCategoryAndQuery(category, search);
-      this.setState({ products: products.results });
-    });
+  handleSelect = (event) => {
+    this.handleClick(event);
+  }
+
+  getProducts(category) {
+    const { search } = this.state;
+    getProductsFromCategoryAndQuery(category, search)
+      .then(({ results }) => {
+        this.setState({
+          products: results,
+        });
+      });
   }
 
   render() {
@@ -83,7 +94,7 @@ class Home extends React.Component {
           style={ { width: '85%' } }
         >
           <Categories
-            onChange={ this.handleSelect }
+            onClick={ (event) => this.handleSelect(event) }
             className="d-flex
             flex-column
             border
@@ -100,7 +111,7 @@ class Home extends React.Component {
           align-items-center"
           >
             {shouldShow && <HomeMessage />}
-            <ProductList products={ products } offCart={ offCart } />
+            {!shouldShow && <ProductList products={ products } offCart={ offCart } />}
           </section>
         </main>
       </div>
