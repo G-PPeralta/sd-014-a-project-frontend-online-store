@@ -23,6 +23,8 @@ class CategoriesList extends React.Component {
 
   render() {
     const { itemsCategories } = this.state;
+    const { onClick } = this.props;
+
     return (
       <section>
         <ul>
@@ -35,6 +37,7 @@ class CategoriesList extends React.Component {
                   id={ categorie.id }
                   data-testid="category"
                   key={ categorie.name }
+                  onClick={ onClick }
                 />
                 { categorie.name }
               </label>

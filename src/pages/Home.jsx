@@ -16,6 +16,7 @@ class Home extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleChangeCategory = this.handleChangeCategory.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
@@ -29,14 +30,20 @@ class Home extends React.Component {
     this.setState({ products: request.results });
   }
 
+  handleChangeCategory(event) {
+    this.setState({ category: event.target.id });
+    this.handleClick();
+  }
+
   render() {
     const { query, products } = this.state;
 
     return (
       <header data-testid="home-initial-message">
-        <CategoriesList />
+        <CategoriesList onClick={ this.handleChangeCategory } />
 
         <form>
+
           <input
             data-testid="query-input"
             type="text"
