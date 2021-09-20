@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard';
 import Category from '../components/Category';
 import CartButton from '../components/CartButton';
 
+// agora vai
 class Home extends Component {
   constructor() {
     super();
