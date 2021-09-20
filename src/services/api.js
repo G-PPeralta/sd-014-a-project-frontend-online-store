@@ -14,7 +14,7 @@ export async function getCategories() {
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
-  const ENDPOINT = `${URL}${SITE_ID}/search?category=${categoryId}&q=${query}`;
-  const products = await fetchAPI(ENDPOINT);
+  const endpoint = `${URL}${SITE_ID}/search?category=${categoryId}&q=${query}`;
+  const products = await fetchAPI(endpoint);
   return products;
 }
