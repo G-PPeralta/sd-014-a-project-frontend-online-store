@@ -14,15 +14,16 @@ class Home extends Component {
       category: '',
       input: '',
       lista: [],
-      submit: false,
       listCategories: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.clickCategories = this.clickCategories.bind(this);
   }
 
   componentDidMount() {
     this.listCategories();
+    this.getListFromAPI();
   }
 
   handleChange({ target }) {
@@ -33,14 +34,19 @@ class Home extends Component {
   }
 
   handleClick() {
-    const { input, category } = this.state;
-    this.setState(async () => {
+    this.getListFromAPI();
+  }
+
+  getListFromAPI= async () => {
+    try {
+      const { input, category } = this.state;
       const listaProdutos = await getProductsFromCategoryAndQuery(category, input);
       this.setState({
         lista: listaProdutos.results,
-        submit: true,
       });
-    });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   listCategories() {
@@ -52,8 +58,15 @@ class Home extends Component {
     });
   }
 
+  clickCategories({ target: { id } }) {
+    this.setState({
+      category: id,
+    });
+    this.getListFromAPI();
+  }
+
   render() {
-    const { input, lista, submit, listCategories } = this.state;
+    const { input, lista, listCategories } = this.state;
     return (
       <div data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
@@ -65,9 +78,15 @@ class Home extends Component {
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        <Categories listCategories={ listCategories } />
+        <div className="d-flex">
+          <Categories
+            listCategories={ listCategories }
+            clickCategories={ this.clickCategories }
+          />
 
-        { submit && <ProductList lista={ lista } /> }
+          <ProductList lista={ lista } />
+
+        </div>
       </div>
     );
   }
