@@ -9,8 +9,8 @@ export default class ProductCard extends Component {
     } = this.props;
     return (
       <div className="product-card" data-testid="product">
-        <h3>{title}</h3>
-        <img src={ thumbnail } alt={ title } />
+        <h3 className="product-title">{title}</h3>
+        <img alt={ title } className="product-thumbnail" src={ thumbnail } />
         <p>{price}</p>
       </div>
     );

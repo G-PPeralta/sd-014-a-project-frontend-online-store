@@ -19,7 +19,7 @@ export default class ShoppingCart extends Component {
           />
           <h2>Carrinho de Compras</h2>
         </div>
-        <main className="product-list">
+        <main className="cart-product-list">
           <img
             alt="empty-box"
             src="https://img.icons8.com/ios/100/000000/empty-box.png"
