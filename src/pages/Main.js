@@ -8,13 +8,13 @@ class Main extends React.Component {
     super();
     this.state = {
       categories: [],
-    }
+    };
   }
 
   componentDidMount() {
     getCategories().then((response) => {
       this.setState({ categories: response });
-    })
+    });
   }
 
   render() {
@@ -25,9 +25,14 @@ class Main extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <hr/>
+        <hr />
         <div>
-          { categories.map((categorie) => <Categories key={ categorie.id } catName={ categorie.name } />)}
+          { categories.map(
+            (categorie) => (<Categories
+              key={ categorie.id }
+              categorie={ categorie.name }
+            />),
+          )}
         </div>
       </div>
     );
