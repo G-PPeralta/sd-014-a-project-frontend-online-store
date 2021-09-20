@@ -9,6 +9,7 @@ export default class Home extends Component {
     super(props);
     this.state = {
       categories: [],
+      // category: '',
       didSearch: false,
       products: [],
       query: '',
@@ -21,14 +22,14 @@ export default class Home extends Component {
     });
   }
 
-  handleChange = ({ target: { value } }) => {
-    this.setState({ query: value });
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
   };
 
-  handleClick = (category) => {
+  handleSearch = ({ target: { value } }) => {
     const { query } = this.state;
     api
-      .getProductsFromCategoryAndQuery(category, query)
+      .getProductsFromCategoryAndQuery(value, query)
       .then(({ results: products }) => {
         this.setState({ didSearch: true, products });
       });
@@ -42,7 +43,7 @@ export default class Home extends Component {
           <button
             className="query-button"
             data-testid="query-button"
-            onClick={ this.handleClick }
+            onClick={ this.handleSearch }
             type="button"
           >
             <img
@@ -53,7 +54,7 @@ export default class Home extends Component {
           <input
             className="query-input"
             data-testid="query-input"
-            name="query-input"
+            name="query"
             onChange={ this.handleChange }
             type="text"
             value={ query }
@@ -82,7 +83,13 @@ export default class Home extends Component {
               htmlFor={ id }
               key={ id }
             >
-              <input id={ id } name="category" type="radio" value={ id } />
+              <input
+                id={ id }
+                name="category"
+                onChange={ this.handleSearch }
+                type="radio"
+                value={ id }
+              />
               {name}
             </label>
           ))}
