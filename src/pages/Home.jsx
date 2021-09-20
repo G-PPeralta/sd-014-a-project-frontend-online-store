@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../components/ProductCard';
+import Category from '../components/Category';
+import CartButton from '../components/CartButton';
 
 class Home extends Component {
   constructor() {
@@ -57,6 +59,8 @@ class Home extends Component {
           />
         </section>
         { results && this.renderProducts() }
+        <Category />
+        <CartButton />
       </div>
     );
   }
