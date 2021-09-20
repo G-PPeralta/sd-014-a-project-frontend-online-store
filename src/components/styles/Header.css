@@ -24,9 +24,9 @@ header > input:hover, header > input:focus {
 .search-icon:first-child {
   color: rgb(71, 71, 71);
   font-size: 16px;
-  left: 80px;
-  position: absolute;
-  top: 22px;
+  left: 26px;
+  top: 2px;
+  position: relative;
 }
 
 .cart-icon {
