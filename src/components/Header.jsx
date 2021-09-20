@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import trybeLogo from '../images/trybeLogo.png';
 
-class Header extends React.Component() {
+class Header extends React.Component {
   render() {
-    const { children } = props;
+    const { children } = this.props;
     return (
       <header
         className="d-flex
