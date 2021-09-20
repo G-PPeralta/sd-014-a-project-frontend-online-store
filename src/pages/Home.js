@@ -63,7 +63,7 @@ export default class Home extends React.Component {
       <main data-testid="home-initial-message" className="flex">
         <Categories category={ category } onChange={ this.handleRadio } />
         <section className="lado-direito">
-          <article>
+          <article className="query-form">
             <input
               className="search"
               type="text"
@@ -88,7 +88,7 @@ export default class Home extends React.Component {
               </span>
             </Link>
           </article>
-          <article>
+          <article className="query-results">
             { isLoading ? <Loading /> : this.results() }
           </article>
         </section>
