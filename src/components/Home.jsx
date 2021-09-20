@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ListCategories from './ListCategories';
 import ProductCard from './ProductCard';
@@ -70,6 +71,9 @@ class Home extends Component {
         >
           Pesquisar
         </button>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          Carrinho
+        </Link>
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
