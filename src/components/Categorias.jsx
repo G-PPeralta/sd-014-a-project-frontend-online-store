@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Categorias.css';
-
+import Produtos from './Produtos';
 import CategoriaFilter from './CategoriaFilter';
 import * as api from '../services/api';
 
@@ -14,6 +14,7 @@ class Categorias extends React.Component {
       request: false,
     };
     this.findCategory = this.findCategory.bind(this);
+    this.updateProducts = this.updateProducts.bind(this);
   }
 
   async findCategory({ target }) {
@@ -24,27 +25,38 @@ class Categorias extends React.Component {
     const resolve = await api.getProductsFromCategoryAndQuery(find, find);
     this.setState({
       response: resolve.results,
-      request: true,
-    });
+    }, () => this.updateProducts());
+  }
+
+  updateProducts() {
+    const { response } = this.state;
+    const { metodo } = this.props;
+      this.setState(
+        { request: false, },
+        () => {
+          metodo(response);
+        });
   }
 
   render() {
     const { responseApi } = this.props;
-    const { response, request } = this.state;
+    const { response } = this.state;
 
     const categorias = responseApi.map((categoria) => {
       const { id, name } = categoria;
       return (
-        <radio
+        <div
           data-testid="category"
           onClick={ this.findCategory }
           id={ id }
           key={ id }
         >
           <p className="categorias">{ name }</p>
-        </radio>
+        </div>
       );
     });
+
+    //  ;
 
     return (
       <div className="side-container">
@@ -52,7 +64,6 @@ class Categorias extends React.Component {
         <ul className="categorias-container">
           { categorias }
         </ul>
-        { request && <CategoriaFilter responseApi={ response } /> }
       </div>
     );
   }
