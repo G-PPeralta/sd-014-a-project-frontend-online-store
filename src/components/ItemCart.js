@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class ItemCart extends Component {
   render() {
-    const { product } = this.props;
-    const { title, quantity, thumbnail } = product;
+    const { product, handleClick, idx } = this.props;
+    const { title, thumbnail, quantity } = product;
+    const DECREASE = -1;
     return (
       <div className="border border-dark d-flex justify-content-around">
         <div>
@@ -16,9 +17,25 @@ export default class ItemCart extends Component {
         <div>
           <p>Quantidade:</p>
           <div className="d-flex justify-content-around">
-            <div className="botao"><i className="fas fa-chevron-up" /></div>
+            <div
+              data-testid="product-increase-quantity"
+              className="botao"
+              onClick={ () => handleClick(idx, 1) }
+              role="button"
+              aria-hidden="true"
+            >
+              <i className="fas fa-chevron-up" />
+            </div>
             <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
-            <div className="botao"><i className="fas fa-chevron-down" /></div>
+            <div
+              data-testid="product-decrease-quantity"
+              className="botao"
+              onClick={ () => handleClick(idx, DECREASE) }
+              role="button"
+              aria-hidden="true"
+            >
+              <i className="fas fa-chevron-down" />
+            </div>
           </div>
         </div>
       </div>
@@ -28,4 +45,6 @@ export default class ItemCart extends Component {
 
 ItemCart.propTypes = {
   product: PropTypes.objectOf(PropTypes.any).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  idx: PropTypes.number.isRequired,
 };

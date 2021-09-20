@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default class SearchComponent extends Component {
   render() {
-    const { input, onChange, onClick } = this.props;
+    const { value, onChange, onClick } = this.props;
     return (
       <div>
         <input
-          value={ input }
+          value={ value }
           onChange={ onChange }
           name="input"
           data-testid="query-input"
@@ -27,5 +27,5 @@ export default class SearchComponent extends Component {
 SearchComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  input: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };

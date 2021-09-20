@@ -14,6 +14,24 @@ export default class ShoppingCart extends Component {
     this.verifyLocalStorage();
   }
 
+  handleClick = (idx, numb) => {
+    const { cart } = this.state;
+    console.log(cart);
+    let { quantity } = cart[idx];
+    if (numb > 0) {
+      quantity += 1;
+    } else {
+      if (quantity === 1) return null;
+      quantity -= 1;
+    }
+    cart[idx].quantity = quantity;
+    console.log(cart);
+    this.setState({
+      cart,
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   verifyLocalStorage() {
     if (localStorage.cart) {
       const { cart } = localStorage;
@@ -36,8 +54,13 @@ export default class ShoppingCart extends Component {
     }
     return (
       <div>
-        { cart.map((product) => (
-          <ItemCart key={ product.title } product={ product } />
+        { cart.map((product, idx) => (
+          <ItemCart
+            key={ product.title }
+            product={ product }
+            idx={ idx }
+            handleClick={ this.handleClick }
+          />
         ))}
       </div>
     );
