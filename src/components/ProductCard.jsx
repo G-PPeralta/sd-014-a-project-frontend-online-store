@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BagPlusFill } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 export default class ProductCard extends Component {
   handleClick(title) {
@@ -8,12 +9,22 @@ export default class ProductCard extends Component {
   }
 
   render() {
-    const { product: { title, thumbnail, price } } = this.props;
+    const {
+      product: { title, thumbnail, price, id },
+    } = this.props;
     return (
       <div data-testid="product">
-        <h2>{ title }</h2>
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/product/${id}`,
+            state: this.props,
+          } }
+        >
+          <h2>{title}</h2>
+        </Link>
         <img src={ thumbnail } alt={ `foto do produto ${title}` } />
-        <h2>{ `preço: ${price}` }</h2>
+        <h2>{`preço: ${price}`}</h2>
         <button
           type="button"
           className="btn btn-outline-primary"
@@ -31,5 +42,6 @@ ProductCard.propTypes = {
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
