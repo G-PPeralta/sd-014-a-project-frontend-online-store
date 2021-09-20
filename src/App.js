@@ -1,14 +1,14 @@
 import React from 'react';
-
 import './App.css';
-import SearchInput from './components/SearchInput';
-import CategoriesMenu from './components/CategoriesMenu';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './components/Routes';
 
 function App() {
   return (
     <main>
-      <SearchInput />
-      <CategoriesMenu />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </main>
   );
 }
