@@ -16,7 +16,7 @@ class Home extends React.Component {
       category: '',
       products: [],
       showMessage: true,
-      offCart: true,
+      inHome: true,
     };
   }
 
@@ -37,7 +37,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { search, products, showMessage, offCart } = this.state;
+    const { search, products, showMessage, inHome } = this.state;
     return (
       <div
         style={ { backgroundColor: '#f9f9f9' } }
@@ -102,7 +102,7 @@ class Home extends React.Component {
               dataTestId="home-initial-message"
               message="Digite algum termo de pesquisa ou escolha uma categoria."
             />}
-            {!showMessage && <ProductList products={ products } offCart={ offCart } />}
+            {!showMessage && <ProductList products={ products } inHome={ inHome } />}
           </section>
         </main>
       </div>

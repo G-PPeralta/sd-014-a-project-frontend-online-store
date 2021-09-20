@@ -12,7 +12,7 @@ class Cart extends Component {
 
     document.title = 'Carrinho';
     this.state = {
-      offCart: false,
+      inHome: false,
       products: [],
     };
 
@@ -26,22 +26,22 @@ class Cart extends Component {
 
   handleQuantityButtonsClick(name, product) {
     const { products } = this.state;
-    let expectedProduct = products.find((item) => item.id === product.id);
-    const filteredProducts = products.filter((item) => item.id !== product.id);
+    const expectedProductIndex = products.findIndex((item) => item.id === product.id);
     switch (name) {
     case 'increase':
-      expectedProduct.counter += 1;
+      products[expectedProductIndex].counter += 1;
       break;
     case 'decrease':
-      expectedProduct.counter -= 1;
+      products[expectedProductIndex].counter -= 1;
       break;
     default:
-      expectedProduct = null;
+      products[expectedProductIndex] = null;
       break;
     }
     let newProducts = [];
-    if (expectedProduct === null) newProducts = [...filteredProducts];
-    else newProducts = [...filteredProducts, expectedProduct];
+    if (products[expectedProductIndex] === null) {
+      newProducts = products.filter((item) => item !== null);
+    } else newProducts = products;
     this.setState({
       products: newProducts,
     });
@@ -52,7 +52,7 @@ class Cart extends Component {
   }
 
   render() {
-    const { products, offCart } = this.state;
+    const { products, inHome } = this.state;
     return (
       <div
         style={ { backgroundColor: '#f9f9f9' } }
@@ -73,7 +73,7 @@ class Cart extends Component {
           <ProductList
             handleQuantityButtonsClick={ this.handleQuantityButtonsClick }
             products={ products }
-            offCart={ offCart }
+            inHome={ inHome }
           />
         </main>
       </div>

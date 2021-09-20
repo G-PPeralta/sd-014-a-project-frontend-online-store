@@ -16,15 +16,14 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { product, offCart: inHome, handleQuantityButtonsClick } = this.props;
+    const { product, inHome, handleQuantityButtonsClick } = this.props;
     const { homeIs } = this.state;
     const id = inHome ? 'product-detail-link' : 'shopping-cart-product-name';
     return (
-      <FadeIn>
-        <section
-          data-testid="product"
-          style={ { width: '15rem', height: '28rem' } }
-          className="
+      <li
+        data-testid="product"
+        style={ { width: '15rem', height: '28rem' } }
+        className="
           m-2
           mb-4
           d-flex
@@ -37,7 +36,8 @@ class ProductCard extends React.Component {
           border
           hover-shadow
           "
-        >
+      >
+        <FadeIn>
           <Link
             data-testid={ id }
             to={ { pathname: `/details/${product.id}`, state: { product } } }
@@ -83,8 +83,8 @@ class ProductCard extends React.Component {
             handleQuantityButtonsClick={ handleQuantityButtonsClick }
           />)}
           {inHome && <AddToCartButton homeIs={ homeIs } product={ product } />}
-        </section>
-      </FadeIn>
+        </FadeIn>
+      </li>
     );
   }
 }
