@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../styles/Produto.css';
+import AddCarrinho from './AddCarrinho';
 
 class Produto extends Component {
   render() {
     const { produto } = this.props;
     const { id, title, price, thumbnail } = produto;
+    console.log(produto);
 
     return (
       <Link
@@ -28,6 +30,7 @@ class Produto extends Component {
             </h2>
             <p className="nome-produto">{ title }</p>
           </div>
+          <AddCarrinho />
         </li>
       </Link>
     );
