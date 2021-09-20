@@ -2,7 +2,7 @@ import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 import CartButton from '../components/CartButton';
 import Categories from '../components/Categories';
-import HomeMessage from '../components/HomeMessage';
+import Message from '../components/Message';
 import ProductList from '../components/ProductList';
 import Header from '../components/Header';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -15,33 +15,29 @@ class Home extends React.Component {
       search: '',
       category: '',
       products: [],
-      shouldShow: true,
-      offCart: true,
+      showMessage: true,
+      inHome: true,
     };
-    this.getProducts = this.getProducts.bind(this);
   }
 
-  handleChange = ({ target: { value, name } }) => {
+  handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
-    if (value.length > 0) this.setState({ shouldShow: false });
-    else this.setState({ shouldShow: true });
   }
 
-  handleSelect = (event) => {
-    this.handleChange(event);
-    this.getProducts();
+  handleClick = async () => {
+    const { category, search } = this.state;
+    const request = await getProductsFromCategoryAndQuery(category, search);
+    this.setState({ products: request.results, showMessage: false });
   }
 
-  getProducts() {
-    const { search, category } = this.state;
-    this.setState(async () => {
-      const products = await getProductsFromCategoryAndQuery(category, search);
-      this.setState({ products: products.results });
-    });
+  handleSelect = async ({ target: { value: category } }) => {
+    const { search } = this.state;
+    const request = await getProductsFromCategoryAndQuery(category, search);
+    this.setState({ products: request.results, showMessage: false });
   }
 
   render() {
-    const { search, products, shouldShow, offCart } = this.state;
+    const { search, products, showMessage, inHome } = this.state;
     return (
       <div
         style={ { backgroundColor: '#f9f9f9' } }
@@ -70,7 +66,7 @@ class Home extends React.Component {
             <button
               type="button"
               className="btn btn-primary ms-2"
-              onClick={ this.getProducts }
+              onClick={ this.handleClick }
               data-testid="query-button"
             >
               <BsSearch />
@@ -83,7 +79,10 @@ class Home extends React.Component {
           style={ { width: '85%' } }
         >
           <Categories
-            onChange={ this.handleSelect }
+            onClick={ (event) => {
+              this.handleChange(event);
+              this.handleSelect(event);
+            } }
             className="d-flex
             flex-column
             border
@@ -99,8 +98,11 @@ class Home extends React.Component {
           w-75
           align-items-center"
           >
-            {shouldShow && <HomeMessage />}
-            <ProductList products={ products } offCart={ offCart } />
+            {showMessage && <Message
+              dataTestId="home-initial-message"
+              message="Digite algum termo de pesquisa ou escolha uma categoria."
+            />}
+            {!showMessage && <ProductList products={ products } inHome={ inHome } />}
           </section>
         </main>
       </div>

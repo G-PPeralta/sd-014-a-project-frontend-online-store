@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 class Category extends React.Component {
   render() {
-    const { title, id } = this.props;
-    const { onChange } = this.props;
+    const { title, id, onClick } = this.props;
     return (
       <label
         data-testid="category"
@@ -25,7 +24,7 @@ class Category extends React.Component {
           className="form-check-input"
           name="category"
           id={ id }
-          onChange={ onChange }
+          onClick={ onClick }
           value={ id }
         />
       </label>

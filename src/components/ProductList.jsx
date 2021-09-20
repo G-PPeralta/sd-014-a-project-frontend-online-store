@@ -5,21 +5,24 @@ import ProductCard from './ProductCard';
 
 class ProductList extends React.Component {
   render() {
-    const { products, offCart } = this.props;
+    const { products, inHome, handleQuantityButtonsClick } = this.props;
     return (
-      <section className="d-flex flex-wrap">
+      <ul className="d-flex flex-wrap m-auto">
         { products.map((product) => (<ProductCard
           key={ product.id }
           product={ product }
-          offCart={ offCart }
+          inHome={ inHome }
+          handleQuantityButtonsClick={ handleQuantityButtonsClick }
         />))}
-      </section>
+      </ul>
     );
   }
 }
 
 ProductList.propTypes = {
   products: PropTypes.array,
+  inHome: PropTypes.bool,
+  handleQuantityButtonsClick: PropTypes.func,
 }.isRequired;
 
 export default ProductList;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import HomeButton from '../components/HomeButton';
 import CartButton from '../components/CartButton';
 import Header from '../components/Header';
-import CardProductDetail from '../components/CardProductDetail';
+import ProductDetailCard from '../components/ProductDetailCard';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -22,17 +22,20 @@ class ProductDetails extends React.Component {
     const { title } = product;
     const { homeIs } = this.state;
     return (
-      <div>
+      <div
+        style={ { backgroundColor: '#f9f9f9' } }
+        className="d-flex flex-column w-100"
+      >
         <Header>
           <div>
             <h5 className="text-white">{title}</h5>
           </div>
-          <div>
+          <div className="d-flex">
             <HomeButton />
             <CartButton />
           </div>
         </Header>
-        <CardProductDetail product={ product } homeIs={ homeIs } />
+        <ProductDetailCard product={ product } homeIs={ homeIs } />
       </div>
     );
   }

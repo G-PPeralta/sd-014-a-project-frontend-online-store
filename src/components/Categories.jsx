@@ -11,20 +11,19 @@ class Categories extends React.Component {
     this.state = {
       categories: [],
     };
-    this.getCategories = this.getCategories.bind(this);
   }
 
   componentDidMount() {
-    this.getCategories();
-  }
-
-  async getCategories() {
-    const categories = await getCategories();
-    this.setState({ categories });
+    getCategories()
+      .then((categories) => {
+        this.setState({
+          categories,
+        });
+      });
   }
 
   render() {
-    const { onChange, className } = this.props;
+    const { onClick, className } = this.props;
     const { categories } = this.state;
     return (
       <section
@@ -36,7 +35,7 @@ class Categories extends React.Component {
           key={ category.id }
           title={ category.name }
           id={ category.id }
-          onChange={ onChange }
+          onClick={ onClick }
         />)) }
       </section>
     );
