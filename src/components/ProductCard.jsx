@@ -11,7 +11,7 @@ export default class ProductCard extends Component {
       <div className="product-card" data-testid="product">
         <h3 className="product-title">{title}</h3>
         <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-        <p>{price}</p>
+        <p>{`R$${price.toFixed(2)}`}</p>
       </div>
     );
   }
