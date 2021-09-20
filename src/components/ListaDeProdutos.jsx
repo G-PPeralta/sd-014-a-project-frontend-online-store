@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-// import busca from './busca';
+import SearchBar from './SearchBar';
 // import card from './card';
 
 export class ListaDeProdutos extends Component {
@@ -35,7 +35,7 @@ export class ListaDeProdutos extends Component {
     const { produtos } = this.state;
     return (
       <div>
-        <Busca
+        <SearchBar
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
