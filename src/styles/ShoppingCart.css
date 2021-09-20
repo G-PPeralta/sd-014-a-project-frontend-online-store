@@ -1,0 +1,21 @@
+.return-button {
+  display: flex;
+  margin: 1rem 2rem;
+}
+
+.shopping-cart-field {
+  align-items: center;
+  display: flex;
+  margin: 1rem;
+}
+
+.shopping-cart-field > *:first-child {
+  margin: 0 1rem;
+}
+
+.cart-product-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}

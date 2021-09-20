@@ -1,103 +1,111 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import ProductList from '../components/ProductList';
+import ProductCard from '../components/ProductCard';
+import * as api from '../services/api';
+import '../styles/Home.css';
 
-class Home extends Component {
-  constructor() {
-    super();
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      searchedTerm: '',
       categories: [],
+      didSearch: false,
       products: [],
+      query: '',
     };
   }
 
   componentDidMount() {
-    this.fetchAPI();
+    api.getCategories().then((categories) => {
+      this.setState({ categories });
+    });
   }
 
-  handleQueryChange = (event) => {
-    if (event.target.value !== undefined) {
-      this.setState({ searchedTerm: event.target.value });
-    }
+  handleChange = ({ target: { value } }) => {
+    this.setState({ query: value });
   };
 
-  fetchAPI = async () => {
-    const result = await getCategories();
-    this.setState({ categories: result });
+  handleClick = (category) => {
+    const { query } = this.state;
+    api
+      .getProductsFromCategoryAndQuery(category, query)
+      .then(({ results: products }) => {
+        this.setState({ didSearch: true, products });
+      });
   };
 
-  fetchProducts = async (event) => {
-    const id = event.target.name;
-    const { searchedTerm } = this.state;
-    const results = await getProductsFromCategoryAndQuery(id, searchedTerm);
-    this.setState({ products: results });
-  };
-
-  sidebar() {
-    const { categories } = this.state;
+  renderSearchSection = () => {
+    const { query } = this.state;
     return (
-      <div id="sidebar">
-        <div className="shopping-cart">
-          <Link
-            to="/shopping-cart"
-            data-testid="shopping-cart-button"
+      <section className="search-section">
+        <div>
+          <button
+            className="query-button"
+            data-testid="query-button"
+            onClick={ this.handleClick }
+            type="button"
           >
-            Carrinho de Compras
+            <img
+              alt="search"
+              src="https://img.icons8.com/ios/50/000000/search--v1.png"
+            />
+          </button>
+          <input
+            className="query-input"
+            data-testid="query-input"
+            name="query-input"
+            onChange={ this.handleChange }
+            type="text"
+            value={ query }
+          />
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">
+            <img
+              alt="shopping-cart"
+              src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
+            />
           </Link>
         </div>
-        { categories.map(({ id, name }) => (
-          <input
-            key={ id }
-            name={ id }
-            type="button"
-            value={ name }
-            data-testid="category"
-            onClick={ this.fetchProducts }
-          />
-        )) }
-      </div>
-    );
-  }
-
-  products() {
-    const { products } = this.state;
-    return (
-      <section id="product-list">
-        { products.results !== undefined && products.results.length > 0 ? (
-          products.results.map((product) => (
-            <ProductList key={ product.id } products={ product } />
-          ))
-        )
-          : (<p>Nenhum produto foi encontrado</p>) }
       </section>
     );
-  }
+  };
 
   render() {
+    const { categories, didSearch, products } = this.state;
     return (
-      <div data-testid="home-initial-message">
-        <h2 className="search-msg">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h2>
-        <form>
-          <input
-            type="text"
-            data-testid="query-input"
-            onChange={ this.handleQueryChange }
-          />
-          <input
-            type="button"
-            value="Buscar"
-            data-testid="query-button"
-            onClick={ this.fetchProducts }
-          />
-        </form>
-        {this.sidebar()}
-        {this.products()}
+      <div className="home-page">
+        <section className="category-list">
+          <h4>Categorias:</h4>
+          {categories.map(({ id, name }) => (
+            <label
+              className="category-item"
+              data-testid="category"
+              htmlFor={ id }
+              key={ id }
+            >
+              <input id={ id } name="category" type="radio" value={ id } />
+              {name}
+            </label>
+          ))}
+        </section>
+        <main className="main-content">
+          {this.renderSearchSection()}
+          <section className="product-list">
+            {!didSearch && (
+              <p className="message" data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>
+            )}
+            {didSearch
+              && products.length > 0
+              && products.map((product) => (
+                <ProductCard key={ product.id } product={ product } />
+              ))}
+            {didSearch && products.length === 0 && (
+              <p className="message">Nenhum produto encontrado</p>
+            )}
+          </section>
+        </main>
       </div>
     );
   }
 }
-export default Home;
