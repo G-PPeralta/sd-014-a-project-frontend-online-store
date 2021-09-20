@@ -19,18 +19,17 @@ class ListaDeProdutos extends Component {
   }
 
   handleClick = async (e) => {
-    e.preventDefault();
     const { busca } = this.state;
+    e.preventDefault();
     const objListaProdutos = await getProductsFromCategoryAndQuery('', busca);
-    console.log(objListaProdutos);
     this.setState({
       produtos: objListaProdutos.results,
     });
   }
 
-/*   mainLista = (produtos) => {
+  mainLista = (produtos) => {
     produtos.map((produto) => (<ProductCard key={ produto.id } produto={ produto } />));
-  } */
+  }
 
   render() {
     const { produtos } = this.state;
@@ -40,7 +39,10 @@ class ListaDeProdutos extends Component {
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        { produtos.map((produto) => <ProductCard key={ produto.id } produto={ produto } />) }
+        { produtos.length === 0
+          ? <p> Nenhum produto foi encontrado </p>
+          : produtos
+            .map((produto) => (<ProductCard key={ produto.id } produto={ produto } />))}
       </div>
     );
   }
