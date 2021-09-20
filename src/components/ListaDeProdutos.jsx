@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ProductCard from './ProductCard';
 // import busca from './busca';
 // import card from './card';
 
@@ -28,7 +29,7 @@ export class ListaDeProdutos extends Component {
   }
 
   mainLista = (produtos) => {
-    produtos.map((produto) => (<ProductCard key={ produto.id } iten={ produto } />));
+    produtos.map((produto) => (<ProductCard key={ produto.id } produto={ produto } />));
   }
 
   render() {
