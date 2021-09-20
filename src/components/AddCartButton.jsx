@@ -9,6 +9,7 @@ class AddCartButton extends React.Component {
 
   addItem() {
     const { product } = this.props;
+    product.quantity = product.quantity || 1;
     const productList = JSON.parse(localStorage.cartItems);
     productList.push(product);
     localStorage.cartItems = JSON.stringify(productList);
