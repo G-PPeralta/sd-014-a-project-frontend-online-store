@@ -1,10 +1,13 @@
 import React from 'react';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class CategoriesMenu extends React.Component {
   constructor() {
     super();
-    this.state = { categoriesData: [] };
+    this.state = {
+      categoriesData: [],
+      searchCategory: '',
+    };
   }
 
   componentDidMount() {
@@ -16,6 +19,11 @@ class CategoriesMenu extends React.Component {
     this.setState({ categoriesData: categories });
   }
 
+  handleChange = async (event) => {
+    const searchResult = await getProductsFromCategoryAndQuery(event.target.value, 'carro');
+    this.setState({ searchCategory: searchResult.results });
+  }
+
   render() {
     const { categoriesData } = this.state;
 
@@ -24,7 +32,7 @@ class CategoriesMenu extends React.Component {
         <form>
           {categoriesData.map(({ id, name }) => (
             <label data-testid="category" htmlFor={ id } key={ id }>
-              <input type="radio" id={ id } value={ id } name="category" />
+              <input type="radio" id={ id } value={ id } onChange={ this.handleChange } name="category" />
               { name }
             </label>
           ))}
