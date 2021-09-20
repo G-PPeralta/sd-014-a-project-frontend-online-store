@@ -1,9 +1,9 @@
 .header-container {
-  width: 100vw;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
   padding: 10px;
+  width: 100vw;
 }
 
 .header-direita {
@@ -15,29 +15,29 @@
 }
 
 .bt-container {
-  display: flex;
   align-items: center;
+  background: #3a4f69;
+  border-radius: 4px;
+  display: flex;
   justify-content: center;
   margin: 5px;
-  border-radius: 4px;
-  background: #3a4f69;
 }
 
 svg {
-  margin: 4px 15px;
-  height: 28px;
   fill: white;
+  height: 28px;
+  margin: 4px 15px;
 }
 
 .search-input {
+  background: #3a4f69;
+  border-radius: 4px;
   color: white;
+  font-size: 14px;
+  height: 35px;
   margin: 5px;
   padding-left: 8px;
-  height: 35px;
   width: 30vw;
-  font-size: 14px;
-  border-radius: 4px;
-  background: #3a4f69;
 }
 
 .bt-search {

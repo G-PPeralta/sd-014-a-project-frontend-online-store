@@ -3,11 +3,11 @@
 }
 
 .categorias-container {
-  width: 175px;
+  color: white;
   display: flex;
   flex-flow: column;
-  color: white;
   list-style-type: none;
+  width: 175px;
 }
 
 .categorias {
