@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Categorias.css';
-import Produtos from './Produtos';
-import CategoriaFilter from './CategoriaFilter';
 import * as api from '../services/api';
 
 class Categorias extends React.Component {
@@ -11,7 +9,6 @@ class Categorias extends React.Component {
     this.state = {
       find: '',
       response: '',
-      request: false,
     };
     this.findCategory = this.findCategory.bind(this);
     this.updateProducts = this.updateProducts.bind(this);
@@ -32,28 +29,24 @@ class Categorias extends React.Component {
   updateProducts() {
     const { response } = this.state;
     const { metodo } = this.props;
-      this.setState(
-        { request: false, },
-        () => {
-          metodo(response);
-        });
+    metodo(response);
   }
 
   render() {
     const { responseApi } = this.props;
-    const { response } = this.state;
 
     const categorias = responseApi.map((categoria) => {
       const { id, name } = categoria;
       return (
-        <li
+        <button
           data-testid="category"
           onClick={ this.findCategory }
           id={ id }
           key={ id }
+          type="button"
         >
           <p className="categorias">{ name }</p>
-        </li>
+        </button>
       );
     });
 
@@ -72,6 +65,7 @@ class Categorias extends React.Component {
 
 Categorias.propTypes = {
   responseApi: PropTypes.arrayOf(PropTypes.object).isRequired,
+  metodo: PropTypes.func.isRequired,
 };
 
 export default Categorias;

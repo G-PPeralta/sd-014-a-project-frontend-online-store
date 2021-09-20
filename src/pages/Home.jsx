@@ -63,7 +63,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { responseApi, apiFetched, queryInput, productsList } = this.state;
+    const { responseApi: r, apiFetched, queryInput, productsList } = this.state;
+    const m = this.categoriesProducts;
     return (
       <section className="wrapper">
         <section className="header-container">
@@ -94,7 +95,7 @@ class Home extends React.Component {
         </section>
         <section className="produtos-container">
           <aside className="categorias">
-            { apiFetched && <Categorias responseApi={ responseApi } metodo={ this.categoriesProducts } /> }
+            { apiFetched && <Categorias responseApi={ r } metodo={ m } /> }
           </aside>
           <Produtos products={ productsList } />
         </section>
