@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'react-rater/lib/react-rater.css';
 
 import HomeButton from '../components/HomeButton';
 import CartButton from '../components/CartButton';
 import Header from '../components/Header';
 import ProductDetailCard from '../components/ProductDetailCard';
+import ReviewForm from '../components/ReviewForm';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -36,6 +38,7 @@ class ProductDetails extends React.Component {
           </div>
         </Header>
         <ProductDetailCard product={ product } homeIs={ homeIs } />
+        <ReviewForm />
       </div>
     );
   }
