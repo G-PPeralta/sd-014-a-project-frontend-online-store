@@ -16,6 +16,13 @@ export default class CardProduct extends Component {
         <img src={ thumbnail } alt={ title } />
         <h5>{ title }</h5>
         <p>{ `R$${price}`}</p>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ this.handleClick }
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
