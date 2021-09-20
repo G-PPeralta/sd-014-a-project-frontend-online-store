@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShoppingIcon from '../components/ShoppingIcon';
 
 export default class Home extends Component {
   render() {
@@ -6,8 +7,9 @@ export default class Home extends Component {
       <div>
         <input
           type="text"
-          name="serach"
+          name="search"
         />
+        <ShoppingIcon />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
