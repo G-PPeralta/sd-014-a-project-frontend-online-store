@@ -1,0 +1,20 @@
+.search-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#search-input {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  outline: none;
+  width: 90%;
+}
+
+.home-initial-message {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
