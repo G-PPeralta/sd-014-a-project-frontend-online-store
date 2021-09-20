@@ -13,46 +13,31 @@ class Home extends React.Component {
     document.title = 'Home';
     this.state = {
       search: '',
+      category: '',
       products: [],
-      shouldShow: true,
+      showMessage: true,
       offCart: true,
     };
-    this.getProducts = this.getProducts.bind(this);
   }
 
-  componentDidMount() {
-    this.getProducts();
-  }
-
-  handleChange = ({ target: { value, name } }) => {
+  handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
-    if (value.length > 0) this.setState({ shouldShow: false });
-    else this.setState({ shouldShow: true });
   }
 
-  handleClick(event) {
-    const { target } = event;
-    const { value } = target;
-    this.setState({ shouldShow: false });
-    this.getProducts(value);
+  handleClick = async () => {
+    const { category, search } = this.state;
+    const request = await getProductsFromCategoryAndQuery(category, search);
+    this.setState({ products: request.results, showMessage: false });
   }
 
-  handleSelect = (event) => {
-    this.handleClick(event);
-  }
-
-  getProducts(category) {
+  handleSelect = async ({ target: { value: category } }) => {
     const { search } = this.state;
-    getProductsFromCategoryAndQuery(category, search)
-      .then(({ results }) => {
-        this.setState({
-          products: results,
-        });
-      });
+    const request = await getProductsFromCategoryAndQuery(category, search);
+    this.setState({ products: request.results, showMessage: false });
   }
 
   render() {
-    const { search, products, shouldShow, offCart } = this.state;
+    const { search, products, showMessage, offCart } = this.state;
     return (
       <div
         style={ { backgroundColor: '#f9f9f9' } }
@@ -81,7 +66,7 @@ class Home extends React.Component {
             <button
               type="button"
               className="btn btn-primary ms-2"
-              onClick={ this.getProducts }
+              onClick={ this.handleClick }
               data-testid="query-button"
             >
               <BsSearch />
@@ -94,7 +79,10 @@ class Home extends React.Component {
           style={ { width: '85%' } }
         >
           <Categories
-            onClick={ (event) => this.handleSelect(event) }
+            onClick={ (event) => {
+              this.handleChange(event);
+              this.handleSelect(event);
+            } }
             className="d-flex
             flex-column
             border
@@ -110,11 +98,11 @@ class Home extends React.Component {
           w-75
           align-items-center"
           >
-            {shouldShow && <Message
+            {showMessage && <Message
               dataTestId="home-initial-message"
               message="Digite algum termo de pesquisa ou escolha uma categoria."
             />}
-            {!shouldShow && <ProductList products={ products } offCart={ offCart } />}
+            {!showMessage && <ProductList products={ products } offCart={ offCart } />}
           </section>
         </main>
       </div>
