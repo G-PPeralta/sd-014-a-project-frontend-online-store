@@ -73,6 +73,7 @@ class Home extends React.Component {
               <Product
                 key={ product.id }
                 product={ product }
+                shipping={ product.shipping }
               />
             ),
           )
