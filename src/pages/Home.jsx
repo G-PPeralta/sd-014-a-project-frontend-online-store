@@ -67,7 +67,7 @@ class Home extends React.Component {
     const m = this.categoriesProducts;
     return (
       <section className="wrapper">
-        <section className="header-container">
+        <header className="header-container">
           <div className="header-esquerda">
             <h4 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
@@ -92,7 +92,7 @@ class Home extends React.Component {
             </button>
             <CarrinhoBt />
           </div>
-        </section>
+        </header>
         <section className="produtos-container">
           <aside className="categorias">
             { apiFetched && <Categorias responseApi={ r } metodo={ m } /> }
