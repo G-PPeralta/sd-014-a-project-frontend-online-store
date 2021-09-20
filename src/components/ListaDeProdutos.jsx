@@ -19,11 +19,15 @@ class ListaDeProdutos extends React.Component {
         >
           Pesquisar
         </button>
-        {productList.map((produtoAtual) => (
-          <section data-testid="product" key={ produtoAtual.id }>
-            <p>{ produtoAtual.title }</p>
-          </section>
-        ))}
+        {console.log(productList)}
+        <main>
+          {productList.map((produtoAtual) => (
+            <section data-testid="product" key={ produtoAtual.id }>
+              <img src={ produtoAtual.thumbnail } alt={ produtoAtual.title } />
+              <p>{ produtoAtual.title }</p>
+            </section>
+          ))}
+        </main>
       </>
     );
   }

@@ -10,37 +10,30 @@ class Home extends Component {
       retornoCategory: [],
       productList: [],
       searchProduct: '',
-      categoriaSelecionada: 'MLB5672',
+      categoriaSelecionada: '',
     };
     this.searchInput = this.searchInput.bind(this);
     this.chamarApi = this.chamarApi.bind(this);
     this.addCotegory = this.addCotegory.bind(this);
-    this.test = this.test.bind(this);
   }
 
   componentDidMount() {
-    this.test();
+    const { categoriaSelecionada, searchProduct } = this.state;
+    getCategories().then((resultado) => this.setState({ retornoCategory: resultado }))
+      .then(() => getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
+        .then((result) => this.setState({ productList: result.results })));
   }
 
-  componentDidUpdate() {
-    this.chamarApi();
+  funcaoRodaDois() {
+    getCategories().then((resultado) => this.setState({ retornoCategory: resultado }));
+    getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
+      .then((result) => this.setState({ productList: result.results }));
   }
 
-  async test() {
-    const t1 = await getCategories();
-    const t2 = await t1;
-    return this.setState({
-      retornoCategory: t2,
-    });
-  }
-
-  async chamarApi() {
-    const { searchProduct, categoriaSelecionada } = this.state;
-    const t1 = await getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct);
-    const t2 = await t1.results;
-    return this.setState({
-      productList: t2,
-    });
+  chamarApi() {
+    const { categoriaSelecionada, searchProduct } = this.state;
+    getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
+      .then((result) => this.setState({ productList: result.results }));
   }
 
   searchInput(event) {

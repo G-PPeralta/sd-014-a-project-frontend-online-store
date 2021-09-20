@@ -6,7 +6,7 @@ class ListCategory extends Component {
     const { categoryList, addCotegory } = this.props;
     return (
       <select onChange={ addCotegory }>
-        <option value="">Categorias</option>
+        {/* <option value="">Categorias</option> */}
         {categoryList.map((category) => (
           <option
             data-testid="category"
