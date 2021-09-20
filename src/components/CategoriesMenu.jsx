@@ -9,7 +9,7 @@ class CategoriesMenu extends React.Component {
   getCategoriesCall = async () => {
     const categories = await getCategories();
     this.setState({ categoriesData : categories })
-    this.state.categoriesData.map((category) => category.name)
+    // this.state.categoriesData.map((category) => console.log(category.name))
   }
 
   componentDidMount() {
