@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import HomeButton from '../components/HomeButton';
-import { getproducts } from '../services/shopCartManag';
+import { getProducts } from '../services/shopCartManag';
 import ProductList from '../components/ProductList';
 import Header from '../components/Header';
 import Message from '../components/Message';
@@ -20,7 +20,7 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    const products = getproducts();
+    const products = getProducts();
     this.resultCart(products);
   }
 
