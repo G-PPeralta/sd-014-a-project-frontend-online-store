@@ -1,0 +1,29 @@
+.input {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#icon {
+  transform: scale(1.0);
+}
+
+.main-conteiner {
+  justify-content: space-around;
+  display: flex;
+  width: 100%;
+}
+
+.conteiner-left {
+  width: 15%;
+  height: 100vh;
+}
+
+.conteiner-right {
+  width: 75%;
+  height: 100vh;
+}
+
+.conteiner-left li {
+  list-style-type: none;
+}
