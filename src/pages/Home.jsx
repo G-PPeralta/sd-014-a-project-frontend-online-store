@@ -10,17 +10,25 @@ class Home extends Component {
     super();
     this.state = {
       queryInput: '',
+      category: '',
       results: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleCategories = this.handleCategories.bind(this);
   }
 
   handleClick = async () => {
-    const { queryInput } = this.state;
-    const { results } = await getProductsFromCategoryAndQuery('', queryInput);
+    const { queryInput, category } = this.state;
+    const { results } = await getProductsFromCategoryAndQuery(category, queryInput);
     this.setState({
       results,
+    });
+  }
+
+  handleCategories({ target: { value } }) {
+    this.setState({ category: value }, () => {
+      this.handleClick();
     });
   }
 
@@ -40,7 +48,9 @@ class Home extends Component {
   render() {
     const { queryInput, results } = this.state;
     return (
-      <div>
+      <div className="d-flex">
+        <Category onChange={ this.handleCategories } />
+
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
@@ -60,7 +70,6 @@ class Home extends Component {
           />
         </section>
         { results && this.renderProducts() }
-        <Category />
         <CartButton />
       </div>
     );
