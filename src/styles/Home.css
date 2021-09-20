@@ -6,12 +6,20 @@
   padding: 1rem;
 }
 
+.search-section > *:first-child {
+  align-items: center;
+  display: flex;
+  width: 90%;
+}
+
 #search-input {
   border: 1px solid black;
   border-radius: 20px;
-  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
   outline: none;
-  width: 90%;
+  padding: 0.5rem 1rem;
+  width: 100%;
 }
 
 .home-initial-message {
