@@ -2,7 +2,7 @@ import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 import CartButton from '../components/CartButton';
 import Categories from '../components/Categories';
-import HomeMessage from '../components/HomeMessage';
+import Message from '../components/Message';
 import ProductList from '../components/ProductList';
 import Header from '../components/Header';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -110,7 +110,10 @@ class Home extends React.Component {
           w-75
           align-items-center"
           >
-            {shouldShow && <HomeMessage />}
+            {shouldShow && <Message
+              dataTestId="home-initial-message"
+              message="Digite algum termo de pesquisa ou escolha uma categoria."
+            />}
             {!shouldShow && <ProductList products={ products } offCart={ offCart } />}
           </section>
         </main>

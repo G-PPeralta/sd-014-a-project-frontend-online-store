@@ -4,7 +4,7 @@ import FadeIn from 'react-fade-in';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import AddToCardButton from './AddToCardButton';
-import { addProduct, decreaseProduct, removeProduct } from '../services/shopCartManag';
+import QuantityButton from './QuantityButton';
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -46,41 +46,10 @@ class ProductCard extends React.Component {
               <Card.Text>{`R$ ${product.price}`}</Card.Text>
             </Card.Body>
           </Link>
-          {!inHome && (
-            <>
-              <button
-                data-testid="product-increase-quantity"
-                name="increase"
-                onClick={ () => {
-                  addProduct(product);
-                  handleQuantityButtonsClick('increase', product);
-                } }
-                type="button"
-              >
-                +
-              </button>
-              <button
-                data-testid="product-decrease-quantity"
-                disabled={ product.counter === 1 }
-                onClick={ () => {
-                  decreaseProduct(product);
-                  handleQuantityButtonsClick('decrease', product);
-                } }
-                type="button"
-              >
-                -
-              </button>
-              <button
-                onClick={ () => {
-                  removeProduct(product);
-                  handleQuantityButtonsClick('', product);
-                } }
-                type="button"
-              >
-                X
-              </button>
-            </>
-          )}
+          {!inHome && (<QuantityButton
+            product={ product }
+            handleQuantityButtonsClick={ handleQuantityButtonsClick }
+          />)}
           {inHome && <AddToCardButton homeIs={ homeIs } product={ product } />}
         </Card>
       </FadeIn>
