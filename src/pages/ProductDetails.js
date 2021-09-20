@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import AddItemToCart from '../components/AddItemToCart';
 import Loading from '../components/Loading';
 import Form from '../components/Form';
+import ShoppingCartButton from '../components/ShoppingCartButton';
 
 export default class ProductDetails extends Component {
   constructor() {
     super();
 
     this.state = {
-      title: '',
-      thumbnail: '',
-      price: 0,
-      // attributes: [],
+      details: {},
       isLoading: false,
     };
   }
@@ -20,37 +20,30 @@ export default class ProductDetails extends Component {
     this.handleAPI();
   }
 
-  // https://api.mercadolibre.com/items/MLB1721632892
-
   handleAPI = async () => {
     this.setState({ isLoading: true });
     const { match: { params: { id } } } = this.props;
     const endPoint = await fetch(`https://api.mercadolibre.com/items/${id}`);
     const details = await endPoint.json();
-    console.log(details);
     this.setState({
-      title: details.title,
-      thumbnail: details.thumbnail,
-      price: details.price,
-      // attributes: details.attributes,
-      availableQuantity: details.available_quantity,
-      soldQuantity: details.sold_quantity,
-      condition: details.condition,
+      details,
       isLoading: false });
   }
 
   render() {
+    const { details, isLoading } = this.state;
     const { title,
       thumbnail,
       price,
       availableQuantity,
       soldQuantity,
-      condition, isLoading } = this.state;
+      condition } = details;
 
     if (isLoading) return <Loading />;
 
     return (
       <div>
+        <ShoppingCartButton />
         <h2 data-testid="product-detail-name">
           { title }
         </h2>
@@ -70,6 +63,7 @@ export default class ProductDetails extends Component {
             { `Condição do produto: ${condition}` }
           </span>
         </div>
+        <AddItemToCart dataTestId="product-detail-add-to-cart" product={ details } />
         <Form />
       </div>
     );
