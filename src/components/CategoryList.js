@@ -10,9 +10,9 @@ export default class CategoryList extends React.Component {
           {categoryList.map((category) => (
             <li
               key={ category.id }
-              data-testid="category"
             >
               <input
+                data-testid="category"
                 type="radio"
                 name="filtroCategoria"
                 id={ category.id }

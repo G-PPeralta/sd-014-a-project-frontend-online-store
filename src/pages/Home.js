@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CategoryList from '../components/CategoryList';
-import ProductsList from './ProductsList';
 import ProductCard from '../components/ProductCard';
 
 export default class Home extends React.Component {
@@ -34,8 +33,11 @@ export default class Home extends React.Component {
   }
 
   handleCategory = async ({ target }) => {
+    const { searchInput } = this.state;
     const { id } = target;
-    this.setState({ selectedCategory: id });
+    const list = await getProductsFromCategoryAndQuery(id, searchInput);
+    const { results } = await list;
+    this.setState({ productList: results });
   }
 
   getCategories = async () => {
@@ -90,10 +92,10 @@ export default class Home extends React.Component {
           categoryList={ categoryList }
           handleCategory={ this.handleCategory }
         />
-        {!productList || productList.length === 0
-          ? initialMessage
-          : this.renderProductList()}
-        {/* <ProductsList products={ this.renderProductList() } /> */}
+        {productList.length !== 0
+          ? this.renderProductList()
+          : initialMessage}
+
       </div>
     );
   }
