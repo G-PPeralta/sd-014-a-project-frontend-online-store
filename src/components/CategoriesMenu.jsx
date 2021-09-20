@@ -6,23 +6,29 @@ class CategoriesMenu extends React.Component {
     super();
     this.state = { categoriesData: [] };
   }
-  getCategoriesCall = async () => {
-    const categories = await getCategories();
-    this.setState({ categoriesData : categories })
-    // this.state.categoriesData.map((category) => console.log(category.name))
-  }
 
   componentDidMount() {
     this.getCategoriesCall();
   }
 
+  getCategoriesCall = async () => {
+    const categories = await getCategories();
+    this.setState({ categoriesData: categories });
+  }
+
   render() {
+    const { categoriesData } = this.state;
 
-    return(
+    return (
       <div>
-        {
-
-        }        
+        <form>
+          {categoriesData.map(({ id, name }) => (
+            <label data-testid="category" htmlFor={ id } key={ id }>
+              <input type="radio" id={ id } value={ id } name="category" />
+              { name }
+            </label>
+          ))}
+        </form>
       </div>
     );
   }
