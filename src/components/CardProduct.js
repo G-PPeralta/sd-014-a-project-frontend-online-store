@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class CardProduct extends Component {
+  handleClick=(product) => {
+    if (localStorage.cart) {
+      const { cart } = localStorage;
+      const cartJSON = JSON.parse(cart);
+      const cartUpDate = cartJSON.concat(product);
+      localStorage.setItem('cart', JSON.stringify(cartUpDate));
+      console.log(cartUpDate);
+    } else {
+      localStorage.setItem('cart', JSON.stringify([product]));
+    }
+  }
+
   render() {
     const { product } = this.props;
     const { thumbnail, title, price, id } = product;
@@ -29,7 +41,7 @@ export default class CardProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.handleClick }
+          onClick={ () => { this.handleClick(product); } }
         >
           Adicionar ao Carrinho
         </button>
