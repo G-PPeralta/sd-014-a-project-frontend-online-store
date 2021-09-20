@@ -20,7 +20,6 @@ class ReviewForm extends React.Component {
       <section>
         <h1>Avaliação</h1>
         <Form>
-
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Email address</Form.Label>
             <Rater
@@ -42,7 +41,6 @@ class ReviewForm extends React.Component {
             Salvar
           </Button>
         </Form>
-
       </section>
 
     );

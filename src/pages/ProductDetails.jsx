@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'react-rater/lib/react-rater.css';
 
-import HomeButton from '../components/HomeButton';
-import CartButton from '../components/CartButton';
+import GoToHomeButton from '../components/GoToHomeButton';
+import GoToCartButton from '../components/GoToCartButton';
 import Header from '../components/Header';
 import ProductDetailCard from '../components/ProductDetailCard';
 import ReviewForm from '../components/ReviewForm';
@@ -33,8 +33,8 @@ class ProductDetails extends React.Component {
             <h5 className="text-white">{title}</h5>
           </div>
           <div className="d-flex">
-            <HomeButton />
-            <CartButton />
+            <GoToHomeButton />
+            <GoToCartButton />
           </div>
         </Header>
         <ProductDetailCard product={ product } homeIs={ homeIs } />
