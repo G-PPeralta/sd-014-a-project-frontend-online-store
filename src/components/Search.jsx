@@ -1,4 +1,5 @@
 import React from 'react';
+import CartButton from './CartButton';
 import { getCategories } from '../services/api';
 
 class Search extends React.Component {
@@ -37,6 +38,7 @@ class Search extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <CartButton />
         {isLoading ? null : this.renderCategories()}
       </div>
     );
