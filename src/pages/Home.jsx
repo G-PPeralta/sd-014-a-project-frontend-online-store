@@ -18,6 +18,7 @@ class Home extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.categoriesProducts = this.categoriesProducts.bind(this);
   }
 
   componentDidMount() {
@@ -55,8 +56,15 @@ class Home extends React.Component {
     });
   }
 
+  categoriesProducts(productsList) {
+    this.setState({
+      productsList,
+    });
+  }
+
   render() {
-    const { responseApi, apiFetched, queryInput, productsList } = this.state;
+    const { responseApi: r, apiFetched, queryInput, productsList } = this.state;
+    const m = this.categoriesProducts;
     return (
       <section className="wrapper">
         <section className="header-container">
@@ -87,7 +95,7 @@ class Home extends React.Component {
         </section>
         <section className="produtos-container">
           <aside className="categorias">
-            { apiFetched && <Categorias responseApi={ responseApi } /> }
+            { apiFetched && <Categorias responseApi={ r } metodo={ m } /> }
           </aside>
           <Produtos products={ productsList } />
         </section>

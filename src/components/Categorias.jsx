@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Categorias.css';
-
-import CategoriaFilter from './CategoriaFilter';
 import * as api from '../services/api';
 
 class Categorias extends React.Component {
@@ -11,40 +9,48 @@ class Categorias extends React.Component {
     this.state = {
       find: '',
       response: '',
-      request: false,
     };
     this.findCategory = this.findCategory.bind(this);
+    this.updateProducts = this.updateProducts.bind(this);
   }
 
   async findCategory({ target }) {
     this.setState({
       find: target.textContent,
+    }, async () => {
+      const { find } = this.state;
+      const resolve = await api.getProductsFromCategoryAndQuery(find);
+      this.setState({
+        response: resolve.results,
+      }, () => this.updateProducts());
     });
-    const { find } = this.state;
-    const resolve = await api.getProductsFromCategoryAndQuery(find, find);
-    this.setState({
-      response: resolve.results,
-      request: true,
-    });
+  }
+
+  updateProducts() {
+    const { response } = this.state;
+    const { metodo } = this.props;
+    metodo(response);
   }
 
   render() {
     const { responseApi } = this.props;
-    const { response, request } = this.state;
 
     const categorias = responseApi.map((categoria) => {
       const { id, name } = categoria;
       return (
-        <radio
+        <button
           data-testid="category"
           onClick={ this.findCategory }
           id={ id }
           key={ id }
+          type="button"
         >
           <p className="categorias">{ name }</p>
-        </radio>
+        </button>
       );
     });
+
+    //  ;
 
     return (
       <div className="side-container">
@@ -52,7 +58,6 @@ class Categorias extends React.Component {
         <ul className="categorias-container">
           { categorias }
         </ul>
-        { request && <CategoriaFilter responseApi={ response } /> }
       </div>
     );
   }
@@ -60,6 +65,7 @@ class Categorias extends React.Component {
 
 Categorias.propTypes = {
   responseApi: PropTypes.arrayOf(PropTypes.object).isRequired,
+  metodo: PropTypes.func.isRequired,
 };
 
 export default Categorias;
