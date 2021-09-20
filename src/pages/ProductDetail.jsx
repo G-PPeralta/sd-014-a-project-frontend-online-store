@@ -27,7 +27,7 @@ export default class ProductDetail extends Component {
   render() {
     const { match: { params: { id } } } = this.props;
     const { resultApi } = this.state;
-    console.log(resultApi);
+    // console.log(resultApi);
     const myProduct = resultApi.find((result) => result.id === id);
     return (myProduct ? ( // This ternary conditional is needed, to ensure we only try to acces myProduct object properties, after resultApi is a non blank array to be iterated with the find HoF
       <section>
