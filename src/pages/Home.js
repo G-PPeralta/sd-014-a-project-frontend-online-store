@@ -82,9 +82,12 @@ export default class Home extends React.Component {
           >
             Pesquisar
           </button>
-          <Link to="/shopping-cart">
+          <Link
+            data-testid="shopping-cart-button"
+            to="/cart"
+          >
             <div className="cart-icon">
-              <ion-icon name="cart-outline" data-testid="shopping-cart-button" />
+              <ion-icon name="cart-outline" />
             </div>
           </Link>
         </header>
