@@ -56,8 +56,6 @@ class Home extends Component {
             data-testid="category"
             onClick={ this.fetchProducts }
           />
-          // <Sidebar key={ category.id } categories={ category } />
-
         )) }
       </div>
     );

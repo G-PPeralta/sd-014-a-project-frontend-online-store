@@ -3,11 +3,6 @@ export async function getCategories(categories = 'categories') {
   return fetch(`https://api.mercadolibre.com/sites/MLB/${categories}`)
     .then((response) => response.json()
       .then((dados) => dados));
-  // {
-  //   dados.map((category) => {
-  //     console.log(category);
-  //   });
-  // }));
 }
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
