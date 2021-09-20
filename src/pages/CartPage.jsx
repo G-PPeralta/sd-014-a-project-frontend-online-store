@@ -17,14 +17,16 @@ export default class CartPage extends Component {
   fetchCartItems = () => {
     const cartItems = readCartItems();
     this.setState({ cartItems });
-  }
+  };
 
   renderCartItems(cartItems) {
-    return cartItems.map(({ id, title, price }) => (
+    return cartItems.map(({ id, title, price, quant = 1 }) => (
       <div key={ id }>
-        <h2 data-testid="shopping-cart-product-name">{ title }</h2>
-        <h2>{ price }</h2>
-        <h2 data-testid="shopping-cart-product-quantity">quantidade</h2>
+        <h2 data-testid="shopping-cart-product-name">{title}</h2>
+        <h2>{`R$ ${(price * quant).toFixed(2)}`}</h2>
+        <h2 data-testid="shopping-cart-product-quantity">
+          {quant}
+        </h2>
       </div>
     ));
   }
@@ -40,7 +42,9 @@ export default class CartPage extends Component {
     return (
       <div>
         <CartButton />
-        { cartItems.length > 0 ? this.renderCartItems(cartItems) : this.renderEmptyCart()}
+        {cartItems.length > 0
+          ? this.renderCartItems(cartItems)
+          : this.renderEmptyCart()}
       </div>
     );
   }
