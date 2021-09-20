@@ -3,14 +3,15 @@ import CartButton from './CartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Search extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       categories: [],
       products: [],
       isLoading: true,
       isLoadingProducts: false,
       inputSearch: '',
+      clickedCat: '',
     };
     this.renderProducts = this.renderProducts.bind(this);
     this.filtrarPorCategoria = this.filtrarPorCategoria.bind(this);
@@ -37,9 +38,12 @@ class Search extends React.Component {
     this.setState({ inputSearch: event.target.value });
   }
 
-  async filtrarPorCategoria(id) {
-    const { inputSearch } = this.state;
-    const product = await getProductsFromCategoryAndQuery(id, inputSearch);
+  async filtrarPorCategoria(event) {
+    const { inputSearch, clickedCat } = this.state;
+    this.setState({
+      clickedCat: event.target.key,
+    });
+    const product = await getProductsFromCategoryAndQuery(clickedCat, inputSearch);
     await this.setState({
       products: product.results,
     });
@@ -50,16 +54,13 @@ class Search extends React.Component {
     return (
       <div>
         {categories.map((cat) => (
-          <button
+          <input
             key={ cat.id }
             type="button"
+            value={ cat.name }
             data-testid="category"
-            onClick={ this.filtrarPorCategoria(cat.id) }
-            onKeyPress={ this.filtrarPorCategoria(cat.id) }
-          >
-            { cat.name }
-
-          </button>
+            onClick={ this.filtrarPorCategoria }
+          />
         ))}
       </div>
     );
