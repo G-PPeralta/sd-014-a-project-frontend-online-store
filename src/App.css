@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap') ;
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap'); */
+
+@import url('//db.onlinewebfonts.com/c/157c6cc36dd65b1b2adc9e7f3329c761?family=Amazon+Ember') ;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap') ;
 
 * {
   margin: 0;
@@ -6,7 +10,7 @@
 }
 
 body {
-  font-family: Open Sans , sans-serif;
+  font-family: Amazon Ember , Helvetica , sans-serif;
 }
 
 .App {
@@ -104,6 +108,12 @@ body {
   width: 90%;
 }
 
+.cart-banner {
+  height: 40px;
+  margin: 20px;
+  text-align: right;
+}
+
 .initial-message {
   font-weight: 600;
 }
@@ -143,7 +153,6 @@ body {
 .product-card {
   align-content: center;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.322);
   display: flex;
   flex-direction: column;
   height: 300px;
@@ -152,8 +161,20 @@ body {
   width: 200px;
 }
 
+.product-border {
+  border: 1px solid rgba(0, 0, 0, 0.322);
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.product-name-link {
+  color: #3f3f3f;
+  text-decoration: none;
+}
+
 .pc-title {
-  font-weight: 700;
+  font-weight: 600;
+  height: 90px;
   padding-bottom: 5px;
   text-align: center;
 }
@@ -166,10 +187,85 @@ body {
 
 .pc-price {
   font-size: 1.1em;
+  margin: 10px 0;
 }
 
 .pc-id {
+  color: #868686;
   font-size: 0.6em;
+}
+
+.product-border button {
+  background-color: #282c34;
+  border: #282c34 1px solid;
+  border-radius: 5px;
+  color: rgb(243, 243, 243);
+  padding: 5px;
+  width: 100%;
+}
+
+.product-border button:hover {
+  background-color: rgb(5, 5, 5);
+  border: rgb(5, 5, 5) 1px solid;
+  color: rgb(255, 208, 0);
+}
+
+.main-sec-detail {
+  margin: auto;
+  margin-bottom: 30px;
+  padding: 15px;
+  position: relative;
+  text-align: center;
+  width: 70%;
+}
+
+.product-list-div {
+  display: block;
+}
+
+.product-detail-name {
+  font-size: 1.5em;
+  font-weight: 900;
+  margin: 20px 0 15px;
+}
+
+.product-detail-spec-title {
+  color: #3d3d3f;
+  display: inline-block;
+  text-align: left;
+  width: 220px;
+}
+
+.product-detail-p {
+  margin-top: 5px;
+}
+
+.product-detail-spec-descr {
+  color: #3d3d3f;
+  display: inline-block;
+  font-weight: 600;
+  width: 100px;
+}
+
+.img-detail {
+  margin-bottom: 15px;
+  width: 200px;
+}
+
+.empty-cart-message {
+  font-weight: 700;
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.mr-bean {
+  margin-top: 30px;
+  width: 350px;
+}
+
+.khabane {
+  border-radius: 10px;
+  width: 250px;
 }
 
 @keyframes App-logo-spin {

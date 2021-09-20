@@ -130,43 +130,46 @@ class ProductList extends Component {
           <section className="product-list">
             {resultQuery.map((result) => (
               <div
-                className="category-div"
+                className="product-list-div"
                 key={ result.id }
                 data-testid="product"
               >
-                <Link
-                  data-testid="product-detail-link"
-                  to={ {
-                    pathname: `/productDetails/${result.id}`,
-                    apiProps,
-                  } }
-                >
-                  <section className="product-card">
-                    <p
-                      className="pc-title"
-                      data-testid="shopping-cart-product-name"
-                    >
-                      { result.title }
-                    </p>
-                    <img
-                      className="pc-img"
-                      src={ result.thumbnail }
-                      alt={ result.title }
-                    />
-                    <p className="pc-price">{ numberFormat(result.price) }</p>
-                    <p className="pc-id">{ result.id }</p>
-                  </section>
-                </Link>
-                <button
-                  type="button"
-                  data-testid="product-add-to-cart"
-                  name={ result.title }
-                  value={ result.price }
-                  className={ result.id }
-                  onClick={ this.handleClick }
-                >
-                  +
-                </button>
+                <div className="product-border">
+                  <Link
+                    className="product-name-link"
+                    data-testid="product-detail-link"
+                    to={ {
+                      pathname: `/productDetails/${result.id}`,
+                      apiProps,
+                    } }
+                  >
+                    <section className="product-card">
+                      <p
+                        className="pc-title"
+                        data-testid="shopping-cart-product-name"
+                      >
+                        { result.title }
+                      </p>
+                      <img
+                        className="pc-img"
+                        src={ result.thumbnail }
+                        alt={ result.title }
+                      />
+                      <p className="pc-price">{numberFormat(result.price)}</p>
+                      <p className="pc-id">{result.id}</p>
+                    </section>
+                  </Link>
+                  <button
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    name={ result.title }
+                    value={ result.price }
+                    className={ result.id }
+                    onClick={ this.handleClick }
+                  >
+                    Adicionar ao Carrinho
+                  </button>
+                </div>
               </div>
             ))}
           </section>
