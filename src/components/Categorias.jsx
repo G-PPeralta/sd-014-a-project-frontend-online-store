@@ -20,12 +20,13 @@ class Categorias extends React.Component {
   async findCategory({ target }) {
     this.setState({
       find: target.textContent,
+    }, async () => {
+      const { find } = this.state;
+      const resolve = await api.getProductsFromCategoryAndQuery(find);
+      this.setState({
+        response: resolve.results,
+      }, () => this.updateProducts());
     });
-    const { find } = this.state;
-    const resolve = await api.getProductsFromCategoryAndQuery(find, find);
-    this.setState({
-      response: resolve.results,
-    }, () => this.updateProducts());
   }
 
   updateProducts() {
@@ -45,14 +46,14 @@ class Categorias extends React.Component {
     const categorias = responseApi.map((categoria) => {
       const { id, name } = categoria;
       return (
-        <div
+        <li
           data-testid="category"
           onClick={ this.findCategory }
           id={ id }
           key={ id }
         >
           <p className="categorias">{ name }</p>
-        </div>
+        </li>
       );
     });
 
