@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class Category extends Component {
@@ -23,12 +24,21 @@ class Category extends Component {
   };
 
   handleElements(arrObj) {
+    const { onChange } = this.props;
     return (
-      <div>
-        {arrObj.map((category) => (
-          <div key={ category.id } data-testid="category">
-            <p>{category.name}</p>
-          </div>
+      <div className="d-flex flex-column">
+        {arrObj.map(({ name, id }) => (
+          <label htmlFor={ id } key={ id }>
+            <input
+              type="radio"
+              id={ id }
+              name="category"
+              value={ id }
+              onChange={ onChange }
+              data-testid="category"
+            />
+            {name}
+          </label>
         ))}
       </div>
     );
@@ -39,5 +49,5 @@ class Category extends Component {
     return <div>{fetched && this.handleElements(categorys)}</div>;
   }
 }
-
+Category.propTypes = { onChange: PropTypes.func.isRequired };
 export default Category;
