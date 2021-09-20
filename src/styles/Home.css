@@ -20,7 +20,11 @@
   margin-top: 0;
 }
 
-.category-item-radio {
+.category-item {
+  margin: 5px 0;
+}
+
+.category-item > input {
   margin-right: 10px;
 }
 
