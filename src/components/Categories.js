@@ -35,9 +35,11 @@ class Categories extends React.Component {
     return (
       <aside>
         <h2>Categorias:</h2>
-        {categories.map(({ id, name }) => (
-          <li key={ id } data-testid="category">{name}</li>
-        ))}
+        <ul>
+          {categories.map(({ id, name }) => (
+            <li key={ id } data-testid="category">{name}</li>
+          ))}
+        </ul>
       </aside>
     );
   }
