@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import saveLocalStorage from '../services/localStorage';
 
 class AddCart extends Component {
   constructor() {
@@ -29,7 +30,7 @@ class AddCart extends Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => { this.handleClick(product); } }
+          onClick={ () => { saveLocalStorage(product); } }
         >
           Adicionar ao Carrinho!
         </button>

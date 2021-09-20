@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ItemCart from './ItemCart';
+import '../css/shoppingCart.css';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -34,11 +36,8 @@ export default class ShoppingCart extends Component {
     }
     return (
       <div>
-        { cart.map(({ title, id, quantity }) => (
-          <div key={ id }>
-            <p data-testid="shopping-cart-product-name">{ title }</p>
-            <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
-          </div>
+        { cart.map((product) => (
+          <ItemCart key={ product.title } product={ product } />
         ))}
       </div>
     );
