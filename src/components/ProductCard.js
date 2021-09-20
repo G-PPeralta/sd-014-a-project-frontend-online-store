@@ -12,9 +12,7 @@ export default class ProductCard extends React.Component {
       <div className="productCard" data-testid="product" id={ id }>
         <Link
           data-testid="product-detail-link"
-          to={ {
-            pathname: `/product-details/${id}`,
-          } }
+          to={ `/product-details/${id}` }
         >
           <div className="productCardContent">
             <h2>{ title }</h2>
