@@ -32,6 +32,7 @@ class Home extends Component {
 
   chamarApi() {
     const { categoriaSelecionada, searchProduct } = this.state;
+
     getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
       .then((result) => this.setState({ productList: result.results }));
   }
