@@ -71,6 +71,14 @@ export default class ProductDetail extends Component {
               {numberFormat(myProduct.price)}
             </span>
           </p>
+          <form>
+            Avaliacoes
+            <input type="email" name="email-for-evaluation" />
+            <textarea
+              data-testid="product-detail-evaluation"
+            />
+            <button type="button">Avaliar</button>
+          </form>
           <img // this is just for fun... remove later!
             className="mr-bean"
             src="https://c.tenor.com/xEu4tiLm3hUAAAAd/mr-bean-mr-beans-holiday.gif"

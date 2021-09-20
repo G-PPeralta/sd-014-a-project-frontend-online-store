@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from './CartButton';
-import Cart from '../pages/Cart';
 
 const numberFormat = (value) => new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -18,7 +17,7 @@ class ProductList extends Component {
       searchText: '',
       categoriaDeProduto: '',
       categories: [],
-      xablau: [],
+      cartList: [],
     };
 
     this.callGetCategories = this.callGetCategories.bind(this);
@@ -45,18 +44,18 @@ class ProductList extends Component {
     await this.callApi();
   }
 
-  handleClick(event) {
+  async handleClick(event) {
     event.preventDefault();
-    const { xablau } = this.state;
-    xablau.push({
+    const { cartList } = this.state;
+    cartList.push({
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
     });
-    this.setState({
-      xablau,
+    await this.setState({
+      cartList,
     });
-    console.log(xablau);
+    localStorage.setItem('cartList', JSON.stringify(cartList));
   }
 
   async callApi() {
@@ -82,7 +81,7 @@ class ProductList extends Component {
 
   render() {
     const { categories,
-      resultQuery, searchText, categoriaDeProduto, xablau } = this.state;
+      resultQuery, searchText, categoriaDeProduto } = this.state;
     const apiProps = {
       searchText,
       categoriaDeProduto,
@@ -173,9 +172,6 @@ class ProductList extends Component {
               </div>
             ))}
           </section>
-          <div>
-            <Cart cartList={ xablau } />
-          </div>
         </div>
       </div>
     );
