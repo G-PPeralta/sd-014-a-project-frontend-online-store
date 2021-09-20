@@ -1,6 +1,8 @@
 import React from 'react';
 import CartButton from './CartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { Link } from 'react-router-dom';
+import ProductDetails from './ProductDetails';
 
 class Search extends React.Component {
   constructor() {
@@ -51,11 +53,13 @@ class Search extends React.Component {
     return (
       <div>
         {products.map(({ id, title, thumbnail, price }) => (
-          <div key={ id } data-testid="product">
-            <img src={ thumbnail } alt="imagem do produto" />
-            <p>{ title }</p>
-            <p>{`R$:${price}`}</p>
-          </div>
+          <Link to="/product" params={ { id } } key={ id } data-testid="product-detail-link">
+            <div data-testid="product">
+              <img src={ thumbnail } alt="imagem do produto" />
+              <p>{ title }</p>
+              <p>{`R$:${price}`}</p>
+            </div>
+          </Link>
         ))}
       </div>
     );
