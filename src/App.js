@@ -1,12 +1,14 @@
 import React from 'react';
-
 import './App.css';
-import SearchInput from './components/SearchInput';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './components/Routes';
 
 function App() {
   return (
     <main>
-      <SearchInput />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </main>
   );
 }
