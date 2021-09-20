@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+// import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 import InputGen from '../components/InputGen';
 
