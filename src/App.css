@@ -80,7 +80,7 @@ body {
   background-color: #282c34;
   color: rgb(207, 207, 207);
   display: block;
-  height: 50px;
+  height: fit-content;
   padding: 10px;
   text-align: center;
 }
@@ -91,9 +91,9 @@ body {
 
 .shopping-footer {
   bottom: 0;
-  height: 50px;
   position: fixed;
   width: 100%;
+  font-size: 0.7em;
 }
 
 .shopping-main {
@@ -266,6 +266,49 @@ body {
 .khabane {
   border-radius: 10px;
   width: 250px;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  color: #ffffff;
+}
+
+.trybezon-header {
+  display: inline-block;
+  width: 130px;
+  font-size: 1.5em;
+}
+
+.trybezon-header-logo {
+  height: 45px;
+}
+
+.text-header {
+  font-family: Lato, sans-serif;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.cart-header-logo {
+  height: 25px;
+}
+
+.cart-name {
+  font-weight: 800;
+}
+
+.payments-footer {
+  margin: 10px 0;
+  color: #ffffff;
+  font-size: 1.1em;
+}
+
+.payments-devs {
+  margin: 10px 0;
+  color: #6e6e6e;
 }
 
 @keyframes App-logo-spin {
