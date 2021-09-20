@@ -1,21 +1,59 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class Cart extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   // const { xablau } = this.props;
-  //   // const myCartList = { xablau };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      cartList: [],
+    };
+    this.recebeInfo = this.recebeInfo.bind(this);
+  }
+
   // VERIFICAR QUANTOS ITENS TEM DE CADA PRODUTO
   // RETORNAR UM NOVO ARRAY COM OS ITENS, COM A QUANTIDADE DE CADA
   // FAZER UM MAP DO CARRINHO
   // APÓS O CARRINHO PRONTO, AO EXCLUIR UM ITEM, EDITAR O ARRAY E DEVOLVER PARA O FILHO O NOVO XABLAU
+  componentDidMount() {
+    this.recebeInfo();
+  }
+
+  recebeInfo() {
+    const cartListLocal = localStorage.getItem('cartList');
+    const cartList = JSON.parse(cartListLocal);
+    console.log(cartList);
+    this.setState({
+      cartList,
+    });
+    // const arrayzao = [];
+    // if (xablau !== undefined) {
+    //   const newList = xablau.map((prod) => {
+    //     const idProd = prod.prodId;
+    //     const arrProd = xablau.filter((produ) => produ.prodId === idProd);
+    //     const cartItemDetail = {
+    //       quantidade: arrProd.length,
+    //       id: arrProd[0].prodId,
+    //       price: arrProd[0].prodPrice,
+    //       name: arrProd[0].name,
+    //     };
+    //     if (!arrayzao.some((produ) => produ.id === idProd)) {
+    //       arrayzao.push(cartItemDetail);
+    //     }
+    //     return (arrayzao);
+    //   });
+    //   this.setState = {
+    //     newArr: arrayzao,
+    //   };
+    //   console.log(newList);
+    // }
+  }
 
   render() {
-    const { cartList } = this.props;
+    // const { newArr } = this.state;
+    // const { xablau } = this.props;
+    const { cartList } = this.state;
     const arrayzao = [];
-    if (cartList !== undefined) {
+    if (cartList) {
       const newList = cartList.map((prod) => {
         const idProd = prod.prodId;
         const arrProd = cartList.filter((produ) => produ.prodId === idProd);
@@ -69,8 +107,8 @@ class Cart extends Component {
   }
 }
 
-Cart.propTypes = {
-  cartList: PropTypes.shape().isRequired,
-};
+// Cart.propTypes = {
+//   cartList: PropTypes.shape().isRequired,
+// };
 
 export default Cart;
