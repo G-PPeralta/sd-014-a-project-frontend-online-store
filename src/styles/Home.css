@@ -42,3 +42,23 @@
 h4 {
   text-align: center;
 }
+
+.query-results {
+  align-content: flex-start;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-card {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px;
+  width: 22%;
+}

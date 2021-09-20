@@ -1,10 +1,28 @@
 import React from 'react';
 
+import * as api from '../services/shoppingCartAPI';
+
 export default class Cart extends React.Component {
   render() {
+    const items = api.readShoppingCart();
+    if (!items.length) {
+      return (
+        <div data-testid="shopping-cart-empty-message">
+          Seu carrinho está vazio
+        </div>
+      );
+    }
     return (
-      <div data-testid="shopping-cart-empty-message">
-        Seu carrinho está vazio
+      <div data-testid="shopping-cart">
+        Seu carrinho tem:
+        { items.map((item, index) => (
+          <div key={ index }>
+            Nome:&nbsp;
+            <div data-testid="shopping-cart-product-name">{ item.title }</div>
+            Quantidade:&nbsp;
+            <div data-testid="shopping-cart-product-quantity">{ item.shopping_cart }</div>
+          </div>
+        )) }
       </div>
     );
   }
