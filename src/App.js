@@ -1,16 +1,18 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Home from './pages/Home';
 
-function App() {
-  return (
-    <div className="App">
+import Home from './pages/Home';
+import Cart from './pages/Cart';
+
+class App extends React.Component {
+  render() {
+    return (
       <BrowserRouter>
         <Route path="/" component={ Home } />
+        <Route path="/cart" component={ Cart } />
       </BrowserRouter>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
