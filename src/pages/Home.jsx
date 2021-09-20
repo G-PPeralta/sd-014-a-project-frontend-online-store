@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Categorias from '../components/Categorias';
+import Produtos from '../components/Produtos';
+import CarrinhoBt from '../components/CarrinhoBt';
+import '../styles/Home.css';
 import * as api from '../services/api';
 
 class Home extends React.Component {
@@ -8,14 +10,29 @@ class Home extends React.Component {
     super();
 
     this.state = {
+      queryInput: '',
       responseApi: [],
+      productsList: [],
       apiFetched: false,
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     api.getCategories()
       .then((r) => this.fetchApi(r));
+  }
+
+  handleChange(event) {
+    const { value } = event.target;
+
+    this.setState({ queryInput: value });
+  }
+
+  handleClick() {
+    this.fetchProducts();
   }
 
   fetchApi(response) {
@@ -27,25 +44,52 @@ class Home extends React.Component {
     );
   }
 
+  async fetchProducts() {
+    const { queryInput } = this.state;
+    const fetchProdutcs = await
+    api.getProductsFromCategoryAndQuery(queryInput);
+    const productsList = fetchProdutcs.results;
+
+    this.setState({
+      productsList,
+    });
+  }
+
   render() {
-    const { responseApi, apiFetched } = this.state;
+    const { responseApi, apiFetched, queryInput, productsList } = this.state;
     return (
-      <section>
-        <aside>
-          { apiFetched && <Categorias responseApi={ responseApi } /> }
-        </aside>
-        <section>
-          <input type="text" />
-          <Link to="/carrinho" data-testid="shopping-cart-button">
-            <button type="button">Carrinho</button>
-          </Link>
+      <section className="wrapper">
+        <section className="header-container">
+          <div className="header-esquerda">
+            <h4 data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h4>
+          </div>
+          <div className="header-direita">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Buscar no Mercado Livre"
+              value={ queryInput }
+              onChange={ this.handleChange }
+              data-testid="query-input"
+            />
+            <button
+              type="button"
+              className="bt-container bt-texto"
+              onClick={ this.handleClick }
+              data-testid="query-button"
+            >
+              BUSCAR
+            </button>
+            <CarrinhoBt />
+          </div>
         </section>
-        <section>
-          <h1
-            data-testid="home-initial-message"
-          >
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h1>
+        <section className="produtos-container">
+          <aside className="categorias">
+            { apiFetched && <Categorias responseApi={ responseApi } /> }
+          </aside>
+          <Produtos products={ productsList } />
         </section>
       </section>
     );
