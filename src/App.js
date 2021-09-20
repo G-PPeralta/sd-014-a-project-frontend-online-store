@@ -1,10 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Search from './pages/Search';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={ Search } />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
