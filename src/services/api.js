@@ -8,6 +8,9 @@ export async function getCategories() {
   return categories;
 }
 
-export async function getProductsFromCategoryAndQuery(/* categoryId, query */) {
-  // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
+export async function getProductsFromCategoryAndQuery(categoryId, query) {
+  const endpoint = `${URL}sites/search?category=${categoryId}&q=${query}`;
+  const response = await fetch(endpoint);
+  const products = await response.json();
+  return products;
 }
