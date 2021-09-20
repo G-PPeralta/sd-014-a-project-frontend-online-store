@@ -25,8 +25,8 @@ header > input:hover, header > input:focus {
   color: rgb(71, 71, 71);
   font-size: 16px;
   left: 26px;
-  top: 2px;
   position: relative;
+  top: 2px;
 }
 
 .cart-icon {
