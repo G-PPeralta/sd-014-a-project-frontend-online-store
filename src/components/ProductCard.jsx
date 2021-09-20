@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BagPlusFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../services/cartAPI';
 
 export default class ProductCard extends Component {
-  handleClick(title) {
-    localStorage.setItem('meuGato', title);
+  handleClick = () => {
+    const { product } = this.props;
+    addToCart(product);
   }
 
   render() {
@@ -28,6 +30,7 @@ export default class ProductCard extends Component {
         <button
           type="button"
           className="btn btn-outline-primary"
+          data-testid="product-add-to-cart"
           onClick={ this.handleClick }
         >
           <BagPlusFill />
