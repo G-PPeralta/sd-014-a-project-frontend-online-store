@@ -7,12 +7,7 @@ export default class Home extends Component {
     return (
       <section className="search-section">
         <div>
-          <input
-            className="search-input"
-            id="search-input"
-            name="search-input"
-            type="text"
-          />
+          <input className="search-input" name="search-input" type="text" />
           <Link data-testid="shopping-cart-button" to="/shopping-cart">
             <img
               alt="shopping-cart"
