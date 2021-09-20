@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UserReviewForm from '../Components/UserReviewForm';
 
 class ProductDetails extends React.Component {
   render() {
@@ -16,6 +17,9 @@ class ProductDetails extends React.Component {
               <li key={ id }>{`${name}: ${valueName}`}</li>
             ))}
           </ul>
+        </section>
+        <section>
+          <UserReviewForm />
         </section>
       </div>
     );
