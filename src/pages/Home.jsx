@@ -8,10 +8,10 @@ export default class Home extends Component {
       <section className="search-section">
         <div>
           <input id="search-input" name="search-input" type="text" />
-          <Link to="/shopping-cart">
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">
             <img
               alt="shopping-cart"
-              src="https://img.icons8.com/material-outlined/48/000000/shopping-cart--v1.png"
+              src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
             />
           </Link>
         </div>
