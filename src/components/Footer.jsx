@@ -7,9 +7,10 @@ class Footer extends Component {
   render() {
     return (
       <footer className="shopping-footer">
-        <p className="payments-footer">Formas de pagamento aceitas: cartões de crédito 
-            (Visa, MasterCard, Elo e American Express) e boleto.
-            Também aceitamos abraços!
+        <p className="payments-footer">
+          Formas de pagamento aceitas: cartões de crédito
+          (Visa, MasterCard, Elo e American Express) e boleto.
+          Também aceitamos abraços!
         </p>
         <p>FrontEnd Online Store designed by the amazing DEVs:</p>
         <p>{ girls + boys}</p>
