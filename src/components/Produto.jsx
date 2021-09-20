@@ -11,28 +11,31 @@ class Produto extends Component {
     console.log(produto);
 
     return (
-      <Link
-        to={ {
-          pathname: `/detalhes/${id}`,
-          state: {
-            infoProduto: produto,
-          },
-        } }
-        style={ { textDecoration: 'none' } }
+      <li
+        className="produto-container"
+        ata-testid="product"
       >
-        <li className="produto-container" data-testid="product">
+        <Link
+          to={ {
+            pathname: `/detalhes/${id}`,
+            state: {
+              infoProduto: produto,
+            },
+          } }
+          style={ { textDecoration: 'none' } }
+        >
           <div className="image-container">
             <img src={ thumbnail } alt={ title } />
           </div>
-          <div className="text-container">
-            <h2 className="price">
-              { `R$  ${price}` }
-            </h2>
-            <p className="nome-produto">{ title }</p>
-          </div>
-          <AddCarrinho />
-        </li>
-      </Link>
+        </Link>
+        <div className="text-container">
+          <h2 className="price">
+            { `R$  ${price}` }
+          </h2>
+          <p className="nome-produto">{ title }</p>
+        </div>
+        <AddCarrinho produto={ produto } />
+      </li>
     );
   }
 }
