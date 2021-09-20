@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class ProductCard extends React.Component {
@@ -8,16 +9,24 @@ export default class ProductCard extends React.Component {
     } = this.props;
 
     return (
-      <div data-testid="product" id={ id }>
-        <h2>{title}</h2>
-        <img src={ thumbnail } alt="Produto" />
-        <p>
-          {`${price.toLocaleString('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          })}`}
-        </p>
-      </div>
+      <Link
+        data-testid="product-detail-link"
+        to={ {
+          pathname: `/product-details/${id}`,
+          state: { title, thumbnail, price },
+        } }
+      >
+        <div data-testid="product" id={ id }>
+          <h2>{title}</h2>
+          <img src={ thumbnail } alt="Produto" />
+          <p>
+            {`${price.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}`}
+          </p>
+        </div>
+      </Link>
     );
   }
 }
