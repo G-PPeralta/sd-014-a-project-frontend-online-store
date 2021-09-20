@@ -15,19 +15,19 @@ class Home extends Component {
     this.searchInput = this.searchInput.bind(this);
     this.chamarApi = this.chamarApi.bind(this);
     this.addCotegory = this.addCotegory.bind(this);
+    this.addCotegory = this.addCotegory.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { categoriaSelecionada, searchProduct } = this.state;
-    getCategories().then((resultado) => this.setState({ retornoCategory: resultado }))
-      .then(() => getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
-        .then((result) => this.setState({ productList: result.results })));
-  }
-
-  funcaoRodaDois() {
-    getCategories().then((resultado) => this.setState({ retornoCategory: resultado }));
-    getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
-      .then((result) => this.setState({ productList: result.results }));
+    try {
+      await getCategories()
+        .then((resultado) => this.setState({ retornoCategory: resultado }));
+      getProductsFromCategoryAndQuery(categoriaSelecionada, searchProduct)
+        .then((result) => this.setState({ productList: result.results }));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   chamarApi() {
@@ -54,6 +54,7 @@ class Home extends Component {
     const { searchInput, chamarApi, addCotegory } = this;
     return (
       <div data-testid="home-initial-message">
+        {/* {console.log(getCategories().results)} */}
         <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
         <ListCategory categoryList={ retornoCategory } addCotegory={ addCotegory } />
         <ListaDeProdutos

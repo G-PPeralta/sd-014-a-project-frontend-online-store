@@ -1,23 +1,26 @@
-section{
-  border-radius: 10px;
-  border: solid black 1px;
+section {
   background-color: whitesmoke;
-  width: 15%;
+  border: solid black 1px;
+  border-radius: 10px;
+  filter: brightness(95%);
   height: auto;
   margin: 1%;
-  filter: brightness(95%);
+  width: 15%;
 }
-main{
+
+main {
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-img{
-  width: 100%;
+
+img {
   border-radius: 10px;
+  width: 100%;
 }
-section:hover{
+
+section:hover {
   filter: brightness(100%);
-  transition: .3s;
+  transition: 0.3s;
 }

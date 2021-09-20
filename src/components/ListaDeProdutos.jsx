@@ -19,7 +19,6 @@ class ListaDeProdutos extends React.Component {
         >
           Pesquisar
         </button>
-        {console.log(productList)}
         <main>
           {productList.map((produtoAtual) => (
             <section data-testid="product" key={ produtoAtual.id }>
