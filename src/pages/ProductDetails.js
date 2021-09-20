@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
+import Form from '../components/Form';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -58,9 +59,7 @@ export default class ProductDetails extends Component {
           {`R$ ${price}`}
         </span>
         <div>
-          <h4>
-            Detalhes:
-          </h4>
+          <h4> Detalhes: </h4>
           <span>
             { `Quantidade disponível: ${availableQuantity}` }
           </span>
@@ -71,6 +70,7 @@ export default class ProductDetails extends Component {
             { `Condição do produto: ${condition}` }
           </span>
         </div>
+        <Form />
       </div>
     );
   }
