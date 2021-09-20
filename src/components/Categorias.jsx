@@ -2,16 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Categorias.css';
 
+import CategoriaFilter from './CategoriaFilter';
+import * as api from '../services/api';
+
 class Categorias extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      find: '',
+      response: '',
+      request: false,
+    };
+    this.findCategory = this.findCategory.bind(this);
+  }
+
+  async findCategory({ target }) {
+    this.setState({
+      find: target.textContent,
+    });
+    const { find } = this.state;
+    const resolve = await api.getProductsFromCategoryAndQuery(find, find);
+    this.setState({
+      response: resolve.results,
+      request: true,
+    });
+  }
+
   render() {
     const { responseApi } = this.props;
+    const { response, request } = this.state;
 
     const categorias = responseApi.map((categoria) => {
       const { id, name } = categoria;
       return (
-        <li data-testid="category" id={ id } key={ id }>
+        <radio
+          data-testid="category"
+          onClick={ this.findCategory }
+          id={ id }
+          key={ id }
+        >
           <p className="categorias">{ name }</p>
-        </li>
+        </radio>
       );
     });
 
@@ -21,6 +52,7 @@ class Categorias extends React.Component {
         <ul className="categorias-container">
           { categorias }
         </ul>
+        { request && <CategoriaFilter responseApi={ response } /> }
       </div>
     );
   }
