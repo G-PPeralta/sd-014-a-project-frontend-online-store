@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FadeIn from 'react-fade-in';
 import { Link } from 'react-router-dom';
-import AddToCardButton from './AddToCardButton';
+import AddToCartButton from './AddToCartButton';
 import QuantityButton from './QuantityButton';
 import Message from './Message';
 
@@ -82,7 +82,7 @@ class ProductCard extends React.Component {
             product={ product }
             handleQuantityButtonsClick={ handleQuantityButtonsClick }
           />)}
-          {inHome && <AddToCardButton homeIs={ homeIs } product={ product } />}
+          {inHome && <AddToCartButton homeIs={ homeIs } product={ product } />}
         </section>
       </FadeIn>
     );

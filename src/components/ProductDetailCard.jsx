@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FadeIn from 'react-fade-in';
 import { Card } from 'react-bootstrap';
-import AddToCardButton from './AddToCardButton';
+import AddToCartButton from './AddToCartButton';
 
 export default function ProductDetailCard(props) {
   const { product, homeIs } = props;
@@ -26,7 +26,7 @@ export default function ProductDetailCard(props) {
                 </li>
               ))}
             </Card.Text>
-            <AddToCardButton product={ product } homeIs={ homeIs } />
+            <AddToCartButton product={ product } homeIs={ homeIs } />
           </Card.Body>
         </Card>
         <Card.Footer>

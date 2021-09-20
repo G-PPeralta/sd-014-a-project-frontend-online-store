@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaShoppingCart } from 'react-icons/fa';
 import { addProduct } from '../services/shopCartManag';
 
-class AddToCardButton extends React.Component {
+class AddToCartButton extends React.Component {
   handleClick = () => {
     const { product } = this.props;
     addProduct(product);
@@ -34,8 +34,8 @@ class AddToCardButton extends React.Component {
   }
 }
 
-AddToCardButton.propTypes = {
+AddToCartButton.propTypes = {
   product: PropTypes.object.isRequired,
 }.isRequired;
 
-export default AddToCardButton;
+export default AddToCartButton;
