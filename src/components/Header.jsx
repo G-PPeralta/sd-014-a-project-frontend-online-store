@@ -28,8 +28,8 @@ class Header extends React.Component() {
   }
 }
 
-export default Header;
-
 Header.propTypes = {
   children: PropTypes.node,
 }.isRequired;
+
+export default Header;
