@@ -1,0 +1,25 @@
+.side-container {
+  margin: 15px;
+}
+
+.categorias-container {
+  width: 175px;
+  display: flex;
+  flex-flow: column;
+  color: white;
+  list-style-type: none;
+}
+
+.categorias {
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+h2 {
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 25px;
+}

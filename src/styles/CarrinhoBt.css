@@ -1,0 +1,21 @@
+.bt-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  border-radius: 3px;
+  background: #1d3557;
+}
+
+.bt-texto {
+  color: white;
+  font-weight: 500;
+  padding: 0 10px 0 10px;
+}
+
+svg {
+  margin: 4px 15px;
+  height: 28px;
+  fill: white;
+}

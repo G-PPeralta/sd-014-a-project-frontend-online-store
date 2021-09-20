@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Categorias.css';
 
 class Categorias extends React.Component {
   render() {
@@ -9,15 +10,18 @@ class Categorias extends React.Component {
       const { id, name } = categoria;
       return (
         <li data-testid="category" id={ id } key={ id }>
-          <p>{ name }</p>
+          <p className="categorias">{ name }</p>
         </li>
       );
     });
 
     return (
-      <ul>
-        { categorias }
-      </ul>
+      <div className="side-container">
+        <h2>Categorias</h2>
+        <ul className="categorias-container">
+          { categorias }
+        </ul>
+      </div>
     );
   }
 }
