@@ -16,7 +16,6 @@ export default class ProductCard extends Component {
     );
   }
 }
-
 ProductCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
