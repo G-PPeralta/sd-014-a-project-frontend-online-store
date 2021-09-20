@@ -14,10 +14,17 @@ export default class CardProduct extends Component {
         m-3 p-2 justify-content-around
         align-items-center card-product"
       >
-        <Link to={ `/ProductDetails/${id}` } data-testid="product-detail-link">
-          <img src={ thumbnail } alt={ title } />
-          <h5>{title}</h5>
-          <p>{`R$${price}`}</p>
+        <Link
+          to={ {
+            pathname: `/ProductDetails/${id}`,
+            state: { product },
+          } }
+        >
+          <div data-testid="product-detail-link">
+            <img src={ thumbnail } alt={ title } />
+            <h5>{title}</h5>
+            <p>{`R$${price}`}</p>
+          </div>
         </Link>
       </div>
     );
