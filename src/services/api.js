@@ -1,16 +1,20 @@
-const URL = 'https://api.mercadolibre.com/';
+const URL = 'https://api.mercadolibre.com/sites/';
 const SITE_ID = 'MLB';
 
-export async function getCategories() {
-  const query = `${URL}sites/${SITE_ID}/categories`;
+async function fetchAPI(query) {
   const response = await fetch(query);
-  const categories = await response.json();
+  const data = await response.json();
+  return data;
+}
+
+export async function getCategories() {
+  const ENDPOINT = `${URL}${SITE_ID}/categories`;
+  const categories = await fetchAPI(ENDPOINT);
   return categories;
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
-  const endpoint = `${URL}sites/search?category=${categoryId}&q=${query}`;
-  const response = await fetch(endpoint);
-  const products = await response.json();
+  const ENDPOINT = `${URL}${SITE_ID}/search?category=${categoryId}&q=${query}`;
+  const products = await fetchAPI(ENDPOINT);
   return products;
 }
