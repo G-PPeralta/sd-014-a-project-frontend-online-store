@@ -8,11 +8,12 @@ header {
 }
 
 header > input {
+  border: 1px solid rgb(175, 175, 175);
   border-radius: 50px;
-  border: 1px solid rgb(192, 192, 192);
   height: 26px;
   outline: none;
   padding-left: 30px;
+  transition: 0.2s;
   width: 80%;
 }
 
@@ -20,18 +21,23 @@ header > input:hover, header > input:focus {
   border: 1px solid rgb(160, 159, 255);
 }
 
-ion-icon {
+.search-icon:first-child {
   color: rgb(71, 71, 71);
-}
-
-ion-icon:first-child {
   font-size: 16px;
-  left: 75px;
+  left: 80px;
   position: absolute;
+  top: 22px;
 }
 
-ion-icon:last-child {
+.cart-icon {
+  color: rgb(71, 71, 71);
   font-size: 26px;
   left: 0;
   position: relative;
+  top: 3px;
+  transition: 0.2s;
+}
+
+.cart-icon:hover {
+  color: rgb(160, 159, 255);
 }

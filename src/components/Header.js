@@ -19,14 +19,18 @@ export default class Header extends Component {
     const { searchInput } = this.state;
     return (
       <header>
-        <ion-icon name="search" />
+        <div className="search-icon">
+          <ion-icon name="search" />
+        </div>
         <input
           type="text"
           onChange={ this.handleSearch }
           value={ searchInput }
         />
         <Link to="/shopping-cart">
-          <ion-icon name="cart-outline" data-testid="shopping-cart-button" />
+          <div className="cart-icon">
+            <ion-icon name="cart-outline" data-testid="shopping-cart-button" />
+          </div>
         </Link>
 
       </header>
