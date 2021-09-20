@@ -20,7 +20,7 @@ export default class ProductDetails extends React.Component {
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      price: PropTypes.string,
+      price: PropTypes.number,
       title: PropTypes.string,
       thumbnail: PropTypes.string,
     }).isRequired,
