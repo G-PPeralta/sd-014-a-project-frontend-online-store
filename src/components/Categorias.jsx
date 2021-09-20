@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Categorias.css';
 
 import CategoriaFilter from './CategoriaFilter';
 import * as api from '../services/api';
@@ -40,14 +41,15 @@ class Categorias extends React.Component {
           id={ id }
           key={ id }
         >
-          <p>{ name }</p>
+          <p className="categorias">{ name }</p>
         </radio>
       );
     });
 
     return (
-      <div>
-        <ul>
+      <div className="side-container">
+        <h2>Categorias</h2>
+        <ul className="categorias-container">
           { categorias }
         </ul>
         { request && <CategoriaFilter responseApi={ response } /> }
