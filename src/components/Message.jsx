@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 class Message extends React.Component {
   render() {
-    const { message, dataTestId } = this.props;
+    const { message, dataTestId, className } = this.props;
     return (
-      <p data-testid={ dataTestId }>
+      <span data-testid={ dataTestId } className={ className }>
         {message}
-      </p>
+      </span>
     );
   }
 }

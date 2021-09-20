@@ -6,19 +6,19 @@ class QuantityButton extends React.Component {
   render() {
     const { product, handleQuantityButtonsClick } = this.props;
     return (
-      <div>
+      <div className="w-100">
         <button
-          data-testid="product-increase-quantity"
-          name="increase"
+          className="w-25 btn btn-danger rounded-0"
           onClick={ () => {
-            addProduct(product);
-            handleQuantityButtonsClick('increase', product);
+            removeProduct(product);
+            handleQuantityButtonsClick('', product);
           } }
           type="button"
         >
-          +
+          X
         </button>
         <button
+          className="w-25 btn btn-primary rounded-0"
           data-testid="product-decrease-quantity"
           disabled={ product.counter === 1 }
           onClick={ () => {
@@ -30,13 +30,16 @@ class QuantityButton extends React.Component {
           -
         </button>
         <button
+          className="w-50 btn btn-primary rounded-0"
+          data-testid="product-increase-quantity"
+          name="increase"
           onClick={ () => {
-            removeProduct(product);
-            handleQuantityButtonsClick('', product);
+            addProduct(product);
+            handleQuantityButtonsClick('increase', product);
           } }
           type="button"
         >
-          X
+          +
         </button>
       </div>
     );

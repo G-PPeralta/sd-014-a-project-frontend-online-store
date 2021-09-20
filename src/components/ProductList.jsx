@@ -7,7 +7,7 @@ class ProductList extends React.Component {
   render() {
     const { products, offCart, handleQuantityButtonsClick } = this.props;
     return (
-      <section className="d-flex flex-wrap">
+      <section className="d-flex flex-wrap m-auto">
         { products.map((product) => (<ProductCard
           key={ product.id }
           product={ product }

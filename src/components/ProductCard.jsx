@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FadeIn from 'react-fade-in';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
 import AddToCardButton from './AddToCardButton';
 import QuantityButton from './QuantityButton';
+import Message from './Message';
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -21,37 +21,69 @@ class ProductCard extends React.Component {
     const id = inHome ? 'product-detail-link' : 'shopping-cart-product-name';
     return (
       <FadeIn>
-        <Card
+        <section
           data-testid="product"
           style={ { width: '15rem', height: '28rem' } }
-          className="m-2 mb-4"
+          className="
+          m-2
+          mb-4
+          d-flex
+          flex-column
+          justify-content-between
+          align-items-center
+          rounded
+          shadow-sm
+          bg-white
+          border
+          hover-shadow
+          "
         >
           <Link
             data-testid={ id }
             to={ { pathname: `/details/${product.id}`, state: { product } } }
             className="text-decoration-none text-dark"
           >
-            <Card.Img variant="top" src={ product.thumbnail } />
-            <Card.Body>
-              <p className="font-bold">
+            <img
+              className="
+              mx-auto d-block
+              w-75
+              text-center
+              "
+              src={ product.thumbnail }
+              alt={ product.name }
+            />
+            <div className="border-top border-2 p-3">
+              <h3>
+                {`R$ ${product.price}`}
+              </h3>
+              <div className="d-flex pt-2 justify-content-between">
+                {!inHome && (
+                  <span data-testid="shopping-cart-product-quantity">
+                    {'Quantidade: '}
+                    <h5 className="d-inline">{product.counter}</h5>
+                  </span>
+                )}
+                { product.shipping.free_shipping
+                  && <Message
+                    message="Frete Grátis"
+                    className="text-success"
+                    dataTestId="free-shipping"
+                  /> }
+              </div>
+              <p
+                className="pt-2 text-muted"
+                style={ { fontSize: '0.8rem' } }
+              >
                 {product.title}
               </p>
-              { product.shipping.free_shipping
-              && (<p data-testid="free-shipping">Frete Grátis</p>) }
-              {!inHome && (
-                <p data-testid="shopping-cart-product-quantity">
-                  {product.counter}
-                </p>
-              )}
-              <Card.Text>{`R$ ${product.price}`}</Card.Text>
-            </Card.Body>
+            </div>
           </Link>
           {!inHome && (<QuantityButton
             product={ product }
             handleQuantityButtonsClick={ handleQuantityButtonsClick }
           />)}
           {inHome && <AddToCardButton homeIs={ homeIs } product={ product } />}
-        </Card>
+        </section>
       </FadeIn>
     );
   }

@@ -54,21 +54,29 @@ class Cart extends Component {
   render() {
     const { products, offCart } = this.state;
     return (
-      <main>
+      <div
+        style={ { backgroundColor: '#f9f9f9' } }
+        className="d-flex flex-column w-100"
+      >
         <Header>
           <h1 className="text-white">Carrinho</h1>
           <HomeButton />
         </Header>
-        {products.length === 0 && <Message
-          message="Seu carrinho está vazio"
-          dataTestId="shopping-cart-empty-message"
-        />}
-        <ProductList
-          handleQuantityButtonsClick={ this.handleQuantityButtonsClick }
-          products={ products }
-          offCart={ offCart }
-        />
-      </main>
+        <main
+          className="d-flex my-3 m-auto"
+          style={ { width: '85%' } }
+        >
+          {products.length === 0 && <Message
+            message="Seu carrinho está vazio"
+            dataTestId="shopping-cart-empty-message"
+          />}
+          <ProductList
+            handleQuantityButtonsClick={ this.handleQuantityButtonsClick }
+            products={ products }
+            offCart={ offCart }
+          />
+        </main>
+      </div>
     );
   }
 }

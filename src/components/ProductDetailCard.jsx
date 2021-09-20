@@ -12,8 +12,8 @@ export default function ProductDetailCard(props) {
       <main style={ { width: '80%' } } className="d-flex flex-column m-auto mt-3">
         <Card className="d-flex flex-row border-bottom-0 w-100 p-3">
           <Card.Img
-            style={ { width: '200px' } }
-            className="img-thumbnail"
+            style={ { width: '300px', height: '300px' } }
+            className="img-thumbnail m-auto"
             variant="top"
             src={ thumbnail }
           />

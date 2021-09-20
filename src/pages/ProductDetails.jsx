@@ -22,7 +22,10 @@ class ProductDetails extends React.Component {
     const { title } = product;
     const { homeIs } = this.state;
     return (
-      <div>
+      <div
+        style={ { backgroundColor: '#f9f9f9' } }
+        className="d-flex flex-column w-100"
+      >
         <Header>
           <div>
             <h5 className="text-white">{title}</h5>
