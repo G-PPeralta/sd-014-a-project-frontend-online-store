@@ -1,23 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CategoriaFilter from './CategoriaFilter';
+import * as api from '../services/api';
+
 class Categorias extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      find: '',
+      response: '',
+      request: false,
+    };
+    this.findCategory = this.findCategory.bind(this);
+  }
+
+  async findCategory({ target }) {
+    this.setState({
+      find: target.textContent,
+    });
+    const { find } = this.state;
+    const resolve = await api.getProductsFromCategoryAndQuery(find, find);
+    this.setState({
+      response: resolve.results,
+      request: true,
+    });
+  }
+
   render() {
     const { responseApi } = this.props;
+    const { response, request } = this.state;
 
     const categorias = responseApi.map((categoria) => {
       const { id, name } = categoria;
       return (
-        <li data-testid="category" id={ id } key={ id }>
+        <radio
+          data-testid="category"
+          onClick={ this.findCategory }
+          id={ id }
+          key={ id }
+        >
           <p>{ name }</p>
-        </li>
+        </radio>
       );
     });
 
     return (
-      <ul>
-        { categorias }
-      </ul>
+      <div>
+        <ul>
+          { categorias }
+        </ul>
+        { request && <CategoriaFilter responseApi={ response } /> }
+      </div>
     );
   }
 }
