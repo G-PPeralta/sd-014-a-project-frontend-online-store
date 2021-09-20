@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ListCategories from './ListCategories';
 import ProductCard from './ProductCard';
 
@@ -8,7 +8,10 @@ class Home extends Component {
     super();
     this.state = {
       categories: [],
+      productFiltred: [],
     };
+
+    this.filterByCategory = this.filterByCategory.bind(this);
   }
 
   componentDidMount() {
@@ -22,19 +25,29 @@ class Home extends Component {
     });
   }
 
+  async filterByCategory(categoryId, query) {
+    const productFiltred = await getProductsFromCategoryAndQuery(categoryId, query);
+    this.setState({
+      productFiltred: productFiltred.results,
+    });
+  }
+
   render() {
     const { state: { categories } } = this;
     return (
       <div>
         <input data-testid="query-input" type="text" />
-        <button data-testid="query-button" type > Pesquisar </button>
+        <button data-testid="query-button" type="button"> Pesquisar </button>
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
         <section>
           <ProductCard />
         </section>
-        <ListCategories categories={ categories } />
+        <ListCategories
+          filterByCategory={ this.filterByCategory }
+          categories={ categories }
+        />
       </div>
     );
   }
