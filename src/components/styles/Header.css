@@ -1,0 +1,43 @@
+header {
+  align-items: center;
+  background: rgb(231, 231, 231);
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  width: 100vw;
+}
+
+header > input {
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 50px;
+  height: 26px;
+  outline: none;
+  padding-left: 30px;
+  transition: 0.2s;
+  width: 80%;
+}
+
+header > input:hover, header > input:focus {
+  border: 1px solid rgb(160, 159, 255);
+}
+
+.search-icon:first-child {
+  color: rgb(71, 71, 71);
+  font-size: 16px;
+  left: 26px;
+  position: relative;
+  top: 2px;
+}
+
+.cart-icon {
+  color: rgb(71, 71, 71);
+  font-size: 26px;
+  left: 0;
+  position: relative;
+  top: 3px;
+  transition: 0.2s;
+}
+
+.cart-icon:hover {
+  color: rgb(160, 159, 255);
+}
