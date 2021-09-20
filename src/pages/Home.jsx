@@ -23,11 +23,18 @@ export default class Home extends Component {
     return (
       <div className="home-page">
         <section className="category-list">
-          <ul>Categorias:</ul>
+          <h4>Categorias:</h4>
           {categories.map(({ id, name }) => (
-            <li className="category-item" data-testid="category" key={ id }>
+            <label data-testid="category" htmlFor={ id } key={ id }>
+              <input
+                className="category-item-radio"
+                id={ id }
+                name="category"
+                type="radio"
+                value={ id }
+              />
               {name}
-            </li>
+            </label>
           ))}
         </section>
         <section className="search-section">
