@@ -27,7 +27,7 @@ class Main extends React.Component {
   }
 
   handleClick() {
-    const { products, search } = this.state;
+    const { search } = this.state;
     getProductsFromCategoryAndQuery(search, search).then((response) => {
       this.setState({ 
         products: response.results,
@@ -35,18 +35,20 @@ class Main extends React.Component {
       })
       console.log(response.results)
     })
-    
-    
-    return (
-      <div>
-        { products
-          .map((product) => <Product key={ product.id } product={ product } />) }
-      </div>
-    )
   }
 
   render() {
-    const { categories, search } = this.state;
+    const { categories, search, products } = this.state;
+
+    if (products.length > 0){
+      return (
+        <div>
+          { products
+            .map((product) => <Product key={ product.id } product={ product } />) }
+        </div>
+      );
+    }
+
     return (
       <div>
         <ShoppingCartLink />

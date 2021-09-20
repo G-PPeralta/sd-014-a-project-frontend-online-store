@@ -4,7 +4,7 @@ class Product extends React.Component {
   render() {
     const { product } = this.props;
     return (
-      <div>
+      <div data-testid="product">
           <h1>
             { product.title }
           </h1>
