@@ -26,8 +26,6 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    const { searchText, checkedCat } = this.state;
-    this.getProductsFromCategoryAndQuery(checkedCat, searchText);
     this.getCategories();
   }
 
@@ -47,7 +45,6 @@ class Search extends Component {
 
   async getProductsFromCategoryAndQuery(checkedCat, searchText) {
     const products = await getProductsFromCategoryAndQuery(checkedCat, searchText);
-    console.log(products.results);
     this.setState({ products: products.results, wasSearch: true });
   }
 
@@ -71,7 +68,8 @@ class Search extends Component {
     if (!checked) {
       this.setState({ checkedCat: '$CATEGORY_ID' });
     }
-    return this.getCategoriesOptions();
+    const { searchText, checkedCat } = this.state;
+    this.getProductsFromCategoryAndQuery(checkedCat, searchText);
   }
 
   productsResult() {
