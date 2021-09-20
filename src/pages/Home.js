@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories } from '../services/api';
 import CategoryList from '../components/CategoryList';
 import ProductsList from './ProductsList';
 
