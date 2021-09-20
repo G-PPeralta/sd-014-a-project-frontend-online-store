@@ -30,7 +30,7 @@ class ProductDetails extends React.Component {
           <div>
             <h5 className="text-white">{title}</h5>
           </div>
-          <div>
+          <div className="d-flex">
             <HomeButton />
             <CartButton />
           </div>
