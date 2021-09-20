@@ -29,18 +29,18 @@ class Main extends React.Component {
   handleClick() {
     const { search } = this.state;
     getProductsFromCategoryAndQuery(search, search).then((response) => {
-      this.setState({ 
+      this.setState({
         products: response.results,
-        search: '' 
-      })
-      console.log(response.results)
-    })
+        search: '',
+      });
+      console.log(response.results);
+    });
   }
 
   render() {
     const { categories, search, products } = this.state;
 
-    if (products.length > 0){
+    if (products.length > 0) {
       return (
         <div>
           { products
@@ -55,12 +55,27 @@ class Main extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <input type="text" data-testid="query-input" name='search' value={ search } onChange={ this.handleChange }/>
-        <button type="button" data-testid="query-button" onClick={ this.handleClick }>Pesquisar</button>
+        <input
+          type="text"
+          data-testid="query-input"
+          name="search"
+          value={ search }
+          onChange={ this.handleChange }
+        />
+        <button
+          type="button"
+          data-testid="query-button"
+          onClick={ this.handleClick }
+        >
+          Pesquisar
+        </button>
         <hr />
         <div>
           { categories
-            .map((categorie) => <Categories key={ categorie.id } categorie={ categorie.name } />)}
+            .map((categorie) => (<Categories
+              key={ categorie.id }
+              categorie={ categorie.name }
+            />))}
         </div>
       </div>
     );
