@@ -1,12 +1,22 @@
 import React from 'react';
 
-class Card extends React.Component {
+class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
-      cart: JSON.parse(localStorage.cartItems),
+      cart: [],
     };
+    this.getCartItems = this.getCartItems.bind(this);
     this.productCard = this.productCard.bind(this);
+  }
+
+  componentDidMount() {
+    this.getCartItems();
+  }
+
+  getCartItems() {
+    const { cartItems } = localStorage;
+    if (cartItems) this.setState({ cart: JSON.parse(cartItems) });
   }
 
   productCard(product) {
@@ -31,4 +41,4 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+export default Cart;
