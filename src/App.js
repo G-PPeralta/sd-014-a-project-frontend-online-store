@@ -1,11 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Search from './pages/Search';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      requisito 02
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={ Search } />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
