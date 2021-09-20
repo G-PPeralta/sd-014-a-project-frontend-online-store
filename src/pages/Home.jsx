@@ -27,12 +27,19 @@ class Home extends React.Component {
     const { query, category } = this.state;
 
     const request = await getProductsFromCategoryAndQuery(category, query);
+    console.log(request);
     this.setState({ products: request.results });
   }
 
   handleChangeCategory(event) {
-    this.setState({ category: event.target.id });
-    this.handleClick();
+    this.setState(
+      { category: event.target.id },
+      async () => {
+        const { category, query } = this.state;
+        const request = await getProductsFromCategoryAndQuery(category, query);
+        this.setState({ products: request.results });
+      },
+    );
   }
 
   render() {
