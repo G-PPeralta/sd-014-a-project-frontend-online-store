@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import './styles/Header.css';
 
@@ -8,7 +7,7 @@ export default class Header extends Component {
     super();
     this.state = {
       searchInput: '',
-    }
+    };
   }
 
   handleSearch = ({ target }) => {
