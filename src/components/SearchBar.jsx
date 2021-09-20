@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class SearchBar extends React.Component {
   render() {
-    const { handleChange, handleClick } = this.props;
+    const { onChange, onClick } = this.props;
     return (
       <form>
         <label htmlFor="searchText">
@@ -11,13 +11,13 @@ class SearchBar extends React.Component {
             type="text"
             data-testid="query-input"
             name="searchText"
-            onChange={ handleChange }
+            onChange={ onChange }
           />
 
           <button
             type="submit"
             data-testid="query-button"
-            onClick={ handleClick }
+            onClick={ onClick }
           >
             Pesquisar
           </button>

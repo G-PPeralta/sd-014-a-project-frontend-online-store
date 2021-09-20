@@ -3,7 +3,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard';
 
-export class ListaDeProdutos extends Component {
+class ListaDeProdutos extends Component {
   constructor() {
     super();
     this.state = {
@@ -19,17 +19,18 @@ export class ListaDeProdutos extends Component {
   }
 
   handleClick = async (e) => {
-    const { busca } = this.state;
     e.preventDefault();
+    const { busca } = this.state;
     const objListaProdutos = await getProductsFromCategoryAndQuery('', busca);
+    console.log(objListaProdutos);
     this.setState({
       produtos: objListaProdutos.results,
     });
   }
 
-  mainLista = (produtos) => {
+/*   mainLista = (produtos) => {
     produtos.map((produto) => (<ProductCard key={ produto.id } produto={ produto } />));
-  }
+  } */
 
   render() {
     const { produtos } = this.state;
@@ -39,9 +40,7 @@ export class ListaDeProdutos extends Component {
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        { produtos.length === 0
-          ? <p> Nenhum produto foi encontrado </p>
-          : mainLista(produtos)}
+        { produtos.map((produto) => <ProductCard key={ produto.id } produto={ produto } />) }
       </div>
     );
   }
