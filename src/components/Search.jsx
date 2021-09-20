@@ -12,6 +12,8 @@ class Search extends React.Component {
       isLoadingProducts: false,
       inputSearch: '',
     };
+    this.renderProducts = this.renderProducts.bind(this);
+    this.filtrarPorCategoria = this.filtrarPorCategoria.bind(this);
   }
 
   componentDidMount() {
@@ -35,12 +37,29 @@ class Search extends React.Component {
     this.setState({ inputSearch: event.target.value });
   }
 
+  async filtrarPorCategoria(id) {
+    const { inputSearch } = this.state;
+    const product = await getProductsFromCategoryAndQuery(id, inputSearch);
+    await this.setState({
+      products: product.results,
+    });
+  }
+
   renderCategories() {
     const { categories } = this.state;
     return (
       <div>
         {categories.map((cat) => (
-          <p key={ cat.id } data-testid="category">{ cat.name }</p>
+          <button
+            key={ cat.id }
+            type="button"
+            data-testid="category"
+            onClick={ this.filtrarPorCategoria(cat.id) }
+            onKeyPress={ this.filtrarPorCategoria(cat.id) }
+          >
+            { cat.name }
+
+          </button>
         ))}
       </div>
     );
@@ -50,7 +69,7 @@ class Search extends React.Component {
     const { products } = this.state;
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price }) => (
+        { products.map(({ id, title, thumbnail, price }) => (
           <div key={ id } data-testid="product">
             <img src={ thumbnail } alt="imagem do produto" />
             <p>{ title }</p>
