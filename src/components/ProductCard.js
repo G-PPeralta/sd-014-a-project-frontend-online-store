@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import AddItemToCart from './AddItemToCart';
+import FreteGratis from '../images/frete-gratis.png';
 
 export default class ProductCard extends React.Component {
   render() {
     const { product } = this.props;
-    const { id, title, thumbnail, price } = product;
+    const { id, title, thumbnail, price, shipping } = product;
 
     return (
       <div className="product-card" data-testid="product" id={ id }>
@@ -17,7 +18,16 @@ export default class ProductCard extends React.Component {
         >
           <h4>{ title }</h4>
         </Link>
-        <img src={ thumbnail } alt="Product Thumbnail" />
+        <div>
+          <img src={ thumbnail } alt="Product Thumbnail" className="thumbnail" />
+          { shipping.free_shipping && (
+            <img
+              className="frete-gratis"
+              data-testid="free-shipping"
+              src={ FreteGratis }
+              alt="frete grátis"
+            />) }
+        </div>
         <span>
           { `${price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
         </span>
