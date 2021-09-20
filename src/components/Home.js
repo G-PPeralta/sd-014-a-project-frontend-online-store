@@ -38,11 +38,15 @@ class Home extends Component {
   }
 
   getListFromAPI= async () => {
-    const { input, category } = this.state;
-    const listaProdutos = await getProductsFromCategoryAndQuery(category, input);
-    this.setState({
-      lista: listaProdutos.results,
-    });
+    try {
+      const { input, category } = this.state;
+      const listaProdutos = await getProductsFromCategoryAndQuery(category, input);
+      this.setState({
+        lista: listaProdutos.results,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   listCategories() {
