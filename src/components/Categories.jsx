@@ -17,7 +17,6 @@ class Categories extends Component {
 
   fetchCategories() {
     getCategories().then((categories) => {
-      console.log(categories);
       this.setState({
         categoriesList: categories,
       });
