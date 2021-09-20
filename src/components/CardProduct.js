@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 
 export default class CardProduct extends Component {
   handleClick=(product) => {
+    const quantityProd = product;
+    quantityProd.quantity = 1;
     if (localStorage.cart) {
       const { cart } = localStorage;
       const cartJSON = JSON.parse(cart);
-      const cartUpDate = cartJSON.concat(product);
+      const cartUpDate = cartJSON.concat(quantityProd);
       localStorage.setItem('cart', JSON.stringify(cartUpDate));
-      console.log(cartUpDate);
     } else {
-      localStorage.setItem('cart', JSON.stringify([product]));
+      localStorage.setItem('cart', JSON.stringify([quantityProd]));
     }
   }
 
