@@ -1,12 +1,16 @@
 import React from 'react';
+import Categories from '../components/Categories';
 
 class Search extends React.Component {
   render() {
     return (
       <section>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+        <Categories />
+        <main>
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        </main>
       </section>
     );
   }
