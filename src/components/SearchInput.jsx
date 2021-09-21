@@ -1,18 +1,4 @@
 import React from 'react';
-
-class SearchInput extends React.Component {
-  render() {
-    return (
-      <div className="App" data-testid="home-initial-message">
-        <input />
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </div>
-    );
-  }
-}
-
-export default SearchInput;
-import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CardProduct from './CardProduct';
 
