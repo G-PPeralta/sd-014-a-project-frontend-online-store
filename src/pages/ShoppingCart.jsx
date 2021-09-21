@@ -30,12 +30,17 @@ class ShoppingCart extends React.Component {
       ],
     };
   }
-  // quantityChanger = (buttonName, id) => {
-  //   const 
-  //   if(buttonName === "acrescentar") {
 
-  //   }
-  // }
+  quantityChanger = (buttonName, id) => {
+    const { arrayProduct } = this.state;
+    if (buttonName === "acrescentar") {
+      const selectedProduct = arrayProduct.filter((product) => product.id === id);
+      selectedProduct[0].quantity += 1;
+      console.log(selectedProduct);
+      this.setState({ quantity: })
+    }
+  }
+
   render() {
     const { arrayProduct } = this.state;
     return (
@@ -44,6 +49,7 @@ class ShoppingCart extends React.Component {
           .map((product) => (<ItemCart
             key={ product.id }
             product={ product }
+            quantityChanger={ this.quantityChanger }
           />))}
         <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
       </div>

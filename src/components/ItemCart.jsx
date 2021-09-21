@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 class ItemCart extends React.Component {
 
-  handleClick=() => {
-    const { product: { id } } = this.props;
-    
+  handleClick=({target }) => {
+    const { product: { id }, quantityChanger } = this.props;
+    quantityChanger(target.name, id);
   }
 
   render() {
