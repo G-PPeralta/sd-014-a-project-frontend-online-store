@@ -19,12 +19,13 @@ class Cart extends React.Component {
     if (cartItems) this.setState({ cart: JSON.parse(cartItems) });
   }
 
-  productCard(product) {
+  productCard(product, index) {
     const { title, quantity } = product;
     return (
-      <div>
+      <div key={ `${title}-${index}` }>
         <p data-testid="shopping-cart-product-name">{title}</p>
-        <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+        <span>Quantidade: </span>
+        <span data-testid="shopping-cart-product-quantity">{quantity}</span>
       </div>
     );
   }
@@ -35,7 +36,7 @@ class Cart extends React.Component {
       <section>
         {cart.length === 0
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          : cart.map((product) => this.productCard(product))}
+          : cart.map((product, index) => this.productCard(product, index))}
       </section>
     );
   }

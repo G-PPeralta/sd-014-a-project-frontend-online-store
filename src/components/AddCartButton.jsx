@@ -10,7 +10,9 @@ class AddCartButton extends React.Component {
   addItem() {
     const { product } = this.props;
     product.quantity = product.quantity || 1;
-    const productList = JSON.parse(localStorage.cartItems);
+    const list = localStorage.cartItems;
+    let productList = [];
+    if (list) productList = JSON.parse(list);
     productList.push(product);
     localStorage.cartItems = JSON.stringify(productList);
   }
@@ -21,7 +23,7 @@ class AddCartButton extends React.Component {
         <input
           type="button"
           value="Adicionar item no carrinho"
-          data-testid="product-detail-add-to-cart"
+          data-testid="product-add-to-cart"
           onClick={ this.addItem }
         />
       </div>
@@ -30,11 +32,18 @@ class AddCartButton extends React.Component {
 }
 
 AddCartButton.propTypes = {
-  product: PropTypes.objectOf(PropTypes.shape({
+  product: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-  })).isRequired,
+    quantity: PropTypes.number,
+  }),
+};
+
+AddCartButton.defaultProps = {
+  product: {
+    quantity: 1,
+  },
 };
 
 export default AddCartButton;
