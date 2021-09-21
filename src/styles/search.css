@@ -1,7 +1,9 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
+  background-color: #e7e9eb;
+  border-radius: 5px;
+  box-shadow: none;
+  margin: 20px;
+  padding: 15px;
 }
 
 .search-bar {
@@ -9,10 +11,38 @@
   width: 100;
 }
 
+/* Retirado do site https://www.w3schools.com/howto/howto_css_cards.asp */
+.card {
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  transition: 0.3s;
+  width: 30%;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+.card-container {
+  padding: 2px 16px;
+}
+
+.img {
+  margin: 5px;
+  max-height: 200px;
+  max-width: 200px;
+}
+
 .category {
   align-items: left;
+  background-color: #e7e9eb;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   margin-left: 20px;
   margin-top: 60px;
+  padding: 8px 20px;
 }

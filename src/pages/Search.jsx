@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { productsSave } from '../services/local';
 
 import InputGen from '../components/InputGen';
 import CategoriesItem from '../components/CategoriesItem';
@@ -13,6 +14,8 @@ class Search extends Component {
     super();
     this.state = {
       searchText: '',
+      cartProducts: [],
+      itensQuantity: {},
       categories: [],
       products: [],
       checkedCat: '$CATEGORY_ID',
@@ -23,6 +26,7 @@ class Search extends Component {
     this.categoriesChange = this.categoriesChange.bind(this);
     this.productsResult = this.productsResult.bind(this);
     this.getCategoriesOptions = this.getCategoriesOptions.bind(this);
+    this.onClickBtn = this.onClickBtn.bind(this);
   }
 
   componentDidMount() {
@@ -38,9 +42,26 @@ class Search extends Component {
     this.getProductsFromCategoryAndQuery(checkedCat, searchText);
   }
 
+  onClickBtn({ target: { id } }) {
+    const { cartProducts, itensQuantity } = this.state;
+    const product = JSON.parse(id);
+    if (cartProducts.some((ele) => ele.id === product.id)) {
+      const quantity = itensQuantity;
+      quantity[product.id] += 1;
+      this.setState({ itensQuantity: quantity });
+      productsSave(cartProducts, quantity);
+    } else {
+      const cart = [...cartProducts, product];
+      const quantity = itensQuantity;
+      quantity[product.id] = 1;
+      this.setState({ cartProducts: cart, itensQuantity: quantity });
+      productsSave(cart, quantity);
+    }
+  }
+
   async getCategories() {
-    const categories = await getCategories();
-    this.setState({ categories });
+    const categoriesML = await getCategories();
+    this.setState({ categories: categoriesML });
   }
 
   async getProductsFromCategoryAndQuery(checkedCat, searchText) {
@@ -78,7 +99,11 @@ class Search extends Component {
       return (<h1>Nenhum produto encontrado</h1>);
     }
     return (
-      products.map((product) => <ProductCard key={ product.id } product={ product } />)
+      products.map((product) => (<ProductCard
+        key={ product.id }
+        onClick={ this.onClickBtn }
+        product={ product }
+      />))
     );
   }
 
@@ -86,7 +111,7 @@ class Search extends Component {
     const { searchText, wasSearch } = this.state;
     return (
       <section className="d-flex">
-        <aside className="category align-items-start flex-column">
+        <aside className="category">
           {this.getCategoriesOptions()}
         </aside>
         <div className="container">
@@ -106,7 +131,7 @@ class Search extends Component {
               Carrinho
             </Link>
           </div>
-          <div className="itemList">
+          <div className="d-flex flex-wrap">
             {wasSearch ? this.productsResult()
               : (
                 <h1 data-testid="home-initial-message">
