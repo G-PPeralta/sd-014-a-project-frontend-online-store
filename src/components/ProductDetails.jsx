@@ -9,12 +9,39 @@ class ProductDetails extends React.Component {
     super(props);
     this.state = {
       product: {},
+      email: '',
+      rating: '',
+      comment: '',
+      ratingsArray: [],
     };
     this.getProduct = this.getProduct.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+  }
+
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleRatingStorage = () => {
+    const { email, rating, comment, ratingsArray } = this.state;
+    const storageElement = (
+      `   <div>
+        <h2>${email}</h2>
+        <br />
+        <span>${rating}</span>
+        <br />
+        <span>${comment}</span>
+      </div>
+      <br />`
+    );
+    const newRatingsArray = [...ratingsArray, storageElement];
+    this.setState({
+      ratingsArray: newRatingsArray,
+    });
   }
 
   async getProduct() {
@@ -28,7 +55,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product } = this.state;
+    const { product, email, rating, comment } = this.state;
     const { title, price, thumbnail, itemDescription } = product;
     return (
       <div>
@@ -38,6 +65,38 @@ class ProductDetails extends React.Component {
         <img src={ thumbnail } alt={ title } />
         {itemDescription ? <p>{itemDescription}</p> : null }
         <AddCartButton product={ product } dataTestId="product-detail-add-to-cart" />
+
+        <form>
+          <label htmlFor="email">
+            E-mail
+            <input
+              name="email"
+              type="text"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label>
+            nota
+            <input />
+          </label>
+          <label htmlFor="comment">
+            comentario
+            <input
+              name="comment"
+              type="text"
+              value={ comment }
+              onChange={ this.handleChange }
+              data-testid="product-detail-evaluation"
+            />
+          </label>
+          <button
+            onClick={ this.handleRatingStorage }
+          >
+            avaliar
+
+          </button>
+        </form>
       </div>
     );
   }
