@@ -31,19 +31,17 @@ class CategoriesList extends Component {
       <div>
         <ul>
           { sortedProducts.map((category) => (
-            <li
+            <button
               data-testid="category"
               key={ category.id }
+              type="button"
+              name={ category.id }
+              onClick={ this.handleclick }
             >
-              <button
-                type="button"
-                name={ category.id }
-                onClick={ this.handleclick }
-              >
-                { category.name }
+              { category.name }
 
-              </button>
-            </li>
+            </button>
+
           ))}
         </ul>
       </div>

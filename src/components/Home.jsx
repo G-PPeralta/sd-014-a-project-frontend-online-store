@@ -8,7 +8,7 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      category: '',
+      category: null,
       product: '',
       productList: [],
       requisition: false,
@@ -24,21 +24,21 @@ class Home extends React.Component {
     this.setState({ product: value });
   }
 
-  fetchGetProducts = async (category, product) => {
-    console.log(category, product);
+  fetchGetProducts = async () => {
+    const { product, category } = this.state;
     const productList = await getProductsFromCategoryAndQuery(category, product);
     console.log(productList);
     this.setState({ productList: productList.results,
       requisition: true });
   }
 
-  handleClick = async () => {
-    const { product, category } = this.state;
-    this.fetchGetProducts(category, product);
+  handleClick = () => {
+    this.fetchGetProducts();
   }
 
   getCategory = (category) => {
     this.setState({ category });
+    this.fetchGetProducts();
   }
 
   render() {
