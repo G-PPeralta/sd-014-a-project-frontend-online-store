@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Avaliacao from './Avaliacao';
 
 class FormAvaliacao extends Component {
@@ -93,5 +94,9 @@ class FormAvaliacao extends Component {
     );
   }
 }
+
+FormAvaliacao.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 
 export default FormAvaliacao;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Avaliacao extends React.Component {
   render() {
@@ -18,17 +19,12 @@ class Avaliacao extends React.Component {
         Não tem comentário!
       </div>
 
-    )
-
-    // const { email, avaliacao, comentario } = localStorage;
-    // return (
-    //   <div>
-    //     <h4>{`E-mail: ${email}`}</h4>
-    //     <p>{`Avaliação: ${avaliacao}`}</p>
-    //     <p>{`Comentário: ${comentario}`}</p>
-    //   </div>
-    // );
+    );
   }
 }
+
+Avaliacao.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 
 export default Avaliacao;
