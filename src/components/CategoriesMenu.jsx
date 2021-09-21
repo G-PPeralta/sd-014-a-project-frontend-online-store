@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class CategoriesMenu extends React.Component {
   constructor() {
     super();
-    this.state = { categoriesData: [] };
+    this.state = {
+      categoriesData: [],
+    };
   }
 
   componentDidMount() {
@@ -16,22 +19,38 @@ class CategoriesMenu extends React.Component {
     this.setState({ categoriesData: categories });
   }
 
+  handleChange = async ({ target: { value } }) => {
+    const { props: { getCategoryId, fetchSearchProduct } } = this;
+    await getCategoryId(value);
+    await fetchSearchProduct();
+  }
+
   render() {
     const { categoriesData } = this.state;
-
     return (
-      <div>
-        <form>
-          {categoriesData.map(({ id, name }) => (
-            <label data-testid="category" htmlFor={ id } key={ id }>
-              <input type="radio" id={ id } value={ id } name="category" />
+      <ul>
+        {categoriesData.map(({ id, name }) => (
+          <li key={ id }>
+            <label data-testid="category" htmlFor={ id }>
+              <input
+                type="radio"
+                id={ id }
+                value={ id }
+                onChange={ this.handleChange }
+                name="category"
+              />
               { name }
             </label>
-          ))}
-        </form>
-      </div>
+          </li>
+        ))}
+      </ul>
     );
   }
 }
+
+CategoriesMenu.propTypes = {
+  getCategoryId: PropTypes.func.isRequired,
+  fetchSearchProduct: PropTypes.func.isRequired,
+};
 
 export default CategoriesMenu;
