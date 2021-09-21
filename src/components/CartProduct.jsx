@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class CartProduct extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      quantity: 1,
+    };
+  }
+
   render() {
     const { produto } = this.props;
     const { title, price, thumbnail } = produto;
-    //  console.log(produto);
+    const { quantity } = this.state;
 
     return (
       <li className="produto-container">
@@ -18,7 +26,7 @@ class CartProduct extends Component {
           </h2>
           <p data-testid="shopping-cart-product-name">{ title }</p>
           <br />
-          <h3 data-testid="shopping-cart-product-quantity">1</h3>
+          <h3 data-testid="shopping-cart-product-quantity">{ quantity }</h3>
           <h3>Unidade(s)</h3>
         </div>
       </li>
