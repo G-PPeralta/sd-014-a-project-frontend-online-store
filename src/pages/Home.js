@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 
 import SearchField from '../components/SearchField';
 
-import Categories from '../components/Categories';
-
-class Search extends React.Component {
+class Home extends React.Component {
   render() {
     return (
       <section>
         <SearchField />
 
-        <Categories />
         <main>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -26,4 +23,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default Home;

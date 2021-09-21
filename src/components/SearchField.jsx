@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Categories from './Categories';
 import ProductList from './ProductList';
 
 class SearchField extends Component {
@@ -8,6 +9,7 @@ class SearchField extends Component {
 
     this.state = {
       searchTerm: '',
+      category: '',
       products: [],
     };
 
@@ -24,8 +26,8 @@ class SearchField extends Component {
   }
 
   async handleClick() {
-    const { searchTerm } = this.state;
-    const products = await getProductsFromCategoryAndQuery('MLB1196', searchTerm);
+    const { searchTerm, category } = this.state;
+    const products = await getProductsFromCategoryAndQuery(category, searchTerm);
     this.setState({
       products: products.results,
     });
@@ -35,6 +37,7 @@ class SearchField extends Component {
     const { searchTerm, products } = this.state;
     return (
       <div>
+        <Categories handleCategoryChange={ this.handleChange } />
         <button
           type="button"
           data-testid="query-button"
