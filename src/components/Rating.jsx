@@ -30,8 +30,10 @@ class Rating extends Component {
     console.log(e);
   }
 
-  handleClick(event) {
-    console.log(event);
+  handleClick(e) {
+    this.setState({
+      rating: e,
+    });
   }
 
   render() {
@@ -45,7 +47,7 @@ class Rating extends Component {
               key={ e }
               onMouseEnter={ () => this.handleMouseEnter(e) }
               onMouseLeave={ this.handleMouseLeave }
-              onClick={ this.handleClick }
+              onClick={ () => this.handleClick(e) }
             />))
         }
       </div>
