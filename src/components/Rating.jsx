@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Star, StarFill } from 'react-bootstrap-icons';
+import PropTypes from 'prop-types';
 import BlankStar from './BlankStar';
 import YellowStar from './YellowStar';
 
@@ -20,18 +20,22 @@ export default class Rating extends Component {
   }
 
   handleClick({ target: { id } }) {
-    this.handleStars(parseInt(id, 10) + 1);
+    this.handleStars(parseInt(id, 10));
   }
 
   handleStars(rate) {
     const { stars } = this.state;
+    const { onClick } = this.props;
+
     const ind = parseInt(rate, 10);
     let newStars;
 
-    if (!stars[ind]) {
+    if (!stars[ind - 1]) {
       newStars = stars.map((_star, index) => (index + 1) <= ind);
+      onClick(ind);
     } else {
       newStars = stars.map((_star, index) => (index + 1) < ind);
+      onClick(ind - 1);
     }
     this.setState({ stars: newStars });
   }
@@ -66,3 +70,11 @@ export default class Rating extends Component {
     );
   }
 }
+
+Rating.propTypes = {
+  rate: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  showOnly: PropTypes.bool,
+};
+
+Rating.defaultProps = { showOnly: false };
