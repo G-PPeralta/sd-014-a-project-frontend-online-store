@@ -17,8 +17,25 @@ export const addItemToCart = (item) => {
       item.shopping_cart = 1;
       saveShoppingCart([...items, item]);
     } else {
-      items[index].shopping_cart += 1;
+      if (items[index].shopping_cart < items[index].available_quantity) {
+        items[index].shopping_cart += 1;
+      }
       saveShoppingCart(items);
+    }
+  }
+};
+
+export const subItemFromCart = (item) => {
+  if (item) {
+    const items = readShoppingCart();
+    const index = items.findIndex(({ id }) => id === item.id);
+    if (index !== NOT_FOUND) {
+      if (item.shopping_cart <= 1) {
+        saveShoppingCart(items.filter(({ id }) => id !== item.id));
+      } else {
+        items[index].shopping_cart -= 1;
+        saveShoppingCart(items);
+      }
     }
   }
 };
