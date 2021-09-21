@@ -4,14 +4,18 @@ import { Link } from 'react-router-dom';
 import * as cart from '../services/cart';
 
 class Product extends React.Component {
+  freeShip = () => <p data-testid="free-shipping">Frete Grátis</p>
+
   render() {
     const { product } = this.props;
+    const { shipping: { free_shipping: freeShipping } } = this.props;
 
     return (
       <div data-testid="product">
         <p>{ product.title }</p>
         <p><img src={ product.thumbnail } alt={ product.title } /></p>
         <p>{ product.price }</p>
+        {freeShipping && this.freeShip()}
         <Link
           data-testid="product-detail-link"
           to={ { pathname: `/details/${product.id}`, state: product } }
