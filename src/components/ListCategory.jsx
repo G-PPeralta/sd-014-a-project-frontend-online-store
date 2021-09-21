@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 
 class ListCategory extends Component {
   render() {
-    const { categoryList } = this.props;
+    const { categoryList, addCotegory } = this.props;
     return (
-      <ul>
+      <select onChange={ addCotegory }>
+        {/* <option value="">Categorias</option> */}
         {categoryList.map((category) => (
-          <li
+          <option
             data-testid="category"
             key={ category.id }
+            value={ category.id }
           >
             { category.name }
-          </li>
+          </option>
         ))}
-      </ul>
+      </select>
     );
   }
 }
