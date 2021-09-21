@@ -16,7 +16,7 @@ export const getProducts = () => {
 export const addProduct = (product) => {
   const productNew = { ...product, counter: 1 };
   const products = readProducts();
-  const check = products.some((elemente) => elemente.id === productNew.id);
+  const check = products.some((element) => element.id === productNew.id);
   if (!check) {
     saveProducts([...products, productNew]);
   } else {
@@ -45,4 +45,12 @@ export const decreaseProduct = (product) => {
   saveProducts(newProducts);
 };
 
-export const getQuantityOfProducts = () => null;
+export const getQuantityOfProducts = () => {
+  const products = readProducts();
+  let quantity = 0;
+  if (products.length === 0) {
+    return quantity;
+  }
+  products.forEach((product) => { quantity += Number(product.counter); });
+  return quantity;
+};

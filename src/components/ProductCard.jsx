@@ -16,7 +16,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { product, inHome, handleQuantityButtonsClick } = this.props;
+    const { product, inHome, handleQuantityButtonsClick, actualizeQuantity } = this.props;
     const { homeIs } = this.state;
     const id = inHome ? 'product-detail-link' : 'shopping-cart-product-name';
     return (
@@ -82,7 +82,11 @@ class ProductCard extends React.Component {
             product={ product }
             handleQuantityButtonsClick={ handleQuantityButtonsClick }
           />)}
-          {inHome && <AddToCartButton homeIs={ homeIs } product={ product } />}
+          {inHome && <AddToCartButton
+            homeIs={ homeIs }
+            actualizeQuantity={ actualizeQuantity }
+            product={ product }
+          />}
         </FadeIn>
       </li>
     );

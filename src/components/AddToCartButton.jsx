@@ -5,8 +5,9 @@ import { addProduct } from '../services/shopCartManag';
 
 class AddToCartButton extends React.Component {
   handleClick = () => {
-    const { product } = this.props;
+    const { product, actualizeQuantity } = this.props;
     addProduct(product);
+    actualizeQuantity();
   }
 
   render() {

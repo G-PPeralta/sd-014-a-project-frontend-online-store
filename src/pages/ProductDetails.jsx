@@ -15,8 +15,14 @@ class ProductDetails extends React.Component {
     document.title = product.title;
 
     this.state = {
+      actualizeQuantity: true,
       homeIs: false,
     };
+  }
+
+  actualizeQuantity = () => {
+    const { actualizeQuantity } = this.state;
+    this.setState({ actualizeQuantity: !actualizeQuantity });
   }
 
   render() {
@@ -37,7 +43,11 @@ class ProductDetails extends React.Component {
             <GoToCartButton />
           </div>
         </Header>
-        <ProductDetailCard product={ product } homeIs={ homeIs } />
+        <ProductDetailCard
+          actualizeQuantity={ this.actualizeQuantity }
+          product={ product }
+          homeIs={ homeIs }
+        />
         <ReviewForm />
       </div>
     );

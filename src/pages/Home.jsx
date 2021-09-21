@@ -12,6 +12,7 @@ class Home extends React.Component {
     super();
     document.title = 'Home';
     this.state = {
+      actualizeQuantity: true,
       search: '',
       category: '',
       products: [],
@@ -34,6 +35,11 @@ class Home extends React.Component {
     const { search } = this.state;
     const request = await getProductsFromCategoryAndQuery(category, search);
     this.setState({ products: request.results, showMessage: false });
+  }
+
+  actualizeQuantity = () => {
+    const { actualizeQuantity } = this.state;
+    this.setState({ actualizeQuantity: !actualizeQuantity });
   }
 
   render() {
@@ -102,7 +108,11 @@ class Home extends React.Component {
               dataTestId="home-initial-message"
               message="Digite algum termo de pesquisa ou escolha uma categoria."
             />}
-            {!showMessage && <ProductList products={ products } inHome={ inHome } />}
+            {!showMessage && <ProductList
+              actualizeQuantity={ this.actualizeQuantity }
+              products={ products }
+              inHome={ inHome }
+            />}
           </section>
         </main>
       </div>

@@ -5,7 +5,12 @@ import ProductCard from './ProductCard';
 
 class ProductList extends React.Component {
   render() {
-    const { products, inHome, handleQuantityButtonsClick } = this.props;
+    const {
+      products,
+      inHome,
+      handleQuantityButtonsClick,
+      actualizeQuantity,
+    } = this.props;
     return (
       <ul className="d-flex flex-wrap m-auto">
         { products.map((product) => (<ProductCard
@@ -13,6 +18,7 @@ class ProductList extends React.Component {
           product={ product }
           inHome={ inHome }
           handleQuantityButtonsClick={ handleQuantityButtonsClick }
+          actualizeQuantity={ actualizeQuantity }
         />))}
       </ul>
     );
