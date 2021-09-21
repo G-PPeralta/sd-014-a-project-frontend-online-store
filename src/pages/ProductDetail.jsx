@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = props.location.state; //https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309
+    this.state = props.location.state; // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309
   }
 
   render() {
