@@ -33,7 +33,7 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const { handleCategoryChange } = this.props;
+    const { handleCategoryChange, value } = this.props;
     return (
       <aside>
         <h2>Categorias:</h2>
@@ -44,6 +44,8 @@ class Categories extends React.Component {
                 type="radio"
                 name="category"
                 id={ id }
+                // Carla ajudou muito aqui! 🙌
+                checked={ id === value }
                 value={ id }
                 onChange={ handleCategoryChange }
               />
@@ -58,6 +60,7 @@ class Categories extends React.Component {
 
 Categories.propTypes = {
   handleCategoryChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Categories;
