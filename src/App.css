@@ -76,6 +76,11 @@ body {
   margin: 10px;
 }
 
+.category-div span:hover {
+  font-size: 1.1em;
+  font-weight: 800;
+}
+
 .shopping-header, .shopping-footer {
   background-color: #282c34;
   color: rgb(207, 207, 207);

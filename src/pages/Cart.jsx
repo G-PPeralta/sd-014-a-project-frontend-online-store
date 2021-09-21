@@ -7,6 +7,8 @@ class Cart extends Component {
     this.state = {
       cartList: [],
     };
+    this.addBTN = this.addBTN.bind(this);
+    this.subBTN = this.subBTN.bind(this);
     this.recebeInfo = this.recebeInfo.bind(this);
   }
 
@@ -18,39 +20,45 @@ class Cart extends Component {
     this.recebeInfo();
   }
 
-  recebeInfo() {
+  async recebeInfo() {
     const cartListLocal = localStorage.getItem('cartList');
     const cartList = JSON.parse(cartListLocal);
     console.log(cartList);
-    this.setState({
+    await this.setState({
       cartList,
     });
-    // const arrayzao = [];
-    // if (xablau !== undefined) {
-    //   const newList = xablau.map((prod) => {
-    //     const idProd = prod.prodId;
-    //     const arrProd = xablau.filter((produ) => produ.prodId === idProd);
-    //     const cartItemDetail = {
-    //       quantidade: arrProd.length,
-    //       id: arrProd[0].prodId,
-    //       price: arrProd[0].prodPrice,
-    //       name: arrProd[0].name,
-    //     };
-    //     if (!arrayzao.some((produ) => produ.id === idProd)) {
-    //       arrayzao.push(cartItemDetail);
-    //     }
-    //     return (arrayzao);
-    //   });
-    //   this.setState = {
-    //     newArr: arrayzao,
-    //   };
-    //   console.log(newList);
-    // }
+  }
+
+  async addBTN(event) {
+    // const { cartList } = this.state;
+    const addPrd = {
+      prodId: event.target.className,
+      name: event.target.name,
+      prodPrice: event.target.value,
+    };
+    if (!JSON.parse(localStorage.getItem('cartList'))) {
+      localStorage.setItem('cartList', JSON.stringify([]));
+    }
+    const localProd = JSON.parse(localStorage.getItem('cartList'));
+    localStorage.setItem('cartList', JSON.stringify([...localProd, addPrd]));
+    await this.setState({
+      cartList: [...localProd, addPrd],
+    });
+  }
+
+  async subBTN(event) {
+    const compareID = event.target.className;
+    const { cartList } = this.state;
+    const getCartList = cartList;
+    const toBeDecreasedObjIndex = cartList.lastIndexOf((ele) => ele.prodId === compareID);
+    getCartList.splice(toBeDecreasedObjIndex, 1);
+    localStorage.setItem('cartList', JSON.stringify(getCartList));
+    this.setState({
+      cartList: getCartList,
+    });
   }
 
   render() {
-    // const { newArr } = this.state;
-    // const { xablau } = this.props;
     const { cartList } = this.state;
     const arrayzao = [];
     if (cartList) {
@@ -79,9 +87,30 @@ class Cart extends Component {
               {arrayzao.map((prod) => (
                 <div key={ prod.id }>
                   <p data-testid="shopping-cart-product-name">{prod.name}</p>
-                  <p data-testid="shopping-cart-product-quantity">{prod.quantidade}</p>
-                  <p>{prod.id}</p>
                   <p>{prod.price}</p>
+                  <button
+                    type="button"
+                    data-testid="product-increase-quantity"
+                    name={ prod.name }
+                    value={ prod.price }
+                    className={ prod.id }
+                    onClick={ this.addBTN }
+                  >
+                    EU ADICIONO COISAS
+                  </button>
+                  <span data-testid="shopping-cart-product-quantity">
+                    {prod.quantidade}
+                  </span>
+                  <button
+                    type="button"
+                    data-testid="product-decrease-quantity"
+                    name={ prod.name }
+                    value={ prod.price }
+                    className={ prod.id }
+                    onClick={ this.subBTN }
+                  >
+                    EU DIMINUO COISAS
+                  </button>
                 </div>
               ))}
             </div>)
