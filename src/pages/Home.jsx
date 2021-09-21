@@ -10,11 +10,13 @@ class Home extends React.Component {
     super();
     this.state = {
       categorias: [],
-      selectedId: "",
-      // products: [],
+      query: '',
+      selectedId: '',
+      products: [],
     };
     this.getCategoryAPI = this.getCategoryAPI.bind(this);
     this.changeSelectedId = this.changeSelectedId.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,29 +36,52 @@ class Home extends React.Component {
     });
   }
 
-  // getProductsFromCategoryAndQuery = async (category, query) => {
-  //   const products = await getProductsFromCategoryAndQuery(category, query);
-  //   this.setState({
-  //     products,
-  //   });
-  // }
+  handleChange = ({ target }) => {
+    const { value } = target;
+    this.setState({
+      query: value,
+    });
+  }
+
+  handleSubmit = () => {
+
+  }
+
+  getProductsFromCategoryAndQuery = async (category, query) => {
+    const productList = await getProductsFromCategoryAndQuery(category, query);
+    this.setState({
+      products: productList,
+    }, () => {
+      const { products } = this.state;
+      console.log(products);
+    });
+  }
 
   render() {
-    const { categorias } = this.state;
+    const { categorias, query, selectedId } = this.state;
     return (
       <main>
         <div className="input">
-          <input type="text" placeholder="Digite um produto" />
-          <BtnCart />
+          <input
+            type="text"
+            placeholder="Digite um produto"
+            value={ query }
+            onChange={ this.handleChange }
+          />
+          <BtnCart
+            query={ query }
+            handleSubmit={ this.getProductsFromCategoryAndQuery }
+            category={ selectedId }
+          />
         </div>
         <div className="main-conteiner">
           {/* Esquerda com Categorias */}
           <fieldset className="conteiner-left">
             <ul>
-              { categorias.map((e) => (
+              { categorias.map((category) => (
                 <ListCategory
-                  key={ e.id }
-                  category={ e }
+                  key={ category.id }
+                  category={ category }
                   onClick={ this.changeSelectedId }
                 />)) }
             </ul>
