@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Products extends Component {
@@ -42,11 +43,18 @@ class Products extends Component {
           Pesquisar
         </button>
         { productsList.map((product) => (
-          <div data-testid="product" key={ product.id }>
-            <h3>{ product.title }</h3>
-            <img src={ product.thumbnail } alt={ product.title } />
-            <p>{ product.price }</p>
-          </div>
+          <Link
+            data-testid="product-detail-link"
+            to={ { pathname: `/product/${product.id}`, state: { product } } }
+            key={ product.id }
+          >
+
+            <div data-testid="product">
+              <h3>{ product.title }</h3>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <p>{ product.price }</p>
+            </div>
+          </Link>
         ))}
       </div>
     );

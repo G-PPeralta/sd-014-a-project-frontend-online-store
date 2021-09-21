@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Categories extends Component {
   constructor() {
     super();
-
     this.state = {
       categoriesList: [],
       productsList: [],
@@ -23,9 +23,10 @@ class Categories extends Component {
   }
 
   fetchAPI(category) {
-    getProductsFromCategoryAndQuery(category, '').then((query) => {
-      this.setState({ productsList: query.results });
-    });
+    getProductsFromCategoryAndQuery(category, '')
+      .then((query) => {
+        this.setState({ productsList: query.results });
+      });
   }
 
   fetchCategories() {
@@ -56,15 +57,20 @@ class Categories extends Component {
           </div>
         ))}
         { productsList.map((product) => (
-          <div data-testid="product" key={ product.id }>
-            <h3>{ product.title }</h3>
-            <img src={ product.thumbnail } alt={ product.title } />
-            <p>{ product.price }</p>
-          </div>
+          <Link
+            data-testid="product-detail-link"
+            to={ { pathname: `/product/${product.id}`, state: { product } } }
+            key={ product.id }
+          >
+            <div data-testid="product" key={ product.id }>
+              <h3>{ product.title }</h3>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <p>{ product.price }</p>
+            </div>
+          </Link>
         ))}
       </div>
     );
   }
 }
-
 export default Categories;
