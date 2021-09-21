@@ -18,7 +18,7 @@ class SearchField extends Component {
   }
 
   componentDidMount() {
-    this.fetchProducts();
+    // this.fetchProducts();
   }
 
   handleChange({ target }) {
@@ -31,7 +31,9 @@ class SearchField extends Component {
 
   async fetchProducts() {
     const { searchTerm, category } = this.state;
+    // console.log('term => ', searchTerm, 'category =>', category);
     const products = await getProductsFromCategoryAndQuery(category, searchTerm);
+    // console.log('products', products);
     this.setState({
       products: products.results,
     });
