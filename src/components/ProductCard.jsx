@@ -72,8 +72,8 @@ export default class ProductCard extends Component {
           <h3 className="product-title">{title}</h3>
           <img alt={ title } className="product-thumbnail" src={ thumbnail } />
           <p>{`R$${price.toFixed(2)}`}</p>
-          {this.addToCartBtn()}
         </Link>
+        {this.addToCartBtn()}
       </div>
     );
   }
