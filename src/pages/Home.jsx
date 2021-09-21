@@ -35,6 +35,9 @@ class Home extends React.Component {
   changeSelectedId = (id) => {
     this.setState({
       selectedId: id,
+    }, () => {
+      const { query, selectedId } = this.state;
+      this.handleSearch(selectedId, query);
     });
   }
 
@@ -50,9 +53,6 @@ class Home extends React.Component {
     const productList = await productsJson.results;
     this.setState({
       products: productList,
-    }, () => {
-      const { products } = this.state;
-      console.log(products);
     });
   }
 
