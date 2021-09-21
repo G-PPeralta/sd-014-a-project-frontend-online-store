@@ -12,7 +12,7 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route exact path="/shopping-cart" component={ ShoppingCart } />
-          <Route exact path="/detail/:id" component={ ProductDetails } />
+          <Route exact path="/product/:id" component={ ProductDetails } />
           <Route exact path="*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
