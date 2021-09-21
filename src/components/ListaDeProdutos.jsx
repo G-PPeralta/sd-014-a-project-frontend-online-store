@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard';
@@ -27,10 +28,6 @@ class ListaDeProdutos extends Component {
     });
   }
 
-  mainLista = (produtos) => {
-    produtos.map((produto) => (<ProductCard key={ produto.id } produto={ produto } />));
-  }
-
   render() {
     const { produtos } = this.state;
     return (
@@ -42,7 +39,14 @@ class ListaDeProdutos extends Component {
         { produtos.length === 0
           ? <p> Nenhum produto foi encontrado </p>
           : produtos
-            .map((produto) => (<ProductCard key={ produto.id } produto={ produto } />))}
+            .map((produto) => (
+              <Link
+                data-testid="product-detail-link"
+                key={ produto.id }
+                to={ `/products/${produto.category_id}/${produto.id}` }
+              >
+                <ProductCard produto={ produto } />
+              </Link>)) }
       </div>
     );
   }
