@@ -97,7 +97,6 @@ class Home extends React.Component {
             {(products.length !== 0) ? products.map((product) => (<ProductsCard
               key={ product.id }
               product={ product }
-              data-testid="product"
             />)) : <p>Nenhum produto foi encontrado</p> }
           </fieldset>
         </div>
