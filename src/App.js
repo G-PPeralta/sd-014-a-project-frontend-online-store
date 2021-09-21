@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Search from './components/Search';
 import Cart from './components/Cart';
 import ProductDetails from './components/ProductDetails';
-import FinishBuy from './components/FinishBuy';
+import Checkout from './components/Checkout';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route exact path="/" component={ Search } />
         <Route exact path="/cart" component={ Cart } />
         <Route exact path="/product/:category/:title/:id" component={ ProductDetails } />
-        <Route exact path="/finish" component={ FinishBuy } />
+        <Route exact path="/checkout" component={ Checkout } />
       </Switch>
     </BrowserRouter>
   );

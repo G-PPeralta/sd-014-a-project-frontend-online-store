@@ -1,6 +1,7 @@
 import React from 'react';
+import Estados from './Estados';
 
-class FinishBuy extends React.Component {
+class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -48,10 +49,28 @@ class FinishBuy extends React.Component {
     const { isLoading } = this.state;
     return (
       <div>
-        { isLoading ? null : this.renderItens() }
+        <div>
+          { isLoading ? null : this.renderItens() }
+        </div>
+        <form>
+          <input
+            type="text"
+            placeholder="Nome Completo"
+            data-testid="checkout-fullname"
+          />
+          <input type="text" placeholder="CPF" data-testid="checkout-cpf" />
+          <input type="email" placeholder="Email" data-testid="checkout-email" />
+          <input type="text" placeholder="Telefone" data-testid="checkout-phone" />
+          <input type="text" placeholder="CEP" data-testid="checkout-cep" />
+          <input type="text" placeholder="Endereço" data-testid="checkout-address" />
+          <input type="text" placeholder="Complemento" />
+          <input type="text" placeholder="Número" />
+          <input type="text" placeholder="Cidade" />
+          <Estados />
+        </form>
       </div>
     );
   }
 }
 
-export default FinishBuy;
+export default Checkout;
