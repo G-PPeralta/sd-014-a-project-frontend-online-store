@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -15,13 +15,14 @@ class ProductDetails extends React.Component {
     this.getProduct();
   }
 
-  getProduct() {
-    const { match: { params: { category, title } } } = this.props;
-    getProductsFromCategoryAndQuery(category, title)
-      .then((res) => {
-        const product = res.results[0];
-        this.setState({ product });
-      });
+  async getProduct() {
+    const { match: { params: { category, title, id } } } = this.props;
+    const result = (await getProductsFromCategoryAndQuery(category, title)).results;
+    if (result[0].id === id) {
+      return this.setState({ product: result[0] });
+    }
+    const idSearch = await getProductById(id);
+    this.setState({ product: idSearch });
   }
 
   render() {
@@ -40,6 +41,7 @@ ProductDetails.propTypes = {
   match: PropTypes.shape({ params: PropTypes.shape({
     category: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   }),
   }).isRequired,
 };

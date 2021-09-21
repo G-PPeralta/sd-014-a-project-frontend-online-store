@@ -68,7 +68,7 @@ class Search extends React.Component {
       <div>
         {products.map(({ id, title, thumbnail, price, category_id: category }) => (
           <Link
-            to={ `/product/${category}/${title.replace('%', '')}` }
+            to={ `/product/${category}/${title.replace('%', '').replace('/', '')}/${id}` }
             key={ id }
             data-testid="product-detail-link"
           >
