@@ -17,7 +17,8 @@ class ProductDetail extends React.Component {
   }
 
   teste() {
-    const { title, thumbnail, price } = this.props.location.state;
+    const { location } = this.props;
+    const { title, thumbnail, price } = location.state;
     this.setState({
       selectedTitle: title,
       selectedThumbnail: thumbnail,
@@ -37,13 +38,9 @@ class ProductDetail extends React.Component {
     );
   }
 }
-
-ProductDetail.PropTypes = {
-  location: PropTypes.shape({
-    selectedTitle: PropTypes.string,
-    selectedThumbnail: PropTypes.string,
-    selectedPrice: PropTypes.number,
-  }).isRequired,
-};
-
+ProductDetail.propTypes = PropTypes.shape({
+  title: PropTypes.string,
+  thumbnail: PropTypes.string,
+  price: PropTypes.number,
+}).isRequired;
 export default ProductDetail;
