@@ -2,46 +2,38 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
 import '../styles/ShoppingCart.css';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
+      cartProducts: [],
       loading: false,
     };
 
-    this.fillProductsTEMP = this.fillProductsTEMP.bind(this);
     this.showProducts = this.showProducts.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
     this.changeProductQuantity = this.changeProductQuantity.bind(this);
   }
 
   componentDidMount() {
-    this.fillProductsTEMP();
+    this.localStorage();
   }
 
-  // Pegando um grupo de itens genéricos para testes, tem que mudar pra pegar do localStorage
-  async fillProductsTEMP() {
-    this.setState({
-      loading: true,
-    });
-    const products = await getProductsFromCategoryAndQuery('MLB1000', 'Fone');
-    this.setState({
-      loading: false,
-      products: products.results,
-    });
-    console.log(products.results);
+  localStorage() {
+    const savedCart = JSON.parse(localStorage.getItem('cart-products'));
+    if (savedCart) {
+      this.setState({ cartProducts: savedCart });
+    }
   }
 
   removeProduct(id) {
-    const { products } = this.state;
+    const { cartProducts } = this.state;
     // Filtrando o array, ficam todos menos o que tem o ID
-    const filtered = products.filter((prod) => prod.id !== id);
+    const filtered = cartProducts.filter((prod) => prod.id !== id);
     this.setState({
-      products: filtered,
+      cartProducts: filtered,
     });
   }
 
@@ -51,23 +43,22 @@ export default class ShoppingCart extends Component {
   }
 
   calculatePrice() {
-    const { products } = this.state;
+    const { cartProducts } = this.state;
     let totalPrice = 0;
-    products.forEach((p) => { totalPrice += p.price; });
+    cartProducts.forEach((p) => { totalPrice += p.price; });
     return totalPrice;
   }
 
   showProducts() {
-    const { products } = this.state;
+    const { cartProducts } = this.state;
     return (
       <section>
-        { products.map((product) => (
+        { cartProducts.map((product) => (
           <CartProduct
             key={ product.id }
             product={ product }
             removeProduct={ this.removeProduct }
             changeProductQuantity={ this.changeProductQuantity }
-            quantity={ 1 }
           />
         ))}
         <h2>{ `Valor Total da Compra: R$ ${this.calculatePrice}` }</h2>
@@ -91,7 +82,7 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { loading, products } = this.state;
+    const { loading, cartProducts } = this.state;
     if (loading) {
       return <h2>LOADING..</h2>;
     }
@@ -111,7 +102,7 @@ export default class ShoppingCart extends Component {
           <h2>Carrinho de Compras</h2>
         </div>
         <main className="cart-product-list">
-          { products.length > 0 ? this.showProducts() : this.showEmptyCart() }
+          { cartProducts.length > 0 ? this.showProducts() : this.showEmptyCart() }
         </main>
       </div>
     );
