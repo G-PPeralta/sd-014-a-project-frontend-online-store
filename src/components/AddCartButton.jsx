@@ -18,32 +18,30 @@ class AddCartButton extends React.Component {
   }
 
   render() {
+    const { dataTestId } = this.props;
     return (
-      <div>
-        <input
-          type="button"
-          value="Adicionar item no carrinho"
-          data-testid="product-add-to-cart"
-          onClick={ this.addItem }
-        />
-      </div>
+      <input
+        type="button"
+        value="Adicionar item no carrinho"
+        data-testid={ dataTestId }
+        onClick={ this.addItem }
+      />
     );
   }
 }
 
 AddCartButton.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
     quantity: PropTypes.number,
   }),
+  dataTestId: PropTypes.string,
 };
 
 AddCartButton.defaultProps = {
   product: {
     quantity: 1,
   },
+  dataTestId: '',
 };
 
 export default AddCartButton;

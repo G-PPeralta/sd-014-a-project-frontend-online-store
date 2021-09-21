@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AddCartButton from './AddCartButton';
+import CartButton from './CartButton';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
 
 class ProductDetails extends React.Component {
@@ -26,13 +28,16 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product: { title, price, thumbnail, itemDescription } } = this.state;
+    const { product } = this.state;
+    const { title, price, thumbnail, itemDescription } = product;
     return (
       <div>
+        <CartButton />
         <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
         {itemDescription ? <p>{itemDescription}</p> : null }
+        <AddCartButton product={ product } dataTestId="product-detail-add-to-cart" />
       </div>
     );
   }
