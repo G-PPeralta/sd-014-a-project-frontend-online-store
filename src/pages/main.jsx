@@ -9,6 +9,7 @@ class main extends React.Component {
     super();
     this.state = {
       categories: [],
+      selected: '',
     };
   }
 
@@ -16,8 +17,15 @@ class main extends React.Component {
     getCategories().then((dados) => this.setState({ categories: dados }));
   }
 
+  categorieHandler = (e) => {
+    e.preventDefault();
+    this.setState({
+      selected: e.target.value,
+    });
+  }
+
   render() {
-    const { categories } = this.state;
+    const { categories, selected } = this.state;
     return (
       <div data-testid="home-initial-message">
         <h2>Digite algum termo de pesquisa ou escolha uma categoria.</h2>
@@ -35,8 +43,9 @@ class main extends React.Component {
             <ListaDeCategorias
               key={ categoria.id }
               categoria={ categoria }
+              onClick={ this.categorieHandler }
             />)) }
-        <ListaDeProdutos />
+        <ListaDeProdutos selected={ selected } />
       </div>
     );
   }
