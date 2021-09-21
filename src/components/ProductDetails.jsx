@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductById } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class ProductDetails extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       product: {},
     };
@@ -16,18 +16,21 @@ class ProductDetails extends React.Component {
   }
 
   getProduct() {
-    const { match: { params: { id } } } = this.props;
-    getProductById(id).then((res) => this.setState({ product: res }));
+    const { match: { params: { category, title } } } = this.props;
+    getProductsFromCategoryAndQuery(category, title)
+      .then((res) => {
+        const product = res.results[0];
+        this.setState({ product });
+      });
   }
 
   render() {
-    const { product: { title, price, thumbnail, itemDescription } } = this.state;
+    const { product: { title, price, thumbnail } } = this.state;
     return (
       <div>
         <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
-        <p>{itemDescription}</p>
       </div>
     );
   }
@@ -35,7 +38,9 @@ class ProductDetails extends React.Component {
 
 ProductDetails.propTypes = {
   match: PropTypes.shape({ params: PropTypes.shape({
-    id: PropTypes.string.isRequired }),
+    category: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }),
   }).isRequired,
 };
 

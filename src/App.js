@@ -10,7 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Search } />
         <Route exact path="/cart" component={ Card } />
-        <Route exact path="/product/:id" component={ ProductDetails } />
+        <Route exact path="/product/:category/:title" component={ ProductDetails } />
       </Switch>
     </BrowserRouter>
   );

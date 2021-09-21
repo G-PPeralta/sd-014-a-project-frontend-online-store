@@ -37,9 +37,9 @@ class Search extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleClick = (event) => {
-    event.preventDefault();
-    this.setState({ [event.target.name]: event.target.key });
+  handleClick = async (event) => {
+    this.setState({ [event.target.name]: event.target.id });
+    await event.preventDefault();
     this.getProduct();
   }
 
@@ -50,6 +50,7 @@ class Search extends React.Component {
         {categories.map((cat) => (
           <input
             key={ cat.id }
+            id={ cat.id }
             data-testid="category"
             name="category"
             onClick={ this.handleClick }
@@ -65,9 +66,9 @@ class Search extends React.Component {
     const { products } = this.state;
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price }) => (
+        {products.map(({ id, title, thumbnail, price, category_id: category }) => (
           <Link
-            to={ `/product/${id}` }
+            to={ `/product/${category}/${title.replace('%', '')}` }
             key={ id }
             data-testid="product-detail-link"
           >
