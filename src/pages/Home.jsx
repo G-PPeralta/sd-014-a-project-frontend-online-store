@@ -1,4 +1,5 @@
 import React from 'react';
+import BtnQuery from '../components/BtnQuery';
 import BtnCart from '../components/BtnCart';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ListCategory from '../components/ListCategory';
@@ -72,12 +73,12 @@ class Home extends React.Component {
             onChange={ this.handleChange }
             data-testid="query-input"
           />
-          <BtnCart
+          <BtnQuery
             query={ query }
             handleSubmit={ this.handleSearch }
             selectedId={ selectedId }
-            data-testid="query-button"
           />
+          <BtnCart />
         </div>
         <div className="main-conteiner">
           {/* Esquerda com Categorias */}
