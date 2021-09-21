@@ -52,6 +52,7 @@ export default class ProductCard extends Component {
   };
 
   render() {
+    const { productQty } = this.state;
     const {
       product: { title, thumbnail, price, id },
     } = this.props;
@@ -66,6 +67,7 @@ export default class ProductCard extends Component {
               thumbnail,
               price,
               id,
+              productQty,
             },
           } }
         >
