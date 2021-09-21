@@ -4,6 +4,7 @@ import CartButton from '../components/CartButton';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import EvaluationForm from '../components/EvaluationForm';
 
 const numberFormat = (value) => new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -87,12 +88,6 @@ export default class ProductDetail extends Component {
               {numberFormat(myProduct.price)}
             </span>
           </p>
-          <form>
-            Avaliacoes
-            <input type="email" name="email-for-evaluation" />
-            <textarea data-testid="product-detail-evaluation" />
-            <button type="button">Avaliar</button>
-          </form>
           <button
             type="button"
             data-testid="product-detail-add-to-cart"
@@ -103,6 +98,7 @@ export default class ProductDetail extends Component {
           >
             Adicionar ao Carrinho
           </button>
+          <EvaluationForm />
         </section>
         <Footer />
       </main>

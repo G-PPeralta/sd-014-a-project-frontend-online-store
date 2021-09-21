@@ -316,6 +316,14 @@ body {
   margin: 10px 0;
 }
 
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.star-rate {
+  display: none;
+}
 @keyframes App-logo-spin {
 
   from {
