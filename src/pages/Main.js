@@ -22,6 +22,13 @@ class Main extends React.Component {
     });
   }
 
+  handleCategorie(id) {
+    getProductsFromCategoryAndQuery(id, '')
+      .then((productsCategories) => (
+        this.setState({ products: productsCategories.results })
+      ));
+  }
+
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -43,6 +50,21 @@ class Main extends React.Component {
     if (products.length > 0) {
       return (
         <div>
+          <ShoppingCartLink />
+          <input
+            type="text"
+            data-testid="query-input"
+            name="search"
+            value={ search }
+            onChange={ this.handleChange }
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.handleClick }
+          >
+            Pesquisar
+          </button>
           { products
             .map((product) => <Product key={ product.id } product={ product } />) }
         </div>
@@ -75,6 +97,7 @@ class Main extends React.Component {
             .map((categorie) => (<Categories
               key={ categorie.id }
               categorie={ categorie.name }
+              handleCategorie={ () => this.handleCategorie(categorie.id) }
             />))}
         </div>
       </div>
