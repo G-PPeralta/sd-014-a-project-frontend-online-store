@@ -128,7 +128,9 @@ class ProductList extends Component {
                   name="categoriaDeProduto"
                   onChange={ this.handleCategory }
                 />
-                <span className="radio-sp" data-testid="category">{ category.name }</span>
+                <span className="radio-sp" data-testid="category">
+                  { category.name }
+                </span>
               </div>
             ))}
           </nav>
