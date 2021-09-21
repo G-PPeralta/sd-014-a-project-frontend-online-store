@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartButton from './CartButton';
+import AddCartButton from './AddCartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Search extends React.Component {
@@ -66,19 +67,24 @@ class Search extends React.Component {
     const { products } = this.state;
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price, category_id: category }) => (
-          <Link
-            to={ `/product/${category}/${title.replace('%', '').replace('/', '')}/${id}` }
-            key={ id }
-            data-testid="product-detail-link"
-          >
-            <div data-testid="product">
-              <img src={ thumbnail } alt="imagem do produto" />
-              <p>{ title }</p>
-              <p>{`R$:${price}`}</p>
+        {products.map((product) => {
+          const { id, title: name, thumbnail, price, category_id: cat } = product;
+          return (
+            <div key={ id }>
+              <Link
+                to={ `/product/${cat}/${name.replace('%', '').replace('/', '')}/${id}` }
+                data-testid="product-detail-link"
+              >
+                <div data-testid="product">
+                  <img src={ thumbnail } alt="imagem do produto" />
+                  <p>{name}</p>
+                  <p>{`R$:${price}`}</p>
+                </div>
+              </Link>
+              <AddCartButton product={ product } />
             </div>
-          </Link>
-        ))}
+          );
+        })}
       </div>
     );
   }
