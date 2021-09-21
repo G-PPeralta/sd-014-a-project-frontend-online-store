@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import NotFound from './pages/NotFound';
+import ProductDetail from './pages/ProductDetail';
 
 export default class App extends Component {
   render() {
@@ -10,6 +11,7 @@ export default class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Home } />
+          <Route exact path="/product-detail" component={ ProductDetail } />
           <Route exact path="/shopping-cart" component={ ShoppingCart } />
           <Route exact path="*" component={ NotFound } />
         </Switch>
