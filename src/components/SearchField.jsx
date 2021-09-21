@@ -14,7 +14,7 @@ class SearchField extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.fetchProducts.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   componentDidMount() {
