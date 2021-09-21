@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AddCartButton from './AddCartButton';
 import CartButton from './CartButton';
+import AvaliationForm from './AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
 
 class ProductDetails extends React.Component {
@@ -27,21 +28,9 @@ class ProductDetails extends React.Component {
   }
 
   handleRatingStorage = () => {
-    const { email, rating, comment, ratingsArray } = this.state;
-    const storageElement = (
-      `   <div>
-        <h2>${email}</h2>
-        <br />
-        <span>${rating}</span>
-        <br />
-        <span>${comment}</span>
-      </div>
-      <br />`
-    );
-    const newRatingsArray = [...ratingsArray, storageElement];
-    this.setState({
-      ratingsArray: newRatingsArray,
-    });
+    const { email, rating, comment } = this.state;
+    this.setState((lastState) => (
+      { ratingsArray: [...lastState, { email, rating, comment }] }));
   }
 
   async getProduct() {
@@ -55,7 +44,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product, email, rating, comment } = this.state;
+    const { product, email, rating, comment, ratingsArray } = this.state;
     const { title, price, thumbnail, itemDescription } = product;
     return (
       <div>
@@ -65,38 +54,14 @@ class ProductDetails extends React.Component {
         <img src={ thumbnail } alt={ title } />
         {itemDescription ? <p>{itemDescription}</p> : null }
         <AddCartButton product={ product } dataTestId="product-detail-add-to-cart" />
-
-        <form>
-          <label htmlFor="email">
-            E-mail
-            <input
-              name="email"
-              type="text"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label>
-            nota
-            <input />
-          </label>
-          <label htmlFor="comment">
-            comentario
-            <input
-              name="comment"
-              type="text"
-              value={ comment }
-              onChange={ this.handleChange }
-              data-testid="product-detail-evaluation"
-            />
-          </label>
-          <button
-            onClick={ this.handleRatingStorage }
-          >
-            avaliar
-
-          </button>
-        </form>
+        <AvaliationForm
+          handleChange={ this.handleChange }
+          handelClick={ this.handleRatingStorage }
+          email={ email }
+          rating={ rating }
+          comment={ comment }
+        />
+        { ratingsArray.map((rating) => <Avaliation />)}
       </div>
     );
   }
