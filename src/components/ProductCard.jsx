@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../styles/ProductCard.css';
 
@@ -20,16 +21,16 @@ export default class ProductCard extends Component {
     this.savetoLocalStorage();
   }
 
-  savetoLocalStorage=() => {
+  savetoLocalStorage = () => {
     const { productQty } = this.state;
     const { product } = this.props;
     const { title, thumbnail, price } = product;
     const savedProduct = { title, thumbnail, price, productQty };
     cartProducts.push(savedProduct);
     localStorage.setItem('cart-products', JSON.stringify(cartProducts));
-  }
+  };
 
-  addToCartBtn= () => {
+  addToCartBtn = () => {
     const { productQty } = this.state;
     return (
       <div>
@@ -41,39 +42,48 @@ export default class ProductCard extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <p>
-          {`Qtd: ${productQty}`}
-        </p>
+        <p>{`Qtd: ${productQty}`}</p>
       </div>
     );
-  }
+  };
 
-  addToCartfunc= () => {
+  addToCartfunc = () => {
     this.setState((prev) => ({ productQty: prev.productQty + 1 }));
-  }
+  };
 
   render() {
     const {
-      product: { title, thumbnail, price },
+      product: { title, thumbnail, price, id },
     } = this.props;
     return (
       <div className="product-card" data-testid="product">
-        <h3
-          className="product-title"
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/product/${id}`,
+            state: {
+              title,
+              thumbnail,
+              price,
+              id,
+            },
+          } }
         >
-          {title}
-        </h3>
-        <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-        <p>{`R$${price.toFixed(2)}`}</p>
-        {this.addToCartBtn()}
+          <h3 className="product-title">{title}</h3>
+          <img alt={ title } className="product-thumbnail" src={ thumbnail } />
+          <p>{`R$${price.toFixed(2)}`}</p>
+          {this.addToCartBtn()}
+        </Link>
       </div>
     );
   }
 }
+
 ProductCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
