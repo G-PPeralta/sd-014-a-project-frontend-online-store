@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FeedbackForm from '../components/FeedbackForm';
 import { BagPlusFill } from 'react-bootstrap-icons';
+import FeedbackForm from '../components/FeedbackForm';
 import { addToCart } from '../services/cartAPI';
 import CartButton from '../components/CartButton';
 

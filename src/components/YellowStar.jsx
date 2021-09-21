@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class YellowStar extends Component {
   render() {
@@ -17,3 +18,8 @@ export default class YellowStar extends Component {
     );
   }
 }
+
+YellowStar.propTypes = {
+  id: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

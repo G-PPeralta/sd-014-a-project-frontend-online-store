@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class BlankStar extends Component {
   render() {
@@ -21,3 +22,7 @@ export default class BlankStar extends Component {
     );
   }
 }
+BlankStar.propTypes = {
+  id: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
