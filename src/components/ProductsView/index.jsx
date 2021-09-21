@@ -4,10 +4,14 @@ import ProductCard from './ProductCard';
 
 export default class ProductView extends Component {
   render() {
-    const { produtos } = this.props;
+    const { produtos, atualizaCarrinho } = this.props;
     return (
       produtos.map((produto, id) => (
-        <ProductCard key={ id } produto={ produto } />
+        <ProductCard
+          key={ id }
+          produto={ produto }
+          atualizaCarrinho={ atualizaCarrinho }
+        />
       ))
     );
   }
