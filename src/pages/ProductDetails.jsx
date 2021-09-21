@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AddCart from '../components/AddCart';
 import ToShoppingCart from '../components/ToShoppingCart';
+import FormAvaliacao from '../components/FormAvaliacao';
 
 class ProductDetails extends React.Component {
   render() {
@@ -27,6 +28,7 @@ class ProductDetails extends React.Component {
           id={ id }
           thumbnail={ thumbnail }
         />
+        <FormAvaliacao id={ id } />
       </div>
     );
   }

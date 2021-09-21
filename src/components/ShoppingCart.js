@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ItemCart from './ItemCart';
 import '../css/shoppingCart.css';
 import ReturnShop from './ReturnShop';
@@ -90,6 +91,9 @@ export default class ShoppingCart extends Component {
           <p>TOTAL R$ </p>
           <p>{totalPrice}</p>
         </div>
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">Checkout</button>
+        </Link>
       </div>
     );
   }
