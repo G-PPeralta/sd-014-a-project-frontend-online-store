@@ -38,13 +38,15 @@ class main extends React.Component {
             carrinho
           </button>
         </Link>
-        {categories
-          .map((categoria) => (
-            <ListaDeCategorias
-              key={ categoria.id }
-              categoria={ categoria }
-              onClick={ this.categorieHandler }
-            />)) }
+        <ul>
+          {categories
+            .map((categoria) => (
+              <ListaDeCategorias
+                key={ categoria.id }
+                categoria={ categoria }
+                onClick={ this.categorieHandler }
+              />)) }
+        </ul>
         <ListaDeProdutos selected={ selected } />
       </div>
     );
