@@ -8,12 +8,11 @@ class Produto extends Component {
   render() {
     const { produto } = this.props;
     const { id, title, price, thumbnail } = produto;
-    console.log(produto);
 
     return (
       <li
         className="produto-container"
-        ata-testid="product"
+        data-testid="product"
       >
         <Link
           to={ {
