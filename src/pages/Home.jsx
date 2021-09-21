@@ -6,7 +6,6 @@ import ListCategory from '../components/ListCategory';
 import '../temp.css';
 import ProductsCard from '../components/ProductsCard';
 
-
 class Home extends React.Component {
   constructor() {
     super();
