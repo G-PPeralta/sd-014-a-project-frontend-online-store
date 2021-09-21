@@ -33,24 +33,21 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const { handleCategoryChange, value } = this.props;
+    const { handleCategoryChange } = this.props;
     return (
       <aside>
         <h2>Categorias:</h2>
         <div>
           {categories.map(({ id, name }) => (
-            <label key={ id } data-testid="category" htmlFor={ id }>
-              <input
-                type="radio"
-                name="category"
-                id={ id }
-                // Carla ajudou muito aqui! 🙌
-                checked={ id === value }
-                value={ id }
-                onChange={ handleCategoryChange }
-              />
+            // Pessini FTW! Muito obrigado! 🚀
+            <button
+              key={ id }
+              type="button"
+              data-testid="category"
+              onClick={ () => handleCategoryChange(id) }
+            >
               {name}
-            </label>
+            </button>
           ))}
         </div>
       </aside>
@@ -60,7 +57,6 @@ class Categories extends React.Component {
 
 Categories.propTypes = {
   handleCategoryChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
 };
 
 export default Categories;

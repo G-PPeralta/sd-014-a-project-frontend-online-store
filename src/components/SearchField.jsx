@@ -12,28 +12,18 @@ class SearchField extends Component {
       category: 'MLB5672',
       products: [],
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
-  componentDidMount() {
-    // this.fetchProducts();
-  }
-
-  handleChange({ target }) {
+  handleChange = ({ target }) => {
     const { name, value } = target;
-
     this.setState({
       [name]: value,
-    }, () => { this.fetchProducts(); });
+    });
   }
 
-  async fetchProducts() {
-    const { searchTerm, category } = this.state;
-    // console.log('term => ', searchTerm, 'category =>', category);
+  fetchProducts = async (category) => {
+    const { searchTerm } = this.state;
     const products = await getProductsFromCategoryAndQuery(category, searchTerm);
-    // console.log('products', products);
     this.setState({
       products: products.results,
     });
@@ -43,11 +33,11 @@ class SearchField extends Component {
     const { searchTerm, products, category } = this.state;
     return (
       <div>
-        <Categories handleCategoryChange={ this.handleChange } value={ category } />
+        <Categories handleCategoryChange={ this.fetchProducts } />
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.fetchProducts }
+          onClick={ () => this.fetchProducts(category) }
         >
           Buscar
         </button>
