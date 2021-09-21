@@ -29,7 +29,7 @@ class AvaliationForm extends React.Component {
           />
         </label>
         <label htmlFor="rating">
-          Rating
+          Nota:
           <select select={ rating } onChange={ handleChange } name="rating">
             <option value="0">0</option>
             <option value="1">1</option>
@@ -61,14 +61,12 @@ class AvaliationForm extends React.Component {
 AvaliationForm.propTypes = {
   comment: PropTypes.string,
   email: PropTypes.string,
-  rating: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 
 AvaliationForm.defaultProps = {
   comment: '',
-  rating: '',
   email: '',
 };
 
