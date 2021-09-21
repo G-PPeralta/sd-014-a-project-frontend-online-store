@@ -8,6 +8,7 @@ const cartProducts = [];
 export default class ProductDetail extends Component {
   constructor(props) {
     super(props);
+    // console.log(props.location.state);
     this.state = {
       product: props.location.state,
       productQty: 0,
@@ -16,24 +17,56 @@ export default class ProductDetail extends Component {
   }
 
   componentDidMount() {
-    JSON.parse(localStorage.getItem('cart-products'));
+    const {
+      product: { id },
+    } = this.state;
+    const storage = JSON.parse(localStorage.getItem('cart-products'));
+    if (storage) {
+      const product = storage.find((item) => item.id === id);
+      if (product) {
+        this.updateProductQty(product.productQty);
+      }
+    }
   }
 
   componentDidUpdate() {
-    this.savetoLocalStorage();
+    const { productQty } = this.state;
+    this.savetoLocalStorage(productQty);
   }
 
-  savetoLocalStorage = () => {
-    const { productQty, product } = this.state;
-    const { title, thumbnail, price } = product;
-    const savedProduct = { title, thumbnail, price, productQty };
-    cartProducts.push(savedProduct);
-    localStorage.setItem('cart-products', JSON.stringify(cartProducts));
+  updateProductQty = (productQty) => this.setState({ productQty });
+  // Can't use setState in componentDidMount
+
+  savetoLocalStorage = (newQty) => {
+    const storageKey = 'cart-products';
+
+    const {
+      product: { id, title, thumbnail, price },
+    } = this.state;
+    const { productQty } = this.state;
+
+    const savedProduct = { id, title, thumbnail, price, productQty: newQty };
+
+    const storage = JSON.parse(localStorage.getItem(storageKey));
+
+    if (productQty === 1) {
+      if (storage) {
+        const newStorage = [...storage, savedProduct];
+        localStorage.setItem(storageKey, JSON.stringify(newStorage));
+      } else {
+        cartProducts.push(savedProduct);
+        localStorage.setItem(storageKey, JSON.stringify(cartProducts));
+      }
+    } else {
+      storage.forEach((item) => {
+        if (item.id === id) item.productQty = newQty;
+      });
+      localStorage.setItem(storageKey, JSON.stringify(storage));
+    }
   };
 
   addToCartBtn = () => {
-    const { product } = this.state;
-    const { productQty } = product;
+    const { productQty } = this.state;
     return (
       <div>
         <button
