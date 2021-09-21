@@ -8,10 +8,15 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
+      category: '',
       product: '',
       productList: [],
       requisition: false,
     };
+  }
+
+  componentDidMount() {
+    this.fetchGetProducts();
   }
 
   handleChange = ({ target }) => {
@@ -19,11 +24,20 @@ class Home extends React.Component {
     this.setState({ product: value });
   }
 
-  handleClick = async () => {
-    const { product } = this.state;
-    const productList = await getProductsFromCategoryAndQuery(null, product);
+  fetchGetProducts = async (category, product) => {
+    const productList = await getProductsFromCategoryAndQuery(category, product);
+    console.log(productList);
     this.setState({ productList: productList.results,
       requisition: true });
+  }
+
+  handleClick = async () => {
+    const { product, category } = this.state;
+    this.fetchGetProducts(category, product);
+  }
+
+  getCategory = (category) => {
+    this.setState({ category });
   }
 
   render() {
@@ -51,7 +65,7 @@ class Home extends React.Component {
         <Link to="/ShoppingCart" data-testid="shopping-cart-button">
           <button type="button">Adicionar icone do carrinho aqui</button>
         </Link>
-        <CategoriesList />
+        <CategoriesList category={ this.getCategory } />
         <Search productList={ productList } requisition={ requisition } />
       </div>
     );
