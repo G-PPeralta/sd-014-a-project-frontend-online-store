@@ -5,6 +5,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import Cart from './components/Cart';
 import './productStyles.css';
 import Home from './components/Home';
+import DetalhesProduto from './components/DetalhesProduto';
 // comentario em qlq lugar
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route path="/shopping-cart" component={ Cart } />
+          <Route path="/detalhesproduto/:id" component={ DetalhesProduto } />
         </Switch>
       </BrowserRouter>
     </div>
