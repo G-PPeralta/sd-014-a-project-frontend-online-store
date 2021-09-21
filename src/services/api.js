@@ -14,9 +14,9 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   try {
     const fetchAPI = await
     fetch(`${URL}/search?category=${categoryId}&q=$${query}`);
-    // const url = `?q=${QUERY}`;
     const search = await fetchAPI.json();
-    return search.results;
+    const results = await search;
+    return results;
   } catch (error) {
     console.log(error);
   }
