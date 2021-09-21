@@ -17,13 +17,13 @@ class AddCarrinho extends React.Component {
   }
 
   render() {
-    const { produto } = this.props;
+    const { produto, testid } = this.props;
 
     return (
       <button
         type="button"
         className="bt-container"
-        data-testid="product-add-to-cart"
+        data-testid={ testid }
         onClick={ () => this.addLocalStorage(produto) }
       >
         Adicionar
@@ -34,6 +34,7 @@ class AddCarrinho extends React.Component {
 
 AddCarrinho.propTypes = {
   produto: PropTypes.objectOf(PropTypes.any).isRequired,
+  testid: PropTypes.string.isRequired,
 };
 
 export default AddCarrinho;

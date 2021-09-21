@@ -34,7 +34,7 @@ class Produto extends Component {
           </h2>
           <p className="nome-produto">{ title }</p>
         </div>
-        <AddCarrinho produto={ produto } />
+        <AddCarrinho produto={ produto } testid="product-add-to-cart" />
       </li>
     );
   }
