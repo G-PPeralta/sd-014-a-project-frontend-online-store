@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Categories from './Categories';
 import ProductList from './ProductList';
 
 class SearchField extends Component {
@@ -8,37 +9,35 @@ class SearchField extends Component {
 
     this.state = {
       searchTerm: '',
+      category: 'MLB5672',
       products: [],
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange({ target }) {
+  handleChange = ({ target }) => {
     const { name, value } = target;
-
     this.setState({
       [name]: value,
     });
   }
 
-  async handleClick() {
+  fetchProducts = async (category) => {
     const { searchTerm } = this.state;
-    const products = await getProductsFromCategoryAndQuery('MLB1196', searchTerm);
+    const products = await getProductsFromCategoryAndQuery(category, searchTerm);
     this.setState({
       products: products.results,
     });
   }
 
   render() {
-    const { searchTerm, products } = this.state;
+    const { searchTerm, products, category } = this.state;
     return (
       <div>
+        <Categories handleCategoryChange={ this.fetchProducts } />
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.handleClick }
+          onClick={ () => this.fetchProducts(category) }
         >
           Buscar
         </button>
