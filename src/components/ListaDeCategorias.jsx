@@ -5,8 +5,9 @@ class ListaDeCategorias extends React.Component {
   render() {
     const { categoria, onClick } = this.props;
     return (
-      <li data-testid="category">
+      <li>
         <button
+          data-testid="category"
           type="button"
           value={ categoria.id }
           onClick={ onClick }
