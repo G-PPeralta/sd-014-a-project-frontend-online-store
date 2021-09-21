@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
@@ -59,12 +60,12 @@ class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
 
-        <li
+        <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"
         >
           Ir carrinho de compras
-        </li>
+        </Link>
 
         <section>
           {categories.map((category) => ( // função do requisito 4
