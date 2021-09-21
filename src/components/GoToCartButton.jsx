@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 
-class CartButton extends Component {
+class GoToCartButton extends Component {
   render() {
     return (
       <Link
@@ -44,4 +44,4 @@ class CartButton extends Component {
   }
 }
 
-export default CartButton;
+export default GoToCartButton;

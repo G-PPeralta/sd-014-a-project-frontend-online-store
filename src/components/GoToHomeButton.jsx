@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-class HomeButton extends Component {
+class GoToHomeButton extends Component {
   render() {
     return (
       <Link
@@ -15,4 +15,4 @@ class HomeButton extends Component {
   }
 }
 
-export default HomeButton;
+export default GoToHomeButton;

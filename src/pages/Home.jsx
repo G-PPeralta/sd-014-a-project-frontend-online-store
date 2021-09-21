@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
-import CartButton from '../components/CartButton';
+import GoToCartButton from '../components/GoToCartButton';
 import Categories from '../components/Categories';
 import Message from '../components/Message';
 import ProductList from '../components/ProductList';
@@ -72,7 +72,7 @@ class Home extends React.Component {
               <BsSearch />
             </button>
           </div>
-          <CartButton />
+          <GoToCartButton />
         </Header>
         <main
           className="d-flex my-3 m-auto"
