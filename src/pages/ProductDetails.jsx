@@ -43,15 +43,18 @@ class ProductDetails extends Component {
         price,
         attributes,
       },
-    }, () => {
-      const { product } = this.state;
-      console.log(product);
     });
   }
 
   render() {
+    const { product: { title, thumbnail, price } } = this.state;
     return (
-      <h2>Product Details</h2>
+      <div>
+        <h2>Product Details</h2>
+        <h4 data-testid="product-detail-name">{ title }</h4>
+        <img src={ thumbnail } alt={ title } />
+        <p>{ price }</p>
+      </div>
     );
   }
 }
