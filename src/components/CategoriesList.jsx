@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class CategoriesList extends Component {
@@ -50,5 +50,9 @@ class CategoriesList extends Component {
     );
   }
 }
+
+CategoriesList.propTypes = {
+  category: PropTypes.func.isRequired,
+};
 
 export default CategoriesList;
