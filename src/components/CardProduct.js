@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import saveLocalStorage from '../services/localStorage';
 
 export default class CardProduct extends Component {
-  handleClick=(product) => {
-    const quantityProd = product;
-    quantityProd.quantity = 1;
-    if (localStorage.cart) {
-      const { cart } = localStorage;
-      const cartJSON = JSON.parse(cart);
-      const cartUpDate = cartJSON.concat(quantityProd);
-      localStorage.setItem('cart', JSON.stringify(cartUpDate));
-    } else {
-      localStorage.setItem('cart', JSON.stringify([quantityProd]));
-    }
-  }
-
   render() {
     const { product } = this.props;
     const { thumbnail, title, price, id } = product;
@@ -42,7 +30,7 @@ export default class CardProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => { this.handleClick(product); } }
+          onClick={ () => { saveLocalStorage(product); } }
         >
           Adicionar ao Carrinho
         </button>
