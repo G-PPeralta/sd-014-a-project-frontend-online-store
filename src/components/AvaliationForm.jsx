@@ -2,8 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class AvaliationForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      rating: '0',
+    };
+  }
+
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   render() {
-    const { handleClick, handleChange, email, comment, rating } = this.props;
+    const { rating } = this.state;
+    const { handleClick, handleChange, email, comment } = this.props;
     return (
       <form>
         <label htmlFor="email">
@@ -15,10 +28,17 @@ class AvaliationForm extends React.Component {
             onChange={ handleChange }
           />
         </label>
-        {/* <label>
-          nota
-          <input />
-        </label> */}
+        <label htmlFor="rating">
+          Rating
+          <select select={ rating } onChange={ handleChange } name="rating">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
         <label htmlFor="comment">
           comentario
           <textarea
@@ -40,15 +60,15 @@ class AvaliationForm extends React.Component {
 
 AvaliationForm.propTypes = {
   comment: PropTypes.string,
-  rating: PropTypes.number,
   email: PropTypes.string,
+  rating: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 
 AvaliationForm.defaultProps = {
   comment: '',
-  rating: 0,
+  rating: '',
   email: '',
 };
 

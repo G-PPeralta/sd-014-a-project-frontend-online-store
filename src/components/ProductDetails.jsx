@@ -4,6 +4,7 @@ import AddCartButton from './AddCartButton';
 import CartButton from './CartButton';
 import AvaliationForm from './AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
+import RenderAvaliation from './RenderAvaliation';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -45,8 +46,9 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product, email, rating, comment } = this.state;
+    const { product, email, rating, comment, ratingsArray } = this.state;
     const { title, price, thumbnail, itemDescription } = product;
+
     return (
       <div>
         <CartButton />
@@ -62,7 +64,13 @@ class ProductDetails extends React.Component {
           rating={ rating }
           comment={ comment }
         />
-        {/* { ratingsArray.map((rating) => <Avaliation />)} */}
+        { ratingsArray.map((user) => (
+          <RenderAvaliation
+            rating={ rating }
+            key={ user.email }
+            storedEmail={ user.email }
+            storedComment={ user.comment }
+          />))}
       </div>
     );
   }
