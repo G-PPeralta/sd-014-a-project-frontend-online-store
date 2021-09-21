@@ -10,9 +10,16 @@ export default class ProductCard extends Component {
     addToCart(product);
   }
 
+  renderFreeShipping() {
+    return (
+      <h2 data-testid="free-shipping">FRETE GRÁTIS!</h2>
+    );
+  }
+
   render() {
     const {
-      product: { title, thumbnail, price, id },
+      // eslint-disable-next-line camelcase
+      product: { title, thumbnail, price, id, shipping: { free_shipping } },
     } = this.props;
     return (
       <div data-testid="product">
@@ -27,6 +34,8 @@ export default class ProductCard extends Component {
         </Link>
         <img src={ thumbnail } alt={ `foto do produto ${title}` } />
         <h2>{`preço: ${price}`}</h2>
+        {/* eslint-disable-next-line camelcase */}
+        { free_shipping && this.renderFreeShipping()}
         <button
           type="button"
           className="btn btn-outline-primary"
@@ -46,5 +55,8 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
 };
