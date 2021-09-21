@@ -29,6 +29,7 @@ class AvaliationForm extends React.Component {
           />
         </label>
         <input
+          value="Avaliar"
           type="submit"
           onClick={ handleClick }
         />

@@ -27,10 +27,11 @@ class ProductDetails extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleRatingStorage = () => {
+  handleRatingStorage = (event) => {
+    event.preventDefault();
     const { email, rating, comment } = this.state;
     this.setState((lastState) => (
-      { ratingsArray: [...lastState, { email, rating, comment }] }));
+      { ratingsArray: [...lastState.ratingsArray, { email, rating, comment }] }));
   }
 
   async getProduct() {
@@ -44,7 +45,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product, email, rating, comment, ratingsArray } = this.state;
+    const { product, email, rating, comment } = this.state;
     const { title, price, thumbnail, itemDescription } = product;
     return (
       <div>
@@ -56,12 +57,12 @@ class ProductDetails extends React.Component {
         <AddCartButton product={ product } dataTestId="product-detail-add-to-cart" />
         <AvaliationForm
           handleChange={ this.handleChange }
-          handelClick={ this.handleRatingStorage }
+          handleClick={ this.handleRatingStorage }
           email={ email }
           rating={ rating }
           comment={ comment }
         />
-        { ratingsArray.map((rating) => <Avaliation />)}
+        {/* { ratingsArray.map((rating) => <Avaliation />)} */}
       </div>
     );
   }
