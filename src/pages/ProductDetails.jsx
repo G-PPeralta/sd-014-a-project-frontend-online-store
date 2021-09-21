@@ -10,8 +10,7 @@ class ProductDetails extends Component {
 
   render() {
     const { location: { state: { product: { title, price, thumbnail,
-      // eslint-disable-next-line camelcase
-      shipping: { free_shipping } } } } } = this.props;
+      shipping: { free_shipping: freeShipping } } } } } = this.props;
     return (
       <div>
         <h2 data-testid="product-detail-name">{title}</h2>
@@ -20,8 +19,7 @@ class ProductDetails extends Component {
           R$
           {price}
         </h3>
-        {/* eslint-disable-next-line camelcase */}
-        { free_shipping && this.renderFreeShipping() }
+        { freeShipping && this.renderFreeShipping() }
         <button type="button"> Comprar </button>
       </div>
     );

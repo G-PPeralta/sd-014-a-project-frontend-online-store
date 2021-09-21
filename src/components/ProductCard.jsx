@@ -18,8 +18,7 @@ export default class ProductCard extends Component {
 
   render() {
     const {
-      // eslint-disable-next-line camelcase
-      product: { title, thumbnail, price, id, shipping: { free_shipping } },
+      product: { title, thumbnail, price, id, shipping: { free_shipping: freeShipping } },
     } = this.props;
     return (
       <div data-testid="product">
@@ -34,8 +33,7 @@ export default class ProductCard extends Component {
         </Link>
         <img src={ thumbnail } alt={ `foto do produto ${title}` } />
         <h2>{`preço: ${price}`}</h2>
-        {/* eslint-disable-next-line camelcase */}
-        { free_shipping && this.renderFreeShipping()}
+        { freeShipping && this.renderFreeShipping()}
         <button
           type="button"
           className="btn btn-outline-primary"
