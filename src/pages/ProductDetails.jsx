@@ -30,7 +30,7 @@ class ProductDetails extends React.Component {
           id={ id }
           thumbnail={ thumbnail }
         />
-        <FormAvaliacao />
+        <FormAvaliacao id={ id } />
       </div>
     );
   }
