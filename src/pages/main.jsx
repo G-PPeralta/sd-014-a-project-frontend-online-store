@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ListaDeCategorias from '../components/ListaDeCategorias';
 import { getCategories } from '../services/api';
+import ListaDeProdutos from '../components/ListaDeProdutos';
 
 class main extends React.Component {
   constructor() {
@@ -35,6 +36,7 @@ class main extends React.Component {
               key={ categoria.id }
               categoria={ categoria }
             />)) }
+        <ListaDeProdutos />
       </div>
     );
   }
