@@ -44,3 +44,5 @@ export const decreaseProduct = (product) => {
   const newProducts = [...filteredProducts, newExpectedProduct];
   saveProducts(newProducts);
 };
+
+export const getQuantityOfProducts = () => null;
