@@ -43,10 +43,6 @@ class Home extends React.Component {
     });
   }
 
-  handleSubmit = () => {
-
-  }
-
   getProductsFromCategoryAndQuery = async (category, query) => {
     const productList = await getProductsFromCategoryAndQuery(category, query);
     this.setState({
@@ -71,7 +67,7 @@ class Home extends React.Component {
           <BtnCart
             query={ query }
             handleSubmit={ this.getProductsFromCategoryAndQuery }
-            category={ selectedId }
+            selectedId={ selectedId }
           />
         </div>
         <div className="main-conteiner">
