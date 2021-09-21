@@ -5,9 +5,19 @@ class ListCategory extends Component {
   render() {
     const { category: { name, id }, onClick } = this.props;
     return (
-      <li data-testid="category">
-        { name }
-        <input name="item-list" type="radio" onClick={ () => onClick(id) } />
+      <li>
+        <label
+          data-testid="category"
+          htmlFor="category"
+        >
+          { name }
+          <input
+            name="item-list"
+            type="radio"
+            onClick={ () => onClick(id) }
+            id="category"
+          />
+        </label>
       </li>
     );
   }
