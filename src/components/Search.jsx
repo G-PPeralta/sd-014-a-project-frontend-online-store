@@ -4,8 +4,8 @@ import CartButton from './CartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Search extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       categories: [],
       category: '',
@@ -37,6 +37,12 @@ class Search extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  handleClick = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.key });
+    this.getProduct();
+  }
+
   renderCategories() {
     const { categories } = this.state;
     return (
@@ -46,8 +52,9 @@ class Search extends React.Component {
             key={ cat.id }
             data-testid="category"
             name="category"
-            onClick={ this.handleChange }
+            onClick={ this.handleClick }
             value={ cat.name }
+            type="button"
           />
         ))}
       </div>
