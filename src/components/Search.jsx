@@ -8,6 +8,7 @@ class Search extends React.Component {
     super();
     this.state = {
       categories: [],
+      category: '',
       products: [],
       isLoading: true,
       isLoadingProducts: false,
@@ -25,15 +26,15 @@ class Search extends React.Component {
   }
 
   getProduct = async () => {
-    await this.setState({ isLoadingProducts: true });
-    const { inputSearch } = this.state;
-    const products = await getProductsFromCategoryAndQuery('', inputSearch);
-    await this.setState({ products: products.results, isLoadingProducts: false });
+    this.setState({ isLoadingProducts: true });
+    const { inputSearch, category } = this.state;
+    const products = await getProductsFromCategoryAndQuery(category, inputSearch);
+    this.setState({ products: products.results, isLoadingProducts: false });
   }
 
   handleChange = (event) => {
     event.preventDefault();
-    this.setState({ inputSearch: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   renderCategories() {
@@ -41,7 +42,13 @@ class Search extends React.Component {
     return (
       <div>
         {categories.map((cat) => (
-          <p key={ cat.id } data-testid="category">{ cat.name }</p>
+          <input
+            key={ cat.id }
+            data-testid="category"
+            name="category"
+            onClick={ this.handleChange }
+            value={ cat.name }
+          />
         ))}
       </div>
     );
@@ -79,7 +86,7 @@ class Search extends React.Component {
           <input
             type="text"
             placeholder="Pesquisa Aqui"
-            name="barraDePesquisa"
+            name="inputSearch"
             value={ inputSearch }
             onChange={ this.handleChange }
             data-testid="query-input"
