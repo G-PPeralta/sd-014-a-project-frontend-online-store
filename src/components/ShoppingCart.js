@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -40,6 +41,9 @@ export default class ShoppingCart extends Component {
             <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
           </div>
         ))}
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">Checkout</button>
+        </Link>
       </div>
     );
   }
