@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import * as api from '../services/shoppingCartAPI';
 
@@ -23,6 +24,12 @@ export default class Cart extends React.Component {
             <div data-testid="shopping-cart-product-quantity">{ item.shopping_cart }</div>
           </div>
         )) }
+        <Link
+          data-testid="checkout-products"
+          to={ { pathname: '/checkout' } }
+        >
+          Finalize a compra
+        </Link>
       </div>
     );
   }
