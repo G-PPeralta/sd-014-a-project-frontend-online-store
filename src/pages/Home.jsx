@@ -82,10 +82,16 @@ class Home extends Component {
         </section>
         <div>
           {products && products.map((product) => ( // função do requisito 5
-            <div key={ product.id } data-testid="product">
+            <div productInfo={ product } key={ product.id } data-testid="product">
               <img src={ product.thumbnail } alt="foto-produto" />
               <h2>{product.title}</h2>
               <p>{product.price}</p>
+              <Link
+                to={ { pathname: `/product/${product.id}`, state: { product } } }
+                data-testid="product-detail-link"
+              >
+                Link
+              </Link>
             </div>))}
         </div>
       </main>
