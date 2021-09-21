@@ -17,6 +17,7 @@ class Home extends React.Component {
     this.getCategoryAPI = this.getCategoryAPI.bind(this);
     this.changeSelectedId = this.changeSelectedId.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -43,8 +44,9 @@ class Home extends React.Component {
     });
   }
 
-  getProductsFromCategoryAndQuery = async (category, query) => {
-    const productList = await getProductsFromCategoryAndQuery(category, query);
+  handleSearch = async (category, query) => {
+    const productsJson = await getProductsFromCategoryAndQuery(category, query);
+    const productList = await productsJson.results;
     this.setState({
       products: productList,
     }, () => {
@@ -67,7 +69,7 @@ class Home extends React.Component {
           />
           <BtnCart
             query={ query }
-            handleSubmit={ this.getProductsFromCategoryAndQuery }
+            handleSubmit={ this.handleSearch }
             selectedId={ selectedId }
             data-testid="query-button"
           />
