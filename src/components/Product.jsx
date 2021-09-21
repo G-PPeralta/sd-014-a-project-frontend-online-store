@@ -5,15 +5,16 @@ class Product extends React.Component {
   render() {
     const { product } = this.props;
     return (
-      <div data-testid="product">
+      <nav data-testid="product">
         <h1>
           { product.title }
         </h1>
-        <img src={ product.thumbnail } alt="" />
+        <img src={ product.thumbnail } alt="" data-testeid="product-detail-link" />
         <p>
           { product.price }
         </p>
-      </div>
+        <hr />
+      </nav>
     );
   }
 }
