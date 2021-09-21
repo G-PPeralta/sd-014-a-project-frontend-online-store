@@ -2,8 +2,8 @@ import React from 'react';
 import BtnCart from '../components/BtnCart';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ListCategory from '../components/ListCategory';
-// import ProductsCard from '../components/ProductsCard';
 import '../temp.css';
+import ProductsCard from '../components/ProductsCard';
 
 class Home extends React.Component {
   constructor() {
@@ -54,7 +54,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categorias, query, selectedId } = this.state;
+    const { categorias, query, selectedId, products } = this.state;
     return (
       <main>
         <div className="input">
@@ -63,11 +63,13 @@ class Home extends React.Component {
             placeholder="Digite um produto"
             value={ query }
             onChange={ this.handleChange }
+            data-testid="query-input"
           />
           <BtnCart
             query={ query }
             handleSubmit={ this.getProductsFromCategoryAndQuery }
             selectedId={ selectedId }
+            data-testid="query-button"
           />
         </div>
         <div className="main-conteiner">
@@ -84,7 +86,11 @@ class Home extends React.Component {
           </fieldset>
           {/* Direita com Produtos */}
           <fieldset className="conteiner-right">
-            <h1>DIREITA</h1>
+            {(products.length !== 0) ? products.map((product) => (<ProductsCard
+              key={ product.id }
+              product={ product }
+              data-testid="product"
+            />)) : <p>Nenhum produto foi encontrado</p> }
           </fieldset>
         </div>
       </main>
