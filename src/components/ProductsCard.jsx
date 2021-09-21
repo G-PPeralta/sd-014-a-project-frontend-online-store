@@ -7,11 +7,13 @@ class ProductsCard extends Component {
     const {
       product: { title, price, thumbnail },
       id,
+      query,
+      categoryId,
     } = this.props;
     return (
       <li data-testid="product">
         <Link
-          to={ `/product-details/${id}` }
+          to={ `/product-details/${id}&${query}&${categoryId}` }
           data-testid="product-detail-link"
         >
           <h1>{ title }</h1>
@@ -30,6 +32,8 @@ ProductsCard.propTypes = {
     thumbnail: PropTypes.string.isRequired,
   }).isRequired,
   id: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
+  categoryId: PropTypes.string.isRequired,
 };
 
 export default ProductsCard;

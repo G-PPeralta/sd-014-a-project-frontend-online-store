@@ -98,6 +98,8 @@ class Home extends React.Component {
               key={ product.id }
               product={ product }
               id={ product.id }
+              query={ query }
+              categoryId={ selectedId }
             />)) : <p>Nenhum produto foi encontrado</p> }
           </fieldset>
         </div>
