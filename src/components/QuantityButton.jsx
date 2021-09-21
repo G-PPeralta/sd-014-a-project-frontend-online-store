@@ -4,7 +4,7 @@ import { addProduct, decreaseProduct, removeProduct } from '../services/shopCart
 
 class QuantityButton extends React.Component {
   render() {
-    const { product, handleQuantityButtonsClick } = this.props;
+    const { product, handleQuantityButtonsClick, conditionQuantity } = this.props;
     return (
       <div className="w-100">
         <button
@@ -33,6 +33,7 @@ class QuantityButton extends React.Component {
           className="w-50 btn btn-primary rounded-0"
           data-testid="product-increase-quantity"
           name="increase"
+          disabled={ conditionQuantity }
           onClick={ () => {
             addProduct(product);
             handleQuantityButtonsClick('increase', product);

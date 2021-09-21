@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { getQuantityOfProducts } from '../services/shopCartManag';
 
-class CartButton extends Component {
+class GoToCartButton extends Component {
   render() {
     return (
       <Link
@@ -21,9 +22,10 @@ class CartButton extends Component {
           fs-6
           text-dark
           "
+          data-testid="shopping-cart-size"
           style={ { userSelect: 'none' } }
         >
-          1
+          { getQuantityOfProducts() }
         </div>
         <div
           className="
@@ -44,4 +46,4 @@ class CartButton extends Component {
   }
 }
 
-export default CartButton;
+export default GoToCartButton;

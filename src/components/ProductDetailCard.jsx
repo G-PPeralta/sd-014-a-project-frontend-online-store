@@ -6,7 +6,7 @@ import AddToCartButton from './AddToCartButton';
 
 class ProductDetailCard extends React.Component {
   render() {
-    const { product, homeIs } = this.props;
+    const { product, homeIs, actualizeQuantity } = this.props;
     const { title, price, thumbnail, attributes } = product;
     return (
       <FadeIn transitionDuration="1000">
@@ -27,7 +27,11 @@ class ProductDetailCard extends React.Component {
                   </li>
                 ))}
               </Card.Text>
-              <AddToCartButton product={ product } homeIs={ homeIs } />
+              <AddToCartButton
+                actualizeQuantity={ actualizeQuantity }
+                product={ product }
+                homeIs={ homeIs }
+              />
             </Card.Body>
           </Card>
           <Card.Footer>
@@ -42,20 +46,7 @@ class ProductDetailCard extends React.Component {
 }
 
 ProductDetailCard.propTypes = {
-  product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    attributes: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      value_name: PropTypes.string.isRequired,
-    })).isRequired,
-    shipping: PropTypes.shape({
-      free_shipping: PropTypes.bool.isRequired,
-    }).isRequired,
-  }).isRequired,
-  homeIs: PropTypes.bool.isRequired,
-};
+  product: PropTypes.object,
+}.isRequired;
 
 export default ProductDetailCard;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import HomeButton from '../components/HomeButton';
+import GoToHomeButton from '../components/GoToHomeButton';
+import GoToPaymentButton from '../components/GoToPaymentButton';
 import { getProducts } from '../services/shopCartManag';
 import ProductList from '../components/ProductList';
 import Header from '../components/Header';
@@ -60,7 +61,10 @@ class Cart extends Component {
       >
         <Header>
           <h1 className="text-white">Carrinho</h1>
-          <HomeButton />
+          <div>
+            <GoToHomeButton />
+            <GoToPaymentButton />
+          </div>
         </Header>
         <main
           className="d-flex my-3 m-auto"
