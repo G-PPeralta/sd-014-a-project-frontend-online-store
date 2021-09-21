@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Product extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Product extends Component {
 Product.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      product,
+      product: PropTypes.objectOf(PropTypes.any).isRequired,
     }).isRequired,
   }).isRequired,
 };
