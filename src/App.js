@@ -5,6 +5,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import Cart from './components/Cart';
 import './productStyles.css';
 import Home from './components/Home';
+// comentario em qlq lugar
 
 function App() {
   return (
