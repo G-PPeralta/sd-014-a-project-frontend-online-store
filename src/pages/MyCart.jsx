@@ -9,7 +9,7 @@ class MyCart extends React.Component {
       inCart: [],
     };
   }
-
+// ye
   componentDidMount() {
     this.getProducts();
   }
