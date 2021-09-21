@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard';
@@ -40,13 +39,8 @@ class ListaDeProdutos extends Component {
           ? <p> Nenhum produto foi encontrado </p>
           : produtos
             .map((produto) => (
-              <Link
-                data-testid="product-detail-link"
-                key={ produto.id }
-                to={ `/products/${produto.category_id}/${produto.id}` }
-              >
-                <ProductCard produto={ produto } />
-              </Link>)) }
+              <ProductCard key={ produto.id } produto={ produto } />
+            )) }
       </div>
     );
   }
