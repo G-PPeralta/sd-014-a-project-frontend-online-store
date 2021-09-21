@@ -17,21 +17,22 @@ class ProductDetails extends React.Component {
 
   async getProduct() {
     const { match: { params: { category, title, id } } } = this.props;
-    const result = (await getProductsFromCategoryAndQuery(category, title)).results;
-    if (result[0].id === id) {
-      return this.setState({ product: result[0] });
+    const result = (await getProductsFromCategoryAndQuery(category, title)).results[0];
+    const idSearch = getProductById(id);
+    if (result.id === id) {
+      return this.setState({ product: result });
     }
-    const idSearch = await getProductById(id);
-    this.setState({ product: idSearch });
+    this.setState({ product: await idSearch });
   }
 
   render() {
-    const { product: { title, price, thumbnail } } = this.state;
+    const { product: { title, price, thumbnail, itemDescription } } = this.state;
     return (
       <div>
         <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
+        {itemDescription ? <p>{itemDescription}</p> : null }
       </div>
     );
   }
