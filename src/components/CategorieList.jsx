@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class CategorieList extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, selectedCategories } = this.props;
 
     return (
       <section>
@@ -12,9 +12,10 @@ export default class CategorieList extends Component {
             <label htmlFor={ id } data-testid="category">
               <input
                 type="radio"
-                name="categorySearch"
+                name="category"
                 id={ id }
-                value={ id }
+                value={ name }
+                onChange={ selectedCategories } // Requisito 6: função que será chamada ao selecionar a categoria
               />
               { name }
             </label>
@@ -30,4 +31,5 @@ CategorieList.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
+  selectedCategories: PropTypes.func.isRequired,
 };

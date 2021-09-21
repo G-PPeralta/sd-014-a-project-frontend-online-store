@@ -5,17 +5,18 @@ import CategorieList from '../components/CategorieList';
 import ProductList from '../components/ProductList';
 
 export default class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       categories: [],
       queryInput: '',
       list: [],
-      // submit: false,
+      category: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.selectedCategories = this.selectedCategories.bind(this);
   }
 
   componentDidMount() {
@@ -28,11 +29,11 @@ export default class Home extends Component {
     this.setState({ [name]: value });
   }
 
-  // Requisito 5: faz requisição para a API de acordo com o que foi digitado no input (queryInput)
+  // Requisito 5: faz requisição para a API de acordo com o que foi digitado no input (category, queryInput)
   // Após isso, salva o resultado em list
   async handleClick() {
-    const { queryInput } = this.state;
-    const { results } = await getProductsFromCategoryAndQuery('', queryInput);
+    const { category, queryInput } = this.state;
+    const { results } = await getProductsFromCategoryAndQuery(category, queryInput);
     console.log(results);
     this.setState({
       list: results,
@@ -42,6 +43,14 @@ export default class Home extends Component {
   getCategoriesFromApi = async () => {
     const categories = await getCategories();
     this.setState({ categories });
+  }
+
+  // Requisito 6: salva em category o id da categoria selecionada
+  selectedCategories({ target: { id } }) {
+    this.setState({
+      category: id,
+    });
+    this.handleClick();
   }
 
   render() {
@@ -68,11 +77,14 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategorieList categories={ categories } />
+        <CategorieList
+          categories={ categories }
+          selectedCategories={ this.selectedCategories } // Requisito 6
+        />
 
         {/* Requisito 5: gera uma lista com todos os produtos que possuem
         a informação digitada no input (list) */}
-        { list && <ProductList list={ list } /> }
+        <ProductList list={ list } />
       </div>
     );
   }
