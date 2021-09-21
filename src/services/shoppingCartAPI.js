@@ -1,15 +1,18 @@
 const SHOPPING_CART_KEY = 'online_store_cart';
+const NOT_FOUND = -1;
 
 if (!JSON.parse(localStorage.getItem(SHOPPING_CART_KEY))) {
   localStorage.setItem(SHOPPING_CART_KEY, JSON.stringify([]));
 }
 export const readShoppingCart = () => JSON.parse(localStorage.getItem(SHOPPING_CART_KEY));
 
+export const getCartSize = () => readShoppingCart()
+  .reduce((total, item) => total + item.shopping_cart, 0);
+
 const saveShoppingCart = (items) => localStorage
   .setItem(SHOPPING_CART_KEY, JSON.stringify(items));
 
 export const addItemToCart = (item) => {
-  const NOT_FOUND = -1;
   if (item) {
     const items = readShoppingCart();
     const index = items.findIndex(({ id }) => id === item.id);
