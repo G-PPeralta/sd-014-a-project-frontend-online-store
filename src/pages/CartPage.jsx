@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CartButton from '../components/CartButton';
 import CartItem from '../components/CartItem';
 import { readCartItems } from '../services/cartAPI';
 
@@ -35,7 +34,6 @@ export default class CartPage extends Component {
     const { cartItems } = this.state;
     return (
       <div>
-        <CartButton />
         {cartItems.length > 0
           ? this.renderCartItems(cartItems)
           : this.renderEmptyCart()}

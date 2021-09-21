@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { BagPlusFill } from 'react-bootstrap-icons';
+import { addToCart } from '../services/cartAPI';
+import CartButton from '../components/CartButton';
 
 class ProductDetails extends Component {
+  handleClick = () => {
+    const { location: { state: { product } } } = this.props;
+    addToCart(product);
+  }
+
   render() {
     const { location: { state: { product: { title, price, thumbnail } } } } = this.props;
     return (
@@ -12,7 +20,15 @@ class ProductDetails extends Component {
           R$
           {price}
         </h3>
-        <button type="button"> Comprar </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.handleClick }
+        >
+          <BagPlusFill />
+        </button>
+        <CartButton />
       </div>
     );
   }
