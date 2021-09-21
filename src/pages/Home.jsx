@@ -59,6 +59,11 @@ class Home extends React.Component {
     const { categorias, query, selectedId, products } = this.state;
     return (
       <main>
+        <h3
+          data-testid="home-initial-message"
+        >
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h3>
         <div className="input">
           <input
             type="text"
