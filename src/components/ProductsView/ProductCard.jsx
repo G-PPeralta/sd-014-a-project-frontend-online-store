@@ -6,6 +6,7 @@ export default class ProductCard extends React.Component {
   render() {
     const {
       produto: { id, title, thumbnail, price },
+      atualizaCarrinho,
     } = this.props;
 
     return (
@@ -25,6 +26,13 @@ export default class ProductCard extends React.Component {
               currency: 'BRL',
             })}`}
           </p>
+          <button
+            type="submit"
+            data-testid="product-add-to-cart"
+            onClick={ (event) => atualizaCarrinho(event, title) }
+          >
+            Adicionar Carrinho
+          </button>
         </div>
       </Link>
     );

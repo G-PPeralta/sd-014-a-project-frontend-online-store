@@ -15,6 +15,7 @@ export default class HomePage extends Component {
       selectedCategory: '',
       produtos: [],
       querySearch: '',
+      cart: {},
     };
   }
 
@@ -50,8 +51,30 @@ export default class HomePage extends Component {
     this.setState({ produtos: resp });
   }
 
+  addCart = (event, nome) => {
+    event.preventDefault();
+    const { cart } = this.state;
+    if (cart[nome]) {
+      this.setState({
+        cart: {
+          ...cart,
+          [nome]: cart[nome] + 1,
+        },
+      });
+    } else {
+      this.setState({
+        cart: {
+          ...cart,
+          [nome]: 1,
+        },
+      });
+    }
+  }
+
   render() {
     const { categorias, produtos, querySearch, selectedCategory } = this.state;
+    const { cart } = this.state;
+
     return (
       <div data-testid="home-initial-message">
         <input
@@ -65,7 +88,9 @@ export default class HomePage extends Component {
           Pesquisar
         </button>
         <div>
-          <CartButton />
+          <CartButton
+            cartList={ cart }
+          />
         </div>
         {categorias && (
           <MenuCategory
@@ -75,7 +100,7 @@ export default class HomePage extends Component {
           />
         )}
         <h3>Digite algum termo de pesquisa ou escolha uma categoria.</h3>
-        <ProductsView produtos={ produtos } />
+        <ProductsView produtos={ produtos } atualizaCarrinho={ this.addCart } />
       </div>
     );
   }
