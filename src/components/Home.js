@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import ProductList from './ProductList';
 import SearchComponent from './SearchComponent';
 import Categories from './Categories';
 import '../css/home.css';
+import ToShoppingCart from './ToShoppingCart';
 
 class Home extends Component {
   constructor(props) {
@@ -70,9 +70,7 @@ class Home extends Component {
     return (
       <div data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
-        <div>
-          <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
-        </div>
+        <ToShoppingCart />
         <SearchComponent
           value={ input }
           onChange={ this.handleChange }

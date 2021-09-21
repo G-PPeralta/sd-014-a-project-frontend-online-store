@@ -11,7 +11,3 @@ export default function saveLocalStorage(product) {
     localStorage.setItem('cart', JSON.stringify([quantityProd]));
   }
 }
-
-// export function catchQuantity({id}) {
-//   console.log()
-// }

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default class ItemCart extends Component {
   render() {
-    const { product, handleClick, idx } = this.props;
-    const { title, thumbnail, quantity } = product;
+    const { product, handleClick, idx, clickRemove } = this.props;
+    const { title, thumbnail, quantity, price } = product;
     const DECREASE = -1;
     return (
-      <div className="border border-dark d-flex justify-content-around">
+      <div className="border border-dark d-flex justify-content-around m-3 p-3">
         <div>
           <img src={ thumbnail } alt={ title } />
         </div>
@@ -38,6 +38,22 @@ export default class ItemCart extends Component {
             </div>
           </div>
         </div>
+        <div className="d-flex flex-column align-items-center">
+          <p>Preço Unitário:</p>
+          <p>{`R$${price.toFixed(2)}`}</p>
+        </div>
+        <div className="d-flex flex-column align-items-center">
+          <p>Preço total:</p>
+          <p>{`R$${(price * quantity).toFixed(2)}`}</p>
+        </div>
+        <div
+          className="botao d-flex align-items-center"
+          onClick={ () => clickRemove(idx) }
+          role="button"
+          aria-hidden="true"
+        >
+          <i className="far fa-trash-alt" />
+        </div>
       </div>
     );
   }
@@ -46,5 +62,6 @@ export default class ItemCart extends Component {
 ItemCart.propTypes = {
   product: PropTypes.objectOf(PropTypes.any).isRequired,
   handleClick: PropTypes.func.isRequired,
+  clickRemove: PropTypes.func.isRequired,
   idx: PropTypes.number.isRequired,
 };
