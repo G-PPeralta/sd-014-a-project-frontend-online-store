@@ -1,0 +1,8 @@
+.form-container {
+  display: flex;
+  background-color: blue;
+}
+
+.rating-container {
+  display: flex;
+}
