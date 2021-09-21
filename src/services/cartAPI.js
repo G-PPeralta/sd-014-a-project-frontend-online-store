@@ -9,25 +9,31 @@ const addToCart = ({ title, thumbnail, price, id }) => {
   if (cart.some((product) => product.id === id)) {
     const cartMap = cart.map((product) => {
       if (product.id === id) {
-        if (product.quant) {
-          product.quant += 1;
-        } else {
-          product.quant = 2;
-        }
+        product.quant += 1;
       }
       return product;
     });
     localStorage.setItem('cart', JSON.stringify(cartMap));
   } else {
+    const quant = 1;
     localStorage.setItem(
       'cart',
-      JSON.stringify([...cart, { id, title, price, thumbnail }]),
+      JSON.stringify([...cart, { id, title, price, thumbnail, quant }]),
     );
   }
 };
 
-const removeFromCart = () => {
-  console.log('oi');
+const removeFromCart = (id, quant) => {
+  const cart = readCartItems();
+  if (quant > 1) {
+    const cartMap = cart.map((product) => {
+      if (product.id === id) {
+        product.quant -= 1;
+      }
+      return product;
+    });
+    localStorage.setItem('cart', JSON.stringify(cartMap));
+  }
 };
 
 export { addToCart, removeFromCart, readCartItems };
