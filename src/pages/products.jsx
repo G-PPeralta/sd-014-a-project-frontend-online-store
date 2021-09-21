@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProdutosPage from '../components/produtosPage';
 
-class products extends Component {
+class Products extends Component {
   constructor(props) {
     super(props);
-    const { match: { params: { Categoria_id }} } = this.props;
+    const { match: { params: { CategoriaId } } } = this.props;
     this.state = {
       produtos: [],
-      Categoria_id,
+      CategoriaId,
     };
   }
 
@@ -17,23 +18,26 @@ class products extends Component {
   }
 
     getProdutos = async () => {
-      const { Categoria_id } = this.state;
-      const getProducts = await getProductsFromCategoryAndQuery(Categoria_id, '');
+      const { CategoriaId } = this.state;
+      const getProducts = await getProductsFromCategoryAndQuery(CategoriaId, '');
       this.setState({ produtos: getProducts.results });
     }
 
     render() {
-      const { match: { params: { product_id }} } = this.props;
+      const { match: { params: { productId } } } = this.props;
       const { produtos } = this.state;
       return (
         <>
-          { produtos.map((produ) => produ.id === product_id
+          { produtos.map((produ) => produ.id === productId
           && <ProdutosPage key={ produ.id } produ={ produ } />)}
         </>
       );
     }
 }
 
-// (produ.id === id ? <produtosPage key={ produ.id } produ={ produ } /> : 'Error')
+Products.propTypes = {
+  CategoriaId: PropTypes.string,
+  productId: PropTypes.string,
+}.isRequired;
 
-export default products;
+export default Products;

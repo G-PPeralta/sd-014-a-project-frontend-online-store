@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export class ProdutosPage extends Component {
+class ProdutosPage extends Component {
   render() {
     const { produ } = this.props;
     return (
@@ -13,5 +14,11 @@ export class ProdutosPage extends Component {
     );
   }
 }
+
+ProdutosPage.propTypes = {
+  produ: PropTypes.objectOf(
+    PropTypes.any,
+  ).isRequired,
+};
 
 export default ProdutosPage;
