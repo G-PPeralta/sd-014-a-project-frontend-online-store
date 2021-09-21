@@ -22,7 +22,7 @@ class CategoriesMenu extends React.Component {
   handleChange = async ({ target: { value } }) => {
     const { props: { getCategoryId, fetchSearchProduct } } = this;
     await getCategoryId(value);
-    fetchSearchProduct();
+    await fetchSearchProduct();
   }
 
   render() {
