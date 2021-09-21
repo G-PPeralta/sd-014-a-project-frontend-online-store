@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CartButton from '../components/CartButton';
+import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 import { readCartItems } from '../services/cartAPI';
 
@@ -21,9 +21,7 @@ export default class CartPage extends Component {
   };
 
   renderCartItems(cartItems) {
-    return cartItems.map((item) => (
-      <CartItem key={ item.id } product={ item } />
-    ));
+    return cartItems.map((item) => <CartItem key={ item.id } product={ item } />);
   }
 
   renderEmptyCart() {
@@ -36,10 +34,16 @@ export default class CartPage extends Component {
     const { cartItems } = this.state;
     return (
       <div>
-        <CartButton />
         {cartItems.length > 0
           ? this.renderCartItems(cartItems)
           : this.renderEmptyCart()}
+        <Link
+          data-testid="checkout-products"
+          to="/checkout"
+          className="btn btn-primary"
+        >
+          Finalizar Compra
+        </Link>
       </div>
     );
   }
