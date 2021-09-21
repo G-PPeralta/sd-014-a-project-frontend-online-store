@@ -1,16 +1,12 @@
 .input {
-  height: 30px;
   display: flex;
+  height: 30px;
   justify-content: center;
 }
 
-#icon {
-  transform: scale(1.0);
-}
-
 .main-conteiner {
-  justify-content: space-around;
   display: flex;
+  justify-content: space-around;
   width: 100%;
 }
 
@@ -22,10 +18,9 @@
 
 .conteiner-right {
   display: flex;
-  width: 75%;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: space-around;
+  width: 75%;
 }
 
 .conteiner-left li {
@@ -33,14 +28,14 @@
 }
 
 .conteiner-right li {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
   border: 1px black solid;
   border-radius: 3%;
+  display: flex;
+  flex-flow: column nowrap;
   list-style-type: none;
-  width: 100px;
-  align-items: center;
   margin-bottom: 5px;
+  width: 100px;
 }
 
 .conteiner-right li h1 {
