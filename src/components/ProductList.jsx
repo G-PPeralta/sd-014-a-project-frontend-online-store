@@ -17,7 +17,7 @@ class ProductList extends Component {
       searchText: '',
       categoriaDeProduto: '',
       categories: [],
-      cartList: [],
+      // cartList: [],
     };
 
     this.callGetCategories = this.callGetCategories.bind(this);
@@ -46,16 +46,22 @@ class ProductList extends Component {
 
   async handleClick(event) {
     event.preventDefault();
-    const { cartList } = this.state;
-    cartList.push({
+    // const { cartList } = this.state;
+    const cartList = {
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
-    });
-    await this.setState({
-      cartList,
-    });
-    localStorage.setItem('cartList', JSON.stringify(cartList));
+    };
+    // await this.setState({
+    //   cartList,
+    // });
+
+    if (!JSON.parse(localStorage.getItem('cartList'))) {
+      localStorage.setItem('cartList', JSON.stringify([]));
+    }
+    const cart = JSON.parse(localStorage.getItem('cartList'));
+    localStorage.setItem('cartList',
+      JSON.stringify([...cart, cartList]));
   }
 
   async callApi() {

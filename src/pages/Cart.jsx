@@ -73,15 +73,15 @@ class Cart extends Component {
 
     return (
       <div className="cart">
-        {arrayzao.length > 0
+        {localStorage.getItem('cartList') !== null
           ? (
             <div>
               {arrayzao.map((prod) => (
                 <div key={ prod.id }>
+                  <p data-testid="shopping-cart-product-name">{prod.name}</p>
                   <p data-testid="shopping-cart-product-quantity">{prod.quantidade}</p>
                   <p>{prod.id}</p>
                   <p>{prod.price}</p>
-                  <p data-testid="shopping-cart-product-name">{prod.name}</p>
                 </div>
               ))}
             </div>)
