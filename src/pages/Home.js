@@ -65,10 +65,9 @@ export default class Home extends React.Component {
         <section className="lado-direito">
           <article className="query-form">
             <input
-              className="search"
               type="text"
               data-testid="query-input"
-              id="query-input"
+              className="query-input"
               name="searchText"
               value={ searchText }
               onChange={ this.handleInput }
@@ -77,7 +76,7 @@ export default class Home extends React.Component {
             <button
               type="submit"
               data-testid="query-button"
-              id="query-button"
+              className="query-button"
               onClick={ this.handleClick }
             >
               Pesquisar

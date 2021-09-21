@@ -19,21 +19,17 @@
   min-width: 80%;
 }
 
-.search {
-  width: max-content;
-}
-
-#query-input {
+.query-input {
   width: 90%;
 }
 
-#query-button {
+.query-button {
   position: absolute;
   right: 25px;
   top: 3px;
 }
 
-#shopping-cart {
+.shopping-cart {
   position: absolute;
   right: 0;
   top: 0;
@@ -46,8 +42,7 @@ h4 {
 .query-results {
   align-content: flex-start;
   display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
 }
 
@@ -61,4 +56,14 @@ h4 {
   margin: 5px;
   padding: 5px;
   width: 22%;
+}
+
+.thumbnail {
+  height: 100px;
+  width: 100px;
+}
+
+.frete-gratis {
+  height: 50px;
+  width: 50px;
 }
