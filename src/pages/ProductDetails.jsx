@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddCart from '../components/AddCart';
+import FormAvaliacao from '../components/FormAvaliacao';
 
 class ProductDetails extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class ProductDetails extends React.Component {
           id={ id }
           thumbnail={ thumbnail }
         />
+        <FormAvaliacao id={ id } />
       </div>
     );
   }
