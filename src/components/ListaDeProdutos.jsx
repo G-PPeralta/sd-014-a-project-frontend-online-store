@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ListaDeProdutos extends React.Component {
   render() {
     const { searchProduct, productList, chamarApi, searchInput } = this.props;
+    console.log(productList);
     return (
       <>
         <input
@@ -21,10 +23,19 @@ class ListaDeProdutos extends React.Component {
         </button>
         <main>
           {productList.map((produtoAtual) => (
-            <section data-testid="product" key={ produtoAtual.id }>
-              <img src={ produtoAtual.thumbnail } alt={ produtoAtual.title } />
-              <p>{ produtoAtual.title }</p>
-            </section>
+            <Link
+              key={ produtoAtual.id }
+              data-testid="product-detail-link"
+              to={ {
+                pathname: `/detalhesproduto/${produtoAtual.id}`,
+                state: { ...produtoAtual },
+              } }
+            >
+              <section data-testid="product" key={ produtoAtual.id }>
+                <img src={ produtoAtual.thumbnail } alt={ produtoAtual.title } />
+                <p>{ produtoAtual.title }</p>
+              </section>
+            </Link>
           ))}
         </main>
       </>
