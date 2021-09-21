@@ -6,7 +6,10 @@ class ProductCard extends Component {
   render() {
     const { product } = this.props;
     return (
-      <Link data-testid="product-detail-link" to={{pathname: `/product/${product.id}`, state: { product }}}>
+      <Link
+        data-testid="product-detail-link"
+        to={ { pathname: `/product/${product.id}`, state: { product } } }
+      >
         <div data-testid="product">
           <h1>{ product.title }</h1>
           <img src={ product.thumbnail } alt="imagem do produto" />
@@ -19,6 +22,7 @@ class ProductCard extends Component {
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,

@@ -37,4 +37,12 @@ class Product extends Component {
   }
 }
 
+Product.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      product,
+    }).isRequired,
+  }).isRequired,
+};
+
 export default Product;
