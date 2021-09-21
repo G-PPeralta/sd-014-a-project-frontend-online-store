@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
   render() {
-    const { produto } = this.props;
+    const { produto: { id, title, thumbnail, price } } = this.props;
     return (
-      <Link to="/details" data-testid="product-detail-link">
-        <div data-testid="product">
-          <h2>{produto.title}</h2>
-          <img src={ produto.thumbnail } alt="" />
-          <p>{produto.price}</p>
-        </div>
-      </Link>
+      <div className="productCard" data-testid="product" id={ id }>
+        <Link to={ `/details/${id}` } data-testid="product-detail-link">
+          <h2>{title}</h2>
+          <img src={ thumbnail } alt="" />
+          <p>{`R$ ${price}`}</p>
+
+        </Link>
+      </div>
     );
   }
 }
