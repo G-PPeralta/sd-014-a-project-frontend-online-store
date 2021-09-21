@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartButton from './CartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Search extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       categories: [],
+      category: '',
       products: [],
       isLoading: true,
       isLoadingProducts: false,
@@ -24,15 +26,21 @@ class Search extends React.Component {
   }
 
   getProduct = async () => {
-    await this.setState({ isLoadingProducts: true });
-    const { inputSearch } = this.state;
-    const products = await getProductsFromCategoryAndQuery('', inputSearch);
-    await this.setState({ products: products.results, isLoadingProducts: false });
+    this.setState({ isLoadingProducts: true });
+    const { inputSearch, category } = this.state;
+    const products = await getProductsFromCategoryAndQuery(category, inputSearch);
+    this.setState({ products: products.results, isLoadingProducts: false });
   }
 
   handleChange = (event) => {
     event.preventDefault();
-    this.setState({ inputSearch: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleClick = async (event) => {
+    this.setState({ [event.target.name]: event.target.id });
+    await event.preventDefault();
+    this.getProduct();
   }
 
   renderCategories() {
@@ -40,7 +48,15 @@ class Search extends React.Component {
     return (
       <div>
         {categories.map((cat) => (
-          <p key={ cat.id } data-testid="category">{ cat.name }</p>
+          <input
+            key={ cat.id }
+            id={ cat.id }
+            data-testid="category"
+            name="category"
+            onClick={ this.handleClick }
+            value={ cat.name }
+            type="button"
+          />
         ))}
       </div>
     );
@@ -50,12 +66,18 @@ class Search extends React.Component {
     const { products } = this.state;
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price }) => (
-          <div key={ id } data-testid="product">
-            <img src={ thumbnail } alt="imagem do produto" />
-            <p>{ title }</p>
-            <p>{`R$:${price}`}</p>
-          </div>
+        {products.map(({ id, title, thumbnail, price, category_id: category }) => (
+          <Link
+            to={ `/product/${category}/${title.replace('%', '').replace('/', '')}/${id}` }
+            key={ id }
+            data-testid="product-detail-link"
+          >
+            <div data-testid="product">
+              <img src={ thumbnail } alt="imagem do produto" />
+              <p>{ title }</p>
+              <p>{`R$:${price}`}</p>
+            </div>
+          </Link>
         ))}
       </div>
     );
@@ -72,7 +94,7 @@ class Search extends React.Component {
           <input
             type="text"
             placeholder="Pesquisa Aqui"
-            name="barraDePesquisa"
+            name="inputSearch"
             value={ inputSearch }
             onChange={ this.handleChange }
             data-testid="query-input"
