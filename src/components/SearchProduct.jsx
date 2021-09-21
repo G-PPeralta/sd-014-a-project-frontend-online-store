@@ -13,6 +13,7 @@ class SearchProduct extends Component {
               title={ products.title }
               image={ products.thumbnail }
               price={ products.price }
+              id={ products.id }
             />))}
         </div>
       );
