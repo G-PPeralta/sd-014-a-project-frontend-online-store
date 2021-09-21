@@ -10,6 +10,7 @@ class Cart extends React.Component {
     this.getCartItems = this.getCartItems.bind(this);
     this.productCard = this.productCard.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +22,25 @@ class Cart extends React.Component {
     if (cartItems) this.setState({ cart: JSON.parse(cartItems) });
   }
 
-  changeQuantity({ target: { value, id } }) {
+  removeAllItems() {
+    localStorage.cartItems = '[]';
+    this.getCartItems();
+  }
+
+  removeItem({ target: { id } }) {
+    const cartList = JSON.parse(localStorage.cartItems);
+    const cartListUpdate = cartList.reduce((acc, cur) => (
+      cur.id === id ? acc : [...acc, cur]), []);
+    localStorage.cartItems = JSON.stringify(cartListUpdate);
+    this.getCartItems();
+  }
+
+  changeQuantity({ target: { name, id } }) {
     const cartList = JSON.parse(localStorage.cartItems);
     const cartListUpdate = cartList.map((product) => {
       if (product.id === id) {
-        product.quantity = value === '+' ? product.quantity + 1 : product.quantity - 1;
+        product.quantity = name === 'add-item' ? product.quantity + 1
+          : product.quantity - 1;
       }
       return product;
     });
@@ -41,17 +56,26 @@ class Cart extends React.Component {
         <input
           id={ id }
           type="button"
-          value="+"
+          value="-"
+          name="remove-item"
           onClick={ this.changeQuantity }
-          data-testid="product-increase-quantity"
+          data-testid="product-decrease-quantity"
+          disabled={ quantity === 0 }
         />
         <span data-testid="shopping-cart-product-quantity">{quantity}</span>
         <input
           id={ id }
           type="button"
-          value="-"
+          value="+"
+          name="add-item"
           onClick={ this.changeQuantity }
-          data-testid="product-decrease-quantity"
+          data-testid="product-increase-quantity"
+        />
+        <input
+          id={ id }
+          type="button"
+          value="X"
+          onClick={ this.removeItem }
         />
       </div>
     );
@@ -67,6 +91,7 @@ class Cart extends React.Component {
         <Link to="/checkout" data-testid="checkout-products">
           <button type="button">Finalizar Compra</button>
         </Link>
+        <input type="button" onClick={ this.removeAllItems } value="Esvaziar Carrinho" />
       </section>
     );
   }
