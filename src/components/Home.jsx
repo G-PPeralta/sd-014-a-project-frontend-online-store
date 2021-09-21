@@ -15,9 +15,9 @@ class Home extends React.Component {
     };
   }
 
-  componentDidMount() {
+  /* componentDidMount() {
     this.fetchGetProducts();
-  }
+  } */
 
   handleChange = ({ target }) => {
     const { value } = target;
@@ -25,6 +25,7 @@ class Home extends React.Component {
   }
 
   fetchGetProducts = async (category, product) => {
+    console.log(category, product);
     const productList = await getProductsFromCategoryAndQuery(category, product);
     console.log(productList);
     this.setState({ productList: productList.results,
