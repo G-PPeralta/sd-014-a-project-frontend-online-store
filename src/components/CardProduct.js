@@ -5,7 +5,7 @@ import saveLocalStorage from '../services/localStorage';
 
 export default class CardProduct extends Component {
   render() {
-    const { product } = this.props;
+    const { product, carShop } = this.props;
     const { thumbnail, title, price, id } = product;
     return (
       <div
@@ -30,7 +30,10 @@ export default class CardProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => { saveLocalStorage(product); } }
+          onClick={ () => {
+            saveLocalStorage(product);
+            carShop();
+          } }
         >
           Adicionar ao Carrinho
         </button>
@@ -40,4 +43,5 @@ export default class CardProduct extends Component {
 }
 CardProduct.propTypes = {
   product: PropTypes.objectOf(PropTypes.any).isRequired,
+  carShop: PropTypes.func.isRequired,
 };

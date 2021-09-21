@@ -4,7 +4,7 @@ import CardProduct from './CardProduct';
 
 export default class ProductList extends Component {
   render() {
-    const { lista } = this.props;
+    const { lista, carShop } = this.props;
     if (lista.length === 0) {
       return (
         <section>
@@ -14,12 +14,17 @@ export default class ProductList extends Component {
     }
     return (
       <section className="d-flex flex-wrap">
-        { lista.map((produto, id) => <CardProduct key={ id } product={ produto } />)}
+        { lista.map((produto, id) => (<CardProduct
+          key={ id }
+          product={ produto }
+          carShop={ carShop }
+        />))}
       </section>
     );
   }
 }
 
 ProductList.propTypes = {
+  carShop: PropTypes.func.isRequired,
   lista: PropTypes.arrayOf(PropTypes.any).isRequired,
 };

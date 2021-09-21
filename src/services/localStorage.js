@@ -4,7 +4,7 @@ export default function saveLocalStorage(product) {
   if (localStorage.cart) {
     const { cart } = localStorage;
     const cartJSON = JSON.parse(cart);
-    if (cartJSON.some(({ id }) => product.id === id)) return null;
+    // if (cartJSON.some(({ id }) => product.id === id)) return null;
     const cartUpDate = cartJSON.concat(quantityProd);
     localStorage.setItem('cart', JSON.stringify(cartUpDate));
   } else {
