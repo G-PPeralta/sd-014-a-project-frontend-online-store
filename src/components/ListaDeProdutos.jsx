@@ -58,7 +58,9 @@ class ListaDeProdutos extends Component {
         { produtos.length === 0
           ? <p> Nenhum produto foi encontrado </p>
           : produtos
-            .map((produto) => (<ProductCard key={ produto.id } produto={ produto } />))}
+            .map((produto) => (
+              <ProductCard key={ produto.id } produto={ produto } />
+            )) }
       </div>
     );
   }
