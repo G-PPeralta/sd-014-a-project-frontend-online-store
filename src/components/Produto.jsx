@@ -21,6 +21,7 @@ class Produto extends Component {
               infoProduto: produto,
             },
           } }
+          data-testid="product-detail-link"
           style={ { textDecoration: 'none' } }
         >
           <div className="image-container">
