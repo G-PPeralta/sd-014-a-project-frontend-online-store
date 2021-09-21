@@ -6,7 +6,6 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
       product: {},
     };
     this.getResults = this.getResults.bind(this);
@@ -30,7 +29,6 @@ class ProductDetails extends Component {
   }
 
   async getProductInfo(results) {
-    console.log(results);
     const { match: { params: { idQueryCategory } } } = this.props;
     const id = idQueryCategory.split('&')[0];
     const {
