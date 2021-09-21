@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BagPlusFill } from 'react-bootstrap-icons';
+import FeedbackForm from '../components/FeedbackForm';
 import { addToCart } from '../services/cartAPI';
 import CartButton from '../components/CartButton';
 
@@ -11,7 +12,8 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { location: { state: { product: { title, price, thumbnail } } } } = this.props;
+    const { location: { state: { product: { title, price, thumbnail,
+      id } } } } = this.props;
     return (
       <div>
         <h2 data-testid="product-detail-name">{title}</h2>
@@ -29,6 +31,7 @@ class ProductDetails extends Component {
           <BagPlusFill />
         </button>
         <CartButton />
+        <FeedbackForm id={ id } />
       </div>
     );
   }
@@ -41,6 +44,7 @@ ProductDetails.propTypes = {
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         thumbnail: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,

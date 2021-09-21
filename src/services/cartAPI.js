@@ -2,6 +2,10 @@ if (!JSON.parse(localStorage.getItem('cart'))) {
   localStorage.setItem('cart', JSON.stringify([]));
 }
 
+if (!JSON.parse(localStorage.getItem('feedbacks'))) {
+  localStorage.setItem('feedbacks', JSON.stringify({}));
+}
+
 const readCartItems = () => JSON.parse(localStorage.getItem('cart'));
 
 const addToCart = ({ title, thumbnail, price, id }) => {
@@ -36,4 +40,18 @@ const removeFromCart = (id, quant) => {
   }
 };
 
-export { addToCart, removeFromCart, readCartItems };
+const readFeedbacks = () => JSON.parse(localStorage.getItem('feedbacks'));
+
+const addFeedback = (feedback, id) => {
+  const feedbacks = readFeedbacks();
+  if (!feedbacks[id]) {
+    feedbacks[id] = [feedback];
+  } else {
+    feedbacks[id] = [...feedbacks[id], feedback];
+  }
+  console.log(feedbacks);
+
+  localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+};
+
+export { addToCart, removeFromCart, readCartItems, readFeedbacks, addFeedback };
