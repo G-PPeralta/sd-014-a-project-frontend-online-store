@@ -6,17 +6,26 @@ class SearchProduct extends Component {
   constructor() {
     super();
     this.state = {
-      cartItems: [],
+      cartItems: '',
+    };
+  }
+
+  componentDidMount() {
+    if (!JSON.parse(localStorage.getItem('setCart'))) {
+      localStorage.setItem('setCart', JSON.stringify([]));
     }
   }
 
- getItem =(item)=>{
-   const {cartItems}= this.state;
-   const cart = (cartItems);
-  
- this.setState ({cartItems:([...cart,item])});
- localStorage.setItem("setCart",cartItems);
- }
+  componentDidUpdate() {
+    const { cartItems } = this.state;
+    localStorage.setItem('setCart', JSON.stringify(cartItems));
+  }
+
+  getItem = (item) => {
+    const { cartItems } = this.state;
+    const cart = cartItems;
+    this.setState({ cartItems: ([...cart, item]) });
+  }
 
   searchProduct = (arrayProduct) => {
     if (arrayProduct.length !== 0) {
@@ -24,11 +33,11 @@ class SearchProduct extends Component {
         <div>
           {arrayProduct.map((products) => (
             <CardProduct
-              key={products.id}
-              title={products.title}
-              image={products.thumbnail}
-              price={products.price}
-              getItem={this.getItem}
+              key={ products.id }
+              title={ products.title }
+              image={ products.thumbnail }
+              price={ products.price }
+              getItem={ this.getItem }
             />))}
         </div>
       );

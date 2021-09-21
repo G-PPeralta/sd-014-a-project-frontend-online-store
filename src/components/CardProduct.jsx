@@ -4,13 +4,13 @@ import AddToCart from './AddToCart';
 
 class CardProduct extends Component {
   render() {
-    const { title, image, price , getItem} = this.props;
+    const { title, image, price, getItem } = this.props;
     return (
       <div data-testid="product">
         <h2>{title}</h2>
         <img src={ image } alt={ title } />
         <p>{price}</p>
-        <AddToCart itemTitle={title} itemPrice={price} getItem={getItem} />
+        <AddToCart itemTitle={ title } itemPrice={ price } getItem={ getItem } />
       </div>
     );
   }

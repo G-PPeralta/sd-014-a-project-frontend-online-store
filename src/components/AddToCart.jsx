@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
 class AddToCart extends Component {
- 
-
   handleClick = (event) => {
     const { getItem } = this.props;
-  getItem(event.target.value);
+    getItem(event.target.value);
   }
 
   render() {
