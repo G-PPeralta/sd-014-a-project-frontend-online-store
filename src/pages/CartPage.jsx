@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CartButton from '../components/CartButton';
+import CartItem from '../components/CartItem';
 import { readCartItems } from '../services/cartAPI';
 
 export default class CartPage extends Component {
@@ -20,14 +21,8 @@ export default class CartPage extends Component {
   };
 
   renderCartItems(cartItems) {
-    return cartItems.map(({ id, title, price, quant = 1 }) => (
-      <div key={ id }>
-        <h2 data-testid="shopping-cart-product-name">{title}</h2>
-        <h2>{`R$ ${(price * quant).toFixed(2)}`}</h2>
-        <h2 data-testid="shopping-cart-product-quantity">
-          {quant}
-        </h2>
-      </div>
+    return cartItems.map((item) => (
+      <CartItem key={ item.id } product={ item } />
     ));
   }
 
