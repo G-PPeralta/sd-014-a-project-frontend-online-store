@@ -81,7 +81,7 @@ class Search extends React.Component {
                   <p>{`R$:${price}`}</p>
                 </div>
               </Link>
-              <AddCartButton product={ product } />
+              <AddCartButton product={ product } dataTestId="product-add-to-cart" />
             </div>
           );
         })}
