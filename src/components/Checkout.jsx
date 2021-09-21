@@ -23,7 +23,6 @@ class Checkout extends React.Component {
       totalPrice = bar + item.price;
       return totalPrice;
     });
-    console.log(totalPrice);
     this.setState({ itens, isLoading: false, totalPrice });
   }
 
