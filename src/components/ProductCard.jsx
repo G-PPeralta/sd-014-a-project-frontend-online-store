@@ -6,14 +6,14 @@ class ProductCard extends Component {
   render() {
     const { produto } = this.props;
     return (
-      <div data-testid="product">
+      <div data-testid="product" id="Card">
         <Link
           data-testid="product-detail-link"
           key={ produto.id }
           to={ `/products/${produto.category_id}/${produto.id}` }
         >
-          <h2>{produto.title}</h2>
-          <img src={ produto.thumbnail } alt="" />
+          <h4>{produto.title}</h4>
+          <img src={ produto.thumbnail } alt="" className="ProdImg" />
           <p>{produto.price}</p>
         </Link>
       </div>

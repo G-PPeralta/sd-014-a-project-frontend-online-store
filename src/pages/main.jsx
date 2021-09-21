@@ -27,17 +27,7 @@ class main extends React.Component {
   render() {
     const { categories, selected } = this.state;
     return (
-      <div data-testid="home-initial-message">
-        <h2>Digite algum termo de pesquisa ou escolha uma categoria.</h2>
-        <Link to="/shoppingCart">
-          <button
-            type="button"
-            data-testid="shopping-cart-button"
-            placeholder="carrinho"
-          >
-            carrinho
-          </button>
-        </Link>
+      <div data-testid="home-initial-message" id="main">
         <ul>
           {categories
             .map((categoria) => (
@@ -47,7 +37,21 @@ class main extends React.Component {
                 onClick={ this.categorieHandler }
               />)) }
         </ul>
-        <ListaDeProdutos selected={ selected } />
+        <div>
+          <h2>Digite algum termo de pesquisa ou escolha uma categoria.</h2>
+          <Link to="/shoppingCart">
+            <button
+              type="button"
+              data-testid="shopping-cart-button"
+              placeholder="carrinho"
+            >
+              carrinho
+            </button>
+          </Link>
+          <div>
+            <ListaDeProdutos selected={ selected } />
+          </div>
+        </div>
       </div>
     );
   }

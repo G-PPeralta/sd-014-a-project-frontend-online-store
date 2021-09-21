@@ -50,18 +50,20 @@ class ListaDeProdutos extends Component {
   render() {
     const { produtos } = this.state;
     return (
-      <div>
+      <section>
         <SearchBar
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        { produtos.length === 0
-          ? <p> Nenhum produto foi encontrado </p>
-          : produtos
-            .map((produto) => (
-              <ProductCard key={ produto.id } produto={ produto } />
-            )) }
-      </div>
+        <div id="Product-list">
+          { produtos.length === 0
+            ? <h3> Nenhum produto foi encontrado </h3>
+            : produtos
+              .map((produto) => (
+                <ProductCard key={ produto.id } produto={ produto } />
+              )) }
+        </div>
+      </section>
     );
   }
 }

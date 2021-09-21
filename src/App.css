@@ -1,9 +1,38 @@
+#main {
+  display: flex;
+  flex-direction: row;
+}
 ul {
   display: flex;
   flex-direction: column;
   align-items:center;
   max-width: 100px;
 }
+
+#Product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: max-content;
+}
+
+#Card {
+  display: flex;
+  flex-direction: row;
+  max-width: 200px;
+}
+h3  {
+  display: block;
+}
+
+#SearchBar {
+  display: block;
+}
+
+.ProdImg {
+  max-height: 150px;
+}
+
 .App {
   text-align: center;
 }
