@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
 import '../styles/ShoppingCart.css';
 
+const STORAGE_KEY = 'cart-products';
+
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
@@ -23,11 +25,20 @@ export default class ShoppingCart extends Component {
 
   componentDidUpdate() {
     const { cartProducts } = this.state;
-    localStorage.setItem('cart-products', JSON.stringify(cartProducts));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cartProducts));
+  }
+
+  getNumberOfProductsInCart() {
+    let totalProducts = 0;
+    const cartProducts = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    cartProducts.forEach((p) => {
+      totalProducts += p.productQty;
+    });
+    return totalProducts;
   }
 
   loadLocalStorage() {
-    const savedCart = JSON.parse(localStorage.getItem('cart-products'));
+    const savedCart = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (savedCart) {
       this.setState({ cartProducts: savedCart });
     }
