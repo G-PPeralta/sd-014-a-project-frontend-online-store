@@ -40,7 +40,7 @@ class ItemCart extends React.Component {
 ItemCart.propTypes = {
   quantityChanger: PropTypes.func.isRequired,
   product: PropTypes.shape({
-    product: Proptypes.shape({
+    product: PropTypes.shape({
       thumbnail: PropTypes.string,
       title: PropTypes.string,
       price: PropTypes.number,
