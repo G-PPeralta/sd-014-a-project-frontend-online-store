@@ -8,7 +8,7 @@ class CardProduct extends Component {
 
     return (
       <div data-testid="product">
-        <Link data-testid="product-detail-link" name={ title } to={ `/${id}/${title}` }>
+        <Link data-testid="product-detail-link" to={ `/${id}/${title}` }>
           <h2>{title}</h2>
           <img src={ image } alt={ title } />
           <p>{price}</p>

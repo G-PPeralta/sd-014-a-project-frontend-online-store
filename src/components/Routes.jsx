@@ -11,12 +11,7 @@ class Routes extends Component {
         <Switch>
           <Route exact path="/" component={ Search } />
           <Route exact path="/cart" component={ Cart } />
-          {/* <Route exact path="/:productId" component={ ProductDetail } /> */}
-          <Route
-            exact
-            path="/:productId/:nome"
-            render={ (props) => <ProductDetail { ...props } /> }
-          />
+          <Route exact path="/:productId/:nome" component={ ProductDetail } />
         </Switch>
       </div>
     );
