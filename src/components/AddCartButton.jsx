@@ -20,10 +20,11 @@ class AddButton extends Component {
   }
 
   render() {
+    const { testeid } = this.props;
     return (
       <button
         type="submit"
-        data-testid="product-add-to-cart"
+        data-testid={ testeid }
         onClick={ this.handleClick }
       >
         Adicionar ao Carrinho
@@ -38,6 +39,7 @@ AddButton.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  testeid: PropTypes.string.isRequired,
 };
 
 export default AddButton;

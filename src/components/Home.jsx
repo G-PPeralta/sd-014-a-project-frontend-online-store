@@ -11,7 +11,7 @@ class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <Products />
-        <Link to="/cart" data-testid="shopping-cart-button">
+        <Link data-testid="shopping-cart-button" to="/cart">
           <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/000000/external-cart-grocery-flatart-icons-outline-flatarticons.png" alt="cart" />
         </Link>
         <Categories />
