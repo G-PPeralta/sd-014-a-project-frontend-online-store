@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 class Evaluation extends React.Component {
   render() {
-    const { value } = this.props;
+    const { email, avaliacao, mensagem } = this.props;
     return (
-      <fieldset value={ value }>
-        <p>{localStorage.getItem('email')}</p>
+      <fieldset>
+        <p>{ email }</p>
         <p>
           Avaliação:
-          {localStorage.getItem('avaliacao')}
+          { avaliacao }
         </p>
-        <p>{localStorage.getItem('mensagem')}</p>
+        <p>{ mensagem }</p>
         <hr />
       </fieldset>
     );
@@ -19,11 +19,13 @@ class Evaluation extends React.Component {
 }
 
 Evaluation.propTypes = {
-  value: PropTypes.arrayOf(PropTypes.string),
+  email: PropTypes.string.isRequired,
+  avaliacao: PropTypes.number.isRequired,
+  mensagem: PropTypes.string,
 };
 
 Evaluation.defaultProps = {
-  value: [],
+  mensagem: '',
 };
 
 export default Evaluation;

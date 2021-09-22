@@ -40,18 +40,21 @@ class Evaluator extends React.Component {
     }));
   }
 
-  renderComment = (avaliacoes) => (Object.values(avaliacoes)
-    .map(({ email, avaliacao, mensagem }) => (
-      <Evaluation
-        key={ email }
-        email={ email }
-        avaliacao={ avaliacao }
-        mensagem={ mensagem }
-      />
-    )));
+  renderComment = () => {
+    const { arrayAvaliacao } = this.state;
+    return (Object.values(arrayAvaliacao)
+      .map(({ evaluation: { email, avaliacao, mensagem } }) => (
+        <Evaluation
+          key={ email }
+          email={ email }
+          avaliacao={ +avaliacao }
+          mensagem={ mensagem }
+        />
+      )));
+  }
 
   render() {
-    const { email, avaliacao, mensagem, arrayAvaliacao } = this.state;
+    const { email, avaliacao, mensagem } = this.state;
     return (
       <section>
         <h1>Quantidade</h1>
@@ -90,7 +93,7 @@ class Evaluator extends React.Component {
           />
           <button type="submit" onClick={ this.handleSubmit }>Avaliar</button>
         </form>
-        { this.renderComment(arrayAvaliacao) }
+        { this.renderComment() }
       </section>
     );
   }
