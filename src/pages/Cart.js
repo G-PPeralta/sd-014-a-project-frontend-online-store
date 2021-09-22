@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 import * as api from '../services/shoppingCartAPI';
 
@@ -14,34 +15,34 @@ export default class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.api.readShoppingCart();
+    this.readShoppingCart();
+  }
+
+  readShoppingCart = () => {
+    const items = api.readShoppingCart();
+    this.setState({ items, isLoading: false });
   }
 
   handleAddItem = ({ target }) => {
     const { items } = this.state;
-    api.addItemToCart(items.find(({ id }) => id === target.key));
-    this.setState({ isLoading: false });
-    // items.find((item) => api.addItemToCart(item));
+    api.addItemToCart(items.find(({ id }) => id === target.value));
+    this.readShoppingCart();
   }
 
   handleSubItem = ({ target }) => {
-    /* const items = api.readShoppingCart();
-    console.log(target);
-    this.setState({
-      quantity: items.find((item) => api.subItemToCart(item)),
-    });
-    // items.find((item) => api.subItemToCart(item)); */
+    const { items } = this.state;
+    api.subItemFromCart(items.find(({ id }) => id === target.value));
+    this.readShoppingCart();
   }
 
-  handleRemoveItem = () => {
-    /* const items = api.readShoppingCart();
-    this.setState({
-      quantity: items.filter((item) => api.removeItemFromCart(item)),
-    }); */
+  handleRemoveItem = ({ target }) => {
+    const { items } = this.state;
+    api.removeItemFromCart(items.find(({ id }) => id === target.value));
+    this.readShoppingCart();
   }
 
   render() {
-    const items = api.readShoppingCart();
+    const { items, isLoading } = this.state;
 
     if (!items.length) {
       return (
@@ -50,6 +51,8 @@ export default class Cart extends React.Component {
         </div>
       );
     }
+
+    if (isLoading) return <Loading />;
 
     return (
       <div data-testid="shopping-cart">
@@ -63,7 +66,7 @@ export default class Cart extends React.Component {
             <div id="buttons">
               <button
                 type="button"
-                key={ item.id }
+                value={ item.id }
                 data-testid="product-decrease-quantity"
                 onClick={ this.handleSubItem }
               >
@@ -71,7 +74,7 @@ export default class Cart extends React.Component {
               </button>
               <button
                 type="button"
-                key={ item.id }
+                value={ item.id }
                 data-testid="product-increase-quantity"
                 onClick={ this.handleAddItem }
               >
@@ -79,24 +82,22 @@ export default class Cart extends React.Component {
               </button>
               <button
                 type="button"
-                key={ item.id }
+                value={ item.id }
                 onClick={ this.handleRemoveItem }
               >
                 X
               </button>
             </div>
             <div id="price-per-item">
-              R$
-              {' '}
-              { (item.price * item.shopping_cart).toFixed(2) }
+              { (item.price * item.shopping_cart)
+                .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
             </div>
           </div>
         )) }
         <div id="total-price">
           Valor Total:&nbsp;
-          { items.reduce((acc, item, index) => (
-            acc + item.price
-          ), 0) }
+          { items.reduce((acc, item) => acc + (item.price * item.shopping_cart), 0)
+            .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
         </div>
         <Link
           data-testid="checkout-products"

@@ -7,7 +7,7 @@ import FreteGratis from '../images/frete-gratis.png';
 
 export default class ProductCard extends React.Component {
   render() {
-    const { product } = this.props;
+    const { product, onClick } = this.props;
     const { id, title, thumbnail, price, shipping } = product;
 
     return (
@@ -31,7 +31,7 @@ export default class ProductCard extends React.Component {
         <span>
           { `${price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
         </span>
-        <AddItemToCart dataTestId="product-add-to-cart" product={ product } />
+        <AddItemToCart dataTestId="product-add-to-cart" onClick={ onClick } />
       </div>
     );
   }
