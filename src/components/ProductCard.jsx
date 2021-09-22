@@ -24,9 +24,7 @@ class ProductCard extends React.Component {
                 <p>{ productInfos.price }</p>
               </Link>
             </div>
-            <AddButton
-              testid="product-add-to-cart"
-            />
+            <AddButton testid="product-add-to-cart" />
           </div>
         ))}
       </>
