@@ -7,7 +7,7 @@ Storage.prototype.getObj = function getobj(key) {
   return JSON.parse(this.getItem(key));
 };
 
-function addToCart(product) {
+export function addToCart(product) {
   let cartProducts = localStorage.getObj('products');
   if (cartProducts) {
     if (!cartProducts[product.id]) {
@@ -19,4 +19,9 @@ function addToCart(product) {
   }
   localStorage.setObj('products', cartProducts);
 }
-export default addToCart;
+
+export function addQuantity(id, operation) {
+  const products = localStorage.getObj('products');
+  if (operation === 'sum') products[id].quantity += 1;
+  if (operation === 'sub' && products[id].quantity !== 1) products[id].quantity -= 1;
+}
