@@ -6,7 +6,7 @@ class SearchProduct extends Component {
   constructor() {
     super();
     this.state = {
-      cartItems: '',
+      cartItems: [],
     };
   }
 

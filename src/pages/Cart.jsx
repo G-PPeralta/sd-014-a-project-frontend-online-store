@@ -34,7 +34,7 @@ class Cart extends Component {
             { cartItems.map((item) => (
               <div key={ item }>
                 <p data-testid="shopping-cart-product-name">{item}</p>
-                <p data-testid="shopping-cart-product-quantity">{item.length}</p>
+                <p data-testid="shopping-cart-product-quantity">{quantidade}</p>
               </div>
             ))}
           </div>
