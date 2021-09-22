@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import saveLocalStorage from '../services/localStorage';
+import freeShiping from '../services/freeShipping';
+import FreteGratis from './FreteGratis';
 
 export default class CardProduct extends Component {
   render() {
@@ -22,6 +24,7 @@ export default class CardProduct extends Component {
           } }
         >
           <div data-testid="product-detail-link">
+            { freeShiping(product) && <FreteGratis />}
             <img src={ thumbnail } alt={ title } />
             <h5>{title}</h5>
             <p>{`R$${price}`}</p>
