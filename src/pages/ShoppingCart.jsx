@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShoppingIcon from '../components/ShoppingIcon';
 import { getCartItems } from '../services/addFunctions';
+import CartCard from '../components/CartCard';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -27,12 +28,7 @@ export default class ShoppingCart extends Component {
         <p data-testid="shopping-cart-empty-message">
           Seu carrinho está vazio
         </p>
-        { items.map((item) => (
-          <div key={ item.id }>
-            <p data-testid="shopping-cart-product-name">{ item.title }</p>
-            <p data-testid="shopping-cart-product-quantity">1</p>
-          </div>
-        )) }
+        { items.map((item) => <CartCard key={ item.id } item={ item } />)}
       </div>
     );
   }
