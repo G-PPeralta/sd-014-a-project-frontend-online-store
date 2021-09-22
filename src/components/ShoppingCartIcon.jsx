@@ -9,16 +9,16 @@ export default class ShoppingCartIcon extends Component {
   }
 
   getNumberOfProductsInCart() {
-    let totalProducts = 0;
     const cartProducts = JSON.parse(localStorage.getItem('cart-products'));
-    console.log(cartProducts);
     if (cartProducts) {
-      cartProducts.forEach((p) => {
-        totalProducts += p.productQty;
-      });
-      return totalProducts;
+      const totalProducts = cartProducts.reduce(
+        (acc, product) => acc + product.productQty,
+        0,
+      );
+      return <span data-testid="shopping-cart-size">{totalProducts}</span>;
     }
-    return 0;
+
+    return <span data-testid="shopping-cart-size">0</span>;
   }
 
   render() {
@@ -30,7 +30,7 @@ export default class ShoppingCartIcon extends Component {
             src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
           />
         </Link>
-        <span data-testid="shopping-cart-size">{ this.getNumberOfProductsInCart }</span>
+        {this.getNumberOfProductsInCart()}
       </div>
     );
   }

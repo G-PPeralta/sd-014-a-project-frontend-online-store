@@ -7,7 +7,7 @@ export default class CustomerInfo extends Component {
   );
 
   renderForm = () => (
-    <form>
+    <form className="customer-info-form">
       <label htmlFor="fullname">
         Nome completo
         {this.renderCustomInput('fullname', 'text')}

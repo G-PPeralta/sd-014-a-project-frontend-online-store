@@ -47,7 +47,8 @@ export default class ProductCard extends Component {
 
     if (productQty === 1) {
       if (storage) {
-        const newStorage = [...storage, savedProduct];
+        const storageWithNewProduct = storage.filter((item) => item.id !== id);
+        const newStorage = [...storageWithNewProduct, savedProduct];
         localStorage.setItem(storageKey, JSON.stringify(newStorage));
       } else {
         cartProducts.push(savedProduct);

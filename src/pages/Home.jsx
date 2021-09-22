@@ -15,6 +15,7 @@ export default class Home extends Component {
       products: [],
       query: '',
     };
+
   }
 
   componentDidMount() {
@@ -67,6 +68,7 @@ export default class Home extends Component {
   };
 
   render() {
+    console.log('render home');
     const { categories, didSearch, products } = this.state;
     return (
       <div className="home-page">

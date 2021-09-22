@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProductsCheckout from '../components/ProductsCheckout';
 import CustomerInfo from '../components/CustomerInfo';
 import PaymentMethod from '../components/PaymentMethod';
+import '../styles/Checkout.css';
 
 export default class Checkout extends Component {
   handleSubmit = (event) => {
@@ -21,7 +22,13 @@ export default class Checkout extends Component {
         <ProductsCheckout />
         <CustomerInfo />
         <PaymentMethod />
-        <button onClick={ this.handleSubmit } type="submit">Comprar</button>
+        <button
+          className="checkout-button"
+          onClick={ this.handleSubmit }
+          type="submit"
+        >
+          Comprar
+        </button>
       </div>
     );
   }
