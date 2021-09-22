@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import CartIcon from '../components/CartIcon';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Header from '../components/Header';
@@ -82,16 +83,19 @@ export default class ProductDetail extends Component {
       <main className="shopping-main">
         <Header />
         {/* <section className="cart-banner"> */}
-        <div>
+        <Link
+          data-testid="shopping-cart-button"
+          to="/cart"
+          className="shopping-cart-button"
+        >
           <CartIcon />
           <span
             data-testid="shopping-cart-size"
             className="shopping-cart-size"
-            // id="shopping-cart-size"
           >
             { cartSize }
           </span>
-        </div>
+        </Link>
         {/* </section> */}
 
         <section className="main-sec-detail">
@@ -136,12 +140,19 @@ export default class ProductDetail extends Component {
         <Footer />
       </main>
     ) : (
-      <span
-        data-testid="shopping-cart-size"
-        className="shopping-cart-size"
+      <Link
+        data-testid="shopping-cart-button"
+        to="/cart"
+        className="shopping-cart-button"
       >
-        { cartSize }
-      </span>
+        <CartIcon />
+        <span
+          data-testid="shopping-cart-size"
+          className="shopping-cart-size"
+        >
+          { cartSize }
+        </span>
+      </Link>
     );
   }
 }
