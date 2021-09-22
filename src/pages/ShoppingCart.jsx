@@ -29,9 +29,7 @@ export default class ShoppingCart extends Component {
   }
 
   removeProduct(id) {
-    console.log(id);
     const { cartProducts } = this.state;
-    // Filtrando o array, ficam todos menos o que tem o ID
     const filtered = cartProducts.filter((prod) => prod.id !== id);
     this.setState({
       cartProducts: filtered,
@@ -39,8 +37,8 @@ export default class ShoppingCart extends Component {
   }
 
   changeProductQuantity(product, sign) {
-    // sign === + ? +1 : -1
-    console.log(product, sign);
+    const { cartProducts } = this.state;
+    console.log(cartProducts.find((p) => p.id === product.id).productQty);
   }
 
   calculatePrice() {
