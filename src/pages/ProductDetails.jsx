@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Evaluator from '../components/Evaluator';
+import BtnCart from '../components/BtnCart';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class ProductDetails extends Component {
           <img src={ thumbnail } alt={ title } />
           <p>{price}</p>
         </div>
+        <BtnCart />
         <Evaluator />
       </main>
     );

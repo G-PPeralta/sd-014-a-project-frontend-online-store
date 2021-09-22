@@ -1,0 +1,22 @@
+// https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
+Storage.prototype.setObj = function setobj(key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+
+Storage.prototype.getObj = function getobj(key) {
+  return JSON.parse(this.getItem(key));
+};
+
+function addToCart(product) {
+  let cartProducts = localStorage.getObj('products');
+  if (cartProducts) {
+    if (!cartProducts[product.id]) {
+      cartProducts[product.id] = { product, quantity: 0 };
+    }
+    cartProducts[product.id].quantity += 1;
+  } else {
+    cartProducts = { [product.id]: { product, quantity: 1 } };
+  }
+  localStorage.setObj('products', cartProducts);
+}
+export default addToCart;
