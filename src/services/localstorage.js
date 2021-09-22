@@ -20,6 +20,13 @@ export function addToCart(product) {
   localStorage.setObj('products', cartProducts);
 }
 
+export function addQuantity(id, operation) {
+  const products = localStorage.getObj('products');
+  if (operation === 'sum') products[id].quantity += 1;
+  if (operation === 'sub' && products[id].quantity !== 1) products[id].quantity -= 1;
+  localStorage.setObj('products', products);
+}
+
 export function addEvaluation(evaluation) {
   let objEvaluation = localStorage.getObj('evaluations');
   if (objEvaluation) {
