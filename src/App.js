@@ -5,6 +5,7 @@ import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';
+import Payment from './pages/Payment';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/" component={ Search } />
           <Route path="/shopping-cart" component={ ShoppingCart } />
           <Route path="/product/:id" component={ ProductDetail } />
+          <Route path="/payment" component={ Payment } />
           <Route path="*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
