@@ -36,7 +36,7 @@ class ProductCartCard extends Component {
 ProductCartCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   quantity: PropTypes.number.isRequired,
   handleAdd: PropTypes.func.isRequired,
