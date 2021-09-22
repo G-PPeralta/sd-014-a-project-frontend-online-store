@@ -38,6 +38,7 @@ class SearchProduct extends Component {
               image={ products.thumbnail }
               price={ products.price }
               getItem={ this.getItem }
+              id={ products.id }
             />))}
         </div>
       );
