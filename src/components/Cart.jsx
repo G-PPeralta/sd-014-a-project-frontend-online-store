@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Context from '../Context';
 
 class Cart extends React.Component {
   constructor() {
@@ -11,6 +12,7 @@ class Cart extends React.Component {
     this.productCard = this.productCard.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.updateGlobal = this.updateGlobal.bind(this);
   }
 
   componentDidMount() {
@@ -22,20 +24,22 @@ class Cart extends React.Component {
     if (cartItems) this.setState({ cart: JSON.parse(cartItems) });
   }
 
-  removeAllItems() {
+  removeAllItems(globalChanger) {
     localStorage.cartItems = '[]';
     this.getCartItems();
+    this.updateGlobal(globalChanger);
   }
 
-  removeItem({ target: { id } }) {
+  removeItem({ target: { id } }, globalChanger) {
     const cartList = JSON.parse(localStorage.cartItems);
     const cartListUpdate = cartList.reduce((acc, cur) => (
       cur.id === id ? acc : [...acc, cur]), []);
     localStorage.cartItems = JSON.stringify(cartListUpdate);
     this.getCartItems();
+    this.updateGlobal(globalChanger);
   }
 
-  changeQuantity({ target: { name, id } }) {
+  changeQuantity({ target: { name, id } }, globalChanger) {
     const cartList = JSON.parse(localStorage.cartItems);
     const cartListUpdate = cartList.map((product) => {
       if (product.id === id) {
@@ -46,11 +50,22 @@ class Cart extends React.Component {
     });
     localStorage.cartItems = JSON.stringify(cartListUpdate);
     this.getCartItems();
+    this.updateGlobal(globalChanger);
   }
 
-  productCard(product, index) {
+  updateGlobal(setCartLength) {
+    const { cartItems } = localStorage;
+    let result = 0;
+    if (cartItems) {
+      result = JSON.parse(cartItems).reduce((acc, cur) => (acc + cur.quantity), 0);
+    }
+    setCartLength(result);
+  }
+
+  productCard(product, index, globalChanger) {
     const { id, title, quantity, available_quantity: avaliable } = product;
     return (
+
       <div key={ `${title}-${index}` }>
         <p data-testid="shopping-cart-product-name">{title}</p>
         <input
@@ -58,7 +73,9 @@ class Cart extends React.Component {
           type="button"
           value="-"
           name="remove-item"
-          onClick={ this.changeQuantity }
+          onClick={ (event) => {
+            this.changeQuantity(event, globalChanger);
+          } }
           data-testid="product-decrease-quantity"
           disabled={ quantity === 0 }
         />
@@ -68,7 +85,9 @@ class Cart extends React.Component {
           type="button"
           value="+"
           name="add-item"
-          onClick={ this.changeQuantity }
+          onClick={ (event) => {
+            this.changeQuantity(event, globalChanger);
+          } }
           data-testid="product-increase-quantity"
           disabled={ avaliable <= quantity }
         />
@@ -76,7 +95,9 @@ class Cart extends React.Component {
           id={ id }
           type="button"
           value="X"
-          onClick={ this.removeItem }
+          onClick={ (event) => {
+            this.removeItem(event, globalChanger);
+          } }
         />
       </div>
     );
@@ -85,15 +106,26 @@ class Cart extends React.Component {
   render() {
     const { cart } = this.state;
     return (
-      <section>
-        {cart.length === 0
-          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          : cart.map((product, index) => this.productCard(product, index))}
-        <Link to="/checkout" data-testid="checkout-products">
-          <button type="button">Finalizar Compra</button>
-        </Link>
-        <input type="button" onClick={ this.removeAllItems } value="Esvaziar Carrinho" />
-      </section>
+      <Context.Consumer>
+        {({ setCartLength }) => (
+          <section>
+            {cart.length === 0
+              ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+              : cart.map((product, index) => (
+                this.productCard(product, index, setCartLength)))}
+            <Link to="/checkout" data-testid="checkout-products">
+              <button type="button">Finalizar Compra</button>
+            </Link>
+            <input
+              type="button"
+              onClick={ () => {
+                this.removeAllItems(setCartLength);
+              } }
+              value="Esvaziar Carrinho"
+            />
+          </section>
+        ) }
+      </Context.Consumer>
     );
   }
 }
