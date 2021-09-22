@@ -27,6 +27,7 @@ export default class ProductCard extends Component {
           <h3>{ product.title }</h3>
           <img src={ product.thumbnail } alt={ product.title } />
           <p>{`R$ ${product.price}`}</p>
+          </Link>
           <button
             data-testid="product-add-to-cart"
             type="button"
@@ -34,7 +35,6 @@ export default class ProductCard extends Component {
           >
             Comprar
           </button>
-        </Link>
       </div>
     );
   }
