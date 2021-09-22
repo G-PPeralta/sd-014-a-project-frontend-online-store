@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ItemCart extends React.Component {
-
-  handleClick=({target }) => {
+  handleClick=({ target }) => {
     const { product: { id }, quantityChanger } = this.props;
     quantityChanger(target.name, id);
   }
@@ -28,11 +27,11 @@ class ItemCart extends React.Component {
           type="button"
           data-testid="product-increase-quantity"
           onClick={ this.handleClick }
-          name="acrescentar"
+          name="incrementar"
         >
           +
         </button>
-        <div>{ product.price }</div>
+        <div>{ product.price * product.quantity }</div>
 
       </div>
     );
