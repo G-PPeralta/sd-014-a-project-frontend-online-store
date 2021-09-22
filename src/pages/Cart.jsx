@@ -25,8 +25,6 @@ class Cart extends Component {
   async recebeInfo() {
     const cartListLocal = localStorage.getItem('cartList');
     const cartList = JSON.parse(cartListLocal);
-    console.log('O ABAIXO EH CART LIST MLKADA!');
-    console.log(cartList);
     await this.setState({
       cartList,
     });
@@ -64,7 +62,7 @@ class Cart extends Component {
     const { cartList } = this.state;
     const arrayzao = [];
     if (cartList) {
-      const newList = cartList.map((prod) => {
+      cartList.map((prod) => {
         const idProd = prod.prodId;
         const arrProd = cartList.filter((produ) => produ.prodId === idProd);
         const cartItemDetail = {
@@ -79,8 +77,6 @@ class Cart extends Component {
         }
         return (arrayzao);
       });
-      console.log('LINHA 83 DE CART.JSX');
-      console.log(newList);
     }
 
     return (

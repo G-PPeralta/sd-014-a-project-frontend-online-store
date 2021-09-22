@@ -30,13 +30,13 @@ export default class ProductDetail extends Component {
     }
   }
 
-  async handleClick(event) {
+  async handleClick(event, availableQuantity) {
     event.preventDefault();
     const cartList = {
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
-      availableQuantity: event.target.quantity,
+      availableQuantity,
     };
     if (!JSON.parse(localStorage.getItem('cartList'))) {
       localStorage.setItem('cartList', JSON.stringify([]));
@@ -45,8 +45,6 @@ export default class ProductDetail extends Component {
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
     const newCart = JSON.parse(localStorage.getItem('cartList'));
-    console.log('LINHA 48 DO PRODUCT DETAIL');
-    console.log(newCart);
     localStorage.setItem('cartSize', newCart.length);
     this.setState({
       cartSize: newCart.length,
@@ -107,8 +105,7 @@ export default class ProductDetail extends Component {
             name={ myProduct.title }
             value={ myProduct.price }
             className={ id }
-            quantity={ myProduct.available_quantity }
-            onClick={ this.handleClick }
+            onClick={ (event) => this.handleClick(event, myProduct.available_quantity) }
           >
             Adicionar ao Carrinho
           </button>
