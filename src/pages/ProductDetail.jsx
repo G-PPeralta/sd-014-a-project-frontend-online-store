@@ -10,7 +10,6 @@ const cartProducts = [];
 export default class ProductDetail extends Component {
   constructor(props) {
     super(props);
-    // console.log(props.location.state);
     this.state = {
       product: props.location.state,
       productQty: 0,
