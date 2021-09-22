@@ -9,9 +9,12 @@ class Home extends Component {
       categories: [],
       products: [],
       inputValue: '',
+      selectedProducts: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.setCartItems = this.setCartItems.bind(this);
   }
 
   componentDidMount() {
@@ -30,12 +33,32 @@ class Home extends Component {
       .then((json) => this.setState({ products: json.results }));
   }
 
+  setCartItems() {
+    const { selectedProducts } = this.state;
+    localStorage.setItem('products', JSON.stringify(selectedProducts));
+  }
+
   callApi = async () => {
     const categoriesList = await getCategories();
     this.setState({
       categories: categoriesList,
     });
   };
+
+  addToCart(product) {
+    const { selectedProducts } = this.state;
+    const cartList = [];
+    if (cartList.includes((product))) {
+      const item = cartList.indexOf(product);
+      cartList[item].quantity += 1;
+    } else {
+      product.quantity = 1;
+      cartList.push(product);
+    }
+    this.setState({
+      selectedProducts: [...selectedProducts, ...cartList],
+    });
+  }
 
   render() {
     const { categories, products } = this.state;
@@ -63,6 +86,7 @@ class Home extends Component {
         <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"
+          onClick={ () => this.setCartItems() }
         >
           Ir carrinho de compras
         </Link>
@@ -82,7 +106,7 @@ class Home extends Component {
         </section>
         <div>
           {products && products.map((product) => ( // função do requisito 5
-            <div productInfo={ product } key={ product.id } data-testid="product">
+            <div key={ product.id } data-testid="product">
               <img src={ product.thumbnail } alt="foto-produto" />
               <h2>{product.title}</h2>
               <p>{product.price}</p>
@@ -92,6 +116,13 @@ class Home extends Component {
               >
                 Link
               </Link>
+              <button
+                data-testid="product-add-to-cart"
+                type="button"
+                onClick={ () => this.addToCart(product) }
+              >
+                Adicionar ao carrinho
+              </button>
             </div>))}
         </div>
       </main>
