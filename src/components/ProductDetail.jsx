@@ -10,14 +10,15 @@ class ProductDetail extends React.Component {
       selectedThumbnail: '',
       selectedPrice: '',
     };
-    this.teste = this.teste.bind(this);
+    this.handleState = this.handleState.bind(this);
+    this.toLocalStorage = this.toLocalStorage.bind(this);
   }
 
   componentDidMount() {
-    this.teste();
+    this.handleState();
   }
 
-  teste() {
+  handleState() {
     const { location } = this.props;
     const { title, thumbnail, price } = location.state;
     this.setState({
@@ -27,15 +28,29 @@ class ProductDetail extends React.Component {
     });
   }
 
+  toLocalStorage() {
+    const { selectedTitle, selectedThumbnail, selectedPrice } = this.state;
+    localStorage.setItem('title', selectedTitle);
+    localStorage.setItem('thumbnail', selectedThumbnail);
+    localStorage.setItem('price', selectedPrice);
+  }
+
   render() {
     const { selectedTitle, selectedThumbnail, selectedPrice } = this.state;
+
     return (
       <div>
         <ShoppingCartLink />
         <h1 data-testid="product-detail-name">{selectedTitle}</h1>
         <img src={ selectedThumbnail } alt="" />
         <h2>{selectedPrice}</h2>
-        <ul />
+        <button
+          type="button"
+          onClick={ this.toLocalStorage }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }

@@ -76,7 +76,7 @@ class Main extends React.Component {
                     pathname: `/product-detail/${product.id}`,
                     state: product } }
                 >
-                  <Product key={ product.id } product={ product } />
+                  <Product key={ product.attributes.values.id } product={ product } />
                 </Link>
                 <AddToCartBtn key={ product.thumbnail_id } product={ product } />
               </>
