@@ -6,17 +6,26 @@ import './App.css';
 import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route path="/Cart" component={ Cart } />
-          <Route path="/productDetails/:category/:id" component={ ProductDetails } />
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
+class App extends React.Component {
+  componentDidMount() {
+    console.log(localStorage.getItem('cart'));
+    if (!localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify([]));
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+            <Route path="/Cart" component={ Cart } />
+            <Route path="/productDetails/:category/:id" component={ ProductDetails } />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 export default App;

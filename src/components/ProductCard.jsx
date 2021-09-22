@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AddCartButton from './AddCartButton';
 
 class ProductCard extends Component {
-  handleAddToCart = () => {
-    const { id, category } = this.props;
-    const newItem = { id, category, qty: 1 };
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    localStorage.setItem('cart', JSON.stringify([...cart, newItem]));
-  };
-
   render() {
     const product = this.props;
     return (
@@ -23,13 +17,11 @@ class ProductCard extends Component {
         >
           Detalhes
         </Link>
-        <button
+        <AddCartButton
           data-testid="product-add-to-cart"
-          onClick={ this.handleAddToCart }
-          type="button"
-        >
-          Adicionar ao carrinho
-        </button>
+          id={ product.id }
+          category={ product.category }
+        />
       </div>
     );
   }
