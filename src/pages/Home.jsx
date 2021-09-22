@@ -61,7 +61,7 @@ class Home extends Component {
   }
 
   render() {
-    const { categories, products } = this.state;
+    const { categories, products, selectedProducts } = this.state;
     return (
       <main>
         <label htmlFor="query-input">
@@ -111,7 +111,8 @@ class Home extends Component {
               <h2>{product.title}</h2>
               <p>{product.price}</p>
               <Link
-                to={ { pathname: `/product/${product.id}`, state: { product } } }
+                to={ { pathname: `/product/${product.id}`,
+                  state: { product, selectedProducts } } }
                 data-testid="product-detail-link"
               >
                 Link
