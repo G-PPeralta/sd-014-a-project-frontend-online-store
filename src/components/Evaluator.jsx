@@ -1,5 +1,6 @@
 import React from 'react';
 import Evaluation from './Evaluation';
+import { addEvaluation } from '../services/localstorage';
 
 class Evaluator extends React.Component {
   constructor() {
@@ -8,7 +9,7 @@ class Evaluator extends React.Component {
       email: '',
       avaliacao: '0',
       mensagem: '',
-      arrayAvaliacao: [],
+      arrayAvaliacao: {},
     };
   }
 
@@ -30,17 +31,24 @@ class Evaluator extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { email, avaliacao, mensagem, arrayAvaliacao } = this.state;
-    localStorage.setItem('email', email);
-    localStorage.setItem('avaliacao', avaliacao);
-    localStorage.setItem('mensagem', mensagem);
+    const { email, avaliacao, mensagem } = this.state;
 
+    addEvaluation({ email, avaliacao, mensagem, id: email });
     // arrayAvaliacao.push([email, avaliacao, mensagem]);
-    this.setState((prevState) => ({
-      arrayAvaliacao: [...prevState.arrayAvaliacao, { email, avaliacao, mensagem }],
+    this.setState(() => ({
+      arrayAvaliacao: localStorage.getObj('evaluations'),
     }));
-    console.log(arrayAvaliacao);
   }
+
+  renderComment = (avaliacoes) => (Object.values(avaliacoes)
+    .map(({ email, avaliacao, mensagem }) => (
+      <Evaluation
+        key={ email }
+        email={ email }
+        avaliacao={ avaliacao }
+        mensagem={ mensagem }
+      />
+    )));
 
   render() {
     const { email, avaliacao, mensagem, arrayAvaliacao } = this.state;
@@ -82,8 +90,7 @@ class Evaluator extends React.Component {
           />
           <button type="submit" onClick={ this.handleSubmit }>Avaliar</button>
         </form>
-        {arrayAvaliacao
-          .map((evaluation, index) => <Evaluation key={ index } value={ evaluation } />)}
+        { this.renderComment(arrayAvaliacao) }
       </section>
     );
   }

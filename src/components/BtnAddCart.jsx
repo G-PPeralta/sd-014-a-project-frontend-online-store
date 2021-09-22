@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import addToCart from '../services/localstorage';
+import { addToCart } from '../services/localstorage';
 
 class BtnAddCart extends React.Component {
   render() {
