@@ -15,20 +15,39 @@ class Evaluations extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    this.evaluationsCheck();
+  }
+
   handleClick = () => {
     const { email, comment, rating, ratings } = this.state;
+    const { productID } = this.props;
     const presentRating = {
       email,
       comment,
       rating,
     };
     ratings.push(presentRating);
-    this.setState({ ratings });
+    localStorage.setItem(productID, JSON.stringify(ratings));
+    this.setState({
+      ratings,
+      email: '',
+      comment: '',
+      rating: 0,
+    });
   }
 
   handleChange({ target }) {
     const { name } = target;
     this.setState({ [name]: target.value });
+  }
+
+  evaluationsCheck = () => {
+    const { productID } = this.props;
+    const oldRatings = JSON.parse(localStorage.getItem(productID) || '[]'); // Referencia -> https://stackoverflow.com/questions/43762363/how-to-store-an-array-of-objects-in-local-storage
+    if (oldRatings.length > 0) {
+      this.setState({ ratings: oldRatings });
+    }
   }
 
   emailAndRating = () => {
@@ -49,7 +68,7 @@ class Evaluations extends React.Component {
   }
 
   render() {
-    const { ratings } = this.state;
+    const { ratings, comment } = this.state;
     return (
       <div>
         <h1>Avaliações</h1>
@@ -59,6 +78,7 @@ class Evaluations extends React.Component {
             <textarea
               onChange={ this.handleChange }
               name="comment"
+              value={ comment }
               rows="5"
               cols="35"
               data-testid="product-detail-evaluation"

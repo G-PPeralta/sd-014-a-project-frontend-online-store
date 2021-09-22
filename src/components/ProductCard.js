@@ -10,17 +10,25 @@ class ProductCard extends React.Component {
     return (
       <>
         { product.map((productInfos) => (
-          <div key={ productInfos.id } data-testid="product">
-            <Link
-              to={ { pathname: `/product/${productInfos.id}`, state: { productInfos } } }
-              data-testid="product-detail-link"
-            >
-              <h4>{ productInfos.title }</h4>
-              <img src={ productInfos.thumbnail } alt="Foto do produto" />
-              <p>{ productInfos.price }</p>
-            </Link>
-            <AddButton />
-          </div>))}
+          <div className="product-and-addtocart-button" key={ productInfos.id }>
+            <div data-testid="product">
+              <Link
+                to={ {
+                  pathname: `/product/${productInfos.id}`,
+                  state: { productInfos },
+                } }
+                data-testid="product-detail-link"
+              >
+                <h4>{ productInfos.title }</h4>
+                <img src={ productInfos.thumbnail } alt="Foto do produto" />
+                <p>{ productInfos.price }</p>
+              </Link>
+            </div>
+            <AddButton
+              testid="product-add-to-cart"
+            />
+          </div>
+        ))}
       </>
     );
   }

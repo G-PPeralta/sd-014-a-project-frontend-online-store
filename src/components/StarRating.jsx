@@ -26,9 +26,9 @@ class StarRating extends Component {
                   color={ ratingValue <= rating ? '#ffc107' : '#e4e5e9' }
                   size={ 30 }
                 />
-              </label>);
+              </label>
+            );
           })}
-        )
       </div>
     );
   }
@@ -36,7 +36,7 @@ class StarRating extends Component {
 
 StarRating.propTypes = {
   onClick: PropTypes.func.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
 };
 
 export default StarRating;
