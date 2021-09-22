@@ -7,14 +7,8 @@ class ProductCard extends Component {
     const { product, onClick } = this.props;
     const { title, thumbnail, price, address, id } = product;
     return (
-      <div
-        data-testid="product"
-        className="card"
-      >
-        <Link
-          data-testid="product-detail-link"
-          to={ `product/${id}` }
-        >
+      <div data-testid="product" className="card">
+        <Link data-testid="product-detail-link" to={ `product/${id}` }>
           <div>
             <img src={ thumbnail } alt={ title } className="img" />
           </div>

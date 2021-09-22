@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { getProductItemFromML } from '../services/api';
 
 class ProductDetail extends Component {
   constructor() {
@@ -15,7 +14,6 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    // console.log(typeof (id));
     this.getProductItemFromML(id).then((response) => {
       this.setState({
         product: response,
@@ -40,7 +38,6 @@ class ProductDetail extends Component {
         </div>
         <div>
           <h2>
-            {' '}
             { `R$ ${product.price}` }
           </h2>
         </div>
