@@ -22,6 +22,8 @@ export function addToCart(product) {
 
 export function addQuantity(id, operation) {
   const products = localStorage.getObj('products');
+  console.log(products[id].quantity);
   if (operation === 'sum') products[id].quantity += 1;
   if (operation === 'sub' && products[id].quantity !== 1) products[id].quantity -= 1;
+  localStorage.setObj('products', products);
 }
