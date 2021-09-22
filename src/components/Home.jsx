@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CategoriesList from './CategoriesList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Search from './Search';
@@ -12,12 +13,20 @@ class Home extends React.Component {
       product: '',
       productList: [],
       requisition: false,
+      cartProducts: [],
     };
   }
 
   handleChange = ({ target }) => {
     const { value } = target;
     this.setState({ product: value });
+  }
+
+  addtocart = (product) => {
+    this.setState((previousState) => ({
+      cartProducts: [...previousState.cartProducts, product],
+    }));
+    this.exportCart(product);
   }
 
   fetchGetProducts = async () => {
@@ -34,6 +43,11 @@ class Home extends React.Component {
   getCategory = (category) => {
     this.setState({ category });
     this.fetchGetProducts();
+  }
+
+  exportCart = (product) => {
+    const { takeCartProduct } = this.props;
+    takeCartProduct(product);
   }
 
   render() {
@@ -62,10 +76,18 @@ class Home extends React.Component {
           <button type="button">Carrinho</button>
         </Link>
         <CategoriesList category={ this.getCategory } />
-        <Search productList={ productList } requisition={ requisition } />
+        <Search
+          productList={ productList }
+          requisition={ requisition }
+          addtocart={ this.addtocart }
+        />
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  takeCartProduct: PropTypes.func.isRequired,
+};
 
 export default Home;
