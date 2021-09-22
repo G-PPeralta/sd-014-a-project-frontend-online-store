@@ -1,0 +1,8 @@
+.div200 {
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  margin: 10px;
+  width: 1000px;
+}

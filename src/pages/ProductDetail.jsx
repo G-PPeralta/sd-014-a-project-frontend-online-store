@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AddReview from '../components/AddReview';
+import Reviews from '../components/Reviews';
 import '../styles/ProductDetail.css';
 
 const cartProducts = [];
@@ -12,11 +14,15 @@ export default class ProductDetail extends Component {
     this.state = {
       product: props.location.state,
       productQty: 0,
-    // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309
+      reviews: [],
+    // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309.
     };
   }
 
   componentDidMount() {
+    const reviews = localStorage.getItem('reviews');
+    if (reviews) this.updateReviews(JSON.parse(reviews));
+    // Load reviews from localStorage
     const {
       product: { id },
     } = this.state;
@@ -33,6 +39,19 @@ export default class ProductDetail extends Component {
     const { productQty } = this.state;
     this.savetoLocalStorage(productQty);
   }
+
+  addReview = (review) => {
+    const { reviews } = this.state;
+    const updatedReviews = [...reviews, review];
+    this.setState({
+      reviews: updatedReviews,
+    });
+    localStorage.setItem('reviews', JSON.stringify(updatedReviews));
+    // Save to localStorage
+  };
+
+  updateReviews = (reviews) => this.setState({ reviews });
+  // Can't use setState in componentDidMount
 
   updateProductQty = (productQty) => this.setState({ productQty });
   // Can't use setState in componentDidMount
@@ -90,7 +109,7 @@ export default class ProductDetail extends Component {
      const {
        product: { title, thumbnail, price },
      } = this.state;
-
+     const { reviews } = this.state;
      return (
        <>
          <Link data-testid="shopping-cart-button" to="/shopping-cart">
@@ -108,6 +127,8 @@ export default class ProductDetail extends Component {
            <p>{`R$${price.toFixed(2)}`}</p>
            {this.addToCartBtn()}
          </div>
+         <AddReview addReview={ this.addReview } />
+         {reviews.length > 0 && <Reviews reviews={ reviews } />}
        </>
      );
    }

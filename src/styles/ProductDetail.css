@@ -8,3 +8,18 @@
   padding: 20px;
   width: 400px;
 }
+
+.product-thumbnail {
+  width: 50px;
+}
+
+.div200 {
+  align-items: stretch;
+  border: solid 2px;
+  display: flex;
+  height: 57px;
+  justify-content: space-evenly;
+  margin: 10px;
+  max-width: 900px;
+  padding: 13px;
+}

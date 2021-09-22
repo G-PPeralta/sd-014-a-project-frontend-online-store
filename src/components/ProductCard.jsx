@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/ProductCard.css';
 
 const cartProducts = [];
+const storageKey = 'cart-products';
 
 export default class ProductCard extends Component {
   constructor() {
@@ -17,7 +18,7 @@ export default class ProductCard extends Component {
     const {
       product: { id },
     } = this.props;
-    const storage = JSON.parse(localStorage.getItem('cart-products'));
+    const storage = JSON.parse(localStorage.getItem(storageKey));
     if (storage) {
       const product = storage.find((item) => item.id === id);
       if (product) {
@@ -35,8 +36,6 @@ export default class ProductCard extends Component {
   // Can't use setState in componentDidMount
 
   savetoLocalStorage = (newQty) => {
-    const storageKey = 'cart-products';
-
     const {
       product: { id, title, thumbnail, price },
     } = this.props;
