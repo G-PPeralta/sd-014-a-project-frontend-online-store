@@ -3,6 +3,7 @@ import CategoriesList from '../Components/CategoriesList';
 import CartButton from '../Components/CartButton';
 import Product from '../Components/Product';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { readProductsInCart } from '../services/cart';
 
 class Home extends React.Component {
   constructor() {
@@ -69,12 +70,19 @@ class Home extends React.Component {
 
         {
           products.length > 0 && products.map(
-            (product) => (
-              <Product
-                key={ product.id }
-                product={ product }
-              />
-            ),
+            (product) => {
+              const thisProduct = readProductsInCart().find((item) => (
+                item.id === product.id
+              ));
+              product.inMyCart = !thisProduct ? 0 : thisProduct.inMyCart;
+
+              return (
+                <Product
+                  key={ product.id }
+                  product={ product }
+                />
+              );
+            },
           )
         }
 

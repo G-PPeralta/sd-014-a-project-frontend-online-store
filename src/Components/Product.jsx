@@ -6,7 +6,6 @@ import * as cart from '../services/cart';
 class Product extends React.Component {
   render() {
     const { product } = this.props;
-
     return (
       <div data-testid="product">
         <p>{ product.title }</p>

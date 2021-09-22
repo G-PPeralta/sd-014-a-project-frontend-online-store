@@ -6,34 +6,73 @@ class MyCart extends React.Component {
     super();
 
     this.state = {
-      inCart: [],
+      // inCart: [],
     };
   }
-// ye
+
   componentDidMount() {
-    this.getProducts();
+    cart.rasterizeCart();
+    // this.getProducts();
+    this.renderCart();
+    // console.log(this.state.inCart);
   }
 
-  getProducts = () => {
-    const productsInCart = cart.readProductsInCart();
-    this.setState({ inCart: productsInCart });
+  // getProducts = () => {
+  //   const inCart = cart.readProductsInCart();
+  //   this.setState({ inCart });
+  // }
+
+  handleQtyClick = ({ target }) => {
+    const { innerText, value } = target;
+    const myItem = cart.readProductsInCart().find((item) => value === item.id);
+    console.log(myItem);
+    // innerText === '+' ? cart.addProductToCart(myItem) : cart.reduceProductInCart(myItem); LINT NÃO GOSTA DE TERNÁRIO
+    if (innerText === '+') cart.addProductToCart(myItem);
+    else cart.reduceProductInCart(myItem);
+    this.renderCart();
   }
 
   emptyCartMessage = () => 'Seu carrinho está vazio';
 
   renderCart = () => {
-    const { inCart } = this.state;
+    const inCart = cart.readProductsInCart();
 
-    return inCart.map((product) => (
-      <div key={ product.id }>
-        <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
-        <h3 data-testid="shopping-cart-product-quantity">1</h3>
-      </div>
-    ));
+    const renderMyCart = inCart.map((product) => {
+      const thisItem = cart.readProductsInCart().find((item) => (
+        item.id === product.id
+      ));
+      product.inMyCart = (!thisItem || thisItem.inMyCart < 1) ? 1 : thisItem.inMyCart;
+      return (
+        <div key={ product.id }>
+          <h5 data-testid="shopping-cart-product-name">{product.title}</h5>
+          <section className="itemQuantity">
+            <button
+              type="button"
+              value={ product.id }
+              onClick={ this.handleQtyClick }
+            >
+              -
+            </button>
+            <p data-testid="shopping-cart-product-quantity">{product.inMyCart}</p>
+            <button
+              type="button"
+              value={ product.id }
+              onClick={ this.handleQtyClick }
+            >
+              +
+            </button>
+          </section>
+          <p>{product.price * product.inMyCart}</p>
+        </div>
+      );
+    });
+
+    return renderMyCart;
   }
 
   render() {
-    const { inCart } = this.state;
+    // const { inCart } = this.state;
+    const inCart = cart.readProductsInCart();
 
     return (
       <main>
