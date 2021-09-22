@@ -53,7 +53,15 @@ export default class Home extends React.Component {
       );
     }
     return (
-      products.map((product, idx) => (<ProductCard key={ idx } product={ product } />))
+      products.map((product, idx) => (
+        <ProductCard
+          key={ idx }
+          product={ product }
+          onClick={ () => {
+            cartApi.addItemToCart(product);
+            this.setState({});
+          } }
+        />))
     );
   }
 

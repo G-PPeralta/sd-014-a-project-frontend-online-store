@@ -31,6 +31,13 @@ export default class ProductDetails extends Component {
       isLoading: false });
   }
 
+  handleClick = () => {
+    const { details } = this.state;
+
+    cartApi.addItemToCart(details);
+    this.setState({});
+  }
+
   render() {
     const { details, isLoading } = this.state;
     const { title,
@@ -40,7 +47,14 @@ export default class ProductDetails extends Component {
       soldQuantity,
       condition } = details;
 
-    if (isLoading) return <Loading />;
+    if (isLoading) {
+      return (
+        <div>
+          <ShoppingCartButton cartSize={ cartApi.getCartSize() } />
+          <Loading />
+        </div>
+      );
+    }
 
     return (
       <div>
@@ -64,7 +78,10 @@ export default class ProductDetails extends Component {
             { `Condição do produto: ${condition}` }
           </span>
         </div>
-        <AddItemToCart dataTestId="product-detail-add-to-cart" product={ details } />
+        <AddItemToCart
+          dataTestId="product-detail-add-to-cart"
+          onClick={ this.handleClick }
+        />
         <Form />
       </div>
     );
