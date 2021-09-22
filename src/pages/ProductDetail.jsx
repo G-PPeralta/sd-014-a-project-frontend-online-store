@@ -15,7 +15,7 @@ export default class ProductDetail extends Component {
       product: props.location.state,
       productQty: 0,
       reviews: [],
-    // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309
+    // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309.
     };
   }
 
