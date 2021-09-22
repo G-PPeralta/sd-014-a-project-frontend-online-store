@@ -38,7 +38,7 @@ export const addProduct = (product) => {
     : saveShoppingCartProducts([...products, producWithQnt]);
 };
 
-export const removeProduct = (product) => {
+export const removeProduct = (id) => {
   const products = readProducts();
-  saveShoppingCartProducts(products.filter((s) => s.product.id !== product.id));
+  saveShoppingCartProducts(products.filter((product) => product.product.id !== id));
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import ItemCart from '../components/ItemCart';
-import { readProducts, sortString } from '../services/localStorage';
+import { readProducts, sortString, removeProduct } from '../services/localStorage';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -16,12 +16,19 @@ class ShoppingCart extends React.Component {
     const remaningProducts = arrayProduct.filter((product) => product.product.id !== id);
     if (buttonName === 'incrementar') {
       selectedProduct[0].quantity += 1;
-    } else if (buttonName === 'decrementar' && selectedProduct[0].quantity > 1) {
+    } else if (selectedProduct[0].quantity > 1) {
       selectedProduct[0].quantity -= 1;
     }
     this.setState({
       arrayProduct: [...remaningProducts, ...selectedProduct]
         .sort((a, b) => sortString(a, b)),
+    });
+  }
+
+  removeItem = (id) => {
+    removeProduct(id);
+    this.setState({
+      arrayProduct: readProducts(),
     });
   }
 
@@ -34,6 +41,7 @@ class ShoppingCart extends React.Component {
             key={ product.product.id }
             product={ product }
             quantityChanger={ this.quantityChanger }
+            removeItem={ this.removeItem }
           />))}
         <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
       </div>

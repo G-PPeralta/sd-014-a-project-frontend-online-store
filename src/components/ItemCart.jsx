@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 
 class ItemCart extends React.Component {
   handleClick=({ target }) => {
-    const { product: { product: { id } }, quantityChanger } = this.props;
-    quantityChanger(target.name, id);
+    const { name } = target;
+    const { product: { product: { id } }, quantityChanger, removeItem } = this.props;
+    if (name === 'remove') {
+      return removeItem(id);
+    }
+    quantityChanger(name, id);
   }
 
   render() {
     const { product } = this.props;
     return (
       <div>
-        <button type="button">x</button>
+        <button name="remove" onClick={ this.handleClick } type="button">x</button>
         <img src={ product.product.thumbnail } alt="" />
         <h3 data-testid="shopping-cart-product-name">{ product.product.title}</h3>
         <button
@@ -38,6 +42,7 @@ class ItemCart extends React.Component {
   }
 }
 ItemCart.propTypes = {
+  removeItem: PropTypes.func.isRequired,
   quantityChanger: PropTypes.func.isRequired,
   product: PropTypes.shape({
     product: PropTypes.shape({
