@@ -1,0 +1,66 @@
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.evaluation-session {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.email-and-rate {
+  display: flex;
+}
+
+.rating {
+  margin-left: 10px;
+}
+
+textarea {
+  margin-top: 10px;
+}
+
+form {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.radio-button {
+  height: 0;
+  visibility: hidden;
+  width: 0;
+}
+
+.old-evaluation-session {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.email-and-rating-history {
+  display: flex;
+  margin-top: 10px;
+}
+
+.teste {
+  align-items: flex-start;
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  margin-bottom: 20px;
+  width: 97%;
+}
+
+.old-rating {
+  margin-left: 40px;
+}
+
+.old-comment {
+  margin-top: 15px;
+}
