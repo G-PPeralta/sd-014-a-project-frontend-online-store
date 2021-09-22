@@ -18,35 +18,68 @@ export default class ShoppingCart extends Component {
   }
 
   componentDidMount() {
-    this.localStorage();
+    this.loadLocalStorage();
   }
 
-  localStorage() {
+  componentDidUpdate() {
+    const { cartProducts } = this.state;
+    localStorage.setItem('cart-products', JSON.stringify(cartProducts));
+  }
+
+  loadLocalStorage() {
     const savedCart = JSON.parse(localStorage.getItem('cart-products'));
     if (savedCart) {
       this.setState({ cartProducts: savedCart });
     }
   }
 
-  removeProduct(id) {
-    console.log(id);
+  removeProduct(productToRemoveId) {
+    console.log('Removendo produto: ', productToRemoveId);
     const { cartProducts } = this.state;
-    // Filtrando o array, ficam todos menos o que tem o ID
-    const filtered = cartProducts.filter((prod) => prod.id !== id);
+    const newCart = cartProducts.filter(
+      (product) => product.id !== productToRemoveId,
+    );
+    console.log(newCart);
     this.setState({
-      cartProducts: filtered,
+      cartProducts: newCart,
     });
   }
 
   changeProductQuantity(product, sign) {
-    // sign === + ? +1 : -1
-    console.log(product, sign);
+    const { cartProducts } = this.state;
+
+    if (sign === '+') {
+      const newCart = cartProducts.map((p) => {
+        if (p.id === product.id) {
+          p.productQty += 1;
+        }
+        return p;
+      });
+
+      this.setState({
+        cartProducts: newCart,
+      });
+    } else {
+      const newCart = cartProducts.map((p) => {
+        if (p.id === product.id && p.productQty >= 1) {
+          p.productQty -= 1;
+        }
+        return p;
+      });
+      const newCartWithoutZero = newCart.filter((p) => p.productQty > 0);
+
+      this.setState({
+        cartProducts: newCartWithoutZero,
+      });
+    }
   }
 
   calculatePrice() {
     const { cartProducts } = this.state;
     let totalPrice = 0;
-    cartProducts.forEach((p) => { totalPrice += p.price; });
+    cartProducts.forEach((p) => {
+      totalPrice += p.price;
+    });
     return totalPrice;
   }
 
@@ -54,7 +87,7 @@ export default class ShoppingCart extends Component {
     const { cartProducts } = this.state;
     return (
       <section>
-        { cartProducts.map((product) => (
+        {cartProducts.map((product) => (
           <CartProduct
             key={ product.id }
             product={ product }
@@ -62,7 +95,9 @@ export default class ShoppingCart extends Component {
             changeProductQuantity={ this.changeProductQuantity }
           />
         ))}
-        <h2>{ `Valor Total da Compra: R$ ${this.calculatePrice().toFixed(2)}` }</h2>
+        <h2>
+          {`Valor Total da Compra: R$ ${this.calculatePrice().toFixed(2)}`}
+        </h2>
         <button type="button">Finalizar Compra</button>
       </section>
     );
@@ -103,7 +138,7 @@ export default class ShoppingCart extends Component {
           <h2>Carrinho de Compras</h2>
         </div>
         <main className="cart-product-list">
-          { cartProducts.length > 0 ? this.showProducts() : this.showEmptyCart() }
+          {cartProducts.length > 0 ? this.showProducts() : this.showEmptyCart()}
         </main>
       </div>
     );
