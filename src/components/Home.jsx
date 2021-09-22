@@ -59,7 +59,7 @@ class Home extends React.Component {
 
         </button>
         <Link to="/ShoppingCart" data-testid="shopping-cart-button">
-          <button type="button">Adicionar icone do carrinho aqui</button>
+          <button type="button">Carrinho</button>
         </Link>
         <CategoriesList category={ this.getCategory } />
         <Search productList={ productList } requisition={ requisition } />
