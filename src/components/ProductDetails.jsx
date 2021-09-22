@@ -2,19 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AddCartButton from './AddCartButton';
 import CartButton from './CartButton';
+import AvaliationForm from './AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
+import RenderAvaliation from './RenderAvaliation';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       product: {},
+      email: '',
+      rating: '',
+      comment: '',
+      ratingsArray: [],
     };
     this.getProduct = this.getProduct.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+  }
+
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleRatingStorage = (event) => {
+    event.preventDefault();
+    const { email, rating, comment } = this.state;
+    this.setState((lastState) => (
+      { ratingsArray: [...lastState.ratingsArray, { email, rating, comment }] }));
   }
 
   async getProduct() {
@@ -28,8 +46,9 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product } = this.state;
+    const { product, email, rating, comment, ratingsArray } = this.state;
     const { title, price, thumbnail, itemDescription } = product;
+
     return (
       <div>
         <CartButton />
@@ -38,6 +57,20 @@ class ProductDetails extends React.Component {
         <img src={ thumbnail } alt={ title } />
         {itemDescription ? <p>{itemDescription}</p> : null }
         <AddCartButton product={ product } dataTestId="product-detail-add-to-cart" />
+        <AvaliationForm
+          handleChange={ this.handleChange }
+          handleClick={ this.handleRatingStorage }
+          email={ email }
+          rating={ rating }
+          comment={ comment }
+        />
+        { ratingsArray.map((user) => (
+          <RenderAvaliation
+            rating={ rating }
+            key={ user.email }
+            storedEmail={ user.email }
+            storedComment={ user.comment }
+          />))}
       </div>
     );
   }
