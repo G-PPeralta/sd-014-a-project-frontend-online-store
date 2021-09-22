@@ -4,6 +4,7 @@ import ShoppingCartLink from '../components/ShoppingCartLink';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../components/Categories';
 import Product from '../components/Product';
+import AddToCartBtn from '../components/AddToCartBtn';
 
 class Main extends React.Component {
   constructor() {
@@ -67,15 +68,19 @@ class Main extends React.Component {
           </button>
           { products
             .map((product) => (
-              <Link
-                data-testid="product-detail-link"
-                key={ product.id }
-                to={ {
-                  pathname: `/product-detail/${product.id}`,
-                  state: product } }
-              >
-                <Product key={ product.id } product={ product } />
-              </Link>)) }
+              <>
+                <Link
+                  data-testid="product-detail-link"
+                  key={ product.id }
+                  to={ {
+                    pathname: `/product-detail/${product.id}`,
+                    state: product } }
+                >
+                  <Product key={ product.id } product={ product } />
+                </Link>
+                <AddToCartBtn key={ product.thumbnail_id } product={ product } />
+              </>
+            )) }
         </div>
       );
     }
