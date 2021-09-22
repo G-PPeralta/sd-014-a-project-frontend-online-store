@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as cart from '../services/cart';
 
 class MyCart extends React.Component {
@@ -69,6 +70,14 @@ class MyCart extends React.Component {
           { inCart.length < 1 ? this.emptyCartMessage() : this.renderCart() }
           <p>{ `Total: R$${cart.getTotal()}` }</p>
         </h2>
+        <Link to={ { pathname: '/checkout', state: inCart } }>
+          <button
+            type="button"
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+          </button>
+        </Link>
       </main>
     );
   }

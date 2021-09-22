@@ -42,7 +42,7 @@ export const decreaseQuant = (item) => {
   const itemCopy = itemsInCart.find((i) => i.product.id === item.product.id);
   removeProductFromCart(item);
 
-  if (itemCopy.quant > 0) {
+  if (itemCopy.quant > 1) {
     itemCopy.quant -= 1;
     addProductToCart(itemCopy);
   }
