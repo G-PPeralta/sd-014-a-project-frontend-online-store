@@ -12,6 +12,7 @@ class Home extends React.Component {
       product: '',
       productList: [],
       requisition: false,
+      cartProducts: [],
     };
   }
 
@@ -24,10 +25,16 @@ class Home extends React.Component {
     this.setState({ product: value });
   }
 
+  addtocart = (product) => {
+    this.setState ((previousState) => ({
+      cartProducts: [...previousState.cartProducts, product ],
+    }))
+    this.exportCart(product);
+  }
+
   fetchGetProducts = async () => {
     const { product, category } = this.state;
     const productList = await getProductsFromCategoryAndQuery(category, product);
-    console.log(productList);
     this.setState({ productList: productList.results,
       requisition: true });
   }
@@ -39,6 +46,11 @@ class Home extends React.Component {
   getCategory = (category) => {
     this.setState({ category });
     this.fetchGetProducts();
+  }
+
+  exportCart = (product) => {    
+    const { takeCartProduct } =  this.props;
+    takeCartProduct(product);
   }
 
   render() {
@@ -63,11 +75,11 @@ class Home extends React.Component {
           Buscar
 
         </button>
-        <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+        <Link to="/ShoppingCart" data-testid="shopping-cart-button" >
           <button type="button">Adicionar icone do carrinho aqui</button>
         </Link>
         <CategoriesList category={ this.getCategory } />
-        <Search productList={ productList } requisition={ requisition } />
+        <Search productList={ productList } requisition={ requisition } addtocart={ this.addtocart } />
       </div>
     );
   }

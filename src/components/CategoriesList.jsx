@@ -14,6 +14,7 @@ class CategoriesList extends Component {
     this.arrayCategories();
   }
 
+
   arrayCategories = async () => {
     const productByCategory = await getCategories();
     this.setState({ sortedProducts: productByCategory });
