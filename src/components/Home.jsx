@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CategoriesList from './CategoriesList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Search from './Search';
@@ -26,9 +27,9 @@ class Home extends React.Component {
   }
 
   addtocart = (product) => {
-    this.setState ((previousState) => ({
-      cartProducts: [...previousState.cartProducts, product ],
-    }))
+    this.setState((previousState) => ({
+      cartProducts: [...previousState.cartProducts, product],
+    }));
     this.exportCart(product);
   }
 
@@ -48,8 +49,8 @@ class Home extends React.Component {
     this.fetchGetProducts();
   }
 
-  exportCart = (product) => {    
-    const { takeCartProduct } =  this.props;
+  exportCart = (product) => {
+    const { takeCartProduct } = this.props;
     takeCartProduct(product);
   }
 
@@ -75,14 +76,22 @@ class Home extends React.Component {
           Buscar
 
         </button>
-        <Link to="/ShoppingCart" data-testid="shopping-cart-button" >
+        <Link to="/ShoppingCart" data-testid="shopping-cart-button">
           <button type="button">Adicionar icone do carrinho aqui</button>
         </Link>
         <CategoriesList category={ this.getCategory } />
-        <Search productList={ productList } requisition={ requisition } addtocart={ this.addtocart } />
+        <Search
+          productList={ productList }
+          requisition={ requisition }
+          addtocart={ this.addtocart }
+        />
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  takeCartProduct: PropTypes.func.isRequired,
+};
 
 export default Home;

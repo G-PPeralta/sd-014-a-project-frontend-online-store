@@ -12,9 +12,9 @@ class App extends React.Component {
   }
 
   takeCartProduct = (product) => {
-    this.setState ((previousState) => ({
-      cartProduct: [...previousState.cartProduct, product ],
-    }))  
+    this.setState((previousState) => ({
+      cartProduct: [...previousState.cartProduct, product],
+    }));
   }
 
   render() {
@@ -23,8 +23,17 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" render={ (props) => <Home { ...props } takeCartProduct={ this.takeCartProduct } /> }  />
-            <Route path="/ShoppingCart" render={ (props) => <ShoppingCart { ...props } cartProduct={ cartProduct } /> } />
+            <Route
+              exact
+              path="/"
+              render={ (props) => (
+                <Home { ...props } takeCartProduct={ this.takeCartProduct } />) }
+            />
+            <Route
+              path="/ShoppingCart"
+              render={ (props) => (
+                <ShoppingCart { ...props } cartProduct={ cartProduct } />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>

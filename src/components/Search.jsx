@@ -19,7 +19,14 @@ class Search extends React.Component {
           <h2 data-testid="shopping-cart-product-name">{item.title}</h2>
           <img src={ item.thumbnail } alt={ item.title } />
           <p>{item.price}</p>
-          <button type="button" data-testid="product-add-to-cart" onClick={ () => this.handleClick(item) } >Adicionar no carrinho</button>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => this.handleClick(item) }
+          >
+            Adicionar no carrinho
+
+          </button>
         </div>))
     );
   }
@@ -28,6 +35,7 @@ class Search extends React.Component {
 Search.propTypes = {
   productList: PropTypes.arrayOf(PropTypes.any).isRequired,
   requisition: PropTypes.bool.isRequired,
+  addtocart: PropTypes.func.isRequired,
 };
 
 export default Search;
