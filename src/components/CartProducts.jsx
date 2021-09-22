@@ -1,29 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CartProduct from './CartProduct';
+import '../styles/CartCheckout.css';
 
 class CartProducts extends React.Component {
   render() {
-    const { carrinho, metodo } = this.props;
+    const { carrinho, updateCart, updateTotal } = this.props;
     const cartList = carrinho.map((produto) => (
       <CartProduct
-        metodo={ metodo }
+        updateCart={ updateCart }
+        updateTotal={ updateTotal }
         key={ produto.id }
         produto={ produto }
       />
     ));
 
     return (
-      <ul>
+      <section className="container-products">
         { cartList }
-      </ul>
+      </section>
     );
   }
 }
 
 CartProducts.propTypes = {
   carrinho: PropTypes.arrayOf(PropTypes.object).isRequired,
-  metodo: PropTypes.func.isRequired,
+  updateCart: PropTypes.func.isRequired,
+  updateTotal: PropTypes.func.isRequired,
 };
 
 export default CartProducts;
