@@ -76,13 +76,20 @@ class Home extends Component {
     const { input, lista, listCategories, carShop } = this.state;
     return (
       <div data-testid="home-initial-message">
-        <ToShoppingCart carShop={ carShop } />
-        Digite algum termo de pesquisa ou escolha uma categoria.
-        <SearchComponent
-          value={ input }
-          onChange={ this.handleChange }
-          onClick={ this.handleClick }
-        />
+        <div className="d-flex justify-content-between home-container">
+          <div />
+          <div className="text-center my-3">
+            <p className="d-none">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+            <SearchComponent
+              value={ input }
+              onChange={ this.handleChange }
+              onClick={ this.handleClick }
+            />
+          </div>
+          <ToShoppingCart carShop={ carShop } />
+        </div>
         <div className="d-flex">
           <Categories
             listCategories={ listCategories }

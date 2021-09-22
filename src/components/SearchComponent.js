@@ -10,10 +10,13 @@ export default class SearchComponent extends Component {
           value={ value }
           onChange={ onChange }
           name="input"
+          className=""
+          placeholder="Pesquise seu produto"
           data-testid="query-input"
         />
         <button
           type="button"
+          className="btn btn-dark"
           onClick={ onClick }
           data-testid="query-button"
         >

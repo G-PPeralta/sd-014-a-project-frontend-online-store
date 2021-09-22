@@ -20,9 +20,19 @@ export default class ToShoppingCart extends Component {
             pathname: '/ShoppingCart',
             state: { },
           } }
+          className="d-flex align-items
+          -center text-decoration-none
+          icon-cart justify-content-center"
         >
-          <i className="fas fa-shopping-cart" />
-          <p data-testid="shopping-cart-size">{this.updateCart()}</p>
+          <div className="d-flex align-items-center">
+            <i className="fas fa-shopping-cart fs-4" />
+            <p
+              className="m-0 align-self-end mb-2 cart-number"
+              data-testid="shopping-cart-size"
+            >
+              {this.updateCart()}
+            </p>
+          </div>
         </Link>
       </div>
     );

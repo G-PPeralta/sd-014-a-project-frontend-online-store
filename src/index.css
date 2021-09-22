@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.icon-cart {
+  width: 60px;
+  height: 60px;
+  color: black;
+  transition: 0.5s;
+}
+
+.icon-cart:hover {
+  transform: scale(1.1);
+  color: black;
+}
+
+.cart-number {
+  border-radius: 50%;
+  background-color: rgb(143, 49, 49);
+  border: 1px solid grey;
+  color: white;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  right: 10px;
+  bottom: 3px;
+}
