@@ -3,6 +3,7 @@ import CategoriesList from '../Components/CategoriesList';
 import CartButton from '../Components/CartButton';
 import Product from '../Components/Product';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getQuantity } from '../services/cart';
 
 class Home extends React.Component {
   constructor() {
@@ -12,11 +13,16 @@ class Home extends React.Component {
       query: '',
       category: '',
       products: [],
+      quant: 0,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateQuantity();
   }
 
   handleChange({ target: { name, value } }) {
@@ -40,8 +46,12 @@ class Home extends React.Component {
     );
   }
 
+  updateQuantity = () => {
+    this.setState({ quant: getQuantity() });
+  }
+
   render() {
-    const { query, products } = this.state;
+    const { query, products, quant } = this.state;
 
     return (
       <header data-testid="home-initial-message">
@@ -65,20 +75,23 @@ class Home extends React.Component {
           </button>
         </form>
 
-        {
-          products.length > 0 && products.map(
-            (product) => (
-              <Product
-                key={ product.id }
-                product={ product }
-                shipping={ product.shipping }
-              />
-            ),
-          )
-        }
+        <main>
+          {
+            products.length > 0 && products.map(
+              (product) => (
+                <Product
+                  key={ product.id }
+                  product={ product }
+                  shipping={ product.shipping }
+                  updateQuantity={ this.updateQuantity }
+                />
+              ),
+            )
+          }
+        </main>
 
         <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
-        <CartButton />
+        <CartButton quant={ quant } />
       </header>
     );
   }

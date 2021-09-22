@@ -63,3 +63,8 @@ export const getTotal = () => {
     (acc, res) => acc + (res.product.price * res.quant), 0,
   );
 };
+
+export const getQuantity = () => {
+  const itemsInCart = readProductsInCart();
+  return itemsInCart.reduce((acc, res) => acc + res.quant, 0);
+};
