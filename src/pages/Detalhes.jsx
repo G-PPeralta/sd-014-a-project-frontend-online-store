@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CarrinhoBt from '../components/CarrinhoBt';
 import ReviewForm from '../components/Review';
+import AddCarrinho from '../components/AddCarrinho';
 
 class Detalhes extends Component {
   render() {
@@ -16,6 +17,7 @@ class Detalhes extends Component {
         </h1>
         <h2>{ infoProduto.price }</h2>
         <p>especificação técnica</p>
+        <AddCarrinho produto={ infoProduto } testid="product-detail-add-to-cart" />
         <ReviewForm />
       </main>
     );
