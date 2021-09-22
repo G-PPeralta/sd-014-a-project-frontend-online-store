@@ -12,7 +12,11 @@ const saveProductsInCart = (productsInCart) => {
 
 export const addProductToCart = (product) => {
   const productsInCart = readProductsInCart();
-  saveProductsInCart([...productsInCart, product]);
+  if (productsInCart) {
+    saveProductsInCart([...productsInCart, product]);
+  } else {
+    saveProductsInCart([product]);
+  }
 };
 
 export const removeProductFromCart = (product) => {
@@ -22,16 +26,22 @@ export const removeProductFromCart = (product) => {
 
 export const isItemInCart = (item) => {
   const itemsInCart = readProductsInCart();
-  return itemsInCart.some((i) => i.product.id === item.product.id);
+  if (itemsInCart) {
+    return itemsInCart.some((i) => i.product.id === item.product.id);
+  }
+  return false;
 };
 
 export const increaseQuant = (item) => {
   if (isItemInCart(item)) {
     const itemsInCart = readProductsInCart();
-    const itemCopy = itemsInCart.find((i) => i.product.id === item.product.id);
-    removeProductFromCart(item);
-    itemCopy.quant += 1;
-    addProductToCart(itemCopy);
+    const newList = itemsInCart.map((i) => {
+      if (i.product.id === item.product.id) {
+        i.quant += 1;
+      }
+      return i;
+    });
+    saveProductsInCart(newList);
   } else {
     addProductToCart(item);
   }
@@ -39,13 +49,12 @@ export const increaseQuant = (item) => {
 
 export const decreaseQuant = (item) => {
   const itemsInCart = readProductsInCart();
-  const itemCopy = itemsInCart.find((i) => i.product.id === item.product.id);
-  removeProductFromCart(item);
-
-  if (itemCopy.quant > 1) {
-    itemCopy.quant -= 1;
-    addProductToCart(itemCopy);
-  }
+  const updatedList = itemsInCart.map((i) => {
+    if (i.product.id === item.product.id) i.quant -= 1;
+    return i;
+  });
+  const newList = updatedList.filter((i) => i.quant > 0);
+  saveProductsInCart(newList);
 };
 
 export const getTotal = () => {
