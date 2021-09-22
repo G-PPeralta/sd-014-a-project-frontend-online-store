@@ -28,17 +28,16 @@ export const addItemToCart = (item) => {
   }
 };
 
-export const subItemFromCart = (item) => {
+export const subItemToCart = (item) => {
   if (item) {
     const items = readShoppingCart();
     const index = items.findIndex(({ id }) => id === item.id);
-    if (index !== NOT_FOUND) {
-      if (item.shopping_cart <= 1) {
-        saveShoppingCart(items.filter(({ id }) => id !== item.id));
-      } else {
-        items[index].shopping_cart -= 1;
-        saveShoppingCart(items);
-      }
+    if (index === NOT_FOUND) {
+      item.shopping_cart = 1;
+      saveShoppingCart([...items, item]);
+    } else {
+      items[index].shopping_cart -= 1;
+      saveShoppingCart(items);
     }
   }
 };
