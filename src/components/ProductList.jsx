@@ -13,6 +13,8 @@ class ProductList extends Component {
             price={ product.price }
             thumbnail={ product.thumbnail }
             key={ product.id }
+            category={ product.category_id }
+            id={ product.id }
           />
         )) }
       </div>
