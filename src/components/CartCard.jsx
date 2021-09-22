@@ -9,7 +9,7 @@ class CartCard extends React.Component {
         <h1 data-testid="shopping-cart-product-name">{ product.title}</h1>
         <img src={ product.thumbnail } alt={ product.id } />
         <p data-testid="shopping-cart-product-quantity">
-          1
+          {!product.quantidade ? 1 : product.quantidade }
         </p>
         <p>
           R$
