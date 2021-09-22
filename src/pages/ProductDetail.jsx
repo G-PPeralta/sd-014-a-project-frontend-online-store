@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddReview from '../components/AddReview';
 import Reviews from '../components/Reviews';
+import '../styles/ProductDetail.css';
 
 const cartProducts = [];
 

@@ -24,7 +24,7 @@ export default class CartProduct extends Component {
         <button
           type="button"
           data-testid="product-decrease-quantity"
-          onClick={ () => changeProductQuantity(product, false) }
+          onClick={ () => changeProductQuantity(product, '-') }
         >
           -
         </button>
@@ -32,7 +32,7 @@ export default class CartProduct extends Component {
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={ () => changeProductQuantity(product, true) }
+          onClick={ () => changeProductQuantity(product, '+') }
         >
           +
         </button>
