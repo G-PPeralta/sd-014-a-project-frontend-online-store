@@ -7,9 +7,16 @@ class ProductDetails extends React.Component {
     const { state: { title, price, thumbnail } } = location;
     return (
       <div>
-        <h2 data-testid="product-detail-name">{title}</h2>
+        <h2 data-testid="product-detail-name">{ title }</h2>
         <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
+        <p>{ `R$ ${price.toFixed(2)}` }</p>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.handleClick }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }

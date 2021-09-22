@@ -16,24 +16,26 @@ class Search extends React.Component {
     }
     return (
       productList.map((item) => (
-        <Link
-          to={ { pathname: `product/${item.id}`, state: item } }
-          key={ item.id }
-          data-testid="product-detail-link"
-        >
-          <div key={ item.id } data-testid="product">
-            <h2>{ item.title }</h2>
-            <img src={ item.thumbnail } alt={ item.title } />
-            <p>{item.price}</p>
-            <button
-              type="button"
-              data-testid="product-add-to-cart"
-              onClick={ () => this.handleClick(item) }
-            >
-              Adicionar no carrinho
-            </button>
-          </div>
-        </Link>
+        <div key={ item.id }>
+          <Link
+            to={ { pathname: `product/${item.id}`, state: item } }
+            key={ item.id }
+            data-testid="product-detail-link"
+          >
+            <div data-testid="product">
+              <h2>{ item.title }</h2>
+              <img src={ item.thumbnail } alt={ item.title } />
+              <p>{item.price}</p>
+            </div>
+          </Link>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => this.handleClick(item) }
+          >
+            Adicionar no carrinho
+          </button>
+        </div>
       ))
     );
   }
