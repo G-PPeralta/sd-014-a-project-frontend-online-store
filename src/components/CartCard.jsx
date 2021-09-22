@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class CartCard extends Component {
   constructor(props) {
@@ -10,30 +11,44 @@ export default class CartCard extends Component {
 
   increaseQuantity = () => {
     this.setState((prevState) => ({
-      quantity: prevState.quantity + 1
+      quantity: prevState.quantity + 1,
     }));
   }
 
   decreaseQuantity = () => {
     const { quantity } = this.state;
     if (quantity > 1) {
-    this.setState((prevState) => ({
-      quantity: prevState.quantity - 1
-    }));
-  }}
+      this.setState((prevState) => ({
+        quantity: prevState.quantity - 1,
+      }));
+    }
+  }
 
   render() {
     const { item } = this.props;
     const { quantity } = this.state;
     return (
-        <div >
-            <p data-testid="shopping-cart-product-name">{ item.title }</p>
-            <button data-testid="product-decrease-quantity" onClick={ this.decreaseQuantity }
-            >-</button>
-            <button data-testid="product-increase-quantity" onClick={ this.increaseQuantity }
-            >+</button>
-            <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
-          </div>
-    )
+      <div>
+        <p data-testid="shopping-cart-product-name">{ item.title }</p>
+        <button
+          type="button"
+          data-testid="product-decrease-quantity"
+          onClick={ this.decreaseQuantity }
+        >
+          -
+        </button>
+        <button
+          type="button"
+          data-testid="product-increase-quantity"
+          onClick={ this.increaseQuantity }
+        >
+          +
+        </button>
+        <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
+      </div>
+    );
   }
 }
+CartCard.propTypes = {
+  item: PropTypes.object,
+}.isRequired;
