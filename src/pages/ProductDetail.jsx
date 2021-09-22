@@ -16,7 +16,7 @@ export default class ProductDetail extends Component {
     super();
     this.state = {
       resultApi: [],
-      cartSize: '',
+      // cartSize: JSON.parse(localStorage.getItem('cartList')).length,
     };
     this.callApi = this.callApi.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -24,7 +24,10 @@ export default class ProductDetail extends Component {
 
   componentDidMount() {
     this.callApi();
-    localStorage.setItem('cartSize', '0');
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    if (newCart !== null) {
+      localStorage.setItem('cartSize', newCart.length);
+    }
   }
 
   async handleClick(event) {
@@ -40,11 +43,11 @@ export default class ProductDetail extends Component {
     const cart = JSON.parse(localStorage.getItem('cartList'));
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
-    localStorage.setItem('cartSize', cart.length);
-
-    const cartSize = localStorage.getItem('cartSize');
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    console.log(newCart);
+    localStorage.setItem('cartSize', newCart.length);
     this.setState({
-      cartSize,
+      cartSize: newCart.length,
     });
   }
 

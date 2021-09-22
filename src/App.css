@@ -125,8 +125,9 @@ body {
 }
 
 .search-bar {
-  display: flex;
+  flex-direction: row;
   padding: 5px 0;
+  width: 500px;
 }
 
 .cartIcon {
@@ -404,16 +405,16 @@ body {
 .shopping-cart-product-qtd-text {
   color: rgb(109, 109, 109);
   display: inline-block;
-  padding: 0 10px 0 0;
+  padding: 0 10 0 0;
 }
 
 .cart-prod-price {
   margin-bottom: 10px;
 }
 
-/* .div-shopping-cart-icon {
-
-} */
+.div-shopping-cart-icon {
+  display: inline-block;
+}
 
 .shopping-cart-button {
   position: absolute;

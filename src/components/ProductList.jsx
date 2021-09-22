@@ -30,7 +30,10 @@ class ProductList extends Component {
   componentDidMount() {
     this.callGetCategories();
     this.handleCategory();
-    localStorage.setItem('cartSize', '0');
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    if (newCart !== null) {
+      localStorage.setItem('cartSize', newCart.length);
+    }
   }
 
   handleChange(event) {
@@ -59,9 +62,11 @@ class ProductList extends Component {
     const cart = JSON.parse(localStorage.getItem('cartList'));
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
-    localStorage.setItem('cartSize', cart.length);
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    console.log(newCart);
+    localStorage.setItem('cartSize', newCart.length);
     this.setState({
-      cartSize: cart.length,
+      cartSize: newCart.length,
     });
   }
 

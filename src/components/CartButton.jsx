@@ -5,13 +5,7 @@ import CartIcon from './CartIcon';
 
 class CartButton extends Component {
   render() {
-    // const cartSize = localStorage.getItem('cartSize');
     const { cartSize } = this.props;
-    // console.log(cartSize);
-    // console.log(typeof (cartSize));
-    // const cartInt = parseInt(cartSize, 10);
-    // console.log(cartSize);
-    // // const cartInt = parseInt(cartSize, 10);
     return (
       <div className="div-shopping-cart-icon">
         <Link
