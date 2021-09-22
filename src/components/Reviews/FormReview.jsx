@@ -40,7 +40,7 @@ class FormReview extends React.Component {
                 type="number"
                 name="evaluation"
                 id="evaluation"
-                min="0"
+                min="0" // https://www.w3schools.com/tags/att_input_type_number.asp
                 max="5"
                 onChange={ this.handleOnChange }
               />
