@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CartProduct from './CartProduct';
+import '../styles/CartCheckout.css';
 
 class CartProducts extends React.Component {
   render() {
@@ -14,9 +15,9 @@ class CartProducts extends React.Component {
     ));
 
     return (
-      <ul>
+      <section className="container-products">
         { cartList }
-      </ul>
+      </section>
     );
   }
 }

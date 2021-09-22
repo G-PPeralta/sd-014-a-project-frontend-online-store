@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartProducts from '../components/CartProducts';
 
 const CART_KEY = 'cart';
@@ -33,10 +34,17 @@ class Carrinho extends React.Component {
   render() {
     const { carrinho } = this.state;
     if (carrinho.length > 0) {
-      return (<CartProducts
-        metodo={ this.handleUpdate }
-        carrinho={ carrinho }
-      />);
+      return (
+        <>
+          <CartProducts
+            metodo={ this.handleUpdate }
+            carrinho={ carrinho }
+          />
+          <Link to="/checkout">
+            <button type="button" className="bt-container">Checkout</button>
+          </Link>
+        </>
+      );
     }
     return (
       <section>
