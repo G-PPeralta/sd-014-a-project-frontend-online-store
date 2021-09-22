@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class ToShoppingCart extends Component {
+  updateCart() {
+    if (localStorage.cart) {
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      const cartLength = cart.reduce((acc, { quantity }) => acc + quantity, 0);
+      return cartLength;
+    }
+    return null;
+  }
+
   render() {
     return (
-      <div>
+      <div className="d-flex justify-content-end me-4">
         <Link
           data-testid="shopping-cart-button"
           to={ {
@@ -12,9 +21,12 @@ export default class ToShoppingCart extends Component {
             state: { },
           } }
         >
-          Carrinho
+          <i className="fas fa-shopping-cart" />
+          <p data-testid="shopping-cart-size">{this.updateCart()}</p>
         </Link>
       </div>
     );
   }
 }
+
+// setInterval(new ToShoppingCart(), 2);

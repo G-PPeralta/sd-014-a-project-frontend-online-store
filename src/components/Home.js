@@ -15,6 +15,7 @@ class Home extends Component {
       input: '',
       lista: [],
       listCategories: [],
+      carShop: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -49,6 +50,12 @@ class Home extends Component {
     }
   }
 
+  carShop = () => {
+    this.setState({
+      carShop: true,
+    });
+  }
+
   listCategories() {
     this.setState(async () => {
       const categories = await getCategories();
@@ -66,11 +73,11 @@ class Home extends Component {
   }
 
   render() {
-    const { input, lista, listCategories } = this.state;
+    const { input, lista, listCategories, carShop } = this.state;
     return (
       <div data-testid="home-initial-message">
+        <ToShoppingCart carShop={ carShop } />
         Digite algum termo de pesquisa ou escolha uma categoria.
-        <ToShoppingCart />
         <SearchComponent
           value={ input }
           onChange={ this.handleChange }
@@ -82,7 +89,10 @@ class Home extends Component {
             clickCategories={ this.clickCategories }
           />
 
-          <ProductList lista={ lista } />
+          <ProductList
+            lista={ lista }
+            carShop={ this.carShop }
+          />
 
         </div>
       </div>
