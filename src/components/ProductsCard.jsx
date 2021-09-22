@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import addToCart from '../services/localstorage';
+import BtnAddCart from './BtnAddCart';
 
 class ProductsCard extends Component {
   render() {
@@ -20,14 +20,14 @@ class ProductsCard extends Component {
           <h1>{ title }</h1>
           <img src={ thumbnail } alt={ `${title}_image` } />
           <p>{ price }</p>
-          <button
-            type="button"
-            onClick={ () => addToCart({ title, price, thumbnail }) }
-            data-testid="product-add-to-cart"
-          >
-            Adicionar ao carrinho
-          </button>
         </Link>
+        <BtnAddCart
+          title={ title }
+          price={ +price }
+          thumbnail={ thumbnail }
+          id={ id }
+          source="product"
+        />
       </li>
     );
   }

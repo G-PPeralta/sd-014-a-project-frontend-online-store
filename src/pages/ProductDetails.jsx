@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Evaluator from '../components/Evaluator';
 import BtnCart from '../components/BtnCart';
+import BtnAddCart from '../components/BtnAddCart';
 
 class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {},
+      title: '',
+      thumbnail: '',
+      price: '',
+      // attributes,
+      id: '',
     };
     this.getResults = this.getResults.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
@@ -32,24 +37,24 @@ class ProductDetails extends Component {
 
   async getProductInfo(results) {
     const { match: { params: { idQueryCategory } } } = this.props;
-    const id = idQueryCategory.split('&')[0];
+    const productId = idQueryCategory.split('&')[0];
     const {
       title,
       thumbnail,
       price,
-      attributes } = results.find((item) => item.id === id);
+      // attributes,
+      id } = results.find((item) => item.id === productId);
     this.setState({
-      product: {
-        title,
-        thumbnail,
-        price,
-        attributes,
-      },
+      title,
+      thumbnail,
+      price,
+      // attributes,
+      id,
     });
   }
 
   render() {
-    const { product: { title, thumbnail, price } } = this.state;
+    const { title, thumbnail, price, id } = this.state;
     return (
       <main>
         <div>
@@ -60,6 +65,13 @@ class ProductDetails extends Component {
         </div>
         <BtnCart />
         <Evaluator />
+        <BtnAddCart
+          source="product-detail"
+          title={ title }
+          price={ +price }
+          thumbnail={ thumbnail }
+          id={ id }
+        />
       </main>
     );
   }
