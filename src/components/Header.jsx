@@ -8,8 +8,7 @@ class Header extends React.Component {
       <Context.Consumer>
         {({ cartLength }) => (
           <header>
-            <CartButton />
-            <span data-testid="shopping-cart-size">{cartLength}</span>
+            <CartButton>{cartLength}</CartButton>
           </header>
         )}
       </Context.Consumer>
