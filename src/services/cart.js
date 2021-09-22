@@ -17,5 +17,33 @@ export const addProductToCart = (product) => {
 
 export const removeProductFromCart = (product) => {
   const productsInCart = readProductsInCart();
-  saveProductsInCart(productsInCart.filter((p) => product.id !== p.id));
+  saveProductsInCart(productsInCart.filter((p) => product.product.id !== p.product.id));
+};
+
+export const isItemInCart = (item) => {
+  const itemsInCart = readProductsInCart();
+  return itemsInCart.some((i) => i.product.id === item.product.id);
+};
+
+export const increaseQuant = (item) => {
+  if (isItemInCart(item)) {
+    const itemsInCart = readProductsInCart();
+    const itemCopy = itemsInCart.find((i) => i.product.id === item.product.id);
+    removeProductFromCart(item);
+    itemCopy.quant += 1;
+    addProductToCart(itemCopy);
+  } else {
+    addProductToCart(item);
+  }
+};
+
+export const decreaseQuant = (item) => {
+  const itemsInCart = readProductsInCart();
+  const itemCopy = itemsInCart.find((i) => i.product.id === item.product.id);
+  removeProductFromCart(item);
+
+  if (itemCopy.quant > 0) {
+    itemCopy.quant -= 1;
+    addProductToCart(itemCopy);
+  }
 };

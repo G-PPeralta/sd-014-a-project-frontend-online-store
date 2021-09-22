@@ -24,10 +24,38 @@ class MyCart extends React.Component {
   renderCart = () => {
     const { inCart } = this.state;
 
-    return inCart.map((product) => (
+    return inCart.map(({ product, quant }) => (
       <div key={ product.id }>
-        <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
-        <h3 data-testid="shopping-cart-product-quantity">1</h3>
+        <h2 data-testid="shopping-cart-product-name">{ product.title }</h2>
+        <h3 data-testid="shopping-cart-product-quantity">
+          <button
+            data-testid="product-decrease-quantity"
+            type="button"
+            onClick={ () => {
+              const item = { product, quant: 1 };
+              cart.decreaseQuant(item);
+              this.setState({
+                inCart: cart.readProductsInCart(),
+              });
+            } }
+          >
+            -
+          </button>
+          { quant }
+          <button
+            data-testid="product-increase-quantity"
+            type="button"
+            onClick={ () => {
+              const item = { product, quant: 1 };
+              cart.increaseQuant(item);
+              this.setState({
+                inCart: cart.readProductsInCart(),
+              });
+            } }
+          >
+            +
+          </button>
+        </h3>
       </div>
     ));
   }

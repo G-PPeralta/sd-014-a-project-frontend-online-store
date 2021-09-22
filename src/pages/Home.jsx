@@ -25,9 +25,7 @@ class Home extends React.Component {
 
   async handleClick() {
     const { query, category } = this.state;
-
     const request = await getProductsFromCategoryAndQuery(category, query);
-    console.log(request);
     this.setState({ products: request.results });
   }
 

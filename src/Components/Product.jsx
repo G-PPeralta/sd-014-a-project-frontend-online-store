@@ -25,7 +25,10 @@ class Product extends React.Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ () => cart.addProductToCart(product) }
+          onClick={ () => {
+            const item = { product, quant: 1 };
+            cart.increaseQuant(item);
+          } }
         >
           Adicionar ao carrinho
         </button>
