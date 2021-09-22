@@ -49,7 +49,7 @@ class Cart extends React.Component {
   }
 
   productCard(product, index) {
-    const { id, title, quantity, available_quantity } = product;
+    const { id, title, quantity, available_quantity: avaliable } = product;
     return (
       <div key={ `${title}-${index}` }>
         <p data-testid="shopping-cart-product-name">{title}</p>
@@ -70,7 +70,7 @@ class Cart extends React.Component {
           name="add-item"
           onClick={ this.changeQuantity }
           data-testid="product-increase-quantity"
-          disabled={ available_quantity <= quantity }
+          disabled={ avaliable <= quantity }
         />
         <input
           id={ id }
