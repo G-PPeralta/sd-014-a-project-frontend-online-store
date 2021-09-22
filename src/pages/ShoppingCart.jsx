@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProductCartCard from '../components/ProductCartCard';
-import { getCartProductsAndQuantity } from '../services/local';
+import { getCartProductsAndQuantity, productsSave } from '../services/local';
 
 class ShoppingCart extends Component {
   constructor() {
@@ -14,6 +15,7 @@ class ShoppingCart extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleRmv = this.handleRmv.bind(this);
     this.renderPrice = this.renderPrice.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -21,28 +23,30 @@ class ShoppingCart extends Component {
   }
 
   handleAdd({ target }) {
+    const { cartItens, itensQuantity } = this.state;
     const { name } = target;
-    this.setState((prevState) => ({
-      itensQuantity: {
-        ...prevState.itensQuantity,
-        [name]: prevState.itensQuantity[name] + 1,
-      },
-    }));
+    const quantity = itensQuantity;
+    if (itensQuantity[name] > 1) {
+      quantity[name] += 1;
+      this.setState({ itensQuantity: quantity });
+      productsSave(cartItens, quantity);
+    }
   }
 
   handleRmv({ target }) {
-    const { itensQuantity } = this.state;
+    const { cartItens, itensQuantity } = this.state;
     const { name } = target;
-    if (itensQuantity[name] > 0) {
-      this.setState((prevState) => ({
-        itensQuantity: {
-          ...prevState.itensQuantity,
-          [name]: prevState.itensQuantity[name] - 1,
-        },
-      }));
-    } else {
-      alert('Não é possível reduzir para além de 0');
+    const quantity = itensQuantity;
+    if (itensQuantity[name] > 1) {
+      quantity[name] -= 1;
+      this.setState({ itensQuantity: quantity });
+      productsSave(cartItens, quantity);
     }
+  }
+
+  handleRedirect() {
+    const { history } = this.props;
+    history.push('/payment');
   }
 
   getItens() {
@@ -65,6 +69,15 @@ class ShoppingCart extends Component {
         </div>
         <div>
           <h3>{`O Valor total é:${this.renderPrice()}`}</h3>
+        </div>
+        <div>
+          <button
+            type="button"
+            data-testid="checkout-products"
+            onClick={ this.handleRedirect }
+          >
+            Finalizar compra
+          </button>
         </div>
       </div>
     );
@@ -90,5 +103,9 @@ class ShoppingCart extends Component {
     );
   }
 }
+
+ShoppingCart.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default ShoppingCart;
