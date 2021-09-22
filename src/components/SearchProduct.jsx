@@ -6,25 +6,31 @@ class SearchProduct extends Component {
   constructor() {
     super();
     this.state = {
-      cartItems: [],
+      nameItem: [],
+      priceItem: [],
+
     };
   }
 
   componentDidMount() {
     if (!JSON.parse(localStorage.getItem('setCart'))) {
-      localStorage.setItem('setCart', JSON.stringify([]));
+      localStorage.setItem('nameItems', JSON.stringify([]));
+      localStorage.setItem('priceItems', JSON.stringify([]));
     }
   }
 
   componentDidUpdate() {
-    const { cartItems } = this.state;
-    localStorage.setItem('setCart', JSON.stringify(cartItems));
+    const { nameItem, priceItem } = this.state;
+    localStorage.setItem('nameItems', JSON.stringify(nameItem));
+    localStorage.setItem('priceItems', JSON.stringify(priceItem));
   }
 
-  getItem = (item) => {
-    const { cartItems } = this.state;
-    const cart = cartItems;
-    this.setState({ cartItems: ([...cart, item]) });
+  getItem = (name, price) => {
+    const { nameItem, priceItem } = this.state;
+    this.setState({
+      nameItem: ([...nameItem, name]),
+      priceItem: ([...priceItem, price]),
+    });
   }
 
   searchProduct = (arrayProduct) => {
