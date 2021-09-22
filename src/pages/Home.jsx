@@ -97,6 +97,9 @@ class Home extends React.Component {
             {(products.length !== 0) ? products.map((product) => (<ProductsCard
               key={ product.id }
               product={ product }
+              id={ product.id }
+              query={ query }
+              categoryId={ selectedId }
             />)) : <p>Nenhum produto foi encontrado</p> }
           </fieldset>
         </div>
