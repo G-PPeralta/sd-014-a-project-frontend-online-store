@@ -1,22 +1,28 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import ShoppingCart from './pages/ShoppingCart';
-import Home from './pages/Home';
 import './App.css';
-import ProductDetails from './components/ProductDetails';
-import Cart from './pages/Cart';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import Home from './Components/Home';
+import Cart from './Components/Cart';
+import ProductPage from './Components/ProductPage';
+import Purchase from './Components/Purchase';
 
 function App() {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={ Home } />
-      <Route exact path="/shopping-cart" component={ ShoppingCart } />
-      <Route exact path="/cart" component={ Cart } />
-      <Route
-        exact
-        path="/product/:id"
-        render={ (props) => <ProductDetails { ...props } /> }
-      />
+      <Switch>
+        <Route exact path="/" component={ Home } />
+        <Route exact path="/cart" component={ Cart } />
+        <Route
+          exact
+          path="/product/:id"
+          render={ (props) => <ProductPage { ...props } /> }
+        />
+        <Route exact path="/checkout" component={ Purchase } />
+      </Switch>
     </BrowserRouter>
   );
 }
