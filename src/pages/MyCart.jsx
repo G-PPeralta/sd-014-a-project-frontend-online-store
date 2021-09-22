@@ -67,6 +67,7 @@ class MyCart extends React.Component {
       <main>
         <h2 data-testid="shopping-cart-empty-message">
           { inCart.length < 1 ? this.emptyCartMessage() : this.renderCart() }
+          <p>{ `Total: R$${cart.getTotal()}` }</p>
         </h2>
       </main>
     );

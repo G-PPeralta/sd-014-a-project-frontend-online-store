@@ -47,3 +47,10 @@ export const decreaseQuant = (item) => {
     addProductToCart(itemCopy);
   }
 };
+
+export const getTotal = () => {
+  const itemsInCart = readProductsInCart();
+  return itemsInCart.reduce(
+    (acc, res) => acc + (res.product.price * res.quant), 0,
+  );
+};
