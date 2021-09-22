@@ -1,11 +1,19 @@
 export async function getCategories() {
-  const response = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
-  const data = await response.json();
-  return data;
+  try {
+    const categories = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
+    const response = categories.json();
+    return response;
+  } catch (e) {
+    console.log(`Erro no fetch getCategories: ${e}`);
+  }
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
-  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`);
-  const data = await response.json();
-  return data;
+  try {
+    const products = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`);
+    const response = products.json();
+    return response;
+  } catch (e) {
+    console.log(`Erro no fetch categoryAndQuery: ${e}`);
+  }
 }

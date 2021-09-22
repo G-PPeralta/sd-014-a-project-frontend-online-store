@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CartItems from './CartItems';
 
 export default class Cart extends React.Component {
   constructor(props) {
@@ -44,11 +45,15 @@ export default class Cart extends React.Component {
     this.setState({ totalPrice });
   }
 
-  addItem = ({ target }) => {
-    const { id } = target;
+  addItem = ({ target }, item) => {
+    const product = item.productObj;
     const currentCart = JSON.parse(localStorage.getItem('cart'));
     for (let i = 0; i <= currentCart.length; i += 1) {
-      if (currentCart[i].productId && currentCart[i].productId === id) {
+      if (currentCart[i].productId === product.id) {
+        if (currentCart[i].quantity === product.available_quantity) {
+          target.disabled = true;
+          break;
+        }
         currentCart[i].quantity += 1;
         break;
       }
@@ -57,11 +62,11 @@ export default class Cart extends React.Component {
     this.getItemsFromStorage();
   }
 
-  removeItem = ({ target }) => {
-    const { id } = target;
+  removeItem = (item) => {
+    const product = item.productObj;
     const currentCart = JSON.parse(localStorage.getItem('cart'));
     for (let i = 0; i <= currentCart.length; i += 1) {
-      if (currentCart[i].productId && currentCart[i].productId === id) {
+      if (currentCart[i].productId === product.id) {
         if (currentCart[i].quantity === 1) {
           currentCart.splice(i, 1);
           break;
@@ -79,40 +84,22 @@ export default class Cart extends React.Component {
     const { productList, totalPrice, totalItems } = this.state;
     const cartDetails = (
       <div>
-        {productList.map((item, i) => {
-          const { price, id, title, thumbnail } = item.productObj;
-          const { quantity } = item;
-          return (
-            <div key={ i }>
-              <img src={ thumbnail } alt={ title } />
-              <p data-testid="shopping-cart-product-name">{title}</p>
-              <p data-testid="shopping-cart-product-quantity">
-                {quantity}
-              </p>
-              <p>{price}</p>
-              <div>
-                <button
-                  type="button"
-                  data-testid="product-decrease-quantity"
-                  name="product-decrease-quantity"
-                  id={ id }
-                  onClick={ this.removeItem }
-                >
-                  -
-                </button>
-                <button
-                  type="button"
-                  data-testid="product-increase-quantity"
-                  name="product-increase-quantity"
-                  id={ id }
-                  onClick={ this.addItem }
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          );
-        })}
+        {productList.map((item) => (
+          (
+            <CartItems
+              key={ item.productObj.id }
+              price={ item.productObj.price }
+              id={ item.productObj.id }
+              title={ item.productObj.title }
+              thumbnail={ item.productObj.thumbnail }
+              quantity={ item.quantity }
+              maxQuant={ item.productObj.available_quantity }
+              addItem={ this.addItem }
+              removeItem={ this.removeItem }
+              item={ item }
+            />
+          )
+        ))}
         <p>
           Total:
           { totalPrice }
@@ -124,6 +111,7 @@ export default class Cart extends React.Component {
         <Link to="/checkout" data-testid="checkout-products">Checkout</Link>
       </div>
     );
+
     return cartDetails;
   }
 
