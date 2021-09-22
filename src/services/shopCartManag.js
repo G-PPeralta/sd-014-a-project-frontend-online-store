@@ -3,7 +3,7 @@ const PRODUCTS_KEY = 'products';
 if (!JSON.parse(localStorage.getItem(PRODUCTS_KEY))) {
   localStorage.setItem(PRODUCTS_KEY, JSON.stringify([]));
 }
-const readProducts = () => JSON.parse(localStorage.getItem(PRODUCTS_KEY)); // JavaScript tem uma função incorporada para converter strings JSON em objetos JavaScript:
+export const readProducts = () => JSON.parse(localStorage.getItem(PRODUCTS_KEY)); // JavaScript tem uma função incorporada para converter strings JSON em objetos JavaScript:
 
 const saveProducts = (products) => localStorage
   .setItem(PRODUCTS_KEY, JSON.stringify(products)); // JavaScript também tem uma função incorporada para converter um objeto em uma string JSON:
@@ -53,4 +53,21 @@ export const getQuantityOfProducts = () => {
   }
   products.forEach((product) => { quantity += Number(product.counter); });
   return quantity;
+};
+
+export const addMessage = (product, rate) => {
+  const productNew = { ...product, rate: [rate] };
+  const products = readProducts();
+
+  const array = products.map((s) => {
+    if (s.id === productNew.id) {
+      if (!s.rate) {
+        s.rate = productNew.rate;
+      } else {
+        s.rate.push(...productNew.rate);
+      }
+    }
+    return s;
+  });
+  saveProducts(array);
 };

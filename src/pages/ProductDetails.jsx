@@ -7,6 +7,7 @@ import GoToCartButton from '../components/GoToCartButton';
 import Header from '../components/Header';
 import ProductDetailCard from '../components/ProductDetailCard';
 import ReviewForm from '../components/ReviewForm';
+import ReviewRate from '../components/ReviewRate';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -48,7 +49,8 @@ class ProductDetails extends React.Component {
           product={ product }
           homeIs={ homeIs }
         />
-        <ReviewForm />
+        <ReviewForm product={ product } />
+        <ReviewRate product={ product } />
       </div>
     );
   }
