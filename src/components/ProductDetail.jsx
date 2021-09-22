@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ShoppingCartLink from './ShoppingCartLink';
 
 class ProductDetail extends React.Component {
   constructor() {
@@ -30,6 +31,7 @@ class ProductDetail extends React.Component {
     const { selectedTitle, selectedThumbnail, selectedPrice } = this.state;
     return (
       <div>
+        <ShoppingCartLink />
         <h1 data-testid="product-detail-name">{selectedTitle}</h1>
         <img src={ selectedThumbnail } alt="" />
         <h2>{selectedPrice}</h2>
