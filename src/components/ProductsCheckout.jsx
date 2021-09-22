@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import CheckoutProduct from './CheckoutProduct';
+import '../styles/ProductsCheckout.css';
 
 export default class ProductsCheckout extends Component {
   constructor(props) {
@@ -34,6 +34,28 @@ export default class ProductsCheckout extends Component {
     ));
   };
 
+  renderTotalPrice = () => {
+    const { products } = this.state;
+
+    return (
+      <div className="checkout-total">
+        <span>Total:</span>
+        {products.length > 0 ? (
+          <span>
+            R$
+            {' '}
+            {products.reduce(
+              (acc, { price, productQty }) => acc + price * productQty,
+              0,
+            )}
+          </span>
+        ) : (
+          <span>R$ 0,00</span>
+        )}
+      </div>
+    );
+  };
+
   render() {
     const { products } = this.state;
     return (
@@ -44,6 +66,7 @@ export default class ProductsCheckout extends Component {
         ) : (
           <span>Não possui itens</span>
         )}
+        {this.renderTotalPrice()}
       </div>
     );
   }
