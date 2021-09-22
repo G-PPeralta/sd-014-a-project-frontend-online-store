@@ -23,7 +23,7 @@ class ProductsCard extends Component {
         </Link>
         <BtnAddCart
           title={ title }
-          price={ price }
+          price={ +price }
           thumbnail={ thumbnail }
           id={ id }
           source="product"
