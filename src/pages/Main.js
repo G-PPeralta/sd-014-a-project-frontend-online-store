@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ShoppingCartLink from '../components/ShoppingCartLink';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../components/Categories';
@@ -35,12 +36,11 @@ class Main extends React.Component {
 
   handleClick() {
     const { search } = this.state;
-    getProductsFromCategoryAndQuery(search, search).then((response) => {
+    getProductsFromCategoryAndQuery('', search).then((response) => {
       this.setState({
         products: response.results,
         search: '',
       });
-      console.log(response.results);
     });
   }
 
@@ -66,7 +66,16 @@ class Main extends React.Component {
             Pesquisar
           </button>
           { products
-            .map((product) => <Product key={ product.id } product={ product } />) }
+            .map((product) => (
+              <Link
+                data-testid="product-detail-link"
+                key={ product.id }
+                to={ {
+                  pathname: `/product-detail/${product.id}`,
+                  state: product } }
+              >
+                <Product key={ product.id } product={ product } />
+              </Link>)) }
         </div>
       );
     }
