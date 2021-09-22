@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import FreeShipping from './FreeShipping';
 
 class Search extends React.Component {
   constructor(props) {
@@ -67,7 +68,14 @@ class Search extends React.Component {
     return (
       <div>
         {products.map((product) => {
-          const { id, title: name, thumbnail, price, category_id: cat } = product;
+          const {
+            id,
+            title: name,
+            thumbnail,
+            price,
+            category_id: cat,
+            shipping: { free_shipping: freeShipping },
+          } = product;
           return (
             <div key={ id }>
               <Link
@@ -78,6 +86,7 @@ class Search extends React.Component {
                   <img src={ thumbnail } alt="imagem do produto" />
                   <p>{name}</p>
                   <p>{`R$:${price}`}</p>
+                  { freeShipping ? <FreeShipping /> : null}
                 </div>
               </Link>
               <AddCartButton product={ product } dataTestId="product-add-to-cart" />

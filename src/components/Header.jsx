@@ -2,16 +2,6 @@ import React from 'react';
 import Context from '../Context';
 import CartButton from './CartButton';
 
-// function Header() {
-//   const { cartLength } = useContext(Context);
-//   return (
-//     <header>
-//       <CartButton />
-//       <span>{cartLength}</span>
-//     </header>
-//   );
-// }
-
 class Header extends React.Component {
   render() {
     return (

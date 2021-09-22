@@ -4,12 +4,13 @@ import AddCartButton from './AddCartButton';
 import AvaliationForm from './AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
 import RenderAvaliation from './RenderAvaliation';
+import FreeShipping from './FreeShipping';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {},
+      product: { shipping: { free_shipping: false } },
       email: '',
       rating: '',
       comment: '',
@@ -46,11 +47,17 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product, email, rating, comment, ratingsArray } = this.state;
-    const { title, price, thumbnail, itemDescription } = product;
-
+    const {
+      title,
+      price,
+      thumbnail,
+      itemDescription,
+      shipping,
+    } = product;
     return (
       <div>
         <p data-testid="product-detail-name">{title}</p>
+        {shipping.free_shipping ? <FreeShipping /> : null}
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
         {itemDescription ? <p>{itemDescription}</p> : null }
