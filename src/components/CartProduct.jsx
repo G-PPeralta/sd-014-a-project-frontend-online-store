@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import '../styles/CartProduct.css';
 
 export default class CartProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
   render() {
     const {
       product,
@@ -18,9 +12,13 @@ export default class CartProduct extends Component {
     } = this.props;
     return (
       <section className="div200">
-        <button type="button" onClick={ () => removeProduct(id) }> X </button>
+        <button type="button" onClick={ () => removeProduct(id) }>
+          {' '}
+          X
+          {' '}
+        </button>
         <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-        <p data-testid="shopping-cart-product-name">{ title }</p>
+        <p data-testid="shopping-cart-product-name">{title}</p>
         <button
           type="button"
           data-testid="product-decrease-quantity"
@@ -28,7 +26,7 @@ export default class CartProduct extends Component {
         >
           -
         </button>
-        <h3 data-testid="shopping-cart-product-quantity">{ productQty }</h3>
+        <h3 data-testid="shopping-cart-product-quantity">{productQty}</h3>
         <button
           type="button"
           data-testid="product-increase-quantity"

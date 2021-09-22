@@ -14,7 +14,7 @@ export default class ProductDetail extends Component {
       product: props.location.state,
       productQty: 0,
       reviews: [],
-    // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309.
+      // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309.
     };
   }
 
@@ -100,37 +100,34 @@ export default class ProductDetail extends Component {
     );
   };
 
-   addToCartfunc = () => {
-     this.setState((prev) => ({ productQty: prev.productQty + 1 }));
-   };
+  addToCartfunc = () => {
+    this.setState((prev) => ({ productQty: prev.productQty + 1 }));
+  };
 
-   render() {
-     const {
-       product: { title, thumbnail, price },
-     } = this.state;
-     const { reviews } = this.state;
-     return (
-       <>
-         <Link data-testid="shopping-cart-button" to="/shopping-cart">
-           <img
-             alt="shopping-cart"
-             src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
-           />
-         </Link>
-         <div
-           className="product-detail"
-           data-testid="product-detail-name"
-         >
-           <h3>{title}</h3>
-           <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-           <p>{`R$${price.toFixed(2)}`}</p>
-           {this.addToCartBtn()}
-         </div>
-         <AddReview addReview={ this.addReview } />
-         {reviews.length > 0 && <Reviews reviews={ reviews } />}
-       </>
-     );
-   }
+  render() {
+    const {
+      product: { title, thumbnail, price },
+    } = this.state;
+    const { reviews } = this.state;
+    return (
+      <>
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">
+          <img
+            alt="shopping-cart"
+            src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
+          />
+        </Link>
+        <div className="product-detail" data-testid="product-detail-name">
+          <h3>{title}</h3>
+          <img alt={ title } className="product-thumbnail" src={ thumbnail } />
+          <p>{`R$${price.toFixed(2)}`}</p>
+          {this.addToCartBtn()}
+        </div>
+        <AddReview addReview={ this.addReview } />
+        {reviews.length > 0 && <Reviews reviews={ reviews } />}
+      </>
+    );
+  }
 }
 
 ProductDetail.propTypes = {

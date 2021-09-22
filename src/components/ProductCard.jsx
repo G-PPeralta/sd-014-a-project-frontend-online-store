@@ -105,6 +105,12 @@ export default class ProductCard extends Component {
           <h3 className="product-title">{title}</h3>
           <img alt={ title } className="product-thumbnail" src={ thumbnail } />
           <p>{`R$${price.toFixed(2)}`}</p>
+          {/* <p>
+            {`${price.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}`}
+          </p> */}
         </Link>
         {this.addToCartBtn()}
       </div>
