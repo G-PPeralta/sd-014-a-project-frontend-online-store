@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddReview from '../components/AddReview';
 import Reviews from '../components/Reviews';
@@ -60,11 +60,24 @@ export default class ProductDetail extends Component {
     const storageKey = 'cart-products';
 
     const {
-      product: { id, title, thumbnail, price, available_quantity: availableQuantity },
+      product: {
+        id,
+        title,
+        thumbnail,
+        price,
+        available_quantity: availableQuantity,
+      },
     } = this.state;
     const { productQty } = this.state;
 
-    const savedProduct = { id, title, thumbnail, price, availableQuantity, productQty: newQty };
+    const savedProduct = {
+      id,
+      title,
+      thumbnail,
+      price,
+      availableQuantity,
+      productQty: newQty,
+    };
 
     const storage = JSON.parse(localStorage.getItem(storageKey));
 

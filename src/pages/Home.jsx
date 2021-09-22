@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import * as api from '../services/api';
@@ -15,7 +15,6 @@ export default class Home extends Component {
       products: [],
       query: '',
     };
-
   }
 
   componentDidMount() {

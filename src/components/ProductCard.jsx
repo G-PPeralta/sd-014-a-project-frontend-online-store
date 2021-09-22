@@ -37,11 +37,24 @@ export default class ProductCard extends Component {
 
   savetoLocalStorage = (newQty) => {
     const {
-      product: { id, title, thumbnail, price, available_quantity: availableQuantity },
+      product: {
+        id,
+        title,
+        thumbnail,
+        price,
+        available_quantity: availableQuantity,
+      },
     } = this.props;
     const { productQty } = this.state;
 
-    const savedProduct = { id, title, thumbnail, price, availableQuantity, productQty: newQty };
+    const savedProduct = {
+      id,
+      title,
+      thumbnail,
+      price,
+      availableQuantity,
+      productQty: newQty,
+    };
 
     const storage = JSON.parse(localStorage.getItem(storageKey));
 
