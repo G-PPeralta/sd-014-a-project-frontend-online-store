@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+const numberFormat = (value) => new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+}).format(value);
 
 class Cart extends Component {
   constructor(props) {
@@ -12,10 +18,6 @@ class Cart extends Component {
     this.recebeInfo = this.recebeInfo.bind(this);
   }
 
-  // VERIFICAR QUANTOS ITENS TEM DE CADA PRODUTO
-  // RETORNAR UM NOVO ARRAY COM OS ITENS, COM A QUANTIDADE DE CADA
-  // FAZER UM MAP DO CARRINHO
-  // APÓS O CARRINHO PRONTO, AO EXCLUIR UM ITEM, EDITAR O ARRAY E DEVOLVER PARA O FILHO O NOVO XABLAU
   componentDidMount() {
     this.recebeInfo();
   }
@@ -30,7 +32,6 @@ class Cart extends Component {
   }
 
   async addBTN(event) {
-    // const { cartList } = this.state;
     const addPrd = {
       prodId: event.target.className,
       name: event.target.name,
@@ -80,64 +81,81 @@ class Cart extends Component {
     }
 
     return (
-      <div className="cart">
-        {localStorage.getItem('cartList') !== null
-          ? (
-            <div>
-              {arrayzao.map((prod) => (
-                <div key={ prod.id }>
-                  <p data-testid="shopping-cart-product-name">{prod.name}</p>
-                  <p>{prod.price}</p>
-                  <button
-                    type="button"
-                    data-testid="product-increase-quantity"
-                    name={ prod.name }
-                    value={ prod.price }
-                    className={ prod.id }
-                    onClick={ this.addBTN }
+      <>
+        <Header />
+        <div className="cart">
+          <h2 className="cart-title-h">Meu Carrinho de Compras da Trybezon</h2>
+          {localStorage.getItem('cartList') !== null
+            ? (
+              <div>
+                {arrayzao.map((prod) => (
+                  <div
+                    key={ prod.id }
+                    className="prod-cart-div"
                   >
-                    EU ADICIONO COISAS
-                  </button>
-                  <span data-testid="shopping-cart-product-quantity">
-                    {prod.quantidade}
-                  </span>
-                  <button
-                    type="button"
-                    data-testid="product-decrease-quantity"
-                    name={ prod.name }
-                    value={ prod.price }
-                    className={ prod.id }
-                    onClick={ this.subBTN }
-                  >
-                    EU DIMINUO COISAS
-                  </button>
-                </div>
-              ))}
-            </div>)
-          : (
-            <div>
-              <p
-                className="empty-cart-message"
-                data-testid="shopping-cart-empty-message"
-              >
-                Seu carrinho está vazio
-              </p>
-              <p>
+                    <p
+                      data-testid="shopping-cart-product-name"
+                      className="shopping-cart-product-name"
+                    >
+                      {prod.name}
+                    </p>
+                    <p className="cart-prod-price">
+                      { numberFormat(prod.price)}
+                    </p>
+                    <span
+                      className="shopping-cart-product-qtd-text"
+                    >
+                      Quantidade escolhida:
+                    </span>
+                    <button
+                      type="button"
+                      data-testid="product-increase-quantity"
+                      name={ prod.name }
+                      value={ prod.price }
+                      className={ prod.id }
+                      onClick={ this.addBTN }
+                    >
+                      +
+                    </button>
+                    <span
+                      data-testid="shopping-cart-product-quantity"
+                      className="shopping-cart-product-quantity"
+                    >
+                      {prod.quantidade}
+                    </span>
+                    <button
+                      type="button"
+                      data-testid="product-decrease-quantity"
+                      name={ prod.name }
+                      value={ prod.price }
+                      className={ prod.id }
+                      onClick={ this.subBTN }
+                    >
+                      -
+                    </button>
+                  </div>
+                ))}
+              </div>)
+            : (
+              <div className="cart-empty-khabane">
+                <p
+                  className="empty-cart-message"
+                  data-testid="shopping-cart-empty-message"
+                >
+                  Seu carrinho está vazio
+                </p>
                 <img
                   className="khabane"
                   src="https://c.tenor.com/E4e4GDUfYEcAAAAd/hello.gif"
                   alt=""
                 />
-              </p>
-            </div>
-          )}
-      </div>
+              </div>
+            )}
+        </div>
+        <Footer />
+      </>
     );
   }
 }
-
-// Cart.propTypes = {
-//   cartList: PropTypes.shape().isRequired,
-// };
 
 export default Cart;

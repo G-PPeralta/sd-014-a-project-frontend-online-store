@@ -51,7 +51,7 @@ class EvaluationForm extends Component {
     // }
     return (
       <section>
-        <form>
+        <form className="form-eval">
           <p>Avaliações</p>
           <input
             type="email"
@@ -72,7 +72,9 @@ class EvaluationForm extends Component {
             value={ comment }
             onChange={ this.handleChange }
             name="comment"
+            rows="6"
           />
+          <br />
           <button
             type="button"
             onClick={ () => this.handleClick(savedEvaluations) }
