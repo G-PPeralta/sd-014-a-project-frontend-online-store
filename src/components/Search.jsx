@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Search extends React.Component {
   render() {
@@ -10,11 +11,18 @@ class Search extends React.Component {
     }
     return (
       productList.map((item) => (
-        <div key={ item.id } data-testid="product">
-          <h2>{item.title}</h2>
-          <img src={ item.thumbnail } alt={ item.title } />
-          <p>{item.price}</p>
-        </div>))
+        <Link
+          to={ { pathname: `product/${item.id}`, state: item } }
+          key={ item.id }
+          data-testid="product-detail-link"
+        >
+          <div key={ item.id } data-testid="product">
+            <h2>{ item.title }</h2>
+            <img src={ item.thumbnail } alt={ item.title } />
+            <p>{item.price}</p>
+          </div>
+        </Link>
+      ))
     );
   }
 }
