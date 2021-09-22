@@ -16,12 +16,18 @@ export default class ProductDetail extends Component {
     super();
     this.state = {
       resultApi: [],
+      // cartSize: JSON.parse(localStorage.getItem('cartList')).length,
     };
     this.callApi = this.callApi.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.callApi();
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    if (newCart !== null) {
+      localStorage.setItem('cartSize', newCart.length);
+    }
   }
 
   async handleClick(event) {
@@ -37,6 +43,12 @@ export default class ProductDetail extends Component {
     const cart = JSON.parse(localStorage.getItem('cartList'));
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    console.log(newCart);
+    localStorage.setItem('cartSize', newCart.length);
+    this.setState({
+      cartSize: newCart.length,
+    });
   }
 
   async callApi() {
@@ -50,7 +62,7 @@ export default class ProductDetail extends Component {
 
   render() {
     const { match: { params: { id } } } = this.props;
-    const { resultApi } = this.state;
+    const { resultApi, cartSize } = this.state;
     const myProduct = resultApi.find((result) => result.id === id);
     // console.log(myProduct);
 
@@ -58,7 +70,7 @@ export default class ProductDetail extends Component {
       <main className="shopping-main">
         <Header />
         <section className="cart-banner">
-          <CartButton />
+          <CartButton className="cartIcon" cartSize={ cartSize } />
         </section>
 
         <section className="main-sec-detail">

@@ -17,7 +17,7 @@ class ProductList extends Component {
       searchText: '',
       categoriaDeProduto: '',
       categories: [],
-      // cartList: [],
+      cartSize: '0',
     };
 
     this.callGetCategories = this.callGetCategories.bind(this);
@@ -30,6 +30,10 @@ class ProductList extends Component {
   componentDidMount() {
     this.callGetCategories();
     this.handleCategory();
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    if (newCart !== null) {
+      localStorage.setItem('cartSize', newCart.length);
+    }
   }
 
   handleChange(event) {
@@ -58,6 +62,12 @@ class ProductList extends Component {
     const cart = JSON.parse(localStorage.getItem('cartList'));
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    console.log(newCart);
+    localStorage.setItem('cartSize', newCart.length);
+    this.setState({
+      cartSize: newCart.length,
+    });
   }
 
   async callApi() {
@@ -83,7 +93,7 @@ class ProductList extends Component {
 
   render() {
     const { categories,
-      resultQuery, searchText, categoriaDeProduto } = this.state;
+      resultQuery, searchText, categoriaDeProduto, cartSize } = this.state;
     const apiProps = {
       searchText,
       categoriaDeProduto,
@@ -110,7 +120,7 @@ class ProductList extends Component {
             >
               Pesquisar Produtos
             </button>
-            <CartButton className="cartIcon" />
+            <CartButton className="cartIcon" cartSize={ cartSize } />
           </div>
         </div>
         <div className="display-flex">
@@ -161,6 +171,10 @@ class ProductList extends Component {
                       <p className="pc-price">{numberFormat(result.price)}</p>
                       <p className="pc-id">{result.id}</p>
                     </section>
+                    {/* { console.log(result.shipping.free_shipping) } */}
+                    { result.shipping.free_shipping
+                      ? <p className="fg" data-testid="free-shipping">Frete Grátis</p>
+                      : <p className="nfg">Poxa, não tem frete grátis</p> }
                   </Link>
                   <button
                     type="button"
