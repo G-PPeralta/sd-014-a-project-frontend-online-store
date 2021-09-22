@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AddCartButton from './AddCartButton';
-import CartButton from './CartButton';
 import AvaliationForm from './AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
 import RenderAvaliation from './RenderAvaliation';
@@ -51,7 +50,6 @@ class ProductDetails extends React.Component {
 
     return (
       <div>
-        <CartButton />
         <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />

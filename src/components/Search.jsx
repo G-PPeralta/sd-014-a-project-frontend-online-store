@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CartButton from './CartButton';
 import AddCartButton from './AddCartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -113,7 +112,6 @@ class Search extends React.Component {
             Pesquisar
           </button>
         </form>
-        <CartButton />
         {isLoading ? null : this.renderCategories()}
         {isLoadingProducts ? null : this.renderProducts()}
       </div>
