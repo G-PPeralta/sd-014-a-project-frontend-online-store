@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Context from '../Context';
 
 class AddCartButton extends React.Component {
   constructor() {
@@ -18,14 +19,21 @@ class AddCartButton extends React.Component {
   }
 
   render() {
-    const { dataTestId } = this.props;
+    const { dataTestId, product } = this.props;
     return (
-      <input
-        type="button"
-        value="Adicionar item no carrinho"
-        data-testid={ dataTestId }
-        onClick={ this.addItem }
-      />
+      <Context.Consumer>
+        {(({ cartLength, setCartLength }) => (
+          <input
+            type="button"
+            value="Adicionar item no carrinho"
+            data-testid={ dataTestId }
+            onClick={ () => {
+              this.addItem();
+              setCartLength(product.quantity + cartLength);
+            } }
+          />
+        )) }
+      </Context.Consumer>
     );
   }
 }
