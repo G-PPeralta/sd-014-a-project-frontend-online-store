@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { createStoraged } from '../services/localStorage';
 import ListCategories from './ListCategories';
 import ProductCard from './ProductCard';
 
@@ -21,6 +22,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
+    createStoraged();
   }
 
   async handleClick() {
