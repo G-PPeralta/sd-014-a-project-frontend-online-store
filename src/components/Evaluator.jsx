@@ -5,24 +5,54 @@ class Evaluator extends React.Component {
   constructor() {
     super();
     this.state = {
-      quantity: 0,
+      email: '',
+      avaliacao: '0',
+      mensagem: '',
     };
   }
 
+  onChangeValue = (event) => {
+    const { value } = event.target;
+    this.setState({
+      avaliacao: value,
+    });
+  }
+
+  handleChange = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
   render() {
-    const { quantity } = this.state;
+    const { email, avaliacao, mensagem } = this.state;
     return (
       <section>
         <h1>Quantidade</h1>
         <button type="button">-</button>
-        <p>{quantity}</p>
-        <button type="button" onClick={ this.handleClickSum }>+</button>
+        <p>0</p>
+        <button type="button">+</button>
         <button type="submit">Adicionar ao Carrinho</button>
         <h1>Avaliações</h1>
         <fieldset>
-          <input type="text" placeholder="Email" />
-          <EvaluationStar />
-          <textarea placeholder="Mensagem(opcional)" />
+          <input
+            name="email"
+            type="text"
+            placeholder="Email"
+            value={ email }
+            onChange={ this.handleChange }
+            required
+          />
+          <EvaluationStar onChangeValue={ this.onChangeValue } avaliacao={ avaliacao } />
+          <textarea
+            name="mensagem"
+            placeholder="Mensagem(opcional)"
+            value={ mensagem }
+            onChange={ this.handleChange }
+          />
           <button type="submit">Avaliar</button>
         </fieldset>
         <fieldset>

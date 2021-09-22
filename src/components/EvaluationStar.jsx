@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class EvaluationStar extends React.Component {
   render() {
+    const { onChangeValue, avaliacao } = this.props;
     return (
-      <div>
+      <div value={ avaliacao } onChange={ onChangeValue }>
         <input type="radio" value="1" name="star" />
         1
         <input type="radio" value="2" name="star" />
@@ -18,5 +20,15 @@ class EvaluationStar extends React.Component {
     );
   }
 }
+
+EvaluationStar.propTypes = {
+  onChangeValue: PropTypes.func,
+  avaliacao: PropTypes.string,
+};
+
+EvaluationStar.defaultProps = {
+  onChangeValue: undefined,
+  avaliacao: '0',
+};
 
 export default EvaluationStar;
