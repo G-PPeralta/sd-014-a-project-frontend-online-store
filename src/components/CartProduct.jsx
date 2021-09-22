@@ -6,7 +6,7 @@ export default class CartProduct extends Component {
   render() {
     const {
       product,
-      product: { title, thumbnail, id, price, productQty },
+      product: { title, thumbnail, id, price, productQty, availableQuantity },
       removeProduct,
       changeProductQuantity,
     } = this.props;
@@ -31,6 +31,7 @@ export default class CartProduct extends Component {
           type="button"
           data-testid="product-increase-quantity"
           onClick={ () => changeProductQuantity(product, '+') }
+          disabled={ productQty >= availableQuantity }
         >
           +
         </button>
@@ -47,6 +48,7 @@ CartProduct.propTypes = {
     id: PropTypes.string,
     price: PropTypes.number,
     productQty: PropTypes.number,
+    availableQuantity: PropTypes.number,
   }).isRequired,
   removeProduct: PropTypes.func.isRequired,
   changeProductQuantity: PropTypes.func.isRequired,

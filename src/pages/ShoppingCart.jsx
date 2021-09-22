@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
 import '../styles/ShoppingCart.css';
 
+const STORAGE_CART_KEY = 'cart-products';
+
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
@@ -23,23 +25,21 @@ export default class ShoppingCart extends Component {
 
   componentDidUpdate() {
     const { cartProducts } = this.state;
-    localStorage.setItem('cart-products', JSON.stringify(cartProducts));
+    localStorage.setItem(STORAGE_CART_KEY, JSON.stringify(cartProducts));
   }
 
   loadLocalStorage() {
-    const savedCart = JSON.parse(localStorage.getItem('cart-products'));
+    const savedCart = JSON.parse(localStorage.getItem(STORAGE_CART_KEY));
     if (savedCart) {
       this.setState({ cartProducts: savedCart });
     }
   }
 
   removeProduct(productToRemoveId) {
-    console.log('Removendo produto: ', productToRemoveId);
     const { cartProducts } = this.state;
     const newCart = cartProducts.filter(
       (product) => product.id !== productToRemoveId,
     );
-    console.log(newCart);
     this.setState({
       cartProducts: newCart,
     });
@@ -78,7 +78,7 @@ export default class ShoppingCart extends Component {
     const { cartProducts } = this.state;
     let totalPrice = 0;
     cartProducts.forEach((p) => {
-      totalPrice += p.price;
+      totalPrice += p.price * p.productQty;
     });
     return totalPrice;
   }
@@ -98,7 +98,9 @@ export default class ShoppingCart extends Component {
         <h2>
           {`Valor Total da Compra: R$ ${this.calculatePrice().toFixed(2)}`}
         </h2>
-        <button type="button">Finalizar Compra</button>
+        <Link data-testid="checkout-products" to="/checkout">
+          <button type="button">Finalizar Compra</button>
+        </Link>
       </section>
     );
   }

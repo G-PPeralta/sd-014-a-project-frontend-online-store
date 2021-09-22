@@ -37,17 +37,31 @@ export default class ProductCard extends Component {
 
   savetoLocalStorage = (newQty) => {
     const {
-      product: { id, title, thumbnail, price },
+      product: {
+        id,
+        title,
+        thumbnail,
+        price,
+        available_quantity: availableQuantity,
+      },
     } = this.props;
     const { productQty } = this.state;
 
-    const savedProduct = { id, title, thumbnail, price, productQty: newQty };
+    const savedProduct = {
+      id,
+      title,
+      thumbnail,
+      price,
+      availableQuantity,
+      productQty: newQty,
+    };
 
     const storage = JSON.parse(localStorage.getItem(storageKey));
 
     if (productQty === 1) {
       if (storage) {
-        const newStorage = [...storage, savedProduct];
+        const storageWithNewProduct = storage.filter((item) => item.id !== id);
+        const newStorage = [...storageWithNewProduct, savedProduct];
         localStorage.setItem(storageKey, JSON.stringify(newStorage));
       } else {
         cartProducts.push(savedProduct);
@@ -124,5 +138,6 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
+    available_quantity: PropTypes.number.isRequired,
   }).isRequired,
 };

@@ -1,0 +1,22 @@
+.payment-method {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+}
+
+.payment-method-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 50%;
+}
+
+.payment-method-content label {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 240px;
+}
