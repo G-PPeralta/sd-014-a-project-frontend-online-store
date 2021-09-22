@@ -27,7 +27,7 @@ class main extends React.Component {
   render() {
     const { categories, selected } = this.state;
     return (
-      <div data-testid="home-initial-message" id="main">
+      <div data-testid="home-initial-message" className="main">
         <ul>
           {categories
             .map((categoria) => (

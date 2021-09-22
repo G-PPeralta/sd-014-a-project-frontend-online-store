@@ -1,5 +1,5 @@
 import React from 'react';
-import CartProduct from '../components/CartProduct';
+import { CartProduct } from '../components/CartProduct';
 
 class shoppingCart extends React.Component {
   constructor() {

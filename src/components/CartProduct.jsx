@@ -15,10 +15,11 @@ export class CartProduct extends Component {
           <h2 data-testid="shopping-cart-product-name">
             {produto.title}
           </h2>
+          {/* </Link> */}
           <img src={ produto.thumbnail } alt="" className="ProdImg" />
           <p>{produto.price}</p>
-          <button type="submit">+</button>
-          <button type="submit">-</button>
+          <button type="submit"> + </button>
+          <button type="submit"> - </button>
           <button type="submit">Remover</button>
           <p data-testid="shopping-cart-product-quantity">{ contador }</p>
         </div>

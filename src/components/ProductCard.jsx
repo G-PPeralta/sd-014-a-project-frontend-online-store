@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import AddToCart from './AddToCart';
+import { AddToCart } from './AddToCart';
 
 class ProductCard extends Component {
   render() {
     const { produto, addCartHandle } = this.props;
     return (
-      <div data-testid="product" id="Card">
+      <div data-testid="product" className="Card">
         <div>
           <Link
             data-testid="product-detail-link"

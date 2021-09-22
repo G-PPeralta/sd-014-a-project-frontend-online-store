@@ -66,7 +66,7 @@ class ListaDeProdutos extends Component {
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        <div id="Product-list">
+        <div className="Product-list">
           { produtos.length === 0
             ? <h3> Nenhum produto foi encontrado </h3>
             : produtos
