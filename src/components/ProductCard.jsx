@@ -11,27 +11,22 @@ export default class ProductCard extends Component {
   }
 
   render() {
-    const {
-      product: { thumbnail, title, price, id },
-    } = this.props;
+    const { product } = this.props;
 
     return (
       <div data-testid="product">
         <Link
           data-testid="product-detail-link"
           to={ {
-            pathname: `/details/${id}`,
+            pathname: `/details/${product.id}`,
             state: {
-              title,
-              price,
-              thumbnail,
-              id,
+              product,
             },
           } }
         >
-          <h3>{ title }</h3>
-          <img src={ thumbnail } alt={ title } />
-          <p>{`R$ ${price}`}</p>
+          <h3>{ product.title }</h3>
+          <img src={ product.thumbnail } alt={ product.title } />
+          <p>{`R$ ${product.price}`}</p>
           <button
             data-testid="product-add-to-cart"
             type="button"
