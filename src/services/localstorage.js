@@ -27,3 +27,15 @@ export function addQuantity(id, operation) {
   if (operation === 'sub' && products[id].quantity !== 1) products[id].quantity -= 1;
   localStorage.setObj('products', products);
 }
+
+export function addEvaluation(evaluation) {
+  let objEvaluation = localStorage.getObj('evaluations');
+  if (objEvaluation) {
+    if (!objEvaluation[evaluation.id]) {
+      objEvaluation[evaluation.id] = { evaluation };
+    }
+  } else {
+    objEvaluation = { [evaluation.id]: { evaluation } };
+  }
+  localStorage.setObj('evaluations', objEvaluation);
+}
