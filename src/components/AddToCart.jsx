@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddToCart extends Component {
   handleClick = (event) => {
@@ -7,7 +8,7 @@ class AddToCart extends Component {
   }
 
   render() {
-    const { itemTitle, itemPrice } = this.props;
+    const { itemTitle } = this.props;
     return (
       <div>
         <button
@@ -22,5 +23,10 @@ class AddToCart extends Component {
     );
   }
 }
+
+AddToCart.propTypes = {
+  getItem: PropTypes.func.isRequired,
+  itemTitle: PropTypes.string.isRequired,
+};
 
 export default AddToCart;

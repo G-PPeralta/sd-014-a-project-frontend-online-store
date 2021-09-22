@@ -20,6 +20,7 @@ CardProduct.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  getItem: PropTypes.func.isRequired,
 };
 
 export default CardProduct;
