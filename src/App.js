@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
+import ProductDetails from './components/ProductDetails';
 import ShoppingCart from './components/ShoppingCart';
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
               render={ (props) => (
                 <ShoppingCart { ...props } cartProduct={ cartProduct } />) }
             />
+            <Route path="/product/:id" component={ ProductDetails } />
           </Switch>
         </BrowserRouter>
       </div>
