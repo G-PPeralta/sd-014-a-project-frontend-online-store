@@ -18,12 +18,17 @@ export default class ShoppingCart extends Component {
   }
 
   componentDidMount() {
-    this.localStorage();
+    this.loadLocalStorage();
   }
 
-  localStorage() {
+  loadLocalStorage() {
     const savedCart = JSON.parse(localStorage.getItem('cart-products'));
     if (savedCart) {
+      savedCart.forEach((product) => {
+        if (!product.quantity) {
+          product.quantity = 1;
+        }
+      });
       this.setState({ cartProducts: savedCart });
     }
   }
@@ -36,9 +41,16 @@ export default class ShoppingCart extends Component {
     });
   }
 
-  changeProductQuantity(product, sign) {
+  changeProductQuantity(product, value) {
     const { cartProducts } = this.state;
-    console.log(cartProducts.find((p) => p.id === product.id).productQty);
+    const index = cartProducts.indexOf(product);
+    if ((cartProducts[index].quantity + value) > 0) {
+      cartProducts[index].quantity += value;
+      this.setState({
+        cartProducts,
+      });
+      //localStorage.setItem('shoppingCart', JSON.stringify(cartProducts));
+    }
   }
 
   calculatePrice() {

@@ -3,19 +3,14 @@ import PropTypes from 'prop-types';
 import '../styles/CartProduct.css';
 
 export default class CartProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
   render() {
     const {
       product,
-      product: { title, thumbnail, id, price, productQty },
+      product: { title, thumbnail, id, price, quantity },
       removeProduct,
       changeProductQuantity,
     } = this.props;
+    const QTY_VALUE = 1;
     return (
       <section className="div200">
         <button type="button" onClick={ () => removeProduct(id) }> X </button>
@@ -24,15 +19,15 @@ export default class CartProduct extends Component {
         <button
           type="button"
           data-testid="product-decrease-quantity"
-          onClick={ () => changeProductQuantity(product, '-') }
+          onClick={ () => changeProductQuantity(product, -QTY_VALUE) }
         >
           -
         </button>
-        <h3 data-testid="shopping-cart-product-quantity">{ productQty }</h3>
+        <h3 data-testid="shopping-cart-product-quantity">{ quantity }</h3>
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={ () => changeProductQuantity(product, '+') }
+          onClick={ () => changeProductQuantity(product, QTY_VALUE) }
         >
           +
         </button>
@@ -48,7 +43,7 @@ CartProduct.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
     price: PropTypes.number,
-    productQty: PropTypes.number,
+    quantity: PropTypes.number,
   }).isRequired,
   removeProduct: PropTypes.func.isRequired,
   changeProductQuantity: PropTypes.func.isRequired,
