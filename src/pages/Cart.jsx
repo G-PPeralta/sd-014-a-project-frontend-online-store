@@ -25,6 +25,7 @@ class Cart extends Component {
   async recebeInfo() {
     const cartListLocal = localStorage.getItem('cartList');
     const cartList = JSON.parse(cartListLocal);
+    console.log('O ABAIXO EH CART LIST MLKADA!');
     console.log(cartList);
     await this.setState({
       cartList,
@@ -71,12 +72,14 @@ class Cart extends Component {
           id: arrProd[0].prodId,
           price: arrProd[0].prodPrice,
           name: arrProd[0].name,
+          availableQuantity: arrProd[0].availableQuantity,
         };
         if (!arrayzao.some((produ) => produ.id === idProd)) {
           arrayzao.push(cartItemDetail);
         }
         return (arrayzao);
       });
+      console.log('LINHA 83 DE CART.JSX');
       console.log(newList);
     }
 
@@ -113,6 +116,7 @@ class Cart extends Component {
                       name={ prod.name }
                       value={ prod.price }
                       className={ prod.id }
+                      disabled={ prod.quantidade >= prod.availableQuantity }
                       onClick={ this.addBTN }
                     >
                       +

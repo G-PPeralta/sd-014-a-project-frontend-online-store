@@ -54,6 +54,7 @@ class ProductList extends Component {
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
+      availableQuantity: event.target.quantity,
     };
 
     if (!JSON.parse(localStorage.getItem('cartList'))) {
@@ -63,6 +64,7 @@ class ProductList extends Component {
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
     const newCart = JSON.parse(localStorage.getItem('cartList'));
+    console.log('Console Log do Product List linha 68');
     console.log(newCart);
     localStorage.setItem('cartSize', newCart.length);
     this.setState({
@@ -182,6 +184,7 @@ class ProductList extends Component {
                     name={ result.title }
                     value={ result.price }
                     className={ result.id }
+                    quantity={ result.available_quantity }
                     onClick={ this.handleClick }
                   >
                     Adicionar ao Carrinho

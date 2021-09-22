@@ -36,6 +36,7 @@ export default class ProductDetail extends Component {
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
+      availableQuantity: event.target.quantity,
     };
     if (!JSON.parse(localStorage.getItem('cartList'))) {
       localStorage.setItem('cartList', JSON.stringify([]));
@@ -44,6 +45,7 @@ export default class ProductDetail extends Component {
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
     const newCart = JSON.parse(localStorage.getItem('cartList'));
+    console.log('LINHA 48 DO PRODUCT DETAIL');
     console.log(newCart);
     localStorage.setItem('cartSize', newCart.length);
     this.setState({
@@ -64,7 +66,6 @@ export default class ProductDetail extends Component {
     const { match: { params: { id } } } = this.props;
     const { resultApi, cartSize } = this.state;
     const myProduct = resultApi.find((result) => result.id === id);
-    // console.log(myProduct);
 
     return myProduct ? ( // This ternary conditional is needed, to ensure we only try to acces myProduct object properties, after resultApi is a non blank array to be iterated with the find HoF
       <main className="shopping-main">
@@ -106,6 +107,7 @@ export default class ProductDetail extends Component {
             name={ myProduct.title }
             value={ myProduct.price }
             className={ id }
+            quantity={ myProduct.available_quantity }
             onClick={ this.handleClick }
           >
             Adicionar ao Carrinho
