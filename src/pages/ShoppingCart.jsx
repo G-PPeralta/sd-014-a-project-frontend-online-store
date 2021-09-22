@@ -47,7 +47,8 @@ class ShoppingCart extends React.Component {
             product={ product }
             quantityChanger={ this.quantityChanger }
             removeItem={ this.removeItem }
-          />))}
+          />
+          ))}
         { arrayProduct.length === 0
         && <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div> }
         <p>

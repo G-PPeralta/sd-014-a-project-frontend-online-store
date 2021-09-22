@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { addProduct } from '../services/localStorage';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Product extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class Product extends Component {
     this.state = {
       product,
     };
+  }
+
+  componentDidMount() {
+    getProductsFromCategoryAndQuery();
   }
 
   handleClick = () => {
@@ -28,7 +33,11 @@ class Product extends Component {
           {`${product.title} - $${product.price}`}
         </h1>
         <img src={ product.thumbnail } alt={ product.title } />
-        <Link to="/cart" data-testid="shopping-cart-button">
+        <Link
+          to="/cart"
+          data-testid="shopping-cart-button"
+          className="cart-link"
+        >
           Carrinho
         </Link>
         <button

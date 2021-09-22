@@ -16,7 +16,7 @@ class ListCategories extends Component {
     const { categories } = this.props;
     return (
       <aside>
-        <ul>
+        <ul className="categories-ul">
           {categories.map((category) => (
             <li key={ category.id }>
               <label data-testid="category" htmlFor={ category.id }>
