@@ -29,6 +29,7 @@ export default class ShoppingCart extends Component {
   }
 
   removeProduct(id) {
+    console.log(id);
     const { cartProducts } = this.state;
     // Filtrando o array, ficam todos menos o que tem o ID
     const filtered = cartProducts.filter((prod) => prod.id !== id);
@@ -38,7 +39,7 @@ export default class ShoppingCart extends Component {
   }
 
   changeProductQuantity(product, sign) {
-    // sign === + ? +1 : -1 (tratar que n pode ser negativo)
+    // sign === + ? +1 : -1
     console.log(product, sign);
   }
 
@@ -61,7 +62,7 @@ export default class ShoppingCart extends Component {
             changeProductQuantity={ this.changeProductQuantity }
           />
         ))}
-        <h2>{ `Valor Total da Compra: R$ ${this.calculatePrice}` }</h2>
+        <h2>{ `Valor Total da Compra: R$ ${this.calculatePrice().toFixed(2)}` }</h2>
         <button type="button">Finalizar Compra</button>
       </section>
     );
