@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addQuantity } from '../services/localstorage';
-import '../services/localstorage';
 
 export class ProductInCart extends Component {
   constructor(props) {
