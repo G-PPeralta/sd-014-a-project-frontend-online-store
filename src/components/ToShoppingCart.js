@@ -5,7 +5,7 @@ export default class ToShoppingCart extends Component {
   updateCart() {
     if (localStorage.cart) {
       const cart = JSON.parse(localStorage.getItem('cart'));
-      const cartLength = cart.length;
+      const cartLength = cart.reduce((acc, { quantity }) => acc + quantity, 0);
       return cartLength;
     }
     return null;
