@@ -50,7 +50,7 @@ export class ProductInCart extends Component {
           onClick={ this.addQuantity }
           data-testid="product-increase-quantity"
         >
-          -
+          +
         </button>
         <button
           id={ product.id }
@@ -59,7 +59,7 @@ export class ProductInCart extends Component {
           onClick={ this.addQuantity }
           data-testid="product-decrease-quantity"
         >
-          +
+          -
         </button>
       </>
     );
