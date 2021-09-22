@@ -6,7 +6,7 @@ class ProductCard extends React.Component {
   render() {
     const { product, localChanger } = this.props;
     return (
-      <div data-testid="product">
+      <section data-testid="product">
         <button
           onClick={ () => localChanger(product) }
           data-testid="product-add-to-cart"
@@ -29,7 +29,7 @@ class ProductCard extends React.Component {
             {product.price}
           </p>
         </Link>
-      </div>
+      </section>
     );
   }
 }

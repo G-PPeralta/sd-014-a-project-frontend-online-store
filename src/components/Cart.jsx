@@ -39,7 +39,7 @@ class Cart extends React.Component {
         <section>
           <Link to="/"><AiFillHome color="green" /></Link>
           <button type="button" onClick={ this.deleteCart }>Apagar Todos</button>
-          {cartItems.map((item) => <CartCard key={ item.id } product={ item } />)}
+          {cartItems.map((item, indice) => <CartCard key={ indice } product={ item } />)}
         </section>
 
       );
