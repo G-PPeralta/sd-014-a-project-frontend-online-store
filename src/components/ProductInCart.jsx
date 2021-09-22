@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addQuantity } from '../services/localstorage';
+import BtnAddQuantity from './BtnAddQuantity';
 
 export class ProductInCart extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export class ProductInCart extends Component {
     this.getCartItem = this.getCartItem.bind(this);
     this.addQuantity = this.addQuantity.bind(this);
     this.state = {
-      product: {},
+      product: { id: 'id' },
       quantity: 0,
     };
   }
@@ -43,24 +44,21 @@ export class ProductInCart extends Component {
         <p>{ product.price }</p>
         <p data-testid="shopping-cart-product-quantity">{ `${String(quantity)}` }</p>
         <p>{`Preço total: ${totalPrice}`}</p>
-        <button
-          id={ product.id }
-          name="sum"
-          type="button"
-          onClick={ this.addQuantity }
-          data-testid="product-increase-quantity"
-        >
-          +
-        </button>
-        <button
+        <BtnAddQuantity
           id={ product.id }
           name="sub"
-          type="button"
           onClick={ this.addQuantity }
-          data-testid="product-decrease-quantity"
-        >
-          -
-        </button>
+          testid="product-decrease-quantity"
+          operation="-"
+        />
+
+        <BtnAddQuantity
+          id={ product.id }
+          name="sum"
+          onClick={ this.addQuantity }
+          testid="product-increase-quantity"
+          operation="+"
+        />
       </>
     );
   }
