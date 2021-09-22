@@ -3,6 +3,30 @@ import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
 
 class SearchProduct extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cartItems: [],
+    };
+  }
+
+  componentDidMount() {
+    if (!JSON.parse(localStorage.getItem('setCart'))) {
+      localStorage.setItem('setCart', JSON.stringify([]));
+    }
+  }
+
+  componentDidUpdate() {
+    const { cartItems } = this.state;
+    localStorage.setItem('setCart', JSON.stringify(cartItems));
+  }
+
+  getItem = (item) => {
+    const { cartItems } = this.state;
+    const cart = cartItems;
+    this.setState({ cartItems: ([...cart, item]) });
+  }
+
   searchProduct = (arrayProduct) => {
     if (arrayProduct.length !== 0) {
       return (
@@ -13,6 +37,7 @@ class SearchProduct extends Component {
               title={ products.title }
               image={ products.thumbnail }
               price={ products.price }
+              getItem={ this.getItem }
               id={ products.id }
             />))}
         </div>
