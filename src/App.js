@@ -6,7 +6,6 @@ import Cart from './components/Cart';
 import './productStyles.css';
 import Home from './components/Home';
 import DetalhesProduto from './components/DetalhesProduto';
-// comentario em qlq lugar
 
 function App() {
   return (
