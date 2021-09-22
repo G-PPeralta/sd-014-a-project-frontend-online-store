@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import CartProducts from '../components/CartProducts';
 
 const CART_KEY = 'cart';
+const QTD_KEY = 'qtd';
 
 class Carrinho extends React.Component {
   constructor() {
@@ -10,6 +11,7 @@ class Carrinho extends React.Component {
 
     this.state = {
       carrinho: [],
+      quantity: [],
     };
     this.mudaEstado = this.mudaEstado.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -21,14 +23,18 @@ class Carrinho extends React.Component {
 
   handleUpdate() {
     const produtos = JSON.parse(localStorage.getItem(CART_KEY));
+    const quantity = JSON.parse(localStorage.getItem(QTD_KEY));
     if (produtos) {
       //  console.log(produtos);
-      this.mudaEstado(produtos);
+      this.mudaEstado(produtos, 'carrinho');
+    }
+    if (quantity) {
+      this.mudaEstado(quantity, 'quantity')
     }
   }
 
-  mudaEstado(produtos) {
-    this.setState({ carrinho: produtos });
+  mudaEstado(produtos, key) {
+    this.setState({ [`${key}`]: produtos });
   }
 
   render() {
@@ -41,7 +47,13 @@ class Carrinho extends React.Component {
             carrinho={ carrinho }
           />
           <Link to="/checkout">
-            <button type="button" className="bt-container">Checkout</button>
+            <button
+              type="button"
+              className="bt-container"
+              data-testid="checkout-products"
+            >
+              Checkout
+            </button>
           </Link>
         </>
       );

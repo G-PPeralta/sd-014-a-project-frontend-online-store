@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/AddCarrinho.css';
 
+const QTD_KEY = 'qtd';
+
 class ProductCheckout extends Component {
   constructor() {
     super();
@@ -9,6 +11,14 @@ class ProductCheckout extends Component {
     this.state = {
       quantity: 1,
     };
+  }
+
+  componentDidMount() {
+    const { quantity } = this.state;
+    const { produto } = this.props;
+    const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
+    const item = savedQuantity.find((item) => item.id === produto.id);
+    this.setState({ quantity: item.quantity});
   }
 
   render() {

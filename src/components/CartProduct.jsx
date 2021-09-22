@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/AddCarrinho.css';
 
+const QTD_KEY = 'qtd';
+
 class CartProduct extends Component {
   constructor() {
     super();
@@ -10,7 +12,21 @@ class CartProduct extends Component {
       quantity: 1,
     };
     this.changeQuantity = this.changeQuantity.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
+    this.deleteItemCart = this.deleteItemCart.bind(this);
+  }
+
+  componentDidMount() {
+    const { quantity } = this.state;
+    const { produto } = this.props;
+    let savedQuantity = [];
+    const qtdProduct = {
+      id: produto.id,
+      quantity,
+    }
+    if (JSON.parse(localStorage.getItem(QTD_KEY))) {
+      savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
+    }
+    localStorage.setItem(QTD_KEY, JSON.stringify([...savedQuantity, qtdProduct]));
   }
 
   changeQuantity(operacao) {
@@ -18,23 +34,48 @@ class CartProduct extends Component {
     if (operacao === '+') {
       this.setState((prevState) => ({
         quantity: prevState.quantity + 1,
-      }));
+      }), () => this.updateQuantityStorage());
     }
     if (operacao === '-' && quantity >= 1) {
       this.setState((prevState) => ({
         quantity: prevState.quantity - 1,
-      }));
+      }), () => this.updateQuantityStorage());
     }
   }
 
-  deleteItem() {
+  updateQuantityStorage() {
+    const { quantity } = this.state;
+    const { produto } = this.props;
+    const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
+    const item = savedQuantity.find((item) => item.id === produto.id);
+    const index = savedQuantity.indexOf(item);
+    if (quantity)
+    savedQuantity[index] = {
+      id: produto.id,
+      quantity,
+    };
+    localStorage.setItem(QTD_KEY, JSON.stringify(savedQuantity));
+  }
+
+  deleteItemCart() {
     const { produto, metodo } = this.props;
     const storage = JSON.parse(localStorage.getItem('cart'));
     const produtoId = (storage.find((each) => each.id === produto.id));
     const index = storage.indexOf(produtoId);
     storage.splice(index, 1);
+    this.setState({ quantity: 0});
+    this.deleteItemStorage();
     localStorage.setItem('cart', JSON.stringify(storage));
     metodo();
+  }
+
+  deleteItemStorage() {
+    const { produto } = this.props;
+    const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
+    const item = savedQuantity.find((item) => item.id === produto.id);
+    const index = savedQuantity.indexOf(item);
+    savedQuantity.splice(index, 1);
+    localStorage.setItem(QTD_KEY, JSON.stringify(savedQuantity));
   }
 
   render() {
@@ -75,7 +116,7 @@ class CartProduct extends Component {
             <button
               className="bt-container"
               type="button"
-              onClick={ this.deleteItem }
+              onClick={ this.deleteItemCart }
             >
               x
             </button>
