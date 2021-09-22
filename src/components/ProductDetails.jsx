@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ProductReviewForm from './ProductReviewForm';
 
 class ProductDetails extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <ProductReviewForm />
       </div>
     );
   }

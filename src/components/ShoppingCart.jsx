@@ -2,6 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ShoppingCart extends React.Component {
+  //  operation recebe atributos increase ou decrease
+  renderQuantityButton = (operation) => (
+    <button
+      type="button"
+      data-testid={ `product-${operation}-quantity` }
+      onClick={ this.handleClick }
+    >
+      { (operation === 'decrease' ? '-' : '+') }
+    </button>
+  );
+
   render() {
     const { cartProduct } = this.props;
     if (cartProduct.length === 0) {
