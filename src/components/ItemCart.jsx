@@ -15,7 +15,7 @@ class ItemCart extends React.Component {
         <button type="button">x</button>
         <img src={ product.thumbnail } alt="" />
         <div>{ product.title}</div>
-        <button 
+        <button
           type="button"
           data-testid="product-decrease-quantity"
           onClick={ this.handleClick }
@@ -25,7 +25,7 @@ class ItemCart extends React.Component {
         </button>
         <div>{ product.quantity }</div>
         <button
-          type="button" 
+          type="button"
           data-testid="product-increase-quantity"
           onClick={ this.handleClick }
           name="acrescentar"
