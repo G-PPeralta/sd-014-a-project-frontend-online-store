@@ -27,6 +27,13 @@ class Evaluator extends React.Component {
     });
   }
 
+  handleSubmit = () => {
+    const { email, avaliacao, mensagem } = this.state;
+    localStorage.setItem('email', email);
+    localStorage.setItem('avaliacao', avaliacao);
+    localStorage.setItem('mensagem', mensagem);
+  }
+
   render() {
     const { email, avaliacao, mensagem } = this.state;
     return (
@@ -37,10 +44,10 @@ class Evaluator extends React.Component {
         <button type="button">+</button>
         <button type="submit">Adicionar ao Carrinho</button>
         <h1>Avaliações</h1>
-        <fieldset>
+        <form onSubmit={ this.handleSubmit }>
           <input
             name="email"
-            type="text"
+            type="email"
             placeholder="Email"
             value={ email }
             onChange={ this.handleChange }
@@ -52,24 +59,18 @@ class Evaluator extends React.Component {
             placeholder="Mensagem(opcional)"
             value={ mensagem }
             onChange={ this.handleChange }
+            data-testid="product-detail-evaluation"
           />
           <button type="submit">Avaliar</button>
-        </fieldset>
+        </form>
         <fieldset>
-          <p>email</p>
-          <EvaluationStar />
-          <hr />
-          <p>email</p>
-          <EvaluationStar />
+          <p>{localStorage.getItem('email')}</p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam commodi quas enim, temporibus aliquid nulla eveniet animi modi incidunt ea fuga ut sequi corrupti soluta nobis hic explicabo eius accusantium.
+            Avaliação:
+            {localStorage.getItem('avaliacao')}
           </p>
+          <p>{localStorage.getItem('mensagem')}</p>
           <hr />
-          <p>email</p>
-          <EvaluationStar />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas alias ducimus, est accusamus eum atque commodi nulla voluptatibus voluptatum, enim laboriosam. Tenetur corrupti vero, magnam aperiam unde ab atque autem.
-          </p>
         </fieldset>
       </section>
     );
