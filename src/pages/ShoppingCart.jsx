@@ -1,12 +1,16 @@
 import React from 'react';
 import ItemCart from '../components/ItemCart';
-import { readProducts, sortString, removeProduct } from '../services/localStorage';
+import {
+  readProducts,
+  removeProduct,
+  sumTotalCartPrice } from '../services/localStorage';
 
 class ShoppingCart extends React.Component {
   constructor() {
     super();
     this.state = {
       arrayProduct: readProducts(),
+      totalPrice: sumTotalCartPrice(readProducts()),
     };
   }
 
@@ -20,8 +24,8 @@ class ShoppingCart extends React.Component {
       selectedProduct[0].quantity -= 1;
     }
     this.setState({
-      arrayProduct: [...remaningProducts, ...selectedProduct]
-        .sort((a, b) => sortString(a, b)),
+      arrayProduct: [...remaningProducts, ...selectedProduct],
+      totalPrice: sumTotalCartPrice([...remaningProducts, ...selectedProduct]),
     });
   }
 
@@ -29,11 +33,12 @@ class ShoppingCart extends React.Component {
     removeProduct(id);
     this.setState({
       arrayProduct: readProducts(),
+      totalPrice: sumTotalCartPrice(readProducts()),
     });
   }
 
   render() {
-    const { arrayProduct } = this.state;
+    const { arrayProduct, totalPrice } = this.state;
     return (
       <div>
         {arrayProduct
@@ -43,7 +48,15 @@ class ShoppingCart extends React.Component {
             quantityChanger={ this.quantityChanger }
             removeItem={ this.removeItem }
           />))}
-        <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
+        { arrayProduct.length === 0
+        && <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div> }
+        <p>
+          Valor total da compra R$
+          { totalPrice }
+        </p>
+        <button type="button">
+          Finalizar a compra
+        </button>
       </div>
     );
   }

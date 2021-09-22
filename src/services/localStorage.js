@@ -6,12 +6,12 @@ export const createStoraged = () => {
   }
 };
 
-export const sortString = (a, b) => {
+export const sortString = (a, b) => { // função para 'sortear' a chave arrayProduct do state ShoppingCart, corrige bug quando incrementa um item no cart.
   const NUMBER_FOR_SORT = -1;
-  if (a.product.id < b.product.id) {
+  if (a.product.title < b.product.title) {
     return NUMBER_FOR_SORT;
   }
-  if (a.product.id > b.product.id) {
+  if (a.product.title > b.product.title) {
     return 0;
   }
   return 0;
@@ -21,7 +21,7 @@ export const readProducts = () => {
   const products = JSON.parse(
     localStorage.getItem(SHOPPING_CART_PRODUCTS),
   );
-  return products.sort((a, b) => sortString(a, b));
+  return products;
 };
 
 const saveShoppingCartProducts = (cart) => localStorage
@@ -41,4 +41,12 @@ export const addProduct = (product) => {
 export const removeProduct = (id) => {
   const products = readProducts();
   saveShoppingCartProducts(products.filter((product) => product.product.id !== id));
+};
+
+export const sumTotalCartPrice = (array) => {
+  let sum = 0;
+  array.forEach((product) => {
+    sum += product.product.price * product.quantity;
+  });
+  return sum;
 };
