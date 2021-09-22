@@ -5,14 +5,17 @@ import addToCart from '../services/localstorage';
 class BtnAddCart extends React.Component {
   render() {
     const {
-      product: { title, price, thumbnail },
+      title,
+      price,
+      thumbnail,
       id,
+      source,
     } = this.props;
     return (
       <button
         type="button"
         onClick={ () => addToCart({ title, price, thumbnail, id }) }
-        data-testid="product-add-to-cart"
+        data-testid={ `${source}-add-to-cart` }
       >
         Adicionar ao carrinho
       </button>
@@ -21,12 +24,15 @@ class BtnAddCart extends React.Component {
 }
 
 BtnAddCart.propTypes = {
-  product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-  }).isRequired,
-  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  source: PropTypes.string.isRequired,
+};
+
+BtnAddCart.defaultProps = {
+  id: '',
 };
 
 export default BtnAddCart;
