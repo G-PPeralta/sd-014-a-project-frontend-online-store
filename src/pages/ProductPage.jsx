@@ -66,6 +66,7 @@ class ProductPage extends Component {
 ProductPage.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
+      selectedProducts: PropTypes.string,
       product: PropTypes.shape({
         title: PropTypes.string,
         price: PropTypes.number,
