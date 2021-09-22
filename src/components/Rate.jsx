@@ -12,23 +12,31 @@ class Rate extends Component {
         {[...Array(stars)].map((star, index) => {
           const ratingValue = index + 1;
           return (
-            <label key={ index }>
-              <input
-                type="radio"
-                id="rate"
-                className="star-rate"
-                value={ rating }
-                onClick={ () => onRating(ratingValue) }
-              />
+            <div
+              key={ index }
+              className="star-div"
+            >
+              <label
+                htmlFor="rate"
+              >
+                <input
+                  name="rate"
+                  type="radio"
+                  id="rate"
+                  className="star-rate"
+                  value={ rating }
+                  onClick={ () => onRating(ratingValue) }
+                />
+              </label>
               <FaStar
-                size={ 100 }
+                size={ 40 }
                 id="rate"
                 className="star"
                 color={ ratingValue <= (hover || rating) ? '#ffc107' : 'e4e5e9' }
                 onMouseEnter={ () => onRating(ratingValue) }
                 onMouseLeave={ () => onHover(null) }
               />
-            </label>
+            </div>
           );
         })}
       </div>

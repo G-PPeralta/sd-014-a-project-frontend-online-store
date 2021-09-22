@@ -12,10 +12,6 @@ class Cart extends Component {
     this.recebeInfo = this.recebeInfo.bind(this);
   }
 
-  // VERIFICAR QUANTOS ITENS TEM DE CADA PRODUTO
-  // RETORNAR UM NOVO ARRAY COM OS ITENS, COM A QUANTIDADE DE CADA
-  // FAZER UM MAP DO CARRINHO
-  // APÓS O CARRINHO PRONTO, AO EXCLUIR UM ITEM, EDITAR O ARRAY E DEVOLVER PARA O FILHO O NOVO XABLAU
   componentDidMount() {
     this.recebeInfo();
   }
@@ -30,7 +26,6 @@ class Cart extends Component {
   }
 
   async addBTN(event) {
-    // const { cartList } = this.state;
     const addPrd = {
       prodId: event.target.className,
       name: event.target.name,
@@ -76,16 +71,20 @@ class Cart extends Component {
         }
         return (arrayzao);
       });
-      console.log(newList);
+      // console.log(newList);
     }
 
     return (
       <div className="cart">
+        <h2 className="cart-title-h">Meu Carrinho de Compras</h2>
         {localStorage.getItem('cartList') !== null
           ? (
             <div>
               {arrayzao.map((prod) => (
-                <div key={ prod.id }>
+                <div
+                  key={ prod.id }
+                  className="prod-cart-div"
+                >
                   <p data-testid="shopping-cart-product-name">{prod.name}</p>
                   <p>{prod.price}</p>
                   <button
@@ -96,7 +95,7 @@ class Cart extends Component {
                     className={ prod.id }
                     onClick={ this.addBTN }
                   >
-                    EU ADICIONO COISAS
+                    +
                   </button>
                   <span data-testid="shopping-cart-product-quantity">
                     {prod.quantidade}
@@ -109,7 +108,7 @@ class Cart extends Component {
                     className={ prod.id }
                     onClick={ this.subBTN }
                   >
-                    EU DIMINUO COISAS
+                    -
                   </button>
                 </div>
               ))}
