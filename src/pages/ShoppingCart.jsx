@@ -49,7 +49,7 @@ export default class ShoppingCart extends Component {
       this.setState({
         cartProducts,
       });
-      //localStorage.setItem('shoppingCart', JSON.stringify(cartProducts));
+      // localStorage.setItem('shoppingCart', JSON.stringify(cartProducts));
     }
   }
 
