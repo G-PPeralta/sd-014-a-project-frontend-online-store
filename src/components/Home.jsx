@@ -16,6 +16,7 @@ class Home extends Component {
     this.chamarApi = this.chamarApi.bind(this);
     this.addCotegory = this.addCotegory.bind(this);
     this.addCotegory = this.addCotegory.bind(this);
+    this.localChanger = this.localChanger.bind(this);
   }
 
   async componentDidMount() {
@@ -48,6 +49,17 @@ class Home extends Component {
     });
   }
 
+  localChanger(product) {
+    if (localStorage.getItem('Cart') !== null) {
+      console.log('oi');
+      let local = JSON.parse(localStorage.getItem('Cart'));
+      local = [...local, product];
+      localStorage.setItem('Cart', JSON.stringify(local));
+    } else {
+      localStorage.setItem('Cart', JSON.stringify([product]));
+    }
+  }
+
   render() {
     const { retornoCategory, searchProduct, productList } = this.state;
     const { searchInput, chamarApi, addCotegory } = this;
@@ -61,6 +73,7 @@ class Home extends Component {
           productList={ productList }
           searchInput={ searchInput }
           chamarApi={ chamarApi }
+          localChanger={ this.localChanger }
         />
       </div>
     );
