@@ -11,7 +11,18 @@ class ListaDeProdutos extends Component {
       busca: '',
       produtos: [],
       selected: '',
+      addCart: [],
     };
+  }
+
+  addCartHandle = async (produto) => {
+    await this.setState((prevState) => ({ addCart: [...prevState.addCart, produto] }));
+    this.saveAddCart();
+  }
+
+  saveAddCart = () => {
+    const { addCart } = this.state;
+    localStorage.setItem('cartItem', JSON.stringify(addCart));
   }
 
   categorieFilter = async () => {
@@ -60,7 +71,12 @@ class ListaDeProdutos extends Component {
             ? <h3> Nenhum produto foi encontrado </h3>
             : produtos
               .map((produto) => (
-                <ProductCard key={ produto.id } produto={ produto } />
+                <ProductCard
+                  key={ produto.id }
+                  produto={ produto }
+                  addCartHandle={ this.addCartHandle }
+                  saveAddCart={ this.saveAddCart }
+                />
               )) }
         </div>
       </section>
