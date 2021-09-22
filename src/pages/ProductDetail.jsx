@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CartButton from '../components/CartButton';
+import CartIcon from '../components/CartIcon';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -16,18 +16,16 @@ export default class ProductDetail extends Component {
     super();
     this.state = {
       resultApi: [],
-      // cartSize: JSON.parse(localStorage.getItem('cartList')).length,
+      cartSize: '0',
     };
     this.callApi = this.callApi.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.setSize = this.setSize.bind(this);
   }
 
   componentDidMount() {
     this.callApi();
-    const newCart = JSON.parse(localStorage.getItem('cartList'));
-    if (newCart !== null) {
-      localStorage.setItem('cartSize', newCart.length);
-    }
+    this.setSize();
   }
 
   async handleClick(event) {
@@ -51,6 +49,20 @@ export default class ProductDetail extends Component {
     });
   }
 
+  async setSize() {
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    if (newCart !== null) {
+      localStorage.setItem('cartSize', newCart.length);
+      this.setState({
+        cartSize: newCart.length,
+      });
+    } else {
+      this.setState({
+        cartSize: '0',
+      });
+    }
+  }
+
   async callApi() {
     const { location: { apiProps: { categoriaDeProduto, searchText } } } = this.props;
     const results = await getProductsFromCategoryAndQuery(categoriaDeProduto,
@@ -69,9 +81,18 @@ export default class ProductDetail extends Component {
     return myProduct ? ( // This ternary conditional is needed, to ensure we only try to acces myProduct object properties, after resultApi is a non blank array to be iterated with the find HoF
       <main className="shopping-main">
         <Header />
-        <section className="cart-banner">
-          <CartButton className="cartIcon" cartSize={ cartSize } />
-        </section>
+        {/* <section className="cart-banner"> */}
+        <div>
+          <CartIcon />
+          <span
+            data-testid="shopping-cart-size"
+            className="shopping-cart-size"
+            // id="shopping-cart-size"
+          >
+            { cartSize }
+          </span>
+        </div>
+        {/* </section> */}
 
         <section className="main-sec-detail">
           <p data-testid="product-detail-name" className="product-detail-name">
@@ -115,7 +136,12 @@ export default class ProductDetail extends Component {
         <Footer />
       </main>
     ) : (
-      <span />
+      <span
+        data-testid="shopping-cart-size"
+        className="shopping-cart-size"
+      >
+        { cartSize }
+      </span>
     );
   }
 }
