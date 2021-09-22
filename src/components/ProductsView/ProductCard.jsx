@@ -8,33 +8,35 @@ export default class ProductCard extends React.Component {
       produto: { id, title, thumbnail, price },
       atualizaCarrinho,
     } = this.props;
-
     return (
-      <Link
-        data-testid="product-detail-link"
-        to={ {
-          pathname: `/product-details/${id}`,
-          state: { title, thumbnail, price },
-        } }
-      >
-        <div data-testid="product" id={ id }>
-          <h2>{title}</h2>
-          <img src={ thumbnail } alt="Produto" />
-          <p>
-            {`${price.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            })}`}
-          </p>
-          <button
-            type="submit"
-            data-testid="product-add-to-cart"
-            onClick={ (event) => atualizaCarrinho(event, title) }
-          >
-            Adicionar Carrinho
-          </button>
-        </div>
-      </Link>
+      <>
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/product-details/${id}`,
+            state: { title, thumbnail, price },
+          } }
+        >
+          <div data-testid="product" id={ id }>
+            <h2>{title}</h2>
+            <img src={ thumbnail } alt="Produto" />
+            <p>
+              {`${price.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              })}`}
+            </p>
+
+          </div>
+        </Link>
+        <button
+          type="submit"
+          data-testid="product-add-to-cart"
+          onClick={ (event) => atualizaCarrinho(event, title, price) }
+        >
+          Adicionar Carrinho
+        </button>
+      </>
     );
   }
 }

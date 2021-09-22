@@ -3,23 +3,65 @@ import PropTypes from 'prop-types';
 
 class CartList extends React.Component {
   render() {
-    const { location: { state: { cartList } } } = this.props;
+    const { cartList, addCart } = this.props;
     const produto = Object.keys(cartList);
-
+    let total = 0;
+    const DECREASE_VAR = -1; // variavel para diminuir a quantidade;
     if (produto.length !== 0) {
+      produto.map((name) => {
+        const precoProduto = Number(cartList[name][0]) * cartList[name][1];
+        total += precoProduto;
+        return true;
+      });
+
       return (
         <div>
           {produto
             && produto.map((name, index) => (
-              <>
-                <p data-testid="shopping-cart-product-name" key={ name }>
+              <div key={ name + index }>
+                <p data-testid="shopping-cart-product-name">
                   {name}
                 </p>
-                <p data-testid="shopping-cart-product-quantity" key={ name + index }>
-                  { cartList[name] }
+                <button
+                  type="button"
+                  data-testid="product-increase-quantity"
+                  onClick={ (event) => {
+                    addCart(event, name, cartList[name][1]);
+                  } }
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  data-testid="product-decrease-quantity"
+                  onClick={ (event) => {
+                    addCart(event, name, cartList[name][1], DECREASE_VAR);
+                  } }
+                >
+                  -
+                </button>
+                <p data-testid="shopping-cart-product-quantity">
+                  {' '}
+                  {cartList[name][0]}
                 </p>
-              </>
+                <p>
+                  Price:
+                  {`${(cartList[name][1] * Number(cartList[name][0]))
+                    .toLocaleString('pt-br', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}`}
+                </p>
+              </div>
             ))}
+          <p>
+            Total Price:
+            {`${total.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+            `}
+          </p>
         </div>
       );
     }
@@ -32,11 +74,8 @@ class CartList extends React.Component {
 }
 
 CartList.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      cartList: PropTypes.objectOf(PropTypes.number),
-    }),
-  }).isRequired,
+  cartList: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  addCart: PropTypes.func.isRequired,
 };
 
 export default CartList;
