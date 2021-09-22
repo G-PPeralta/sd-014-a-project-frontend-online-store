@@ -26,12 +26,12 @@ class Search extends React.Component {
             <img src={ item.thumbnail } alt={ item.title } />
             <p>{item.price}</p>
             <button
-            type="button"
-            data-testid="product-add-to-cart"
-            onClick={ () => this.handleClick(item) }
-          >
-            Adicionar no carrinho
-          </button>
+              type="button"
+              data-testid="product-add-to-cart"
+              onClick={ () => this.handleClick(item) }
+            >
+              Adicionar no carrinho
+            </button>
           </div>
         </Link>
       ))
