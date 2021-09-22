@@ -7,7 +7,7 @@ Storage.prototype.getObj = function getobj(key) {
   return JSON.parse(this.getItem(key));
 };
 
-function addToCart(product) {
+export function addToCart(product) {
   let cartProducts = localStorage.getObj('products');
   if (cartProducts) {
     if (!cartProducts[product.id]) {
@@ -19,4 +19,15 @@ function addToCart(product) {
   }
   localStorage.setObj('products', cartProducts);
 }
-export default addToCart;
+
+export function addEvaluation(evaluation) {
+  let objEvaluation = localStorage.getObj('evaluations');
+  if (objEvaluation) {
+    if (!objEvaluation[evaluation.id]) {
+      objEvaluation[evaluation.id] = { evaluation };
+    }
+  } else {
+    objEvaluation = { [evaluation.id]: { evaluation } };
+  }
+  localStorage.setObj('evaluations', objEvaluation);
+}

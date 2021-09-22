@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Evaluator from '../components/Evaluator';
 import BtnCart from '../components/BtnCart';
 import BtnAddCart from '../components/BtnAddCart';
 
@@ -55,12 +56,15 @@ class ProductDetails extends Component {
   render() {
     const { title, thumbnail, price, id } = this.state;
     return (
-      <div>
-        <h2>Product Details</h2>
-        <h4 data-testid="product-detail-name">{ title }</h4>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
+      <main>
+        <div>
+          <h2>Product Details</h2>
+          <h4 data-testid="product-detail-name">{title}</h4>
+          <img src={ thumbnail } alt={ title } />
+          <p>{price}</p>
+        </div>
         <BtnCart />
+        <Evaluator />
         <BtnAddCart
           source="product-detail"
           title={ title }
@@ -68,7 +72,7 @@ class ProductDetails extends Component {
           thumbnail={ thumbnail }
           id={ id }
         />
-      </div>
+      </main>
     );
   }
 }
