@@ -19,13 +19,13 @@ export class ProductInCart extends Component {
   }
 
   getCartItem() {
-    const { id } = this.props;
+    const { item } = this.props;
     const cartProducts = localStorage.getObj('products');
-    const product = Object.values(cartProducts).find((prdct) => prdct.id === id);
-    console.log(product);
+    const product = Object.entries(cartProducts).find((prdct) => prdct[0] === item);
+    console.log(product[1].quantity);
     this.setState({
-      product: product.product,
-      quantity: product.quantity,
+      product: product[1].product,
+      quantity: product[1].quantity,
     });
   }
 
@@ -43,7 +43,7 @@ export class ProductInCart extends Component {
       <>
         <h1 data-testid="shopping-cart-product-name">{ product.title }</h1>
         <p>{ product.price }</p>
-        <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
+        <p data-testid="shopping-cart-product-quantity">{ `${String(quantity)}` }</p>
         <p>{`Preço total: ${totalPrice}`}</p>
         <button
           id={ product.id }
@@ -69,7 +69,7 @@ export class ProductInCart extends Component {
 }
 
 ProductInCart.propTypes = {
-  id: PropTypes.string.isRequired,
+  item: PropTypes.string.isRequired,
 };
 
 export default ProductInCart;
