@@ -79,7 +79,7 @@ class Categories extends Component {
                 <p>{formatPrice(product.price)}</p>
               </div>
             </Link>
-            <AddCartButton product={ product } />
+            <AddCartButton testeid="product-add-to-cart" product={ product } />
           </div>
         ))}
       </div>
