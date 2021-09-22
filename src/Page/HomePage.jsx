@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CartButton from '../components/CartButton';
 import MenuCategory from '../components/MenuCategory';
 import ProductsView from '../components/ProductsView';
@@ -15,7 +16,6 @@ export default class HomePage extends Component {
       selectedCategory: '',
       produtos: [],
       querySearch: '',
-      cart: {},
     };
   }
 
@@ -51,30 +51,9 @@ export default class HomePage extends Component {
     this.setState({ produtos: resp });
   }
 
-  addCart = (event, nome) => {
-    event.preventDefault();
-    const { cart } = this.state;
-    if (cart[nome]) {
-      this.setState({
-        cart: {
-          ...cart,
-          [nome]: cart[nome] + 1,
-        },
-      });
-    } else {
-      this.setState({
-        cart: {
-          ...cart,
-          [nome]: 1,
-        },
-      });
-    }
-  }
-
   render() {
+    const { addCart } = this.props;
     const { categorias, produtos, querySearch, selectedCategory } = this.state;
-    const { cart } = this.state;
-
     return (
       <div data-testid="home-initial-message">
         <input
@@ -89,7 +68,8 @@ export default class HomePage extends Component {
         </button>
         <div>
           <CartButton
-            cartList={ cart }
+            produtos={ produtos }
+            addCart={ addCart }
           />
         </div>
         {categorias && (
@@ -100,8 +80,12 @@ export default class HomePage extends Component {
           />
         )}
         <h3>Digite algum termo de pesquisa ou escolha uma categoria.</h3>
-        <ProductsView produtos={ produtos } atualizaCarrinho={ this.addCart } />
+        <ProductsView produtos={ produtos } atualizaCarrinho={ addCart } />
       </div>
     );
   }
 }
+
+HomePage.propTypes = {
+  addCart: PropTypes.func.isRequired,
+};
