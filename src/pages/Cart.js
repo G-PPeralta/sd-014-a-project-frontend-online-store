@@ -13,7 +13,7 @@ export default class Cart extends React.Component {
   }
 
   componentDidMount() {
-    const items = api.readShoppingCart();
+    this.api.readShoppingCart();
   }
 
   handleAddItem = ({ target }) => {
@@ -40,6 +40,8 @@ export default class Cart extends React.Component {
   }
 
   render() {
+    const items = api.readShoppingCart();
+
     if (!items.length) {
       return (
         <div data-testid="shopping-cart-empty-message">
