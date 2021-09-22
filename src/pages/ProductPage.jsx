@@ -58,6 +58,34 @@ class ProductPage extends Component {
         >
           Ir carrinho de compras
         </Link>
+        <form>
+          <h1>Como você avalia o produto?</h1>
+          <label htmlFor="1">
+            <input type="radio" name="rate" id="1" value="1" />
+            1
+          </label>
+          <label htmlFor="2">
+            <input type="radio" name="rate" id="2" value="2" />
+            2
+          </label>
+          <label htmlFor="3">
+            <input type="radio" name="rate" id="3" value="3" />
+            3
+          </label>
+          <label htmlFor="4">
+            <input type="radio" name="rate" id="4" value="4" />
+            4
+          </label>
+          <label htmlFor="5">
+            <input type="radio" name="rate" id="5" value="5" />
+            5
+          </label>
+          <textarea
+            placeholder="Digite um Comentario"
+            data-testid="product-detail-evaluation"
+          />
+          <button type="button">Enviar</button>
+        </form>
       </main>
     );
   }
@@ -66,7 +94,7 @@ class ProductPage extends Component {
 ProductPage.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      selectedProducts: PropTypes.string,
+      selectedProducts: PropTypes.arrayOf(PropTypes.object),
       product: PropTypes.shape({
         title: PropTypes.string,
         price: PropTypes.number,
