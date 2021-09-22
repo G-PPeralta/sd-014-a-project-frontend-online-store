@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddReview from '../components/AddReview';
 import Reviews from '../components/Reviews';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import '../styles/ProductDetail.css';
 
 const cartProducts = [];
@@ -111,12 +112,7 @@ export default class ProductDetail extends Component {
     const { reviews } = this.state;
     return (
       <>
-        <Link data-testid="shopping-cart-button" to="/shopping-cart">
-          <img
-            alt="shopping-cart"
-            src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
-          />
-        </Link>
+        <ShoppingCartIcon />
         <div className="product-detail" data-testid="product-detail-name">
           <h3>{title}</h3>
           <img alt={ title } className="product-thumbnail" src={ thumbnail } />
