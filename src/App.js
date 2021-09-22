@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 import ShoppingCart from './pages/ShoppingCart';
+import ProductDetail from './pages/ProductDetail';
 
 import './App.css';
 
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Search } />
           <Route path="/shopping-cart" component={ ShoppingCart } />
+          <Route path="/product/:id" component={ ProductDetail } />
           <Route path="*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
