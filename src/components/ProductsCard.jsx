@@ -20,14 +20,14 @@ class ProductsCard extends Component {
           <h1>{ title }</h1>
           <img src={ thumbnail } alt={ `${title}_image` } />
           <p>{ price }</p>
-          <button
-            type="button"
-            onClick={ () => addToCart({ title, price, thumbnail }) }
-            data-testid="product-add-to-cart"
-          >
-            Adicionar ao carrinho
-          </button>
         </Link>
+        <button
+          type="button"
+          onClick={ () => addToCart({ title, price, thumbnail, id }) }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </button>
       </li>
     );
   }
