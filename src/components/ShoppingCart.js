@@ -21,7 +21,9 @@ export default class ShoppingCart extends Component {
   handleClick = (idx, numb) => {
     const { cart } = this.state;
     let { quantity } = cart[idx];
+    const maxQuantity = cart[idx].available_quantity;
     if (numb > 0) {
+      if (quantity === maxQuantity) return null;
       quantity += 1;
     } else {
       if (quantity === 1) return null;
