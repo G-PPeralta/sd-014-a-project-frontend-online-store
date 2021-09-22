@@ -9,3 +9,8 @@ export async function getProductsFromCategoryAndQuery(CATEGORY_ID, QUERY) {
   const responseRaw = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}&q=${QUERY}`);
   return responseRaw.json();
 }
+
+export async function getProductItemFromML(id) {
+  const responseRaw = await fetch(`https://api.mercadolibre.com/items/${id}`);
+  return responseRaw.json();
+}
