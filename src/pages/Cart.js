@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
-
 import * as api from '../services/shoppingCartAPI';
 
 export default class Cart extends React.Component {
