@@ -48,9 +48,7 @@ class Cart extends Component {
               </div>
             ))}
             <hr />
-            <p data-testid="shopping-cart-product-quantity">
-              {quantidade}
-            </p>
+
             <spam>Preço Total: </spam>
           </div>
         )

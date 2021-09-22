@@ -8,13 +8,14 @@ class SearchProduct extends Component {
     this.state = {
       nameItem: [],
       priceItem: [],
-
     };
   }
 
   componentDidMount() {
-    if (!JSON.parse(localStorage.getItem('setCart'))) {
+    if (!JSON.parse(localStorage.getItem('nameItems'))) {
       localStorage.setItem('nameItems', JSON.stringify([]));
+    }
+    if (!JSON.parse(localStorage.getItem('priceItems'))) {
       localStorage.setItem('priceItems', JSON.stringify([]));
     }
   }
@@ -60,9 +61,5 @@ class SearchProduct extends Component {
     );
   }
 }
-
-SearchProduct.propTypes = {
-  arrayProduct: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default SearchProduct;
