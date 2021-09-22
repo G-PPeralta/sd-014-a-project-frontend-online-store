@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
+import AddCartButton from './AddCartButton';
+
+/* Pra formaatar o preço do produto, segui os passos de: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat */
+
+const formatPrice = (value) => new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+}).format(value);
 
 class Categories extends Component {
   constructor() {
@@ -23,10 +34,9 @@ class Categories extends Component {
   }
 
   fetchAPI(category) {
-    getProductsFromCategoryAndQuery(category, '')
-      .then((query) => {
-        this.setState({ productsList: query.results });
-      });
+    getProductsFromCategoryAndQuery(category, '').then((query) => {
+      this.setState({ productsList: query.results });
+    });
   }
 
   fetchCategories() {
@@ -56,18 +66,21 @@ class Categories extends Component {
             </label>
           </div>
         ))}
-        { productsList.map((product) => (
-          <Link
-            data-testid="product-detail-link"
-            to={ { pathname: `/product/${product.id}`, state: { product } } }
-            key={ product.id }
-          >
-            <div data-testid="product" key={ product.id }>
-              <h3>{ product.title }</h3>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <p>{ product.price }</p>
-            </div>
-          </Link>
+        {productsList.map((product) => (
+          <div key={ product.id }>
+            <Link
+              data-testid="product-detail-link"
+              to={ { pathname: `/product/${product.id}`, state: { product } } }
+              key={ product.id }
+            >
+              <div data-testid="product" key={ product.id }>
+                <h3>{product.title}</h3>
+                <img src={ product.thumbnail } alt={ product.title } />
+                <p>{formatPrice(product.price)}</p>
+              </div>
+            </Link>
+            <AddCartButton product={ product } />
+          </div>
         ))}
       </div>
     );
