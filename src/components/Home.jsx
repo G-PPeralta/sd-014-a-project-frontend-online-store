@@ -17,10 +17,6 @@ class Home extends React.Component {
     };
   }
 
-  /* componentDidMount() {
-    this.fetchGetProducts();
-  } */
-
   handleChange = ({ target }) => {
     const { value } = target;
     this.setState({ product: value });
