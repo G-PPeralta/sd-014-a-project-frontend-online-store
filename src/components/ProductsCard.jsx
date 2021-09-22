@@ -21,8 +21,8 @@ class ProductsCard extends Component {
           <img src={ thumbnail } alt={ `${title}_image` } />
           <p>{ price }</p>
         </Link>
-        <BtnAddCart 
-          product={ product }
+        <BtnAddCart
+          product={ { title, price, thumbnail} }
           id={ id }
         />
       </li>
