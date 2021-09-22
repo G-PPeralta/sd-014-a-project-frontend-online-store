@@ -17,7 +17,7 @@ export default class ProductDetail extends Component {
     super();
     this.state = {
       resultApi: [],
-      cartSize: 0,
+      cartSize: '0',
     };
     this.callApi = this.callApi.bind(this);
     this.handleClick = this.handleClick.bind(this);

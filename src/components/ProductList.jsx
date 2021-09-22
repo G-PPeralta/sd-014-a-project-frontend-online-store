@@ -25,15 +25,13 @@ class ProductList extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.setSize = this.setSize.bind(this);
   }
 
   componentDidMount() {
     this.callGetCategories();
     this.handleCategory();
-    const newCart = JSON.parse(localStorage.getItem('cartList'));
-    if (newCart !== null) {
-      localStorage.setItem('cartSize', newCart.length);
-    }
+    this.setSize();
   }
 
   handleChange(event) {
@@ -68,6 +66,20 @@ class ProductList extends Component {
     this.setState({
       cartSize: newCart.length,
     });
+  }
+
+  async setSize() {
+    const newCart = JSON.parse(localStorage.getItem('cartList'));
+    if (newCart !== null) {
+      localStorage.setItem('cartSize', newCart.length);
+      this.setState({
+        cartSize: newCart.length,
+      });
+    } else {
+      this.setState({
+        cartSize: '0',
+      });
+    }
   }
 
   async callApi() {
