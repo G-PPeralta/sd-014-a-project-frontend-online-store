@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ShoppingIcon from '../components/ShoppingIcon';
+import { addProduct } from '../services/addFunctions';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -9,25 +10,25 @@ export default class ProductDetails extends Component {
   }
 
   handleClick = () => {
-    const { product } = this.props;
+    const { product } = this.state;
     addProduct(product);
   }
 
   render() {
-    const { title, thumbnail, price } = this.state;
-    console.log(this.state);
+    const { product } = this.state;
+
     return (
       <div>
         <ShoppingIcon />
         <h3 data-testid="product-detail-name">
-          { title }
+          { product.title }
         </h3>
-        <img src={ thumbnail } alt={ title } />
+        <img src={ product.thumbnail } alt={ product.title } />
         <h3>
-          { `R$${price}`}
+          { `R$${product.price}`}
         </h3>
         <button
-          data-testid="product-add-to-cart"
+          data-testid="product-detail-add-to-cart"
           type="button"
           onClick={ this.handleClick }
         >
