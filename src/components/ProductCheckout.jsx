@@ -14,11 +14,14 @@ class ProductCheckout extends Component {
   }
 
   componentDidMount() {
-    const { quantity } = this.state;
     const { produto } = this.props;
     const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
-    const item = savedQuantity.find((item) => item.id === produto.id);
-    this.setState({ quantity: item.quantity});
+    const item = savedQuantity.find((element) => element.id === produto.id);
+    this.updateState(item);
+  }
+
+  updateState(item) {
+    this.setState({ quantity: item.quantity });
   }
 
   render() {

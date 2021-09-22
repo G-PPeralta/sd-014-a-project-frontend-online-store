@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 class InfoComprador extends Component {
   constructor() {
     super();
@@ -16,12 +17,14 @@ class InfoComprador extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
     });
   }
+
   render() {
     const {
       nome,

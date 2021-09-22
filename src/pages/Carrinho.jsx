@@ -11,7 +11,6 @@ class Carrinho extends React.Component {
 
     this.state = {
       carrinho: [],
-      quantity: [],
     };
     this.mudaEstado = this.mudaEstado.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -29,7 +28,7 @@ class Carrinho extends React.Component {
       this.mudaEstado(produtos, 'carrinho');
     }
     if (quantity) {
-      this.mudaEstado(quantity, 'quantity')
+      this.mudaEstado(quantity, 'quantity');
     }
   }
 

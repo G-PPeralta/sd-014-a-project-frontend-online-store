@@ -11,7 +11,7 @@ class Checkout extends React.Component {
         <InfoComprador />
         <MetodoPagamento />
       </main>
-    )
+    );
   }
 }
 

@@ -22,11 +22,19 @@ class CartProduct extends Component {
     const qtdProduct = {
       id: produto.id,
       quantity,
-    }
+    };
     if (JSON.parse(localStorage.getItem(QTD_KEY))) {
       savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
+      const item = savedQuantity.find((element) => element.id === produto.id);
+      this.updateState(item);
     }
-    localStorage.setItem(QTD_KEY, JSON.stringify([...savedQuantity, qtdProduct]));
+    if (!savedQuantity.some((item) => item.id === qtdProduct.id)) {
+      localStorage.setItem(QTD_KEY, JSON.stringify([...savedQuantity, qtdProduct]));
+    }
+  }
+
+  updateState(item) {
+    this.setState({ quantity: item.quantity });
   }
 
   changeQuantity(operacao) {
@@ -47,13 +55,14 @@ class CartProduct extends Component {
     const { quantity } = this.state;
     const { produto } = this.props;
     const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
-    const item = savedQuantity.find((item) => item.id === produto.id);
+    const item = savedQuantity.find((element) => element.id === produto.id);
     const index = savedQuantity.indexOf(item);
-    if (quantity)
-    savedQuantity[index] = {
-      id: produto.id,
-      quantity,
-    };
+    if (quantity) {
+      savedQuantity[index] = {
+        id: produto.id,
+        quantity,
+      };
+    }
     localStorage.setItem(QTD_KEY, JSON.stringify(savedQuantity));
   }
 
@@ -63,7 +72,7 @@ class CartProduct extends Component {
     const produtoId = (storage.find((each) => each.id === produto.id));
     const index = storage.indexOf(produtoId);
     storage.splice(index, 1);
-    this.setState({ quantity: 0});
+    this.setState({ quantity: 0 });
     this.deleteItemStorage();
     localStorage.setItem('cart', JSON.stringify(storage));
     metodo();
@@ -72,7 +81,7 @@ class CartProduct extends Component {
   deleteItemStorage() {
     const { produto } = this.props;
     const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
-    const item = savedQuantity.find((item) => item.id === produto.id);
+    const item = savedQuantity.find((element) => element.id === produto.id);
     const index = savedQuantity.indexOf(item);
     savedQuantity.splice(index, 1);
     localStorage.setItem(QTD_KEY, JSON.stringify(savedQuantity));
