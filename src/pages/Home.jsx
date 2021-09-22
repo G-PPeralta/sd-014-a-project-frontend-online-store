@@ -92,6 +92,7 @@ class Home extends React.Component {
             </button>
             <CarrinhoBt />
           </div>
+
         </header>
         <section className="produtos-container">
           <aside className="categorias">

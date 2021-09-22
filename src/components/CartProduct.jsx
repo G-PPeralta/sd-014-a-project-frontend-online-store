@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/AddCarrinho.css';
 
 class CartProduct extends Component {
   constructor() {
@@ -8,6 +9,32 @@ class CartProduct extends Component {
     this.state = {
       quantity: 1,
     };
+    this.changeQuantity = this.changeQuantity.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  changeQuantity(operacao) {
+    const { quantity } = this.state;
+    if (operacao === '+') {
+      this.setState((prevState) => ({
+        quantity: prevState.quantity + 1,
+      }));
+    }
+    if (operacao === '-' && quantity >= 1) {
+      this.setState((prevState) => ({
+        quantity: prevState.quantity - 1,
+      }));
+    }
+  }
+
+  deleteItem() {
+    const { produto, metodo } = this.props;
+    const storage = JSON.parse(localStorage.getItem('cart'));
+    const produtoId = (storage.find((each) => each.id === produto.id));
+    const index = storage.indexOf(produtoId);
+    storage.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(storage));
+    metodo();
   }
 
   render() {
@@ -28,6 +55,31 @@ class CartProduct extends Component {
           <br />
           <h3 data-testid="shopping-cart-product-quantity">{ quantity }</h3>
           <h3>Unidade(s)</h3>
+          <div className="btn-container-cart">
+            <button
+              className="bt-container"
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => this.changeQuantity('+') }
+            >
+              +
+            </button>
+            <button
+              className="bt-container"
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.changeQuantity('-') }
+            >
+              -
+            </button>
+            <button
+              className="bt-container"
+              type="button"
+              onClick={ this.deleteItem }
+            >
+              x
+            </button>
+          </div>
         </div>
       </li>
     );
@@ -42,6 +94,7 @@ CartProduct.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ])).isRequired,
+  metodo: PropTypes.func.isRequired,
 };
 
 export default CartProduct;
