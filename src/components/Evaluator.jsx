@@ -35,8 +35,10 @@ class Evaluator extends React.Component {
     localStorage.setItem('avaliacao', avaliacao);
     localStorage.setItem('mensagem', mensagem);
 
-    // preventDefault fazendo com que o localStorage.getItem só atualize depois de editar qqr input;
-    arrayAvaliacao.push([email, avaliacao, mensagem]);
+    // arrayAvaliacao.push([email, avaliacao, mensagem]);
+    this.setState((prevState) => ({
+      arrayAvaliacao: [...prevState.arrayAvaliacao, { email, avaliacao, mensagem }],
+    }));
     console.log(arrayAvaliacao);
   }
 
