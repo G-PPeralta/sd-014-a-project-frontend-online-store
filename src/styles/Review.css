@@ -1,8 +1,15 @@
 .form-container {
   display: flex;
-  background-color: blue;
 }
 
 .rating-container {
   display: flex;
+}
+
+.star-white {
+  fill: white;
+}
+
+.star-yellow {
+  fill: yellow;
 }

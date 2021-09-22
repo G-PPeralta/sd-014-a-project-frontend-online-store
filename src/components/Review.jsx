@@ -15,12 +15,14 @@ class Review extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleStars = this.handleStars.bind(this);
     this.setlocalStorage = this.setLocalStorage.bind(this);
+    this.readLocalStorage = this.readLocalStorage.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.readLocalStorage();
-  // }
+  componentDidMount() {
+    this.readLocalStorage();
+  }
 
   handleChange(event) {
     const { name, value } = event.target;
@@ -45,7 +47,12 @@ class Review extends Component {
     }), () => {
       this.setLocalStorage();
     });
-    console.log(review);
+  }
+
+  handleStars(nota) {
+    this.setState({
+      nota,
+    });
   }
 
   setLocalStorage() {
@@ -55,16 +62,22 @@ class Review extends Component {
 
   readLocalStorage() {
     const reviews = JSON.parse(localStorage.getItem('reviews'));
-
-    this.setState({
-      reviews,
-    });
-    // salvar no state;
-    // executar no component did mount
+    if (reviews) {
+      this.setState({
+        reviews,
+      });
+    }
   }
 
   render() {
-    const { email, nota, mensagem, reviews } = this.state;
+    const { email, mensagem, reviews } = this.state;
+    const loadStorage = reviews.map((review) => (
+      <div key={ review.mensagem }>
+        <p>{review.email}</p>
+        <p>{review.nota}</p>
+        <p>{review.mensagem}</p>
+      </div>
+    ));
 
     return (
       <>
@@ -80,7 +93,7 @@ class Review extends Component {
               onChange={ this.handleChange }
             />
 
-            <Rating />
+            <Rating handleStars={ this.handleStars } />
 
             <textarea
               id="comentario"
@@ -100,13 +113,7 @@ class Review extends Component {
           </form>
         </section>
         <section>
-          {reviews.map(({ email, nota, mensagem }) => (
-            <div key="mensagem">
-              <p>{email}</p>
-              <p>{nota}</p>
-              <p>{mensagem}</p>
-            </div>
-          ))}
+          { loadStorage }
         </section>
       </>
     );
