@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ProductReview from './ProductReview';
 
 class DetalhesProduto extends React.Component {
   constructor() {
@@ -24,6 +25,8 @@ class DetalhesProduto extends React.Component {
     return (
       <div>
         <h2 data-testid="product-detail-name">{title}</h2>
+        {/* Componente para avaliação do produto */}
+        <ProductReview />
       </div>
     );
   }
