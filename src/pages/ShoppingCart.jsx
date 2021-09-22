@@ -26,7 +26,7 @@ class ShoppingCart extends Component {
     const { cartItens, itensQuantity } = this.state;
     const { name } = target;
     const quantity = itensQuantity;
-    if (itensQuantity[name] > 1) {
+    if (itensQuantity[name] > 0) {
       quantity[name] += 1;
       this.setState({ itensQuantity: quantity });
       productsSave(cartItens, quantity);
