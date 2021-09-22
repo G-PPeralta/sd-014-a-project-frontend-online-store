@@ -36,12 +36,10 @@ export default class ShoppingCart extends Component {
   }
 
   removeProduct(productToRemoveId) {
-    console.log('Removendo produto: ', productToRemoveId);
     const { cartProducts } = this.state;
     const newCart = cartProducts.filter(
       (product) => product.id !== productToRemoveId,
     );
-    console.log(newCart);
     this.setState({
       cartProducts: newCart,
     });
