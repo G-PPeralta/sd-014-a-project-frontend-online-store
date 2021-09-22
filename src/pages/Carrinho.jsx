@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartProducts from '../components/CartProducts';
+import TotalPrice from '../components/TotalPrice';
 
 const CART_KEY = 'cart';
 const QTD_KEY = 'qtd';
@@ -11,40 +12,53 @@ class Carrinho extends React.Component {
 
     this.state = {
       carrinho: [],
+      total: 0,
     };
     this.mudaEstado = this.mudaEstado.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.loadTotal = this.loadTotal.bind(this);
   }
 
   componentDidMount() {
     this.handleUpdate();
+    this.loadTotal();
   }
 
   handleUpdate() {
     const produtos = JSON.parse(localStorage.getItem(CART_KEY));
-    const quantity = JSON.parse(localStorage.getItem(QTD_KEY));
     if (produtos) {
-      //  console.log(produtos);
       this.mudaEstado(produtos, 'carrinho');
-    }
-    if (quantity) {
-      this.mudaEstado(quantity, 'quantity');
     }
   }
 
-  mudaEstado(produtos, key) {
-    this.setState({ [`${key}`]: produtos });
+  loadTotal() {
+    const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
+    const savedCart = JSON.parse(localStorage.getItem(CART_KEY));
+    if (savedQuantity && savedCart) {
+      let sums = 0;
+      savedCart.forEach((item) => {
+        const foundItem = savedQuantity.find((element) => element.id === item.id);
+        sums += foundItem.quantity * item.price;
+      });
+      this.mudaEstado(sums, 'total');
+    }
+  }
+
+  mudaEstado(value, key) {
+    this.setState({ [key]: value });
   }
 
   render() {
-    const { carrinho } = this.state;
+    const { carrinho, total } = this.state;
     if (carrinho.length > 0) {
       return (
         <>
           <CartProducts
-            metodo={ this.handleUpdate }
+            updateCart={ this.handleUpdate }
             carrinho={ carrinho }
+            updateTotal={ this.loadTotal }
           />
+          <TotalPrice total={ total } />
           <Link to="/checkout">
             <button
               type="button"

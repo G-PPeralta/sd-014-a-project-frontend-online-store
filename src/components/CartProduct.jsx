@@ -26,7 +26,7 @@ class CartProduct extends Component {
     if (JSON.parse(localStorage.getItem(QTD_KEY))) {
       savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
       const item = savedQuantity.find((element) => element.id === produto.id);
-      this.updateState(item);
+      if (item) this.updateState(item);
     }
     if (!savedQuantity.some((item) => item.id === qtdProduct.id)) {
       localStorage.setItem(QTD_KEY, JSON.stringify([...savedQuantity, qtdProduct]));
@@ -53,21 +53,20 @@ class CartProduct extends Component {
 
   updateQuantityStorage() {
     const { quantity } = this.state;
-    const { produto } = this.props;
+    const { produto, updateTotal } = this.props;
     const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
     const item = savedQuantity.find((element) => element.id === produto.id);
     const index = savedQuantity.indexOf(item);
-    if (quantity) {
-      savedQuantity[index] = {
-        id: produto.id,
-        quantity,
-      };
-    }
+    savedQuantity[index] = {
+      id: produto.id,
+      quantity,
+    };
     localStorage.setItem(QTD_KEY, JSON.stringify(savedQuantity));
+    updateTotal();
   }
 
   deleteItemCart() {
-    const { produto, metodo } = this.props;
+    const { produto, updateCart, updateTotal } = this.props;
     const storage = JSON.parse(localStorage.getItem('cart'));
     const produtoId = (storage.find((each) => each.id === produto.id));
     const index = storage.indexOf(produtoId);
@@ -75,16 +74,18 @@ class CartProduct extends Component {
     this.setState({ quantity: 0 });
     this.deleteItemStorage();
     localStorage.setItem('cart', JSON.stringify(storage));
-    metodo();
+    updateCart();
+    updateTotal();
   }
 
   deleteItemStorage() {
-    const { produto } = this.props;
+    const { produto, updateTotal } = this.props;
     const savedQuantity = JSON.parse(localStorage.getItem(QTD_KEY));
     const item = savedQuantity.find((element) => element.id === produto.id);
     const index = savedQuantity.indexOf(item);
     savedQuantity.splice(index, 1);
     localStorage.setItem(QTD_KEY, JSON.stringify(savedQuantity));
+    updateTotal();
   }
 
   render() {
@@ -144,7 +145,8 @@ CartProduct.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ])).isRequired,
-  metodo: PropTypes.func.isRequired,
+  updateCart: PropTypes.func.isRequired,
+  updateTotal: PropTypes.func.isRequired,
 };
 
 export default CartProduct;
