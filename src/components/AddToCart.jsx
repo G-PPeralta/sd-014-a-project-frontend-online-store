@@ -8,14 +8,14 @@ class AddToCart extends Component {
   }
 
   render() {
-    const { itemTitle } = this.props;
+    const { itemTitle, testId } = this.props;
     return (
       <div>
         <button
           type="button"
           value={ itemTitle }
-          data-testid="product-add-to-cart"
           onClick={ this.handleClick }
+          data-testid={ testId }
         >
           Adicionar ao carrinho
         </button>
@@ -27,6 +27,7 @@ class AddToCart extends Component {
 AddToCart.propTypes = {
   getItem: PropTypes.func.isRequired,
   itemTitle: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
 };
 
 export default AddToCart;

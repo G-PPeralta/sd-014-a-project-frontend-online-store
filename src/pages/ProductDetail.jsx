@@ -12,7 +12,11 @@ class ProductDetail extends Component {
       <div data-testid="product">
         <h2 data-testid="product-detail-name">{ title }</h2>
         <p>{ price }</p>
-        <AddToCart itemTitle={ title } itemPrice={ price } />
+        <AddToCart
+          testId="product-detail-add-to-cart"
+          itemTitle={ title }
+          itemPrice={ price }
+        />
       </div>
     );
   }

@@ -13,7 +13,12 @@ class CardProduct extends Component {
           <img src={ image } alt={ title } />
           <p>{price}</p>
         </Link>
-        <AddToCart itemTitle={ title } itemPrice={ price } getItem={ getItem } />
+        <AddToCart
+          testId="product-add-to-cart"
+          itemTitle={ title }
+          itemPrice={ price }
+          getItem={ getItem }
+        />
       </div>
     );
   }

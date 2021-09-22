@@ -12,8 +12,10 @@ class Routes extends Component {
           <Route exact path="/" component={ Search } />
           <Route exact path="/cart" component={ Cart } />
           <Route
-            exact path="/:productId/:title/:price"
-            render={ (props) => <ProductDetail { ...props } /> } />
+            exact
+            path="/:productId/:title/:price"
+            render={ (props) => <ProductDetail { ...props } /> }
+          />
         </Switch>
       </div>
     );
