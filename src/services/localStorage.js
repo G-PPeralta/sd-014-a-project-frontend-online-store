@@ -6,9 +6,23 @@ export const createStoraged = () => {
   }
 };
 
-export const readProducts = () => JSON.parse(
-  localStorage.getItem(SHOPPING_CART_PRODUCTS),
-);
+export const sortString = (a, b) => {
+  const NUMBER_FOR_SORT = -1;
+  if (a.product.id < b.product.id) {
+    return NUMBER_FOR_SORT;
+  }
+  if (a.product.id > b.product.id) {
+    return 0;
+  }
+  return 0;
+};
+
+export const readProducts = () => {
+  const products = JSON.parse(
+    localStorage.getItem(SHOPPING_CART_PRODUCTS),
+  );
+  return products.sort((a, b) => sortString(a, b));
+};
 
 const saveShoppingCartProducts = (cart) => localStorage
   .setItem(SHOPPING_CART_PRODUCTS, JSON.stringify(cart));
