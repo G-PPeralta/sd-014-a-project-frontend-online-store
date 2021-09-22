@@ -5,6 +5,7 @@ import AddItemToCart from '../components/AddItemToCart';
 import Loading from '../components/Loading';
 import Form from '../components/Form';
 import ShoppingCartButton from '../components/ShoppingCartButton';
+import * as cartApi from '../services/shoppingCartAPI';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -43,7 +44,7 @@ export default class ProductDetails extends Component {
 
     return (
       <div>
-        <ShoppingCartButton />
+        <ShoppingCartButton cartSize={ cartApi.getCartSize() } />
         <h2 data-testid="product-detail-name">
           { title }
         </h2>

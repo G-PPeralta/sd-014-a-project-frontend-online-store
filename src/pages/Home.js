@@ -5,6 +5,7 @@ import Categories from '../components/Categories';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
 import ShoppingCartButton from '../components/ShoppingCartButton';
+import * as cartApi from '../services/shoppingCartAPI';
 
 import '../styles/Home.css';
 
@@ -81,7 +82,7 @@ export default class Home extends React.Component {
             >
               Pesquisar
             </button>
-            <ShoppingCartButton />
+            <ShoppingCartButton cartSize={ cartApi.getCartSize() } />
           </article>
           <article className="query-results">
             { isLoading ? <Loading /> : this.results() }
