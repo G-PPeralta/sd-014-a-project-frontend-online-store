@@ -1,4 +1,5 @@
 import React from 'react';
+import Evaluation from './Evaluation';
 
 class Evaluator extends React.Component {
   constructor() {
@@ -7,6 +8,7 @@ class Evaluator extends React.Component {
       email: '',
       avaliacao: '0',
       mensagem: '',
+      arrayAvaliacao: [],
     };
   }
 
@@ -26,15 +28,20 @@ class Evaluator extends React.Component {
     });
   }
 
-  handleSubmit = () => {
-    const { email, avaliacao, mensagem } = this.state;
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, avaliacao, mensagem, arrayAvaliacao } = this.state;
     localStorage.setItem('email', email);
     localStorage.setItem('avaliacao', avaliacao);
     localStorage.setItem('mensagem', mensagem);
+
+    // preventDefault fazendo com que o localStorage.getItem só atualize depois de editar qqr input;
+    arrayAvaliacao.push([email, avaliacao, mensagem]);
+    console.log(arrayAvaliacao);
   }
 
   render() {
-    const { email, avaliacao, mensagem } = this.state;
+    const { email, avaliacao, mensagem, arrayAvaliacao } = this.state;
     return (
       <section>
         <h1>Quantidade</h1>
@@ -43,7 +50,7 @@ class Evaluator extends React.Component {
         <button type="button">+</button>
         <button type="submit">Adicionar ao Carrinho</button>
         <h1>Avaliações</h1>
-        <form onSubmit={ this.handleSubmit }>
+        <form>
           <input
             name="email"
             type="email"
@@ -71,17 +78,10 @@ class Evaluator extends React.Component {
             onChange={ this.handleChange }
             data-testid="product-detail-evaluation"
           />
-          <button type="submit">Avaliar</button>
+          <button type="submit" onClick={ this.handleSubmit }>Avaliar</button>
         </form>
-        <fieldset>
-          <p>{localStorage.getItem('email')}</p>
-          <p>
-            Avaliação:
-            {localStorage.getItem('avaliacao')}
-          </p>
-          <p>{localStorage.getItem('mensagem')}</p>
-          <hr />
-        </fieldset>
+        {arrayAvaliacao
+          .map((evaluation, index) => <Evaluation key={ index } value={ evaluation } />)}
       </section>
     );
   }
