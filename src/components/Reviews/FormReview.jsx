@@ -8,7 +8,6 @@ class FormReview extends React.Component {
     });
   }
 
-  // Ver como funciona o LocalStorage
   handleSubmit = (event) => {
     event.preventDefault();
   }
