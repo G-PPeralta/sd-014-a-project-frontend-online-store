@@ -46,15 +46,11 @@ class ProductList extends Component {
 
   async handleClick(event) {
     event.preventDefault();
-    // const { cartList } = this.state;
     const cartList = {
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
     };
-    // await this.setState({
-    //   cartList,
-    // });
 
     if (!JSON.parse(localStorage.getItem('cartList'))) {
       localStorage.setItem('cartList', JSON.stringify([]));

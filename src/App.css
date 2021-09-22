@@ -209,6 +209,27 @@ body {
   width: 100%;
 }
 
+.main-sec-detail button {
+  background-color: #282c34;
+  border: #282c34 1px solid;
+  border-radius: 5px;
+  color: rgb(243, 243, 243);
+  margin-top: 30px;
+  padding: 5px;
+}
+
+.prod-cart-div button {
+  background-color: #949494;
+  border: 1px solid;
+  border-radius: 3px;
+  color: #f1f1f1;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 5px;
+  padding: 1px 5px;
+  width: 30px;
+}
+
 .product-border button:hover {
   background-color: rgb(5, 5, 5);
   border: rgb(5, 5, 5) 1px solid;
@@ -221,7 +242,7 @@ body {
   padding: 15px;
   position: relative;
   text-align: center;
-  width: 70%;
+  width: 60%;
 }
 
 .product-list-div {
@@ -270,6 +291,7 @@ body {
 
 .khabane {
   border-radius: 10px;
+  margin: 20px;
   width: 250px;
 }
 
@@ -322,45 +344,36 @@ body {
 }
 
 .star-div {
-  margin: 10px 0;
   display: inline-block;
+  margin: 10px 0;
 }
 
 .star-rate {
   display: none;
 }
 
-.main-sec-detail button {
-  margin-top: 30px;
-  background-color: #282c34;
-  border: #282c34 1px solid;
-  border-radius: 5px;
-  color: rgb(243, 243, 243);
-  padding: 5px;
-}
-
 .form-eval {
   margin: 30px 0 0;
 }
 
-.form-eval input , textarea {
-  padding: 5px 10px;
+.form-eval input, .form-eval textarea {
   border-radius: 5px;
-  width: 250px;
+  padding: 5px 10px;
   text-align: center;
+  width: 250px;
 }
 
 .form-eval p {
-  margin: 50px 0 10px;
   color: #3d3d3f;
   font-size: 1.5em;
+  margin: 50px 0 10px;
 }
 
 .cart {
+  background-color: #f3f1f1;
   margin: auto;
   margin-top: 30px;
   padding: 20px;
-  background-color: #f1f1f1;
   width: 70%;
 }
 
@@ -372,13 +385,33 @@ body {
 .prod-cart-div {
   margin: 15px 0;
 }
-/* 
-.form-eval textarea {
-  padding: 5px 10px;
-  border-radius: 5px;
-  width: 250px;
+
+.shopping-cart-product-name {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 10px 0 4px;
+}
+
+.shopping-cart-product-quantity {
+  color: #3d3d3f;
+  font-weight: 600;
+}
+
+.shopping-cart-product-qtd-text {
+  color: rgb(109, 109, 109);
+  display: inline-block;
+  padding: 0 10px 0 0;
+}
+
+.cart-prod-price {
+  margin-bottom: 10px;
+}
+
+.cart-empty-khabane {
+  margin: auto;
   text-align: center;
-} */
+  width: 70%;
+}
 
 @keyframes App-logo-spin {
 
