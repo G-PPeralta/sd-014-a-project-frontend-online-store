@@ -18,9 +18,8 @@ class Checkout extends React.Component {
   pegarCarrinho = async () => {
     const itens = await JSON.parse(localStorage.getItem('cartItems'));
     let totalPrice = 0.00;
-    itens.forEach((item) => {
-      const bar = totalPrice;
-      totalPrice = bar + item.price;
+    itens.forEach(({ price, quantity }) => {
+      totalPrice += price * quantity;
       return totalPrice;
     });
     this.setState({ itens, isLoading: false, totalPrice });
