@@ -168,8 +168,8 @@ class ProductList extends Component {
                     </section>
                     {/* { console.log(result.shipping.free_shipping) } */}
                     { result.shipping.free_shipping
-                      ? <span data-testid="free-shipping">Frete Grátis </span>
-                      : '' }
+                      ? <p className="fg" data-testid="free-shipping">Frete Grátis</p>
+                      : <p className="nfg">Poxa, não tem frete grátis</p> }
                   </Link>
                   <button
                     type="button"

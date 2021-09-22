@@ -425,8 +425,9 @@ body {
   display: inline-block;
   font-size: 1em;
   font-weight: 800;
-  margin-left: 23px;
+  margin-left: 18px;
   position: absolute;
+  text-align: center;
   width: 20px;
   z-index: 1;
 }
@@ -435,6 +436,24 @@ body {
   margin: auto;
   text-align: center;
   width: 70%;
+}
+
+.fg {
+  background-color: white;
+  font-weight: 800;
+  height: 20px;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.nfg {
+  background-color: white;
+  color: #949494;
+  font-size: 0.8em;
+  font-weight: 300;
+  height: 20px;
+  padding: 5px 0;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
