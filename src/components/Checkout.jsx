@@ -20,7 +20,6 @@ class Checkout extends React.Component {
     let totalPrice = 0.00;
     itens.forEach(({ price, quantity }) => {
       totalPrice += price * quantity;
-      return totalPrice;
     });
     this.setState({ itens, isLoading: false, totalPrice });
   }
