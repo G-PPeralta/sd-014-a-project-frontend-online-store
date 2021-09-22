@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Evaluator from '../components/Evaluator';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -49,12 +50,15 @@ class ProductDetails extends Component {
   render() {
     const { product: { title, thumbnail, price } } = this.state;
     return (
-      <div>
-        <h2>Product Details</h2>
-        <h4 data-testid="product-detail-name">{ title }</h4>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
-      </div>
+      <main>
+        <div>
+          <h2>Product Details</h2>
+          <h4 data-testid="product-detail-name">{title}</h4>
+          <img src={ thumbnail } alt={ title } />
+          <p>{price}</p>
+        </div>
+        <Evaluator />
+      </main>
     );
   }
 }
