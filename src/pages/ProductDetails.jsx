@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import BtnCart from '../components/BtnCart';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class ProductDetails extends Component {
         <h4 data-testid="product-detail-name">{ title }</h4>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
+        <BtnCart />
       </div>
     );
   }

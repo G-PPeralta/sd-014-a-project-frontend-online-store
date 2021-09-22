@@ -22,7 +22,7 @@ class ProductsCard extends Component {
           <p>{ price }</p>
           <button
             type="button"
-            onClick={ () => addToCart(product) }
+            onClick={ () => addToCart({ title, price, thumbnail }) }
             data-testid="product-add-to-cart"
           >
             Adicionar ao carrinho
