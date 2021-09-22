@@ -21,7 +21,6 @@ export class ProductInCart extends Component {
     const { item } = this.props;
     const cartProducts = localStorage.getObj('products');
     const product = Object.entries(cartProducts).find((prdct) => prdct[0] === item);
-    console.log(product[1].quantity);
     this.setState({
       product: product[1].product,
       quantity: product[1].quantity,
@@ -46,7 +45,7 @@ export class ProductInCart extends Component {
         <p>{`Preço total: ${totalPrice}`}</p>
         <button
           id={ product.id }
-          name="sub"
+          name="sum"
           type="button"
           onClick={ this.addQuantity }
           data-testid="product-increase-quantity"
@@ -55,7 +54,7 @@ export class ProductInCart extends Component {
         </button>
         <button
           id={ product.id }
-          name="sum"
+          name="sub"
           type="button"
           onClick={ this.addQuantity }
           data-testid="product-decrease-quantity"
