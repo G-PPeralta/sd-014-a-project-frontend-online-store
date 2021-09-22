@@ -75,11 +75,11 @@ class Home extends React.Component {
                 item.id === product.id
               ));
               product.inMyCart = !thisProduct ? 0 : thisProduct.inMyCart;
-
               return (
                 <Product
                   key={ product.id }
                   product={ product }
+                  shipping={ product.shipping }
                 />
               );
             },
