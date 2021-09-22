@@ -29,7 +29,7 @@ class Cart extends React.Component {
       <main>
         { items
           ? (Object.entries(items)
-            .map((item) => <ProducInCart key={ item[0] } item={ item[1] } />))
+            .map((item) => <ProducInCart key={ item[0] } item={ item[1].id } />))
           : (
             <h1 data-testid="shopping-cart-empty-message">
               Seu carrinho está vazio
