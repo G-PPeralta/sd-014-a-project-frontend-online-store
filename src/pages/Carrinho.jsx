@@ -11,9 +11,14 @@ class Carrinho extends React.Component {
       carrinho: [],
     };
     this.mudaEstado = this.mudaEstado.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   componentDidMount() {
+    this.handleUpdate();
+  }
+
+  handleUpdate() {
     const produtos = JSON.parse(localStorage.getItem(CART_KEY));
     if (produtos) {
       //  console.log(produtos);
@@ -27,7 +32,12 @@ class Carrinho extends React.Component {
 
   render() {
     const { carrinho } = this.state;
-    if (carrinho.length > 0) return <CartProducts carrinho={ carrinho } />;
+    if (carrinho.length > 0) {
+      return (<CartProducts
+        metodo={ this.handleUpdate }
+        carrinho={ carrinho }
+      />);
+    }
     return (
       <section>
         <section>
