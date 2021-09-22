@@ -46,12 +46,13 @@ class ProductList extends Component {
     await this.callApi();
   }
 
-  async handleClick(event) {
+  async handleClick(event, availableQuantity) {
     event.preventDefault();
     const cartList = {
       prodId: event.target.className,
       name: event.target.name,
       prodPrice: event.target.value,
+      availableQuantity,
     };
 
     if (!JSON.parse(localStorage.getItem('cartList'))) {
@@ -61,7 +62,6 @@ class ProductList extends Component {
     localStorage.setItem('cartList',
       JSON.stringify([...cart, cartList]));
     const newCart = JSON.parse(localStorage.getItem('cartList'));
-    console.log(newCart);
     localStorage.setItem('cartSize', newCart.length);
     this.setState({
       cartSize: newCart.length,
@@ -183,7 +183,6 @@ class ProductList extends Component {
                       <p className="pc-price">{numberFormat(result.price)}</p>
                       <p className="pc-id">{result.id}</p>
                     </section>
-                    {/* { console.log(result.shipping.free_shipping) } */}
                     { result.shipping.free_shipping
                       ? <p className="fg" data-testid="free-shipping">Frete Grátis</p>
                       : <p className="nfg">Poxa, não tem frete grátis</p> }
@@ -194,7 +193,9 @@ class ProductList extends Component {
                     name={ result.title }
                     value={ result.price }
                     className={ result.id }
-                    onClick={ this.handleClick }
+                    onClick={ (event) => this.handleClick(
+                      event, result.available_quantity,
+                    ) }
                   >
                     Adicionar ao Carrinho
                   </button>

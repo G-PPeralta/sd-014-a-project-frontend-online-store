@@ -27,7 +27,7 @@ class CartButton extends Component {
 }
 
 CartButton.propTypes = {
-  cartSize: PropTypes.string.isRequired,
+  cartSize: PropTypes.number.isRequired,
 };
 
 export default CartButton;
