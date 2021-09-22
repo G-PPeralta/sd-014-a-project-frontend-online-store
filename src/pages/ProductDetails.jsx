@@ -11,9 +11,15 @@ class ProductDetails extends Component {
     addToCart(product);
   }
 
+  renderFreeShipping() {
+    return (
+      <h2 data-testid="free-shipping">FRETE GRÁTIS!</h2>
+    );
+  }
+
   render() {
     const { location: { state: { product: { title, price, thumbnail,
-      id } } } } = this.props;
+      id, shipping: { free_shipping: freeShipping } } } } } = this.props;
     return (
       <div>
         <h2 data-testid="product-detail-name">{title}</h2>
@@ -22,6 +28,8 @@ class ProductDetails extends Component {
           R$
           {price}
         </h3>
+        { freeShipping && this.renderFreeShipping() }
+        <button type="button"> Comprar </button>
         <button
           type="button"
           className="btn btn-outline-primary"
@@ -44,6 +52,9 @@ ProductDetails.propTypes = {
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         thumbnail: PropTypes.string.isRequired,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool.isRequired,
+        }).isRequired,
         id: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
