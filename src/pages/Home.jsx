@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import * as api from '../services/api';
 import '../styles/Home.css';
 
@@ -59,12 +60,7 @@ export default class Home extends Component {
             type="text"
             value={ query }
           />
-          <Link data-testid="shopping-cart-button" to="/shopping-cart">
-            <img
-              alt="shopping-cart"
-              src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
-            />
-          </Link>
+          <ShoppingCartIcon />
         </div>
       </section>
     );

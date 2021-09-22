@@ -6,7 +6,6 @@ export default class ProductsCheckout extends Component {
     super(props);
     this.state = {
       products: [],
-      // total: 0,
     };
   }
 
@@ -59,7 +58,7 @@ export default class ProductsCheckout extends Component {
   render() {
     const { products } = this.state;
     return (
-      <div>
+      <div className="checkout-container">
         <h2>Revise seus produtos</h2>
         {products.length > 0 ? (
           this.renderProducts()

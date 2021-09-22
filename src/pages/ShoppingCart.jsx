@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
 import '../styles/ShoppingCart.css';
 
-const STORAGE_KEY = 'cart-products';
+const STORAGE_CART_KEY = 'cart-products';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -25,20 +25,11 @@ export default class ShoppingCart extends Component {
 
   componentDidUpdate() {
     const { cartProducts } = this.state;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cartProducts));
-  }
-
-  getNumberOfProductsInCart() {
-    let totalProducts = 0;
-    const cartProducts = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    cartProducts.forEach((p) => {
-      totalProducts += p.productQty;
-    });
-    return totalProducts;
+    localStorage.setItem(STORAGE_CART_KEY, JSON.stringify(cartProducts));
   }
 
   loadLocalStorage() {
-    const savedCart = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const savedCart = JSON.parse(localStorage.getItem(STORAGE_CART_KEY));
     if (savedCart) {
       this.setState({ cartProducts: savedCart });
     }
@@ -109,7 +100,9 @@ export default class ShoppingCart extends Component {
         <h2>
           {`Valor Total da Compra: R$ ${this.calculatePrice().toFixed(2)}`}
         </h2>
-        <button type="button">Finalizar Compra</button>
+        <Link data-testid="checkout-products" to="/checkout">
+          <button type="button">Finalizar Compra</button>
+        </Link>
       </section>
     );
   }
