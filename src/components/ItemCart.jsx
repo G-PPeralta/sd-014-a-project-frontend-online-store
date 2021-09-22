@@ -13,7 +13,7 @@ class ItemCart extends React.Component {
       <div>
         <button type="button">x</button>
         <img src={ product.thumbnail } alt="" />
-        <div>{ product.title}</div>
+        <h3 data-testid="shopping-cart-product-name">{ product.title}</h3>
         <button
           type="button"
           data-testid="product-decrease-quantity"
@@ -22,7 +22,7 @@ class ItemCart extends React.Component {
         >
           -
         </button>
-        <div>{ product.quantity }</div>
+        <p data-testid="shopping-cart-product-quantity">{ product.quantity }</p>
         <button
           type="button"
           data-testid="product-increase-quantity"
@@ -31,7 +31,7 @@ class ItemCart extends React.Component {
         >
           +
         </button>
-        <div>{ product.price * product.quantity }</div>
+        <span>{ product.price * product.quantity }</span>
 
       </div>
     );
