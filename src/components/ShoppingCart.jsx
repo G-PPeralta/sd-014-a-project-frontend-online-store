@@ -28,7 +28,7 @@ class ShoppingCart extends React.Component {
           <div key={ product.id }>
             <p data-testid="shopping-cart-product-name">{product.title}</p>
             <img src={ product.thumbnail } alt={ product.title } />
-            <p>{product.price}</p>
+            <p>{ `R$ ${product.price.toFixed(2)}` }</p>
             <p data-testid="shopping-cart-product-quantity">1</p>
           </div>
         ))}
