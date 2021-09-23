@@ -4,6 +4,7 @@ import {
   Link,
 } from 'react-router-dom';
 import EvaluationForm from './EvaluationForm';
+import '../style/ProductPage.css';
 
 export default class ProductPage extends React.Component {
   constructor(props) {
@@ -87,28 +88,6 @@ export default class ProductPage extends React.Component {
     }
   }
 
-  reviewRender = () => {
-    const { location: { state: { product: { id } } } } = this.props;
-    const reviewsForItem = JSON.parse(localStorage.getItem(id));
-    if (reviewsForItem) {
-      return (
-        <div>
-          {reviewsForItem.map((review) => (
-            <div key={ `${review.email}-${id}` }>
-              {`${review.stars} estrelas!`}
-              <p>
-                {review.email}
-              </p>
-              <p data-testid="product-detail-evaluation">
-                {review.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      );
-    }
-  }
-
   totalItemsInCart = () => {
     const currentCart = JSON.parse(localStorage.getItem('cart'));
     if (currentCart) {
@@ -145,44 +124,97 @@ export default class ProductPage extends React.Component {
     }
   }
 
+  reviewRender = () => {
+    const { location: { state: { product: { id } } } } = this.props;
+    const reviewsForItem = JSON.parse(localStorage.getItem(id));
+    if (reviewsForItem) {
+      return (
+        <div>
+          {reviewsForItem.map((review) => (
+            <div key={ `${review.email}-${id}` } className="div-review m-3">
+              {`${review.stars} estrelas!`}
+              <p>
+                {review.email}
+              </p>
+              <p data-testid="product-detail-evaluation">
+                {review.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      );
+    }
+  }
+
   render() {
     const { totalItems, review: { email, text }, product, disabled } = this.state;
     return (
       <div>
-        <div>
-          <p data-testid="product-detail-name">{product.title}</p>
-          <p>{product.price}</p>
-          <img src={ product.thumbnail } alt={ product.title } />
-        </div>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.toCart }
-          disabled={ disabled }
+        <header
+          className="d-flex
+        flex-row justify-content-between div-header align-items-end"
         >
-          +
-        </button>
-        <div>
-          <EvaluationForm
-            handleInput={ this.handleInput }
-            handleFavorites={ this.handleFavorites }
-            textValue={ text }
-            emailValue={ email }
-          />
-          <button
-            type="button"
-            onClick={ this.handleButton }
+          <Link to="/">
+            <i className="fas fa-home fa-2x" />
+          </Link>
+          <div className="d-flex flex-row align-items-end">
+            <Link to="/cart" data-testid="shopping-cart-button">
+              <i className="fas fa-shopping-cart fa-2x" />
+            </Link>
+            <p data-testid="shopping-cart-size">
+              { totalItems }
+            </p>
+          </div>
+        </header>
+        <main
+          className="d-flex flex-column
+         flex-wrap div-main-product-page
+         ms-5 align-items-center"
+        >
+          <div
+            className="d-flex
+        flex-column div-item-page
+         align-items-center justify-content-evenly"
           >
-            Avaliar
-          </button>
-        </div>
-        <div>
-          {this.reviewRender()}
-        </div>
-        <Link to="/cart" data-testid="shopping-cart-button">Cart</Link>
-        <p data-testid="shopping-cart-size">
-          { totalItems }
-        </p>
+            <h4 data-testid="product-detail-name">{product.title}</h4>
+            <div>
+              <span>R$</span>
+              <span>{product.price}</span>
+            </div>
+            <img src={ product.thumbnail } alt={ product.title } />
+            <button
+              type="button"
+              className="btn btn-success"
+              data-testid="product-detail-add-to-cart"
+              onClick={ this.toCart }
+              disabled={ disabled }
+            >
+              Adicionar ao carrinho
+            </button>
+          </div>
+          <div
+            className="d-flex
+          flex-column flex-wrap
+           div-rating justify-content-evenly align-items-center"
+          >
+            <EvaluationForm
+              handleInput={ this.handleInput }
+              handleFavorites={ this.handleFavorites }
+              textValue={ text }
+              emailValue={ email }
+            />
+            <button
+              type="button"
+              onClick={ this.handleButton }
+            >
+              Avaliar
+            </button>
+          </div>
+          <div className="d-flex flex-column flex-wrap align-items-center text-break">
+            <h3>Avaliações:</h3>
+            {this.reviewRender()}
+          </div>
+        </main>
       </div>
     );
   }

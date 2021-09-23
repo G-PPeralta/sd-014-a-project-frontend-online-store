@@ -15,8 +15,14 @@ export default class PurchaseForm extends React.Component {
       handlePayment,
     } = this.props;
     return (
-      <form>
+      <form
+        className="d-flex
+       flex-column text-center
+       align-items-center flex-wrap
+        m-3 purchase-form"
+      >
         <input
+          className="m-1"
           type="text"
           data-testid="checkout-fullname"
           name="fullname"
@@ -25,6 +31,7 @@ export default class PurchaseForm extends React.Component {
           onChange={ handleInput }
         />
         <input
+          className="m-1"
           type="email"
           data-testid="checkout-email"
           name="email"
@@ -33,6 +40,7 @@ export default class PurchaseForm extends React.Component {
           onChange={ handleInput }
         />
         <input
+          className="m-1"
           type="text"
           data-testid="checkout-cpf"
           name="cpf"
@@ -41,6 +49,7 @@ export default class PurchaseForm extends React.Component {
           onChange={ handleInput }
         />
         <input
+          className="m-1"
           type="text"
           data-testid="checkout-phone"
           name="phone"
@@ -49,6 +58,7 @@ export default class PurchaseForm extends React.Component {
           onChange={ handleInput }
         />
         <input
+          className="m-1"
           type="text"
           data-testid="checkout-cep"
           name="cep"
@@ -64,24 +74,36 @@ export default class PurchaseForm extends React.Component {
           value={ address }
           onChange={ handleInput }
         />
-        <input
-          type="radio"
-          name="method"
-          value="debit"
-          onChange={ handlePayment }
-        />
-        <input
-          type="radio"
-          name="method"
-          value="credit"
-          onChange={ handlePayment }
-        />
-        <input
-          type="radio"
-          name="method"
-          value="boleto"
-          onChange={ handlePayment }
-        />
+        <div>
+          <label htmlFor="debit">
+            <input
+              id="debit"
+              type="radio"
+              name="method"
+              value="debit"
+              onChange={ handlePayment }
+            />
+            <i className="fab fa-cc-visa fa-5x" />
+          </label>
+          <label htmlFor="credit">
+            <input
+              type="radio"
+              name="method"
+              value="credit"
+              onChange={ handlePayment }
+            />
+            <i className="fab fa-cc-paypal fa-5x" />
+          </label>
+          <label htmlFor="boleto">
+            <input
+              type="radio"
+              name="method"
+              value="boleto"
+              onChange={ handlePayment }
+            />
+            <i className="fab fa-cc-apple-pay fa-5x" />
+          </label>
+        </div>
         <button
           type="button"
           onClick={ handleButton }

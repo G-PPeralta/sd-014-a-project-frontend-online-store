@@ -1,0 +1,27 @@
+.div-item-page {
+  height: 350px;
+  width: 350px;
+}
+
+.div-item-page img {
+  height: 150px;
+  width: 150px;
+}
+
+.div-rating {
+  height: 300px;
+  width: 300px;
+}
+
+.div-main-product-page {
+  height: 700px;
+}
+
+.div-header {
+  background-color: yellow;
+}
+
+.div-review {
+  border: 1px solid black;
+  width: 500px;
+}

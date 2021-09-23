@@ -11,6 +11,8 @@ import {
 import CategoriesList from './CategoriesList';
 import ProductCard from './ProductCard';
 
+import '../style/Home.css';
+
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,9 @@ export default class Home extends React.Component {
     const { searchInput } = this.state;
     const list = await getProductsFromCategoryAndQuery(category, searchInput);
     const result = list.results;
-    this.setState({ productList: result });
+    this.setState({ productList: [] }, () => {
+      this.setState({ productList: result });
+    });
   }
 
    fetchCategories = async () => {
@@ -87,36 +91,56 @@ export default class Home extends React.Component {
       totalItems,
     } = this.state;
     const initialMessage = (
-      <h3 data-testid="home-initial-message">
+      <h3
+        className="text-md-end"
+        data-testid="home-initial-message"
+      >
         Digite algum termo de pesquisa ou escolha uma categoria.
       </h3>
     );
     return (
       <div>
-        <input
-          type="text"
-          onChange={ this.searchProduct }
-          value={ searchInput }
-          data-testid="query-input"
-        />
-        <button
-          type="button"
-          onClick={ this.handleButton }
-          data-testid="query-button"
+        <header
+          className="d-flex flex-row
+          justify-content-between
+          input-group-sm mb-3 div-header"
         >
-          Pesquisar
-        </button>
-        <Link to="/cart" data-testid="shopping-cart-button">Cart</Link>
-        <p data-testid="shopping-cart-size">{ totalItems }</p>
-        <nav>
-          <CategoriesList
-            list={ categoriesList }
-            callback={ this.handleSelectedCategory }
-          />
-        </nav>
-        <section>
-          {productList.length !== 0 ? this.productMap() : initialMessage}
-        </section>
+          <div className="d-flex flex-row justify-content-center div-input">
+            <input
+              className="input-group-text opacity-75"
+              placeholder="pesquise algo aqui!"
+              type="text"
+              onChange={ this.searchProduct }
+              value={ searchInput }
+              data-testid="query-input"
+            />
+            <button
+              className="btn btn-dark"
+              type="button"
+              onClick={ this.handleButton }
+              data-testid="query-button"
+            >
+              Pesquisar
+            </button>
+          </div>
+          <div className="d-flex flex-row align-items-end">
+            <Link to="/cart" data-testid="shopping-cart-button">
+              <i className="fas fa-shopping-cart fa-2x" />
+            </Link>
+            <p data-testid="shopping-cart-size">{ totalItems }</p>
+          </div>
+        </header>
+        <main className="d-flex">
+          <nav className="overflow-auto div-category">
+            <CategoriesList
+              list={ categoriesList }
+              callback={ this.handleSelectedCategory }
+            />
+          </nav>
+          <section className="d-flex flex-wrap overflow-auto section-height">
+            {productList.length !== 0 ? this.productMap() : initialMessage}
+          </section>
+        </main>
       </div>
     );
   }

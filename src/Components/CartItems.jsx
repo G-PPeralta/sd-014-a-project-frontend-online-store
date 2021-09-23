@@ -33,24 +33,42 @@ export default class CartItems extends React.Component {
     } = this.props;
     const { disabled } = this.state;
     return (
-      <div>
-        <img src={ thumbnail } alt={ title } />
-        <p data-testid="shopping-cart-product-name">{title}</p>
-        <p data-testid="shopping-cart-product-quantity">
-          {quantity}
-        </p>
-        <p>{price}</p>
-        <div>
+      <div
+        className="d-flex
+       flex-row align-items-center
+       justify-content-evenly div-item-cart-card
+       m-1"
+      >
+        <div className="cart-item-img">
+          <img src={ thumbnail } alt={ title } />
+        </div>
+        <div className="cart-item-title">
+          <p data-testid="shopping-cart-product-name">{title}</p>
+        </div>
+        <div className="d-flex flex-row">
+          <span>Qtd: </span>
+          <span data-testid="shopping-cart-product-quantity">
+            {quantity}
+          </span>
+        </div>
+        <div className="cart-item-price">
+          <span>R$</span>
+          <span>{price}</span>
+        </div>
+        <div className="d-flex cart-item-button justify-content-around">
           <button
+            className="btn"
             type="button"
             data-testid="product-decrease-quantity"
             name="product-decrease-quantity"
             id={ id }
             onClick={ () => removeItem(item) }
           >
+            <i className="fas fa-minus" />
             -
           </button>
           <button
+            className="btn"
             type="button"
             data-testid="product-increase-quantity"
             name="product-increase-quantity"
@@ -58,6 +76,7 @@ export default class CartItems extends React.Component {
             onClick={ (e) => addItem(e, item) }
             disabled={ disabled }
           >
+            <i className="fas fa-plus" />
             +
           </button>
         </div>

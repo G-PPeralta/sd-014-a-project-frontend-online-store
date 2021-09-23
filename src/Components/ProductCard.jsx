@@ -68,17 +68,30 @@ export default class ProductCard extends React.Component {
       product,
       disabled,
     } = this.state;
+    const freeShipping = (
+      <p data-testid="free-shipping">
+        <i className="fas fa-truck" />
+        Frete Grátis
+      </p>
+
+    );
     const hasShip = product.shipping;
     let ship;
     if (hasShip) {
       ship = product.shipping.free_shipping;
     }
     return (
-      <div data-testid="product">
+      <div
+        data-testid="product"
+        className="div-card d-flex flex-column align-items-center m-1 text-center"
+      >
         <h3>{ title }</h3>
         <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
-        {ship && <p data-testid="free-shipping">Grátis</p>}
+        <div className="d-flex flex-row flex-wrap">
+          <span>R$</span>
+          <span>{ price }</span>
+        </div>
+        {ship && freeShipping}
         <Link
           to={ { pathname: `/product/${id}`, state: { product } } }
           data-testid="product-detail-link"
@@ -87,6 +100,7 @@ export default class ProductCard extends React.Component {
         </Link>
         <button
           type="button"
+          className="btn btn-success"
           onClick={ this.toCart }
           data-testid="product-add-to-cart"
           disabled={ disabled }

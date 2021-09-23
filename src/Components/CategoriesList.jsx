@@ -7,8 +7,12 @@ export default class CategoriesList extends React.Component {
     return (
       <ul>
         { list.map((category) => (
-          <li key={ category.id }>
+          <li
+            key={ category.id }
+            style={ { listStyle: 'none' } }
+          >
             <input
+              className="form-check-input"
               data-testid="category"
               type="radio"
               name="filtro"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PurchaseForm from './PurchaseForm';
+import '../style/Purchase.css';
 
 export default class Purchase extends React.Component {
   constructor(props) {
@@ -71,23 +72,44 @@ export default class Purchase extends React.Component {
   }
 
   renderCart = () => {
-    const { cart, totalPrice } = this.state;
+    const { cart } = this.state;
     return (
-      <div>
+      <div className="d-flex flex-wrap overflow-auto flex-wrap items-div m-1">
         {cart.map((item) => (
-          <div key={ item.productObj.id }>
-            <p>
-              {item.productObj.title}
-            </p>
-            <p>
-              {item.quantity}
-            </p>
-            <p>
-              {item.productObj.price}
-            </p>
+          <div
+            key={ item.productObj.id }
+            className="d-flex
+            flex-row
+             item-div
+             m-1 justify-content-evenly
+             align-items-center"
+          >
+            <div>
+              <img
+                src={ item.productObj.thumbnail }
+                alt="item"
+                className="checkout-img"
+              />
+            </div>
+            <div className="checkout-title">
+              <p>
+                {item.productObj.title}
+              </p>
+            </div>
+            <div>
+              <span>Quantidade: </span>
+              <span>
+                {item.quantity}
+              </span>
+            </div>
+            <div>
+              <span>R$</span>
+              <span>
+                {item.productObj.price}
+              </span>
+            </div>
           </div>
         ))}
-        { totalPrice }
       </div>
     );
   }
@@ -99,22 +121,41 @@ export default class Purchase extends React.Component {
   }
 
   render() {
-    const { email, fullname, phone, cep, cpf, address, paymentOk } = this.state;
+    const
+      {
+        email,
+        fullname,
+        phone,
+        cep,
+        cpf,
+        address,
+        paymentOk,
+        totalPrice,
+      } = this.state;
     if (paymentOk === true) return <Redirect to="/" />;
     return (
-      <div>
+      <div className="d-flex flex-column align-items-center">
+        <h3 className="text-center header">Revise sua compra</h3>
         { this.renderCart() }
-        <PurchaseForm
-          fullname={ fullname }
-          email={ email }
-          phone={ phone }
-          cep={ cep }
-          cpf={ cpf }
-          address={ address }
-          handleInput={ this.handleInput }
-          handleButton={ this.handleButton }
-          handlePayment={ this.handlePayment }
-        />
+        <div className="text-center">
+          <div>
+            <span>TOTAL: R$</span>
+            <span>
+              {totalPrice}
+            </span>
+          </div>
+          <PurchaseForm
+            fullname={ fullname }
+            email={ email }
+            phone={ phone }
+            cep={ cep }
+            cpf={ cpf }
+            address={ address }
+            handleInput={ this.handleInput }
+            handleButton={ this.handleButton }
+            handlePayment={ this.handlePayment }
+          />
+        </div>
       </div>
     );
   }
