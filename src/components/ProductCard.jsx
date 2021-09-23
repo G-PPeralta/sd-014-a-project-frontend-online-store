@@ -93,7 +93,12 @@ export default class ProductCard extends Component {
   };
 
   addToCartfunc = () => {
-    this.setState((prev) => ({ productQty: prev.productQty + 1 }));
+    const { shouldUpdateTotalProducts } = this.props;
+    this.setState((prevState) => {
+      const { productQty } = prevState;
+      shouldUpdateTotalProducts();
+      return { productQty: productQty + 1 };
+    });
   };
 
   render() {
@@ -140,4 +145,5 @@ ProductCard.propTypes = {
     id: PropTypes.string.isRequired,
     available_quantity: PropTypes.number.isRequired,
   }).isRequired,
+  shouldUpdateTotalProducts: PropTypes.func.isRequired,
 };

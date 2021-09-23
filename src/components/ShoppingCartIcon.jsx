@@ -4,24 +4,48 @@ import { Link } from 'react-router-dom';
 export default class ShoppingCartIcon extends Component {
   constructor(props) {
     super(props);
-
-    this.getNumberOfProductsInCart = this.getNumberOfProductsInCart.bind(this);
+    this.state = {
+      totalProducts: 0,
+    };
   }
 
-  getNumberOfProductsInCart() {
-    const cartProducts = JSON.parse(localStorage.getItem('cart-products'));
-    if (cartProducts) {
-      const totalProducts = cartProducts.reduce(
+  componentDidMount() {
+    const totalProducts = JSON.parse(localStorage.getItem('cart-products'));
+    if (totalProducts) {
+      const totalProductsCount = totalProducts.reduce(
         (acc, product) => acc + product.productQty,
         0,
       );
-      return <span data-testid="shopping-cart-size">{totalProducts}</span>;
+      const newState = { totalProducts: totalProductsCount };
+      this.updateState(newState);
     }
-
-    return <span data-testid="shopping-cart-size">0</span>;
   }
 
+  shouldComponentUpdate() {
+    const { totalProducts } = this.state;
+    // const updatedTotalProducts = funcaoQueRetornaTotalDeProdutosAtualizado();
+    const updatedProducts = JSON.parse(localStorage.getItem('cart-products'));
+    const updatedTotalProducts = updatedProducts ? updatedProducts.reduce(
+      (acc, product) => acc + product.productQty,
+      0,
+    ) : 0;
+    return totalProducts !== updatedTotalProducts;
+  }
+
+  componentDidUpdate() {
+    const updatedProducts = JSON.parse(localStorage.getItem('cart-products'));
+    const updatedTotalProducts = updatedProducts ? updatedProducts.reduce(
+      (acc, product) => acc + product.productQty,
+      0,
+    ) : 0;
+    const newState = { totalProducts: updatedTotalProducts };
+    this.updateState(newState);
+  }
+
+  updateState = (newState) => this.setState(newState);
+
   render() {
+    const { totalProducts } = this.state;
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
@@ -30,7 +54,7 @@ export default class ShoppingCartIcon extends Component {
             src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
           />
         </Link>
-        {this.getNumberOfProductsInCart()}
+        <span data-testid="shopping-cart-size">{totalProducts}</span>
       </div>
     );
   }
