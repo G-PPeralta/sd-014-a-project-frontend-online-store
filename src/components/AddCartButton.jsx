@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import addToCart from '../services/cart';
+import { addToCart } from '../services/cart';
 
 class AddCartButton extends React.Component {
   handleAddToCart = () => {
-    const { id, category } = this.props;
-    addToCart(id, category);
+    const { category, id } = this.props;
+    addToCart(category, id);
   }
 
   render() {
