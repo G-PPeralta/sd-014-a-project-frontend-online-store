@@ -49,6 +49,7 @@ export default class HomePage extends Component {
     );
     const resp = produtos ? produtos.results : this.produtos;
     this.setState({ produtos: resp });
+    localStorage.setItem('produtos', JSON.stringify(resp));
   }
 
   render() {
