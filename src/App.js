@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Checkout from './components/Checkout';
 import Home from './components/Home';
 import ProductDetails from './components/ProductDetails';
 import ShoppingCart from './components/ShoppingCart';
@@ -16,6 +17,11 @@ class App extends React.Component {
     this.setState((previousState) => ({
       cartProduct: [...previousState.cartProduct, product],
     }));
+  }
+
+  handleCleanCart = () => {
+    this.setState({ cartProduct: [],
+    });
   }
 
   render() {
@@ -36,6 +42,12 @@ class App extends React.Component {
                 <ShoppingCart { ...props } cartProduct={ cartProduct } />) }
             />
             <Route path="/product/:id" component={ ProductDetails } />
+            <Route
+              path="/Checkout"
+              render={ (props) => (
+                <Checkout { ...props } handleCleanCart={ this.handleCleanCart } />
+              ) }
+            />
           </Switch>
         </BrowserRouter>
       </div>
