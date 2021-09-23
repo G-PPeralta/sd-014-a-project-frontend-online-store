@@ -12,6 +12,7 @@ export default class Home extends Component {
       didSearch: false,
       products: [],
       query: '',
+      shouldUpdateTotalProducts: false,
     };
   }
 
@@ -35,7 +36,7 @@ export default class Home extends Component {
   };
 
   renderSearchSection = () => {
-    const { query } = this.state;
+    const { query, shouldUpdateTotalProducts } = this.state;
     return (
       <section className="search-section">
         <div>
@@ -58,10 +59,16 @@ export default class Home extends Component {
             type="text"
             value={ query }
           />
-          <ShoppingCartIcon />
+          <ShoppingCartIcon
+            shouldUpdateTotalProducts={ shouldUpdateTotalProducts }
+          />
         </div>
       </section>
     );
+  };
+
+  shouldUpdateTotalProducts = () => {
+    this.setState({ shouldUpdateTotalProducts: true });
   };
 
   render() {
@@ -99,7 +106,11 @@ export default class Home extends Component {
             {didSearch
               && products.length > 0
               && products.map((product) => (
-                <ProductCard key={ product.id } product={ product } />
+                <ProductCard
+                  key={ product.id }
+                  product={ product }
+                  shouldUpdateTotalProducts={ this.shouldUpdateTotalProducts }
+                />
               ))}
             {didSearch && products.length === 0 && (
               <p className="message">Nenhum produto encontrado</p>
