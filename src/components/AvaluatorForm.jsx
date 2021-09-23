@@ -7,6 +7,7 @@ class AvaluatorForm extends React.Component {
       email: '',
       avaliacao: 0,
       mensagem: '',
+
     };
   }
 
@@ -24,8 +25,8 @@ class AvaluatorForm extends React.Component {
     this.setState({ avaliacao: value });
   }
 
-  handleSubmit = () => {
-
+  handleSubmit = (event) => {
+    event.preventDefaut();
   }
 
   render() {
