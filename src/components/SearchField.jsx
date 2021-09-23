@@ -1,39 +1,11 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Categories from './Categories';
-import ProductList from './ProductList';
+import PropTypes from 'prop-types';
 
 class SearchField extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      searchTerm: '',
-      category: 'MLB5672',
-      products: [],
-    };
-  }
-
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  fetchProducts = async (category) => {
-    const { searchTerm } = this.state;
-    const products = await getProductsFromCategoryAndQuery(category, searchTerm);
-    this.setState({
-      products: products.results,
-    });
-  }
-
   render() {
-    const { searchTerm, products, category } = this.state;
+    const { searchTerm, category, handleChange } = this.props;
     return (
       <div>
-        <Categories handleCategoryChange={ this.fetchProducts } />
         <button
           type="button"
           data-testid="query-button"
@@ -46,13 +18,18 @@ class SearchField extends Component {
           type="text"
           name="searchTerm"
           value={ searchTerm }
-          onChange={ this.handleChange }
+          onChange={ handleChange }
           placeholder="Exemplo: produto 'xxx'"
         />
-        <ProductList products={ products } />
       </div>
     );
   }
 }
+
+SearchField.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 
 export default SearchField;
