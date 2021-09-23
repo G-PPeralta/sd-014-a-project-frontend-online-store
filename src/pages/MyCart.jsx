@@ -53,6 +53,7 @@ class MyCart extends React.Component {
                 inCart: cart.readProductsInCart(),
               });
             } }
+            disabled={ quant >= product.available_quantity }
           >
             +
           </button>
