@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AddProductCart from '../components/AddProductCart';
 
 export default class Cart extends Component {
@@ -16,6 +17,17 @@ export default class Cart extends Component {
         {storageCartItems.map((product) => (
           <AddProductCart key={ product.id } product={ product } />
         ))}
+        <button
+          data-testid="shopping-cart-button"
+          type="button"
+        >
+          <Link
+            to="/Cart"
+            data-testid="product-detail-add-to-cart"
+          >
+            Adicionar ao Carrinho
+          </Link>
+        </button>
         <span>Valor total da Compra: $</span>
         <div>
           <button type="button">Finalizar compra</button>
