@@ -10,11 +10,15 @@ class BtnAddCart extends React.Component {
       thumbnail,
       id,
       source,
+      onClick,
     } = this.props;
     return (
       <button
         type="button"
-        onClick={ () => addToCart({ title, price, thumbnail, id }) }
+        onClick={ () => {
+          addToCart({ title, price, thumbnail, id });
+          onClick();
+        } }
         data-testid={ `${source}-add-to-cart` }
       >
         Adicionar ao carrinho
@@ -29,6 +33,7 @@ BtnAddCart.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   id: PropTypes.string,
   source: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 BtnAddCart.defaultProps = {

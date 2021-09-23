@@ -38,3 +38,14 @@ export function addEvaluation(evaluation) {
   }
   localStorage.setObj('evaluations', objEvaluation);
 }
+
+export function cartSize() {
+  const products = localStorage.getObj('products');
+  if (products) {
+    return Object.values(products).reduce((acc, crr) => {
+      acc += crr.quantity;
+      return acc;
+    }, 0);
+  }
+  return 0;
+}

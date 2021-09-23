@@ -10,6 +10,7 @@ class ProductsCard extends Component {
       id,
       query,
       categoryId,
+      onClick,
     } = this.props;
     return (
       <li data-testid="product">
@@ -27,6 +28,7 @@ class ProductsCard extends Component {
           thumbnail={ thumbnail }
           id={ id }
           source="product"
+          onClick={ onClick }
         />
       </li>
     );
@@ -42,6 +44,7 @@ ProductsCard.propTypes = {
   id: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired,
   categoryId: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ProductsCard;

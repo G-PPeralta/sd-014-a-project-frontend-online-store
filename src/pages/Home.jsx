@@ -5,6 +5,7 @@ import { getCategories, getProductsFromCategoryAndQuery } from '../services/api'
 import ListCategory from '../components/ListCategory';
 import '../temp.css';
 import ProductsCard from '../components/ProductsCard';
+import { cartSize } from '../services/localstorage';
 
 class Home extends React.Component {
   constructor() {
@@ -14,15 +15,18 @@ class Home extends React.Component {
       query: '',
       selectedId: '',
       products: [],
+      cartsize: 0,
     };
     this.getCategoryAPI = this.getCategoryAPI.bind(this);
     this.changeSelectedId = this.changeSelectedId.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.updateCartSize = this.updateCartSize.bind(this);
   }
 
   componentDidMount() {
     this.getCategoryAPI();
+    this.updateCartSize();
   }
 
   getCategoryAPI = async () => {
@@ -56,8 +60,15 @@ class Home extends React.Component {
     });
   }
 
+  updateCartSize() {
+    const size = cartSize();
+    this.setState({
+      cartsize: size,
+    });
+  }
+
   render() {
-    const { categorias, query, selectedId, products } = this.state;
+    const { categorias, query, selectedId, products, cartsize } = this.state;
     return (
       <main>
         <h3
@@ -78,7 +89,10 @@ class Home extends React.Component {
             handleSubmit={ this.handleSearch }
             selectedId={ selectedId }
           />
-          <BtnCart />
+          <div>
+            <BtnCart />
+            <span data-testid="shopping-cart-size">{ cartsize }</span>
+          </div>
         </div>
         <div className="main-conteiner">
           {/* Esquerda com Categorias */}
@@ -100,6 +114,7 @@ class Home extends React.Component {
               id={ product.id }
               query={ query }
               categoryId={ selectedId }
+              onClick={ this.updateCartSize }
             />)) : <p>Nenhum produto foi encontrado</p> }
           </fieldset>
         </div>
