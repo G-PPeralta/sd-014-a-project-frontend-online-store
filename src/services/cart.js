@@ -1,33 +1,12 @@
-export default function addToCart(id, category) {
+export default function addToCart(id, category, qty = 1) {
   const cart = JSON.parse(localStorage.getItem('cart'));
-  const cartItem = cart.find(({ productId }) => productId === id);
-  console.log(cartItem);
-  const qty = cartItem ? cartItem.qty + 1 : 1;
-  const newItem = { productId: id, category, qty };
-  localStorage.setItem('cart', JSON.stringify([...cart, newItem]));
+
+  // se o item já existe, e só alterar o qty, senão cria um novo item no cart
+  const updatedCart = cart.find(({ productId }) => productId === id)
+    ? cart.map((item) => (
+      item.productId === id ? { ...item, qty: item.qty + qty } : item
+    ))
+    : [...cart, { productId: id, category, qty }];
+
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
 }
-
-/*
-[
-    {
-        "id": "MLB2023133600",
-        "category": "MLB253383",
-        "qty": 2
-    },
-    {
-        "id": "MLB2023133600",
-        "category": "MLB253383",
-        "qty": 5
-    },
-    {
-        "id": "MLB2023133600",
-        "category": "MLB253383",
-        "qty": 5
-    }
-]
-*/
-
-/* if (cart.lenght === 0) {
-  return <p>Seu carrinho está vazio</p>
-  }
-*/
