@@ -10,11 +10,22 @@ class Products extends Component {
     this.state = {
       produtos: [],
       CategoriaId,
+      addCart: [],
     };
   }
 
   componentDidMount() {
     this.getProdutos();
+  }
+
+  addCartHandle = async (produto) => {
+    await this.setState((prevState) => ({ addCart: [...prevState.addCart, produto] }));
+    this.saveAddCart();
+  }
+
+  saveAddCart = () => {
+    const { addCart } = this.state;
+    localStorage.setItem('cartItem', JSON.stringify(addCart));
   }
 
     getProdutos = async () => {
@@ -28,8 +39,13 @@ class Products extends Component {
       const { produtos } = this.state;
       return (
         <>
-          { produtos.map((produ) => produ.id === productId
-          && <ProdutosPage key={ produ.id } produ={ produ } />)}
+          { produtos.map((produto) => produto.id === productId
+          && <ProdutosPage
+            key={ produto.id }
+            produto={ produto }
+            addCartHandle={ this.addCartHandle }
+            saveAddCart={ this.saveAddCart }
+          />)}
         </>
       );
     }

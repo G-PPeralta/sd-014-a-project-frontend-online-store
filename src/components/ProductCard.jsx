@@ -21,6 +21,7 @@ class ProductCard extends Component {
           <AddToCart
             addCartHandle={ addCartHandle }
             produto={ produto }
+            data-testid="product-add-to-cart"
           />
         </div>
       </div>

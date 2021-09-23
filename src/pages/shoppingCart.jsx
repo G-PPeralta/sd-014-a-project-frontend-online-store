@@ -34,7 +34,6 @@ class shoppingCart extends React.Component {
                 {produto.title}
               </h2>
               <CartProduct
-                data-testid="shopping-cart-product-name"
                 key={ produto.id }
                 produto={ produto }
                 contador={ contadores[`${produto.id}`] }
