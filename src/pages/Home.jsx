@@ -59,7 +59,9 @@ export default class Home extends Component {
             type="text"
             value={ query }
           />
-          <ShoppingCartIcon shouldUpdateTotalProducts={ shouldUpdateTotalProducts } />
+          <ShoppingCartIcon
+            shouldUpdateTotalProducts={ shouldUpdateTotalProducts }
+          />
         </div>
       </section>
     );

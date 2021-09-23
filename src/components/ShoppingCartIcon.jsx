@@ -7,10 +7,13 @@ export default class ShoppingCartIcon extends Component {
     this.state = {
       totalProducts: 0,
     };
+    this.localStorageKey = 'cart-products';
   }
 
   componentDidMount() {
-    const totalProducts = JSON.parse(localStorage.getItem('cart-products'));
+    const totalProducts = JSON.parse(
+      localStorage.getItem(this.localStorageKey),
+    );
     if (totalProducts) {
       const totalProductsCount = totalProducts.reduce(
         (acc, product) => acc + product.productQty,
@@ -23,21 +26,22 @@ export default class ShoppingCartIcon extends Component {
 
   shouldComponentUpdate() {
     const { totalProducts } = this.state;
-    // const updatedTotalProducts = funcaoQueRetornaTotalDeProdutosAtualizado();
-    const updatedProducts = JSON.parse(localStorage.getItem('cart-products'));
-    const updatedTotalProducts = updatedProducts ? updatedProducts.reduce(
-      (acc, product) => acc + product.productQty,
-      0,
-    ) : 0;
+    const updatedProducts = JSON.parse(
+      localStorage.getItem(this.localStorageKey),
+    );
+    const updatedTotalProducts = updatedProducts
+      ? updatedProducts.reduce((acc, product) => acc + product.productQty, 0)
+      : 0;
     return totalProducts !== updatedTotalProducts;
   }
 
   componentDidUpdate() {
-    const updatedProducts = JSON.parse(localStorage.getItem('cart-products'));
-    const updatedTotalProducts = updatedProducts ? updatedProducts.reduce(
-      (acc, product) => acc + product.productQty,
-      0,
-    ) : 0;
+    const updatedProducts = JSON.parse(
+      localStorage.getItem(this.localStorageKey),
+    );
+    const updatedTotalProducts = updatedProducts
+      ? updatedProducts.reduce((acc, product) => acc + product.productQty, 0)
+      : 0;
     const newState = { totalProducts: updatedTotalProducts };
     this.updateState(newState);
   }
