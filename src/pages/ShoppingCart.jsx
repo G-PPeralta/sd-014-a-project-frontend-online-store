@@ -51,7 +51,7 @@ export default class ShoppingCart extends Component {
     if (sign === '+') {
       const newCart = cartProducts.map((p) => {
         if (p.id === product.id) {
-          p.productQty += 1;
+          p.quantity += 1;
         }
         return p;
       });
@@ -61,12 +61,12 @@ export default class ShoppingCart extends Component {
       });
     } else {
       const newCart = cartProducts.map((p) => {
-        if (p.id === product.id && p.productQty >= 1) {
-          p.productQty -= 1;
+        if (p.id === product.id && p.quantity >= 1) {
+          p.quantity -= 1;
         }
         return p;
       });
-      const newCartWithoutZero = newCart.filter((p) => p.productQty > 0);
+      const newCartWithoutZero = newCart.filter((p) => p.quantity > 0);
 
       this.setState({
         cartProducts: newCartWithoutZero,
@@ -78,7 +78,7 @@ export default class ShoppingCart extends Component {
     const { cartProducts } = this.state;
     let totalPrice = 0;
     cartProducts.forEach((p) => {
-      totalPrice += p.price * p.productQty;
+      totalPrice += p.price * p.quantity;
     });
     return totalPrice;
   }

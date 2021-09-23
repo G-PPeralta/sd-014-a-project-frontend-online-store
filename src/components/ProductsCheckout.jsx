@@ -23,12 +23,12 @@ export default class ProductsCheckout extends Component {
   renderProducts = () => {
     const { products } = this.state;
 
-    return products.map(({ id, price, productQty, thumbnail, title }) => (
+    return products.map(({ id, price, quantity, thumbnail, title }) => (
       <div className="checkout-product" key={ id }>
         <img src={ thumbnail } alt={ title } />
         <span>{title}</span>
         <span>{price}</span>
-        <span>{productQty}</span>
+        <span>{quantity}</span>
       </div>
     ));
   };
@@ -44,7 +44,7 @@ export default class ProductsCheckout extends Component {
             R$
             {' '}
             {products.reduce(
-              (acc, { price, productQty }) => acc + price * productQty,
+              (acc, { price, quantity }) => acc + price * quantity,
               0,
             )}
           </span>

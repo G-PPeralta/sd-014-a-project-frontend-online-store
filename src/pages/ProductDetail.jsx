@@ -12,7 +12,7 @@ export default class ProductDetail extends Component {
     super(props);
     this.state = {
       product: props.location.state,
-      productQty: 0,
+      quantity: 0,
       reviews: [],
       // https://cursos.alura.com.br/forum/topico-this-props-location-query-em-novas-versoes-48309.
     };
@@ -29,14 +29,14 @@ export default class ProductDetail extends Component {
     if (storage) {
       const product = storage.find((item) => item.id === id);
       if (product) {
-        this.updateProductQty(product.productQty);
+        this.updatequantity(product.quantity);
       }
     }
   }
 
   componentDidUpdate() {
-    const { productQty } = this.state;
-    this.savetoLocalStorage(productQty);
+    const { quantity } = this.state;
+    this.savetoLocalStorage(quantity);
   }
 
   addReview = (review) => {
@@ -52,7 +52,7 @@ export default class ProductDetail extends Component {
   updateReviews = (reviews) => this.setState({ reviews });
   // Can't use setState in componentDidMount
 
-  updateProductQty = (productQty) => this.setState({ productQty });
+  updatequantity = (quantity) => this.setState({ quantity });
   // Can't use setState in componentDidMount
 
   savetoLocalStorage = (newQty) => {
@@ -67,7 +67,7 @@ export default class ProductDetail extends Component {
         available_quantity: availableQuantity,
       },
     } = this.state;
-    const { productQty } = this.state;
+    const { quantity } = this.state;
 
     const savedProduct = {
       id,
@@ -75,12 +75,12 @@ export default class ProductDetail extends Component {
       thumbnail,
       price,
       availableQuantity,
-      productQty: newQty,
+      quantity: newQty,
     };
 
     const storage = JSON.parse(localStorage.getItem(storageKey));
 
-    if (productQty === 1) {
+    if (quantity === 1) {
       if (storage) {
         const newStorage = [...storage, savedProduct];
         localStorage.setItem(storageKey, JSON.stringify(newStorage));
@@ -90,14 +90,14 @@ export default class ProductDetail extends Component {
       }
     } else {
       storage.forEach((item) => {
-        if (item.id === id) item.productQty = newQty;
+        if (item.id === id) item.quantity = newQty;
       });
       localStorage.setItem(storageKey, JSON.stringify(storage));
     }
   };
 
   addToCartBtn = () => {
-    const { productQty } = this.state;
+    const { quantity } = this.state;
     return (
       <div>
         <button
@@ -108,13 +108,13 @@ export default class ProductDetail extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <p>{`Qtd: ${productQty}`}</p>
+        <p>{`Qtd: ${quantity}`}</p>
       </div>
     );
   };
 
   addToCartfunc = () => {
-    this.setState((prev) => ({ productQty: prev.productQty + 1 }));
+    this.setState((prev) => ({ quantity: prev.quantity + 1 }));
   };
 
   render() {

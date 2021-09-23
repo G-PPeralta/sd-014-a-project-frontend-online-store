@@ -10,7 +10,7 @@ export default class ProductCard extends Component {
   constructor() {
     super();
     this.state = {
-      productQty: 0,
+      quantity: 0,
     };
   }
 
@@ -22,17 +22,17 @@ export default class ProductCard extends Component {
     if (storage) {
       const product = storage.find((item) => item.id === id);
       if (product) {
-        this.updateProductQty(product.productQty);
+        this.updatequantity(product.quantity);
       }
     }
   }
 
   componentDidUpdate() {
-    const { productQty } = this.state;
-    this.savetoLocalStorage(productQty);
+    const { quantity } = this.state;
+    this.savetoLocalStorage(quantity);
   }
 
-  updateProductQty = (productQty) => this.setState({ productQty });
+  updatequantity = (quantity) => this.setState({ quantity });
   // Can't use setState in componentDidMount
 
   savetoLocalStorage = (newQty) => {
@@ -45,7 +45,7 @@ export default class ProductCard extends Component {
         available_quantity: availableQuantity,
       },
     } = this.props;
-    const { productQty } = this.state;
+    const { quantity } = this.state;
 
     const savedProduct = {
       id,
@@ -53,12 +53,12 @@ export default class ProductCard extends Component {
       thumbnail,
       price,
       availableQuantity,
-      productQty: newQty,
+      quantity: newQty,
     };
 
     const storage = JSON.parse(localStorage.getItem(storageKey));
 
-    if (productQty === 1) {
+    if (quantity === 1) {
       if (storage) {
         const storageWithNewProduct = storage.filter((item) => item.id !== id);
         const newStorage = [...storageWithNewProduct, savedProduct];
@@ -69,14 +69,14 @@ export default class ProductCard extends Component {
       }
     } else {
       storage.forEach((item) => {
-        if (item.id === id) item.productQty = newQty;
+        if (item.id === id) item.quantity = newQty;
       });
       localStorage.setItem(storageKey, JSON.stringify(storage));
     }
   };
 
   addToCartBtn = () => {
-    const { productQty } = this.state;
+    const { quantity } = this.state;
     return (
       <div>
         <button
@@ -87,7 +87,7 @@ export default class ProductCard extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <p>{`Qtd: ${productQty}`}</p>
+        <p>{`Qtd: ${quantity}`}</p>
       </div>
     );
   };
@@ -95,14 +95,14 @@ export default class ProductCard extends Component {
   addToCartfunc = () => {
     const { shouldUpdateTotalProducts } = this.props;
     this.setState((prevState) => {
-      const { productQty } = prevState;
+      const { quantity } = prevState;
       shouldUpdateTotalProducts();
-      return { productQty: productQty + 1 };
+      return { quantity: quantity + 1 };
     });
   };
 
   render() {
-    const { productQty } = this.state;
+    const { quantity } = this.state;
     const {
       product: { title, thumbnail, price, id },
     } = this.props;
@@ -117,7 +117,7 @@ export default class ProductCard extends Component {
               thumbnail,
               price,
               id,
-              productQty,
+              quantity,
             },
           } }
         >
