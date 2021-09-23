@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Comments from '../components/Comments';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class ProductDetails extends React.Component {
@@ -33,9 +34,15 @@ class ProductDetails extends React.Component {
     const testando = arrayProducts.find((product) => product.id === idProduct);
     if (testando === undefined) return <h3>Produto indisponível...</h3>;
     return (
-      <div>
-        <p data-testid="product-detail-name">{testando.title}</p>
-      </div>
+      <section>
+        <div>
+          <p data-testid="product-detail-name">{testando.title}</p>
+        </div>
+
+        <div>
+          <Comments />
+        </div>
+      </section>
     );
   }
 }
