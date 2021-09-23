@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -79,6 +80,7 @@ class Cart extends Component {
       });
     }
 
+    const { history } = this.props;
     return (
       <>
         <Header />
@@ -151,11 +153,22 @@ class Cart extends Component {
                 />
               </div>
             )}
+          <button
+            type="button"
+            onClick={ () => history.push('/checkout') }
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+          </button>
         </div>
         <Footer />
       </>
     );
   }
 }
+
+Cart.propTypes = {
+  history: PropTypes.string.isRequired,
+};
 
 export default Cart;
