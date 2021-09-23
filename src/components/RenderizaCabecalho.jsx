@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class RenderizaCabecalho extends Component {
   render() {
@@ -16,23 +17,28 @@ class RenderizaCabecalho extends Component {
           <label htmlFor="searchProduct">
             <input
               onChange={ handleChange }
+              // source: https://stackoverflow.com/questions/31272207/to-call-onchange-event-after-pressing-enter-key
+              onKeyPress={
+                ((event) => {
+                  if (event.key === 'Enter') {
+                    handleClick();
+                  }
+                })
+              }
               value={ pesquisa }
               data-testid="query-input"
               type="text"
               id="searchProduct"
             />
           </label>
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ handleClick }
-          >
-            pesquisar
-          </button>
         </div>
       </div>
     );
   }
 }
+
+RenderizaCabecalho.propTypes = {
+  pesquisa: PropTypes.string,
+}.isRequired;
 
 export default RenderizaCabecalho;
