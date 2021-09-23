@@ -62,4 +62,8 @@ class SearchProduct extends Component {
   }
 }
 
+SearchProduct.propTypes = {
+  arrayProduct: PropTypes.objectOf(PropTypes.string).isRequired,
+};
+
 export default SearchProduct;
