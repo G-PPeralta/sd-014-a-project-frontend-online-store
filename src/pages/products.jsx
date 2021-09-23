@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProdutosPage from '../components/produtosPage';
+import { saver } from '../services/StorageServices';
 
 class Products extends Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class Products extends Component {
     this.getProdutos();
   }
 
+  addCartHandle = (produto) => {
+    saver(produto);
+  }
+
     getProdutos = async () => {
       const { CategoriaId } = this.state;
       const getProducts = await getProductsFromCategoryAndQuery(CategoriaId, '');
@@ -28,8 +33,14 @@ class Products extends Component {
       const { produtos } = this.state;
       return (
         <>
-          { produtos.map((produ) => produ.id === productId
-          && <ProdutosPage key={ produ.id } produ={ produ } />)}
+          { produtos.map((produto) => produto.id === productId
+            && <ProdutosPage
+              key={ produto.id }
+              produto={ produto }
+              addCartHandle={ this.addCartHandle }
+              saveAddCart={ this.saveAddCart }
+              data-testid="shopping-cart-product-name"
+            />)}
         </>
       );
     }
