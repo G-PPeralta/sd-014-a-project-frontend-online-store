@@ -53,10 +53,10 @@
 }
 
 .free-shipping {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   font-size: 0.8rem;
   font-weight: 400;
+  justify-content: center;
   padding: 10px;
 }
