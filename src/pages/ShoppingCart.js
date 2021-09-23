@@ -37,7 +37,6 @@ class ShoppingCart extends Component {
     const productId = target.id;
     const { products } = this.state;
     const productIndex = products.findIndex((product) => product.id === productId);
-    console.log(productIndex);
     products.splice(productIndex, 1);
     this.setState({
       products,
