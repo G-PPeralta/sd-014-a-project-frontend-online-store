@@ -26,7 +26,7 @@ class Comment extends Component {
 Comment.propTypes = {
   assessment: PropTypes.shape({
     email: PropTypes.string,
-    rating: PropTypes.string,
+    rating: PropTypes.number,
     comment: PropTypes.string,
   }).isRequired,
 };
