@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends React.Component {
-  //  operation recebe atributos increase ou decrease
   renderQuantityButton = (operation) => (
     <button
       type="button"
@@ -32,6 +32,13 @@ class ShoppingCart extends React.Component {
             <p data-testid="shopping-cart-product-quantity">1</p>
           </div>
         ))}
+        <Link to="/Checkout" data-testid="checkout-products">
+          <button
+            type="button"
+          >
+            Finalizar Compra
+          </button>
+        </Link>
       </div>
     );
   }
