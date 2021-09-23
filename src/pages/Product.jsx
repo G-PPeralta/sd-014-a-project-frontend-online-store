@@ -14,10 +14,6 @@ class Product extends Component {
     };
   }
 
-  componentDidMount() {
-    // this.changeState();
-  }
-
   handleClick = () => {
     const { product } = this.state;
     addProduct(product);
