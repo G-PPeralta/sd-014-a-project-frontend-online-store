@@ -1,6 +1,7 @@
 import React from 'react';
 import EmptyCart from '../components/EmptyCart';
 import { getFromCart } from '../services/localStorageServices';
+import ShoppingCartItem from '../components/ShoppingCartItem';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -32,12 +33,16 @@ class ShoppingCart extends React.Component {
       }
       return formatedArray;
     }, []);
-    console.log(result);
+
     return (
       <div>
         {
-          contentCart.map(
-            (content) => (<p key={ content.id }>{ content.title }</p>),
+          result.map(
+            (itemInfo) => (
+              <ShoppingCartItem
+                key={ itemInfo.content.id }
+                itemInfo={ itemInfo }
+              />),
           )
         }
       </div>

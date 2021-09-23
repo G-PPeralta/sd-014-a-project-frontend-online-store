@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import CartItem from '../components/CartItem';
 import Categorias from '../components/Categorias';
 import Produtos from '../components/Produtos';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
@@ -63,14 +63,7 @@ class Search extends React.Component {
           </button>
         </div>
 
-        <div>
-          <Link
-            data-testid="shopping-cart-button"
-            to="/shopping-cart"
-          >
-            Carrinho de Compras
-          </Link>
-        </div>
+        <CartItem />
 
         <p
           data-testid="home-initial-message"

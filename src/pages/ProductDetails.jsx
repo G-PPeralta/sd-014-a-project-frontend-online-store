@@ -11,27 +11,7 @@ class ProductDetails extends Component {
     this.state = {
       product,
     };
-    // this.getProductItemFromMlApi = this.getProductItemFromMlApi.bind(this);
-    // this.updateState = this.updateState.bind(this);
   }
-
-  // componentDidMount() {
-  // const { location: { state: { product } } } = this.props;
-  // // const { match: { params: { itemID } } } = this.props;
-  // this.updateState(product);
-  // }
-
-  // updateState(product) {
-  //   this.setState({
-  //     product,
-  //   });
-  // }
-
-  // getProductItemFromMlApi(sku) {
-  //   return fetch(`https://api.mercadolibre.com/items/${sku}`)
-  //     .then((response) => response.json())
-  //     .then((json) => json);
-  // }
 
   render() {
     const { product } = this.state;
