@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CartItem from '../components/CartItem';
-import './ShoppingCart.css';
 
 /**
  * Referência de onde descobrimos o método findIndex
@@ -20,6 +19,7 @@ class ShoppingCart extends Component {
     };
 
     this.removeItem = this.removeItem.bind(this);
+    this.cartList = this.cartList.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class ShoppingCart extends Component {
   };
 
   removeItem({ target }) {
-    const productId = target.id;
+    const productId = target.parentElement.id;
     const { products } = this.state;
     const productIndex = products.findIndex((product) => product.id === productId);
     console.log(productIndex);

@@ -15,12 +15,10 @@ class AddButton extends Component {
   }
 
   render() {
-    const { testid } = this.props;
     return (
       <button
         type="submit"
-        data-testid={ testid }
-        className="addtocart-button"
+        data-testid="product-add-to-cart"
         onClick={ this.handleClick }
       >
         Adicionar ao Carrinho
