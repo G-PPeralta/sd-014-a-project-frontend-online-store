@@ -14,8 +14,7 @@ class Checkout extends React.Component {
     };
   }
 
-  handleChange = ({ target }) => {
-    const { value, id } = target;
+  handleChange = ({ target: { value, id} }) => {
     this.setState({
       [id]: value,
     });
@@ -23,7 +22,6 @@ class Checkout extends React.Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    console.log(event);
     const { history, handleCleanCart } = this.props;
     handleCleanCart();
     this.setState({
@@ -46,7 +44,7 @@ class Checkout extends React.Component {
           <h3>Revise seus produtos</h3>
           <h3>Total:</h3>
         </section>
-        <div>
+        <section>
           <h3>Informações do Comprador</h3>
           <input
             type="text"
@@ -103,7 +101,7 @@ class Checkout extends React.Component {
             onChange={ this.handleChange }
             required
           />
-        </div>
+        </section>
         <section>
           <h3>Método de Pagamento</h3>
           <label htmlFor="boleto">
