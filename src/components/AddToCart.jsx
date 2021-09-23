@@ -7,9 +7,9 @@ export class AddToCart extends Component {
     return (
       <div>
         <button
-          data-testid="product-add-to-cart"
           type="submit"
           onClick={ () => addCartHandle(produto) }
+          data-testid="product-add-to-cart"
         >
           Adicionar ao carrinho
         </button>

@@ -18,10 +18,12 @@ class ProductCard extends Component {
             <img src={ produto.thumbnail } alt="" className="ProdImg" />
             <p>{produto.price}</p>
           </Link>
-          <AddToCart
-            addCartHandle={ addCartHandle }
-            produto={ produto }
-          />
+          <div>
+            <AddToCart
+              addCartHandle={ addCartHandle }
+              produto={ produto }
+            />
+          </div>
         </div>
       </div>
     );
