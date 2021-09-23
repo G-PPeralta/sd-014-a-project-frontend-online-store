@@ -48,6 +48,7 @@ class CartCard extends React.Component {
             type="button"
             onClick={ this.atualizaQuantidadeA }
             data-testid="product-increase-quantity"
+            disabled={ product.available_quantity === qtd }
           >
             +
           </button>
