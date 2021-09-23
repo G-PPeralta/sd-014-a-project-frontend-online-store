@@ -1,0 +1,22 @@
+.div-item-cart-card {
+  background-color: lightyellow;
+  border: 1px solid black;
+}
+
+.cart-item-button {
+  width: 100px;
+}
+
+.cart-item-title {
+  width: 300px;
+}
+
+.cart-header {
+  background-color: yellow;
+  height: 40px;
+}
+
+.div-teste {
+  background-color: yellow;
+  width: 300px;
+}

@@ -1,0 +1,42 @@
+.div-card {
+  border: 1px solid black;
+  border-radius: 1%;
+  height: 320px;
+  justify-content: space-evenly;
+  width: 250px;
+}
+
+.div-card img {
+  max-height: 90px;
+  max-width: 90px;
+}
+
+.div-card h3 {
+  font-size: 15px;
+}
+
+.section-height {
+  height: 600px;
+  width: 1050px;
+}
+
+.div-category {
+  height: 600px;
+}
+
+.div-header {
+  background-color: yellow;
+  height: 40px;
+}
+
+.div-input {
+  width: 1500px;
+}
+
+.fa-shopping-cart {
+  color: black;
+}
+
+.fa-home {
+  color: black;
+}

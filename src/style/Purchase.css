@@ -1,0 +1,30 @@
+.checkout-img {
+  height: 90px;
+  width: 90px;
+}
+
+.item-div {
+  background-color: lightyellow;
+  border: 1px solid black;
+  height: 140px;
+  width: 1320px;
+}
+
+.items-div {
+  height: 400px;
+  width: auto;
+}
+
+.checkout-title {
+  width: 300px;
+}
+
+.purchase-form {
+  width: auto;
+}
+
+.header {
+  background-color: yellow;
+  height: 36px;
+  width: 1350px;
+}

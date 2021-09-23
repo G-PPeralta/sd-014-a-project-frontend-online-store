@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartItems from './CartItems';
+import '../style/Cart.css';
 
 export default class Cart extends React.Component {
   constructor(props) {
@@ -84,31 +85,37 @@ export default class Cart extends React.Component {
     const { productList, totalPrice, totalItems } = this.state;
     const cartDetails = (
       <div>
-        {productList.map((item) => (
-          (
-            <CartItems
-              key={ item.productObj.id }
-              price={ item.productObj.price }
-              id={ item.productObj.id }
-              title={ item.productObj.title }
-              thumbnail={ item.productObj.thumbnail }
-              quantity={ item.quantity }
-              maxQuant={ item.productObj.available_quantity }
-              addItem={ this.addItem }
-              removeItem={ this.removeItem }
-              item={ item }
-            />
-          )
-        ))}
-        <p>
-          Total:
-          { totalPrice }
-        </p>
-        <p data-testid="shopping-cart-size">
-          Itens no carrinho:
-          { totalItems }
-        </p>
-        <Link to="/checkout" data-testid="checkout-products">Checkout</Link>
+        <div>
+          {productList.map((item) => (
+            (
+              <CartItems
+                key={ item.productObj.id }
+                price={ item.productObj.price }
+                id={ item.productObj.id }
+                title={ item.productObj.title }
+                thumbnail={ item.productObj.thumbnail }
+                quantity={ item.quantity }
+                maxQuant={ item.productObj.available_quantity }
+                addItem={ this.addItem }
+                removeItem={ this.removeItem }
+                item={ item }
+              />
+            )
+          ))}
+        </div>
+        <div className="text-end me-2">
+          <div>
+            <span>Total: R$</span>
+            <span>
+              { totalPrice }
+            </span>
+          </div>
+          <p data-testid="shopping-cart-size">
+            Itens no carrinho:
+            { totalItems }
+          </p>
+          <Link to="/checkout" data-testid="checkout-products">Checkout</Link>
+        </div>
       </div>
     );
 
@@ -124,7 +131,14 @@ export default class Cart extends React.Component {
     );
     return (
       <div>
-        {!productList || productList.length === 0 ? empty : this.itemsToRenderMap()}
+        <header className="cart-header d-flex justify-content-end align-items-end">
+          <Link to="/">
+            <i className="fas fa-home fa-2x" />
+          </Link>
+        </header>
+        <main>
+          {!productList || productList.length === 0 ? empty : this.itemsToRenderMap()}
+        </main>
       </div>
     );
   }
