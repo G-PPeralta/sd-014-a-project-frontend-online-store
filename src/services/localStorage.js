@@ -50,3 +50,9 @@ export const sumTotalCartPrice = (array) => {
   });
   return sum;
 };
+
+export const addKeyWithValue = (object, key, value) => {
+  const newObject = object;
+  newObject[key] = value;
+  return newObject;
+};

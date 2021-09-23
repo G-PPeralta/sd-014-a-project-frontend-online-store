@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { addProduct } from '../services/localStorage';
+import { addProduct, addKeyWithValue } from '../services/localStorage';
+import { FormAvaliate } from '../components/FormAvaliate';
+import Comment from '../components/Comment';
 
 class Product extends Component {
   constructor(props) {
     super(props);
     const { location: { state: { product } } } = props;
     this.state = {
-      product,
+      product: addKeyWithValue(product, 'assessments', []),
     };
+  }
+
+  componentDidMount() {
+    // this.changeState();
   }
 
   handleClick = () => {
     const { product } = this.state;
     addProduct(product);
+  }
+
+  addAssessments = (avaliacao) => {
+    const { product } = this.state;
+    const productObject = product;
+    productObject.assessments = [...productObject.assessments, avaliacao];
+    this.setState({
+      product: productObject,
+    });
   }
 
   render() {
@@ -50,6 +65,10 @@ class Product extends Component {
             )) }
           </ol>
         </section>
+        <FormAvaliate addAssessments={ this.addAssessments } />
+        { product.assessments.map((assessment, index) => (
+          <Comment key={ index } assessment={ assessment } />
+        )) }
       </div>
     );
   }
