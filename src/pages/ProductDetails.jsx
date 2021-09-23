@@ -13,6 +13,7 @@ class ProductDetails extends React.Component {
       arrayProducts: [],
     };
     this.getProduct = this.getProduct.bind(this);
+    // this.addCartItem = this.addCartItem.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +29,21 @@ class ProductDetails extends React.Component {
       idProduct: idsSplit[0],
       arrayProducts: response.results,
     });
+  }
+
+  addCartItem(product) {
+    const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
+    const findItem = cartStorage.find((cart) => cart.id === product.id);
+    if (findItem !== undefined) {
+      const newCart = cartStorage.map((item) => (
+        item.id === product.id
+          ? { ...findItem, quantity: findItem.quantity + 1 } : item));
+      localStorage.setItem('carrinho', JSON.stringify([...newCart]));
+    } else {
+      localStorage
+        .setItem('carrinho',
+          JSON.stringify([...cartStorage, { ...product, quantity: 1 }]));
+    }
   }
 
   render() {
@@ -51,16 +67,11 @@ class ProductDetails extends React.Component {
         </div>
         <button
           type="button"
-          onClick={ () => {
-            const localStorageValue = JSON.parse(localStorage.getItem('carrinho'));
-            const saveLocal = [...localStorageValue, findProduct];
-            localStorage.setItem('carrinho', JSON.stringify(saveLocal));
-          } }
+          onClick={ () => this.addCartItem(findProduct) }
           data-testid="product-detail-add-to-cart"
         >
           Adicionar ao carrinho!
         </button>
-
         <section>
           <div>
             <p data-testid="product-detail-name">{testando.title}</p>

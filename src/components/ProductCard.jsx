@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
+  addCartItem(product) {
+    const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
+    const findItem = cartStorage.find((cart) => cart.id === product.id);
+    if (findItem !== undefined) {
+      const newCart = cartStorage.map((item) => (
+        item.id === product.id
+          ? { ...findItem, quantity: findItem.quantity + 1 } : item));
+      localStorage.setItem('carrinho', JSON.stringify([...newCart]));
+    } else {
+      localStorage
+        .setItem('carrinho',
+          JSON.stringify([...cartStorage, { ...product, quantity: 1 }]));
+    }
+  }
+
   render() {
     const { stateSearch } = this.props;
     return (
@@ -22,11 +37,7 @@ class ProductCard extends React.Component {
             <button
               data-testid="product-add-to-cart"
               type="button"
-              onClick={ () => {
-                const localStorageValue = JSON.parse(localStorage.getItem('carrinho'));
-                const saveLocal = [...localStorageValue, product];
-                localStorage.setItem('carrinho', JSON.stringify(saveLocal));
-              } }
+              onClick={ () => this.addCartItem(product) }
             >
               Adicionar ao Carrinho
             </button>
