@@ -4,6 +4,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Evaluator from '../components/Evaluator';
 import BtnCart from '../components/BtnCart';
 import BtnAddCart from '../components/BtnAddCart';
+import { cartSize } from '../services/localstorage';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -14,9 +15,11 @@ class ProductDetails extends Component {
       price: '',
       // attributes,
       id: '',
+      cartsize: 0,
     };
     this.getResults = this.getResults.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
+    this.updateCartSize = this.updateCartSize.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +30,7 @@ class ProductDetails extends Component {
       .then((results) => {
         this.getProductInfo(results);
       });
+    this.updateCartSize();
   }
 
   async getResults(categoryId, query) {
@@ -53,8 +57,15 @@ class ProductDetails extends Component {
     });
   }
 
+  updateCartSize() {
+    const size = cartSize();
+    this.setState({
+      cartsize: size,
+    });
+  }
+
   render() {
-    const { title, thumbnail, price, id } = this.state;
+    const { title, thumbnail, price, id, cartsize } = this.state;
     return (
       <main>
         <div>
@@ -63,7 +74,10 @@ class ProductDetails extends Component {
           <img src={ thumbnail } alt={ title } />
           <p>{price}</p>
         </div>
-        <BtnCart />
+        <div>
+          <BtnCart />
+          <span data-testid="shopping-cart-size">{ cartsize }</span>
+        </div>
         <Evaluator />
         <BtnAddCart
           source="product-detail"
@@ -71,6 +85,7 @@ class ProductDetails extends Component {
           price={ +price }
           thumbnail={ thumbnail }
           id={ id }
+          onClick={ this.updateCartSize }
         />
       </main>
     );
