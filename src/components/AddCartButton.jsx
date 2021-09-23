@@ -22,8 +22,8 @@ class AddCartButton extends React.Component {
 }
 
 AddCartButton.propTypes = {
-  id: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default AddCartButton;
