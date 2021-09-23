@@ -48,11 +48,12 @@ class App extends React.Component {
                   { ...props }
                   takeCartProduct={ this.takeCartProduct }
                 />) }
+            />
             <Route
               path="/Checkout"
               render={ (props) => (
-                <Checkout { ...props } handleCleanCart={ this.handleCleanCart } />
-              ) }
+                <Checkout { ...props } handleCleanCart={ this.handleCleanCart } />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>
