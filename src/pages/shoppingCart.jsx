@@ -1,6 +1,6 @@
 import React from 'react';
 import { CartProduct } from '../components/CartProduct';
-import { getter } from '../services/StorageServices';
+import { getter, counterGetter } from '../services/StorageServices';
 
 class shoppingCart extends React.Component {
   constructor() {
@@ -17,11 +17,16 @@ class shoppingCart extends React.Component {
 
   loadFromCart = () => {
     const cart = getter();
-    // const counters = counterGetter();
+    const counters = counterGetter();
     this.setState({
       produtos: cart,
+      contadores: counters,
     });
-    // if (cart.length >= 1) this.setState({ contadores: counters });
+  }
+
+  addCartHandle = (contador, produto) => {
+    const { contadores } = this.state;
+    contadores.produto = contador;
   }
 
   render() {
@@ -35,6 +40,7 @@ class shoppingCart extends React.Component {
           key={ produto.id }
           produto={ produto }
           contador={ contadores[`${produto.id}`] }
+          onClick={ this.addCartHandle }
         />
       ))
     );
