@@ -12,10 +12,7 @@ export default class ProductCard extends React.Component {
       <>
         <Link
           data-testid="product-detail-link"
-          to={ {
-            pathname: `/product-details/${id}`,
-            state: { title, thumbnail, price },
-          } }
+          to={ `/product-details/${id}` }
         >
           <div data-testid="product" id={ id }>
             <h2>{title}</h2>
@@ -26,7 +23,6 @@ export default class ProductCard extends React.Component {
                 currency: 'BRL',
               })}`}
             </p>
-
           </div>
         </Link>
         <button
