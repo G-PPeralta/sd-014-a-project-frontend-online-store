@@ -14,7 +14,7 @@ class Checkout extends React.Component {
     };
   }
 
-  handleChange = ({ target: { value, id} }) => {
+  handleChange = ({ target: { value, id } }) => {
     this.setState({
       [id]: value,
     });
