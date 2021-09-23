@@ -1,5 +1,5 @@
 import React from 'react';
-// import addToCart from '../services/localstorage';
+import { Link } from 'react-router-dom';
 import '../services/localstorage';
 import ProducInCart from '../components/ProductInCart';
 
@@ -33,7 +33,15 @@ class Cart extends React.Component {
           : (
             <h1 data-testid="shopping-cart-empty-message">
               Seu carrinho está vazio
-            </h1>)}
+            </h1>) }
+        <button
+          type="submit"
+          data-testid="checkout-products"
+        >
+          <Link to="/checkout">
+            Finalizar Compra
+          </Link>
+        </button>
       </main>
     );
   }
