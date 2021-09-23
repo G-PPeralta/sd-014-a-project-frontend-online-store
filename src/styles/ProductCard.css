@@ -51,3 +51,12 @@
   background-color: #ffd54f;
   transition: 0.3s;
 }
+
+.free-shipping {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  padding: 10px;
+}

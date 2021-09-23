@@ -43,6 +43,7 @@ export default class ProductCard extends Component {
         thumbnail,
         price,
         available_quantity: availableQuantity,
+        shipping: { free_shipping: freeShipping },
       },
     } = this.props;
     const { quantity } = this.state;
@@ -54,6 +55,7 @@ export default class ProductCard extends Component {
       price,
       availableQuantity,
       quantity: newQty,
+      freeShipping,
     };
 
     const storage = JSON.parse(localStorage.getItem(storageKey));
@@ -104,7 +106,13 @@ export default class ProductCard extends Component {
   render() {
     const { quantity } = this.state;
     const {
-      product: { title, thumbnail, price, id },
+      product: {
+        title,
+        thumbnail,
+        price,
+        id,
+        shipping: { free_shipping: freeShipping },
+      },
     } = this.props;
     return (
       <div className="product-card" data-testid="product">
@@ -132,6 +140,15 @@ export default class ProductCard extends Component {
             })}`}
           </p> */}
         </Link>
+        {freeShipping && (
+          <div className="free-shipping">
+            <p data-testid="free-shipping">Frete Grátis</p>
+            <img
+              alt="cardboard-box"
+              src="https://img.icons8.com/ios/50/000000/cardboard-box.png"
+            />
+          </div>
+        )}
         {this.addToCartBtn()}
       </div>
     );
@@ -145,6 +162,9 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
     available_quantity: PropTypes.number.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
   shouldUpdateTotalProducts: PropTypes.func.isRequired,
 };
