@@ -87,7 +87,7 @@ export default class ProductCard extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <p>{`Qtd: ${quantity}`}</p>
+        <p>{`Quantidade: ${quantity}`}</p>
       </div>
     );
   };
@@ -109,6 +109,7 @@ export default class ProductCard extends Component {
     return (
       <div className="product-card" data-testid="product">
         <Link
+          className="product-card-link"
           data-testid="product-detail-link"
           to={ {
             pathname: `/product/${id}`,

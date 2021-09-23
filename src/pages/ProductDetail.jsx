@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AddReview from '../components/AddReview';
 import Reviews from '../components/Reviews';
 import ShoppingCartIcon from '../components/ShoppingCartIcon';
@@ -108,7 +109,7 @@ export default class ProductDetail extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <p>{`Qtd: ${quantity}`}</p>
+        <p>{`Quantidade: ${quantity}`}</p>
       </div>
     );
   };
@@ -124,12 +125,24 @@ export default class ProductDetail extends Component {
     const { reviews } = this.state;
     return (
       <>
-        <ShoppingCartIcon />
+        <div className="product-detail-header">
+          <Link className="return-button" to="/">
+            <img
+              alt="return-button"
+              src="https://img.icons8.com/ios/50/000000/left2.png"
+            />
+          </Link>
+          <ShoppingCartIcon />
+        </div>
         <div className="product-detail" data-testid="product-detail-name">
-          <h3>{title}</h3>
-          <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-          <p>{`R$${price.toFixed(2)}`}</p>
-          {this.addToCartBtn()}
+          <div className="product-detail-section">
+            <h3>{title}</h3>
+            <img alt={ title } className="product-thumbnail" src={ thumbnail } />
+            <p>{`R$${price.toFixed(2)}`}</p>
+          </div>
+          <div>
+            {this.addToCartBtn()}
+          </div>
         </div>
         <AddReview addReview={ this.addReview } />
         {reviews.length > 0 && <Reviews reviews={ reviews } />}
