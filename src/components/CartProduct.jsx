@@ -11,14 +11,19 @@ export default class CartProduct extends Component {
       changeProductQuantity,
     } = this.props;
     return (
-      <section className="div200">
+      <section className="shopping-cart-product-item">
         <button type="button" onClick={ () => removeProduct(id) }>
           {' '}
           X
           {' '}
         </button>
         <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-        <p data-testid="shopping-cart-product-name">{title}</p>
+        <p
+          className="shopping-cart-product-name"
+          data-testid="shopping-cart-product-name"
+        >
+          {title}
+        </p>
         <button
           type="button"
           data-testid="product-decrease-quantity"

@@ -140,9 +140,7 @@ export default class ProductDetail extends Component {
             <img alt={ title } className="product-thumbnail" src={ thumbnail } />
             <p>{`R$${price.toFixed(2)}`}</p>
           </div>
-          <div>
-            {this.addToCartBtn()}
-          </div>
+          <div>{this.addToCartBtn()}</div>
         </div>
         <AddReview addReview={ this.addReview } />
         {reviews.length > 0 && <Reviews reviews={ reviews } />}

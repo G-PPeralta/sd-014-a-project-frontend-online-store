@@ -99,7 +99,9 @@ export default class ShoppingCart extends Component {
           {`Valor Total da Compra: R$ ${this.calculatePrice().toFixed(2)}`}
         </h2>
         <Link data-testid="checkout-products" to="/checkout">
-          <button type="button">Finalizar Compra</button>
+          <button className="checkout-order-button" type="button">
+            Finalizar Compra
+          </button>
         </Link>
       </section>
     );
