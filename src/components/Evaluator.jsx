@@ -57,11 +57,6 @@ class Evaluator extends React.Component {
     const { email, avaliacao, mensagem } = this.state;
     return (
       <section>
-        <h1>Quantidade</h1>
-        <button type="button">-</button>
-        <p>0</p>
-        <button type="button">+</button>
-        <button type="submit">Adicionar ao Carrinho</button>
         <h1>Avaliações</h1>
         <form>
           <input
