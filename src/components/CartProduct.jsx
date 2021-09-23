@@ -6,19 +6,24 @@ export default class CartProduct extends Component {
   render() {
     const {
       product,
-      product: { title, thumbnail, id, price, productQty, availableQuantity },
+      product: { title, thumbnail, id, price, quantity, availableQuantity },
       removeProduct,
       changeProductQuantity,
     } = this.props;
     return (
-      <section className="div200">
+      <section className="shopping-cart-product-item">
         <button type="button" onClick={ () => removeProduct(id) }>
           {' '}
           X
           {' '}
         </button>
         <img alt={ title } className="product-thumbnail" src={ thumbnail } />
-        <p data-testid="shopping-cart-product-name">{title}</p>
+        <p
+          className="shopping-cart-product-name"
+          data-testid="shopping-cart-product-name"
+        >
+          {title}
+        </p>
         <button
           type="button"
           data-testid="product-decrease-quantity"
@@ -26,12 +31,12 @@ export default class CartProduct extends Component {
         >
           -
         </button>
-        <h3 data-testid="shopping-cart-product-quantity">{productQty}</h3>
+        <h3 data-testid="shopping-cart-product-quantity">{quantity}</h3>
         <button
           type="button"
           data-testid="product-increase-quantity"
           onClick={ () => changeProductQuantity(product, '+') }
-          disabled={ productQty >= availableQuantity }
+          disabled={ quantity >= availableQuantity }
         >
           +
         </button>
@@ -47,7 +52,7 @@ CartProduct.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
     price: PropTypes.number,
-    productQty: PropTypes.number,
+    quantity: PropTypes.number,
     availableQuantity: PropTypes.number,
   }).isRequired,
   removeProduct: PropTypes.func.isRequired,

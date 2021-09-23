@@ -1,8 +1,34 @@
-.div200 {
+.shopping-cart-product-item {
   align-items: center;
   display: flex;
-  height: 50px;
-  justify-content: center;
+  justify-content: space-between;
   margin: 10px;
+  padding: 10px;
   width: 1000px;
+}
+
+.shopping-cart-product-name {
+  font-size: 20px;
+  font-weight: 700;
+  width: 300px;
+}
+
+.shopping-cart-product-item button {
+  background-color: #ffc107;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 2em;
+  padding: 0.5rem;
+  width: 50px;
+}
+
+.shopping-cart-product-item button:hover {
+  background-color: #ffd54f;
+  transition: 0.3s;
+}
+
+.shopping-cart-product-item button:disabled {
+  background-color: #ccc;
 }

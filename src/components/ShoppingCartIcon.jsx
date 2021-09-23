@@ -16,7 +16,7 @@ export default class ShoppingCartIcon extends Component {
     );
     if (totalProducts) {
       const totalProductsCount = totalProducts.reduce(
-        (acc, product) => acc + product.productQty,
+        (acc, product) => acc + product.quantity,
         0,
       );
       const newState = { totalProducts: totalProductsCount };
@@ -30,7 +30,7 @@ export default class ShoppingCartIcon extends Component {
       localStorage.getItem(this.localStorageKey),
     );
     const updatedTotalProducts = updatedProducts
-      ? updatedProducts.reduce((acc, product) => acc + product.productQty, 0)
+      ? updatedProducts.reduce((acc, product) => acc + product.quantity, 0)
       : 0;
     return totalProducts !== updatedTotalProducts;
   }
@@ -40,7 +40,7 @@ export default class ShoppingCartIcon extends Component {
       localStorage.getItem(this.localStorageKey),
     );
     const updatedTotalProducts = updatedProducts
-      ? updatedProducts.reduce((acc, product) => acc + product.productQty, 0)
+      ? updatedProducts.reduce((acc, product) => acc + product.quantity, 0)
       : 0;
     const newState = { totalProducts: updatedTotalProducts };
     this.updateState(newState);

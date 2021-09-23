@@ -60,34 +60,31 @@ export default class AddReview extends Component {
     const { email, review } = this.state;
     return (
       <>
-        <h1>Detalhes do Produto</h1>
-        <div>
-          <h3>Avaliar produto</h3>
-          <form>
-            <div>
-              <input
-                name="email"
-                onChange={ this.handleChange }
-                placeholder="Email"
-                type="email"
-                value={ email }
-              />
-              {this.renderRatings()}
-            </div>
-            <textarea
-              cols="40"
-              data-testid="product-detail-evaluation"
-              name="review"
+        <h3>Avaliar produto</h3>
+        <form>
+          <div>
+            <input
+              name="email"
               onChange={ this.handleChange }
-              placeholder="Mensagem (opcional)"
-              rows="4"
-              value={ review }
+              placeholder="Email"
+              type="email"
+              value={ email }
             />
-            <button onClick={ this.handleSubmit } type="submit">
-              Enviar
-            </button>
-          </form>
-        </div>
+            {this.renderRatings()}
+          </div>
+          <textarea
+            cols="40"
+            data-testid="product-detail-evaluation"
+            name="review"
+            onChange={ this.handleChange }
+            placeholder="Mensagem (opcional)"
+            rows="4"
+            value={ review }
+          />
+          <button onClick={ this.handleSubmit } type="submit">
+            Enviar
+          </button>
+        </form>
       </>
     );
   }
