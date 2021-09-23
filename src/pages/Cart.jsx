@@ -25,7 +25,6 @@ class Cart extends Component {
     const savedNames = JSON.parse(localStorage.getItem('nameItems'));
     const savedPrices = JSON.parse(localStorage.getItem('priceItems'));
     const cartItems = savedNames.map((name, index) => [name, savedPrices[index]]);
-    console.log(cartItems.length);
     this.setState({
       cartItems,
       quantidade: ((cartItems.length) ? cartItems.length : 0),
