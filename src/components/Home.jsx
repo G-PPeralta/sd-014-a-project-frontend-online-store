@@ -22,7 +22,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
-    createStoraged();
+    createStoraged('shopping_cart_products');
   }
 
   async handleClick() {

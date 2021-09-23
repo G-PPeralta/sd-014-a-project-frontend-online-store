@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ItemCart from '../components/ItemCart';
-import {
-  readProducts,
-  removeProduct,
-  sumTotalCartPrice } from '../services/localStorage';
+import { readProducts, removeProduct } from '../services/localStorage';
+import { sumTotalCartPrice } from '../services/algoritmos';
 
 class ShoppingCart extends React.Component {
   constructor() {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { addProduct } from '../services/localStorage';
+import { FormAvaliate } from '../components/FormAvaliate';
 
 class Product extends Component {
   constructor(props) {
@@ -15,6 +16,15 @@ class Product extends Component {
   handleClick = () => {
     const { product } = this.state;
     addProduct(product);
+  }
+
+  addAssessments = (avaliacao) => {
+    const { product } = this.state;
+    const productObject = product;
+    productObject.assessments = [...productObject.assessments, avaliacao];
+    this.setState({
+      product: productObject,
+    });
   }
 
   render() {
@@ -50,6 +60,7 @@ class Product extends Component {
             )) }
           </ol>
         </section>
+        <FormAvaliate id={ product.id } addAssessments={ this.addAssessments } />
       </div>
     );
   }
