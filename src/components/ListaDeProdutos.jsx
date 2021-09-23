@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 class ListaDeProdutos extends React.Component {
   render() {
-    const { searchProduct, productList, chamarApi, searchInput } = this.props;
+    const { searchProduct, productList,
+      chamarApi, searchInput, localChanger } = this.props;
     console.log(productList);
     return (
       <>
@@ -22,20 +23,12 @@ class ListaDeProdutos extends React.Component {
           Pesquisar
         </button>
         <main>
-          {productList.map((produtoAtual) => (
-            <Link
-              key={ produtoAtual.id }
-              data-testid="product-detail-link"
-              to={ {
-                pathname: `/detalhesproduto/${produtoAtual.id}`,
-                state: { ...produtoAtual },
-              } }
-            >
-              <section data-testid="product" key={ produtoAtual.id }>
-                <img src={ produtoAtual.thumbnail } alt={ produtoAtual.title } />
-                <p>{ produtoAtual.title }</p>
-              </section>
-            </Link>
+          {productList.map((product) => (
+            <ProductCard
+              localChanger={ localChanger }
+              key={ product.id }
+              product={ product }
+            />
           ))}
         </main>
       </>
@@ -48,6 +41,7 @@ ListaDeProdutos.propTypes = {
   productList: PropTypes.array,
   chamarApi: PropTypes.func,
   searchInput: PropTypes.func,
+  localChanger: PropTypes.func,
 }.isRequired;
 
 export default ListaDeProdutos;
