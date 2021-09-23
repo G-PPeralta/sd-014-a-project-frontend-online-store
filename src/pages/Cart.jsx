@@ -157,6 +157,7 @@ class Cart extends Component {
             type="button"
             onClick={ () => history.push('/checkout') }
             data-testid="checkout-products"
+            className="checkout-button"
           >
             Finalizar compra
           </button>

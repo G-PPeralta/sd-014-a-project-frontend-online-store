@@ -12,8 +12,11 @@ class Footer extends Component {
           (Visa, MasterCard, Elo e American Express) e boleto.
           Também aceitamos abraços!
         </p>
-        <p>FrontEnd Online Store designed by the amazing DEVs:</p>
-        <p>{ girls + boys}</p>
+        <p>
+          FrontEnd Online Store designed by the amazing DEVs:
+          <br />
+          { girls + boys}
+        </p>
       </footer>
     );
   }

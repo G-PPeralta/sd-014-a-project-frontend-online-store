@@ -1,5 +1,11 @@
 import React from 'react';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
+const numberFormat = (value) => new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+}).format(value);
 class Checkout extends React.Component {
   render() {
     const states = [
@@ -39,136 +45,143 @@ class Checkout extends React.Component {
     const valorUnico = valores.reduce((accum, curr) => accum + curr);
 
     return (
-      <div>
-        <div>
-          <p>Revise seus produtos</p>
+      <div className="main-cols">
+        <Header />
+        <div className="main-sec ma w60 mb5">
+          <h2 className="revise-title mb-5">Revise seus produtos</h2>
           {storage.map((product) => (
             <div key="index">
-              <h3>{product.name}</h3>
-              <p>{product.prodId}</p>
-              <p>{product.prodPrice}</p>
+              <p className="check-prod-name">{product.name}</p>
+              <p className="check-prod-code">{product.prodId}</p>
+              <p>{ numberFormat(product.prodPrice)}</p>
             </div>
           ))}
-          <h3>
-            Valor total: R$
-            {valorUnico}
-          </h3>
-        </div>
-        <form>
-          <p>Informações do comprador</p>
+          <h5 className="checkout-total">
+            { `Valor total: ${numberFormat(valorUnico)}` }
+          </h5>
+          <h4 className="mt-5 mb-3">Informações do comprador</h4>
+          <form className="gocol ma w60">
+            <label htmlFor="fullName">
+              <input
+                data-testid="checkout-fullname"
+                type="text"
+                placeholder="Nome completo"
+                id="fullName"
+                onChange={ this.handleChange }
+                className="form-control mb-2"
+              />
+            </label>
 
-          <label htmlFor="fullName">
-            <input
-              data-testid="checkout-fullname"
-              type="text"
-              placeholder="Nome completo"
-              id="fullName"
-              onChange={ this.handleChange }
-            />
-          </label>
+            <label htmlFor="cpf">
+              <input
+                type="text"
+                placeholder="CPF"
+                id="cpf"
+                data-testid="checkout-cpf"
+                className="form-control mb-2"
+              />
+            </label>
 
-          <label htmlFor="cpf">
-            <input
-              type="text"
-              placeholder="CPF"
-              id="cpf"
-              data-testid="checkout-cpf"
-            />
-          </label>
-
-          <label
-            htmlFor="email"
-          >
-            <input
-              data-testid="checkout-email"
-              type="email"
-              placeholder="Email"
-              id="email"
-            />
-          </label>
-
-          <label
-            htmlFor="telefone-number"
-          >
-            <input
-              data-testid="checkout-phone"
-              type="text"
-              placeholder="Telefone"
-              id="telefone-number"
-            />
-          </label>
-
-          <label
-            htmlFor="cep-id"
-          >
-            <input
-              data-testid="checkout-cep"
-              type="text"
-              placeholder="CEP"
-              id="cep-id"
-            />
-          </label>
-
-          <label
-            htmlFor="endereco-id"
-          >
-            <input
-              data-testid="checkout-address"
-              type="text"
-              placeholder="Endereço"
-              id="endereco-id"
-            />
-          </label>
-
-          <label
-            htmlFor="text-complement"
-          >
-            <input
-              type="text"
-              placeholder="Complemento"
-              id="text-complement"
-            />
-          </label>
-
-          <label
-            htmlFor="number-id"
-          >
-            <input
-              type="text"
-              placeholder="Número"
-              id="number-id"
-            />
-          </label>
-
-          <label
-            htmlFor="city-id"
-          >
-            <input
-              type="text"
-              placeholder="Cidade"
-              id="city-id"
-            />
-          </label>
-
-          <label
-            htmlFor="state-id"
-          >
-            <select
-              id="state-id"
-              placeholder="Estado"
+            <label
+              htmlFor="email"
             >
-              {states.map((state, index) => (
-                <option key={ index } value="">{ state }</option>
-              ))}
-            </select>
-          </label>
+              <input
+                data-testid="checkout-email"
+                type="email"
+                placeholder="Email"
+                id="email"
+                className="form-control mb-2"
+              />
+            </label>
 
-        </form>
-        <div>
-          <p>Método de pagamento</p>
+            <label
+              htmlFor="telefone-number"
+            >
+              <input
+                data-testid="checkout-phone"
+                type="text"
+                placeholder="Telefone"
+                id="telefone-number"
+                className="form-control mb-2"
+              />
+            </label>
 
-          <label htmlFor="pag-boleto">
+            <label
+              htmlFor="cep-id"
+            >
+              <input
+                data-testid="checkout-cep"
+                type="text"
+                placeholder="CEP"
+                id="cep-id"
+                className="form-control mb-2"
+              />
+            </label>
+
+            <label
+              htmlFor="endereco-id"
+            >
+              <input
+                data-testid="checkout-address"
+                type="text"
+                placeholder="Endereço"
+                id="endereco-id"
+                className="form-control mb-2"
+              />
+            </label>
+
+            <label
+              htmlFor="text-complement"
+            >
+              <input
+                type="text"
+                placeholder="Complemento"
+                id="text-complement"
+                className="form-control mb-2"
+              />
+            </label>
+
+            <label
+              htmlFor="number-id"
+            >
+              <input
+                type="text"
+                placeholder="Número"
+                id="number-id"
+                className="form-control mb-2"
+              />
+            </label>
+
+            <label
+              htmlFor="state-id"
+            >
+              <select
+                id="state-id"
+                placeholder="Estado"
+                className="form-select mb-2"
+              >
+                {states.map((state, index) => (
+                  <option key={ index } value="">{ state }</option>
+                ))}
+              </select>
+            </label>
+
+            <label
+              htmlFor="city-id"
+            >
+              <input
+                type="text"
+                placeholder="Cidade"
+                id="city-id"
+                className="form-control mb-2"
+              />
+            </label>
+          </form>
+          <h4 className="mt-5 mb-3">Método de pagamento</h4>
+
+          <label htmlFor="pag-boleto" className="me-2">
             <input
+              className="me-1"
               type="radio"
               id="pag-boleto"
               value="Boleto"
@@ -177,8 +190,9 @@ class Checkout extends React.Component {
             Boleto
           </label>
 
-          <label htmlFor="pag-visa">
+          <label htmlFor="pag-visa" className="me-2">
             <input
+              className="me-1"
               type="radio"
               id="pag-visa"
               value="Visa"
@@ -187,8 +201,9 @@ class Checkout extends React.Component {
             Visa
           </label>
 
-          <label htmlFor="pag-master">
+          <label htmlFor="pag-master" className="me-2">
             <input
+              className="me-1"
               type="radio"
               id="pag-master"
               value="MasterCard"
@@ -197,8 +212,9 @@ class Checkout extends React.Component {
             MasterCard
           </label>
 
-          <label htmlFor="pag-elo">
+          <label htmlFor="pag-elo" className="me-2">
             <input
+              className="me-1"
               type="radio"
               id="pag-elo"
               value="Elo"
@@ -206,8 +222,10 @@ class Checkout extends React.Component {
             />
             Elo
           </label>
+          <br />
+          <button type="button" className="mt-3 btn btn-warning">Comprar</button>
         </div>
-        <button type="button">Comprar</button>
+        <Footer />
       </div>
     );
   }
