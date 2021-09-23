@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-shadow */
 import React from 'react';
 import CreateComments from './CreateComments';
 
@@ -75,7 +73,6 @@ class Comments extends React.Component {
           <CreateComments
             // key={ email }
             email={ email }
-            starsChecked=""
             text={ text }
           />
           {/* ))} */}
