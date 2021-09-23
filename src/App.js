@@ -7,8 +7,8 @@ import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
 
 class App extends React.Component {
-  componentDidMount() {
-    console.log(localStorage.getItem('cart'));
+  constructor() {
+    super();
     if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify([]));
     }
