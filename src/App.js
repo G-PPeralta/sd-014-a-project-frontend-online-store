@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   addCart = (event, nome, preco, quantidade = 1) => {
-    // event.preventDefault();
+    event.preventDefault();
     const { cart } = this.state;
     if (cart[nome]) {
       this.setState({
@@ -30,7 +30,6 @@ class App extends React.Component {
         },
       });
     }
-    return false;
   }
 
   render() {
@@ -54,7 +53,14 @@ class App extends React.Component {
               addCart={ this.addCart }
             />) }
           />
-          <Route exact path="/product-details/:id" component={ ProductDetails } />
+          <Route
+            exact
+            path="/product-details/:id"
+            render={ (props) => (<ProductDetails
+              { ...props }
+              addCart={ this.addCart }
+            />) }
+          />
         </Switch>
       </BrowserRouter>
     );
