@@ -24,3 +24,14 @@ section:hover {
   filter: brightness(100%);
   transition: 0.3s;
 }
+
+.flex-quantidade {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.flex-quantidade button {
+  height: 50px;
+  width: 50px;
+}
