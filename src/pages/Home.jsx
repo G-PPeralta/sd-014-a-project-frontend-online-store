@@ -17,6 +17,10 @@ class Home extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+
+    if (!localStorage.getItem('carrinho')) {
+      localStorage.setItem('carrinho', JSON.stringify([]));
+    }
   }
 
   handleChange({ target }) {
