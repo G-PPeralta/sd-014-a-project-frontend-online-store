@@ -7,6 +7,9 @@ class Home extends React.Component {
   render() {
     return (
       <section>
+        <Link to="/Cart" data-testid="shopping-cart-button">
+          <button type="button">Icone do Carrinho</button>
+        </Link>
         <SearchField />
 
         <main>
@@ -15,9 +18,6 @@ class Home extends React.Component {
           </p>
         </main>
 
-        <Link to="/Cart" data-testid="shopping-cart-button">
-          <button type="submit">Icone do Carrinho</button>
-        </Link>
       </section>
     );
   }
