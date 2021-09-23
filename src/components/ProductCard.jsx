@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   render() {
-    const { product, localChanger } = this.props;
+    const { product, localChanger, cartSetState } = this.props;
+    const productQuant = { ...product };
+    productQuant.quantidade = 1;
     return (
       <div data-testid="product">
         <button
-          onClick={ () => localChanger(product) }
+          onClick={ () => localChanger(productQuant) }
           data-testid="product-add-to-cart"
           type="button"
         >
@@ -20,6 +22,7 @@ class ProductCard extends React.Component {
           to={ {
             pathname: `/detalhesproduto/${product.id}`,
             state: { ...product },
+            cartSetState,
           } }
         >
           <h1>{ product.title}</h1>

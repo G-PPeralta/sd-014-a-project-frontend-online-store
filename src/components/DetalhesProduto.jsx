@@ -24,6 +24,7 @@ class DetalhesProduto extends React.Component {
   }
 
   addCarrinho() {
+    const { location: { cartSetState } } = this.props;
     const { quantidade, produtoFiltrado } = this.state;
     const { history } = this.props;
     const acumulador = produtoFiltrado;
@@ -38,6 +39,7 @@ class DetalhesProduto extends React.Component {
     } else {
       saveCart([...cartStorage, acumulador]);
     }
+    cartSetState();
     history.push('/shopping-cart');
   }
 

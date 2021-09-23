@@ -50,6 +50,7 @@ class Home extends Component {
   }
 
   localChanger(product) {
+    const { cartSetState } = this.props;
     if (localStorage.getItem('Cart') !== null) {
       console.log('oi');
       let local = JSON.parse(localStorage.getItem('Cart'));
@@ -58,10 +59,12 @@ class Home extends Component {
     } else {
       localStorage.setItem('Cart', JSON.stringify([product]));
     }
+    cartSetState();
   }
 
   render() {
     const { retornoCategory, searchProduct, productList } = this.state;
+    const { cartSetState } = this.props;
     const { searchInput, chamarApi, addCotegory } = this;
     return (
       <div data-testid="home-initial-message">
@@ -74,6 +77,7 @@ class Home extends Component {
           searchInput={ searchInput }
           chamarApi={ chamarApi }
           localChanger={ this.localChanger }
+          cartSetState={ cartSetState }
         />
       </div>
     );

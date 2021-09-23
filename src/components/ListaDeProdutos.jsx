@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 
 class ListaDeProdutos extends React.Component {
   render() {
-    const { searchProduct, productList,
+    const { searchProduct, productList, cartSetState,
       chamarApi, searchInput, localChanger } = this.props;
     console.log(productList);
     return (
@@ -26,6 +26,7 @@ class ListaDeProdutos extends React.Component {
           {productList.map((product) => (
             <ProductCard
               localChanger={ localChanger }
+              cartSetState={ cartSetState }
               key={ product.id }
               product={ product }
             />

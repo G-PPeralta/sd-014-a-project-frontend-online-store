@@ -4,44 +4,16 @@ import { Link } from 'react-router-dom';
 import CartCard from './CartCard';
 
 class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cartItems: undefined,
-    };
-  }
-
-  componentDidMount() {
-    this.cartSetState();
-  }
-
-  cartSetState = () => {
-    if (localStorage.getItem('Cart')) {
-      let local = localStorage.getItem('Cart');
-      local = JSON.parse(local);
-      this.setState({
-        cartItems: [...local],
-      });
-    }
-  }
-
-  deleteCart = () => {
-    localStorage.removeItem('Cart');
-    this.setState({
-      cartItems: undefined,
-    });
-  }
-
   render() {
-    const { cartItems } = this.state;
-    if (cartItems !== undefined) {
+    const { cartItems, deleteCart } = this.props;
+    console.log(cartItems);
+    if (cartItems !== undefined && cartItems !== null && cartItems.length > 0) {
       return (
         <section>
           <Link to="/"><AiFillHome color="green" /></Link>
-          <button type="button" onClick={ this.deleteCart }>Apagar Todos</button>
+          <button type="button" onClick={ deleteCart }>Apagar Todos</button>
           {cartItems.map((item) => <CartCard key={ item.id } product={ item } />)}
         </section>
-
       );
     }
     return (
