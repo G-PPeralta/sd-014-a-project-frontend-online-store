@@ -61,15 +61,15 @@ class ProductDetails extends React.Component {
           Adicionar ao carrinho!
         </button>
 
-      <section>
-        <div>
-          <p data-testid="product-detail-name">{testando.title}</p>
-        </div>
+        <section>
+          <div>
+            <p data-testid="product-detail-name">{testando.title}</p>
+          </div>
 
-        <div>
-          <Comments />
-        </div>
-      </section>
+          <div>
+            <Comments />
+          </div>
+        </section>
       </div>
     );
   }
