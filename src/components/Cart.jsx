@@ -36,11 +36,14 @@ class Cart extends React.Component {
     const { cartItems } = this.state;
     if (cartItems !== undefined) {
       return (
-        <section>
+        <>
           <Link to="/"><AiFillHome color="green" /></Link>
           <button type="button" onClick={ this.deleteCart }>Apagar Todos</button>
-          {cartItems.map((item, indice) => <CartCard key={ indice } product={ item } />)}
-        </section>
+          <main>
+            {cartItems.map((item, i) => <CartCard key={ i } product={ item } />)}
+
+          </main>
+        </>
 
       );
     }
