@@ -10,8 +10,6 @@ class ShoppingCart extends Component {
     };
     this.loadCart = this.loadCart.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.increaseQuantity = this.increaseQuantity.bind(this);
-    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -25,17 +23,6 @@ class ShoppingCart extends Component {
     } else { this.setState({ quantity: value }); }
   }
 
-  increaseQuantity(quantity) {
-    quantity += 1;
-    // } if (target.quantity < 0) { target.quantity = 0; }
-    // this.setState({ quantity: amount });
-  }
-
-  decreaseQuantity(quantity) {
-    if (quantity < 0) { quantity = 0; }
-    quantity -= 1;
-  }
-
   loadCart() {
     this.setState({
       products: JSON.parse(localStorage.getItem('products')),
@@ -43,7 +30,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const { products, quantity } = this.state;
+    const { products, quantity, price } = this.state;
     if (products.length === 0) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
@@ -53,15 +40,13 @@ class ShoppingCart extends Component {
           <CartItem
             key={ product.id }
             product={ product }
-            increaseQuantity={ this.increaseQuantity }
-            decreaseQuantity={ this.decreaseQuantity }
           />
         ))}
         <button type="button">
           X
         </button>
         <p>
-          { `Total: R$${products.price * quantity}`}
+          { `Total: R$${price * quantity}`}
         </p>
       </div>
     );

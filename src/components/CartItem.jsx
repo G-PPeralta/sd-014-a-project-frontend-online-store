@@ -17,7 +17,7 @@ class CartItem extends Component {
     return (
       <div>
         <h1 data-testid="shopping-cart-product-name">{ title }</h1>
-        <h2>{ price }</h2>
+        <h2>{`R$${price}`}</h2>
         <span data-testid="shopping-cart-product-quantity">{ quantityItem }</span>
         <button
           type="button"
