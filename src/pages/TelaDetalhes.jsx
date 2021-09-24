@@ -15,31 +15,8 @@ class TelaDetalhes extends Component {
 
     };
     this.handleClick = this.handleClick.bind(this);
-    // this.getProductItemFromMlApi = this.getProductItemFromMlApi.bind(this);
-    // this.updateState = this.updateState.bind(this);
   }
 
-  // componentDidMount() {
-  // const { location: { state: { product } } } = this.props;
-  // // const { match: { params: { itemID } } } = this.props;
-  // this.updateState(product);
-  // }
-
-  // updateState(product) {
-  //   this.setState({
-  //     product,
-  //   });
-  // }
-
-  // getProductItemFromMlApi(sku) {
-  //   return fetch(`https://api.mercadolibre.com/items/${sku}`)
-  //     .then((response) => response.json())
-  //     .then((json) => json);
-  // }
-
-  // componentDidMount() {
-  //   const produtosCariinho = getFromCart();
-  // }
   handleClick() {
     const { product } = this.state;
     addToCart(product);
@@ -108,7 +85,6 @@ TelaDetalhes.propTypes = {
     pathname: PropTypes.string.isRequired,
     state: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
-  // objectOf(PropTypes.object).isRequired,
 };
 
 export default TelaDetalhes;
