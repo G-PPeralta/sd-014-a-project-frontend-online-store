@@ -9,8 +9,3 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   const requestProductJson = await requestProduct.json();
   return requestProductJson;
 }
-
-export async function getProductInfo(categoryId, productId) {
-  const json = await getProductsFromCategoryAndQuery(categoryId, productId);
-  return json.results.find(({ id }) => id === productId);
-}
