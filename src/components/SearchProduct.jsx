@@ -6,25 +6,32 @@ class SearchProduct extends Component {
   constructor() {
     super();
     this.state = {
-      cartItems: [],
+      nameItem: [],
+      priceItem: [],
     };
   }
 
   componentDidMount() {
-    if (!JSON.parse(localStorage.getItem('setCart'))) {
-      localStorage.setItem('setCart', JSON.stringify([]));
+    if (!JSON.parse(localStorage.getItem('nameItems'))) {
+      localStorage.setItem('nameItems', JSON.stringify([]));
+    }
+    if (!JSON.parse(localStorage.getItem('priceItems'))) {
+      localStorage.setItem('priceItems', JSON.stringify([]));
     }
   }
 
   componentDidUpdate() {
-    const { cartItems } = this.state;
-    localStorage.setItem('setCart', JSON.stringify(cartItems));
+    const { nameItem, priceItem } = this.state;
+    localStorage.setItem('nameItems', JSON.stringify(nameItem));
+    localStorage.setItem('priceItems', JSON.stringify(priceItem));
   }
 
-  getItem = (item) => {
-    const { cartItems } = this.state;
-    const cart = cartItems;
-    this.setState({ cartItems: ([...cart, item]) });
+  getItem = (name, price) => {
+    const { nameItem, priceItem } = this.state;
+    this.setState({
+      nameItem: ([...nameItem, name]),
+      priceItem: ([...priceItem, price]),
+    });
   }
 
   searchProduct = (arrayProduct) => {
@@ -56,7 +63,7 @@ class SearchProduct extends Component {
 }
 
 SearchProduct.propTypes = {
-  arrayProduct: PropTypes.arrayOf(PropTypes.object).isRequired,
+  arrayProduct: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default SearchProduct;

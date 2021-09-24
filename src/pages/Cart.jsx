@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ItemQuantity from '../components/ItemQuantity';
+import RemoveItem from '../components/RemoveItem';
 
 class Cart extends Component {
   constructor() {
@@ -14,13 +16,18 @@ class Cart extends Component {
   }
 
   getSavedCart = () => {
-    if (!JSON.parse(localStorage.getItem('setCart'))) {
-      localStorage.setItem('setCart', JSON.stringify([]));
+    if (!JSON.parse(localStorage.getItem('nameItems'))) {
+      localStorage.setItem('nameItems', JSON.stringify([]));
     }
-    const savedCart = JSON.parse(localStorage.getItem('setCart'));
+    if (!JSON.parse(localStorage.getItem('priceItems'))) {
+      localStorage.setItem('priceItems', JSON.stringify([]));
+    }
+    const savedNames = JSON.parse(localStorage.getItem('nameItems'));
+    const savedPrices = JSON.parse(localStorage.getItem('priceItems'));
+    const cartItems = savedNames.map((name, index) => [name, savedPrices[index]]);
     this.setState({
-      cartItems: savedCart,
-      quantidade: ((savedCart.length) ? savedCart.length : 0),
+      cartItems,
+      quantidade: ((cartItems.length) ? cartItems.length : 0),
     });
   }
 
@@ -33,10 +40,15 @@ class Cart extends Component {
           <div>
             { cartItems.map((item) => (
               <div key={ item }>
-                <p data-testid="shopping-cart-product-name">{item}</p>
-                <p data-testid="shopping-cart-product-quantity">{quantidade}</p>
+                <hr />
+                <RemoveItem />
+                <p data-testid="shopping-cart-product-name">{item[0]}</p>
+                <ItemQuantity itemPrice={ item[1] } />
               </div>
             ))}
+            <hr />
+
+            <spam>Preço Total: </spam>
           </div>
         )
     );
