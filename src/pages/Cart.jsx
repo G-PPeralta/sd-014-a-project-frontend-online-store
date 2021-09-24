@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class Cart extends React.Component {
   render() {
     const { cart } = this.props;
-    console.log(cart);
     return (
       <section>
         <h1>Carrinho de compras</h1>
@@ -14,8 +13,8 @@ class Cart extends React.Component {
               { cart.map(({ title, price, qty, productId }) => (
                 <li key={ productId }>
                   <span data-testid="shopping-cart-product-name">{ title }</span>
-                  <span>{ qty }</span>
-                  <span data-testid="shopping-cart-product-quantity">{ price }</span>
+                  <span data-testid="shopping-cart-product-quantity">{ qty }</span>
+                  <span>{ price }</span>
                 </li>
               )) }
             </ul>

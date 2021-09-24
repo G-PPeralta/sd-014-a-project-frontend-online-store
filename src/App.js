@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // TODO: Rodar essa função ao atualizar o cart no localStorage também
     this.fetchCart();
   }
 
@@ -31,38 +30,22 @@ class App extends React.Component {
   }
 
   fetchCart = async () => {
-    console.log('função', getCartItems);
     const cart = await getCartItems();
-    console.log('cart no fetchCart', cart);
     this.setState({ cart });
   }
 
   render() {
     const { cart } = this.state;
-    console.log('state do app', this.state);
-    // const renderHome = (props) => (
-    //   <Home { ...props } handleAddToCart={ this.handleAddtoCart } />
-    // );
-    // const renderCart = (props) => {
-    //   console.log('cart na callback no app', cart);
-    //   return <Cart { ...props } cart={ cart } />;
-    // }
+    const renderHome = (props) => (
+      <Home { ...props } handleAddToCart={ this.handleAddtoCart } />
+    );
+    const renderCart = (props) => <Cart { ...props } cart={ cart } />;
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={ (props) => (<Home
-                { ...props }
-                handleAddToCart={ this.handleAddtoCart }
-              />) }
-            />
-            <Route
-              path="/Cart"
-              render={ (props) => <Cart { ...props } cart={ cart } /> }
-            />
+            <Route exact path="/" render={ renderHome } />
+            <Route path="/Cart" render={ renderCart } />
             <Route
               path="/productDetails/:category/:id"
               component={ ProductDetails }
