@@ -1,4 +1,4 @@
-import { getProductInfo } from "./api";
+import { getProductInfo } from './api';
 
 export function getCartData() {
   return JSON.parse(localStorage.getItem('cart'));
