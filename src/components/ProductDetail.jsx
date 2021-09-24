@@ -9,9 +9,12 @@ class ProductDetail extends React.Component {
       selectedTitle: '',
       selectedThumbnail: '',
       selectedPrice: '',
+      textarea: 'Deixe seu comentário',
+      emailInput: 'Digite seu email',
     };
     this.handleState = this.handleState.bind(this);
     this.toLocalStorage = this.toLocalStorage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +31,10 @@ class ProductDetail extends React.Component {
     });
   }
 
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   toLocalStorage() {
     const { selectedTitle, selectedThumbnail, selectedPrice } = this.state;
     localStorage.setItem('title', selectedTitle);
@@ -36,7 +43,12 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    const { selectedTitle, selectedThumbnail, selectedPrice } = this.state;
+    const {
+      selectedTitle,
+      selectedThumbnail,
+      selectedPrice,
+      textarea,
+      emailInput } = this.state;
 
     return (
       <div>
@@ -51,6 +63,24 @@ class ProductDetail extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
+        <br />
+        <input
+          type="text"
+          name="emailInput"
+          value={ emailInput }
+          onChange={ this.handleChange }
+        />
+        <br />
+        <textarea
+          name="textarea"
+          cols="30"
+          rows="10"
+          value={ textarea }
+          onChange={ this.handleChange }
+          data-testid="product-detail-evaluation"
+        />
+        <br />
+        <button type="button">Avaliar</button>
       </div>
     );
   }
