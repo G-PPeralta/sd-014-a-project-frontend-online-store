@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard';
+import { saver } from '../services/StorageServices';
 
 class ListaDeProdutos extends Component {
   constructor() {
@@ -12,6 +13,10 @@ class ListaDeProdutos extends Component {
       produtos: [],
       selected: '',
     };
+  }
+
+  addCartHandle = (produto) => {
+    saver(produto);
   }
 
   categorieFilter = async () => {
@@ -50,18 +55,25 @@ class ListaDeProdutos extends Component {
   render() {
     const { produtos } = this.state;
     return (
-      <div>
+      <section>
         <SearchBar
           onChange={ this.handleChange }
           onClick={ this.handleClick }
         />
-        { produtos.length === 0
-          ? <p> Nenhum produto foi encontrado </p>
-          : produtos
-            .map((produto) => (
-              <ProductCard key={ produto.id } produto={ produto } />
-            )) }
-      </div>
+        <div className="Product-list">
+          { produtos.length === 0
+            ? <h3> Nenhum produto foi encontrado </h3>
+            : produtos
+              .map((produto) => (
+                <ProductCard
+                  key={ produto.id }
+                  produto={ produto }
+                  addCartHandle={ this.addCartHandle }
+                  saveAddCart={ this.saveAddCart }
+                />
+              )) }
+        </div>
+      </section>
     );
   }
 }
