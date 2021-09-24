@@ -1,16 +1,26 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
+import Cart from './pages/Cart';
+import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 
-function App() {
-  return (
-    <div className="App">
+class App extends React.Component {
+  render() {
+    return (
       <BrowserRouter>
-        <Route path="/" component={ Home } />
+        <Switch>
+          <Route path="/checkout" component={ Checkout } />
+          <Route
+            path="/product-details/:idQueryCategory"
+            render={ (props) => <ProductDetails { ...props } /> }
+          />
+          <Route path="/cart" component={ Cart } />
+          <Route path="/" component={ Home } />
+        </Switch>
       </BrowserRouter>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

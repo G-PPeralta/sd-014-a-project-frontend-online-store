@@ -12,11 +12,10 @@ export async function getCategories() {
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   try {
-    const fetchAPI = await
-    fetch(`${URL}/search?category=$CATEGORY_${categoryId}&q=$${query}`);
-
-    const search = await fetchAPI.json();
-    return search;
+    const response = await
+    fetch(`${URL}/search?category=${categoryId}&q=$${query}`);
+    const jsonResponse = await response.json();
+    return jsonResponse;
   } catch (error) {
     console.log(error);
   }
