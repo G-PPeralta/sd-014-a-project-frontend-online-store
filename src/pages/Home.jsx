@@ -41,7 +41,7 @@ class Home extends React.Component {
     const { search, product } = this.state;
     return (
       <main>
-        <section>
+        <section className="home">
           <ul>
             <Categories />
           </ul>
@@ -57,6 +57,19 @@ class Home extends React.Component {
         </section>
         <section>
           <ProductCard stateSearch={ search } />
+          <div>
+            <h3 data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h3>
+            <SearchInput
+              name={ product }
+              handleChange={ this.handleChange }
+              handleClick={ this.handleClick }
+            />
+            <section>
+              <ProductCard stateSearch={ search } />
+            </section>
+          </div>
         </section>
       </main>
     );
