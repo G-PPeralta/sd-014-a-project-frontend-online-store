@@ -34,7 +34,7 @@ class Categories extends React.Component {
               data-testid="category"
               key={ id }
             >
-              {name}
+              <p>{name}</p>
             </Link>))}
       </div>
     );

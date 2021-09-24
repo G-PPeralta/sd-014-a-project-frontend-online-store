@@ -29,6 +29,8 @@ class ProductCard extends React.Component {
               data-testid="product-detail-link"
               to={ `/product/${product.id}+${product.category_id}` }
             >
+              {product.shipping.free_shipping
+                ? <h5 data-testid="free-shipping">Frete Gratis</h5> : false}
               <div data-testid="product">
                 <img src={ product.thumbnail } alt={ product.title } />
                 <p>{product.title}</p>
