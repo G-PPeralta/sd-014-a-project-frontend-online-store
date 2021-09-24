@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class Cart extends React.Component {
   render() {
     const { cart } = this.props;
+    console.log(cart);
     return (
       <section>
         <h1>Carrinho de compras</h1>

@@ -5,7 +5,7 @@ import AddCartButton from './AddCartButton';
 
 class ProductCard extends Component {
   render() {
-    const product = this.props;
+    const { handleAddToCart, ...product } = this.props;
     return (
       <div data-testid="product">
         <h4>{ product.title }</h4>
@@ -19,6 +19,7 @@ class ProductCard extends Component {
         </Link>
         <AddCartButton
           category={ product.category }
+          handleAddToCart={ handleAddToCart }
           id={ product.id }
         />
       </div>
@@ -32,6 +33,7 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

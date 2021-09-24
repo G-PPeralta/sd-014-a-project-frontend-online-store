@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addToCart } from '../services/cart';
 
 class AddCartButton extends React.Component {
-  handleAddToCart = () => {
-    const { category, id } = this.props;
-    addToCart(category, id);
-  }
-
   render() {
+    const { category, id, handleAddToCart } = this.props;
     return (
       <button
         data-testid="product-add-to-cart"
-        onClick={ this.handleAddToCart }
+        onClick={ () => handleAddToCart(category, id) }
         type="button"
       >
         Adicionar ao carrinho
@@ -24,6 +19,7 @@ class AddCartButton extends React.Component {
 AddCartButton.propTypes = {
   category: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default AddCartButton;

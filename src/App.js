@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { getCartItems } from './services/cart';
+import { addToCart, getCartItems } from './services/cart';
 
 import Home from './pages/Home';
 import Cart from './pages/Cart';
@@ -25,18 +25,40 @@ class App extends React.Component {
     this.fetchCart();
   }
 
+  handleAddtoCart = async (category, id) => {
+    await addToCart(category, id);
+    this.fetchCart();
+  }
+
   fetchCart = async () => {
+    console.log('função', getCartItems);
     const cart = await getCartItems();
+    console.log('cart no fetchCart', cart);
     this.setState({ cart });
   }
 
   render() {
     const { cart } = this.state;
+    console.log('state do app', this.state);
+    // const renderHome = (props) => (
+    //   <Home { ...props } handleAddToCart={ this.handleAddtoCart } />
+    // );
+    // const renderCart = (props) => {
+    //   console.log('cart na callback no app', cart);
+    //   return <Cart { ...props } cart={ cart } />;
+    // }
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={ Home } />
+            <Route
+              exact
+              path="/"
+              render={ (props) => (<Home
+                { ...props }
+                handleAddToCart={ this.handleAddtoCart }
+              />) }
+            />
             <Route
               path="/Cart"
               render={ (props) => <Cart { ...props } cart={ cart } /> }

@@ -1,4 +1,4 @@
-import { getProductInfo } from './api';
+import { getProductInfo } from "./api";
 
 export function getCartData() {
   return JSON.parse(localStorage.getItem('cart'));
@@ -7,11 +7,13 @@ export function getCartData() {
 export async function getCartItems() {
   // Map assíncrono precisa de Promise.all e callback assíncrona
   // https://advancedweb.hu/how-to-use-async-functions-with-array-map-in-javascript/
-  return Promise.all(getCartData().map(async ({ productId, category, qty }) => {
+  const cart = Promise.all(getCartData().map(async ({ category, productId, qty }) => {
     const info = await getProductInfo(category, productId);
     const { title, price } = info;
     return { title, price, qty, productId };
   }));
+  console.log('cart dentro da async', cart);
+  return cart;
 }
 
 export async function addToCart(category, id, qty = 1) {
