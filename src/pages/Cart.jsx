@@ -34,14 +34,9 @@ class Cart extends React.Component {
             <h1 data-testid="shopping-cart-empty-message">
               Seu carrinho está vazio
             </h1>) }
-        <button
-          type="submit"
-          data-testid="checkout-products"
-        >
-          <Link to="/checkout">
-            Finalizar Compra
-          </Link>
-        </button>
+        <Link to="/checkout" data-testid="checkout-products">
+          Finalizar Compra
+        </Link>
       </main>
     );
   }
