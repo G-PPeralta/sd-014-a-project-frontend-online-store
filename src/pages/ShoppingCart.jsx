@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
+import CartItem from '../components/CartItem';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
     this.state = {
       products: [],
+      quantity: 1,
     };
     this.loadCart = this.loadCart.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.loadCart();
+  }
+
+  handleChange({ target }) {
+    const { value } = target;
+    if (value < 0) {
+      this.setState({ quantity: 0 });
+    } else { this.setState({ quantity: value }); }
   }
 
   loadCart() {
@@ -20,20 +30,24 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, quantity, price } = this.state;
     if (products.length === 0) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
     return (
       <div>
         {products.map((product) => (
-          <div
+          <CartItem
             key={ product.id }
-          >
-            <h1 data-testid="shopping-cart-product-name">{ product.title }</h1>
-            <span data-testid="shopping-cart-product-quantity">{product.quantity}</span>
-          </div>
+            product={ product }
+          />
         ))}
+        <button type="button">
+          X
+        </button>
+        <p>
+          { `Total: R$${price * quantity}`}
+        </p>
       </div>
     );
   }
