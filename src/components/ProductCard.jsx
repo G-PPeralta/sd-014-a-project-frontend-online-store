@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './ProductCard.css';
 
 class ProductCard extends React.Component {
   render() {
     const { stateSearch } = this.props;
     return (
-      <div>
+      <div className="productDiv">
         { stateSearch.map((product) => (
-          <div key={ product.id }>
+          <div key={ product.id } className="products">
             <Link
               data-testid="product-detail-link"
               to={ `/product/${product.id}+${product.category_id}` }

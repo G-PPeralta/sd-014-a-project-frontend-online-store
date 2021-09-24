@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../SearchInput.css';
 
 class SearchInput extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class SearchInput extends React.Component {
           id="input"
           type="text"
           data-testid="query-input"
+          className="inputText"
         />
         <button
           type="submit"
