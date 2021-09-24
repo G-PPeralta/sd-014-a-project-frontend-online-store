@@ -5,13 +5,12 @@ import ShoppingCart from '../services/image/ShoppingCart.svg';
 class ShoppingCartIcon extends React.Component {
   constructor() {
     const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
+    const quant = cartStorage.reduce((quantidade, soma) => quantidade + soma.quantity, 0);
     super();
 
     this.state = {
-      products: cartStorage.length,
+      products: quant,
     };
-
-    this.productsUpdate = this.productsUpdate.bind(this);
   }
 
   render() {
@@ -21,7 +20,7 @@ class ShoppingCartIcon extends React.Component {
         <Link to="/cart" data-testid="shopping-cart-button">
           <img src={ ShoppingCart } alt="shopping cart" />
         </Link>
-        <span>{products}</span>
+        <span data-testid="shopping-cart-size">{products}</span>
       </div>
     );
   }
