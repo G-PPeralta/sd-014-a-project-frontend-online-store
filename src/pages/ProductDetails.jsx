@@ -78,7 +78,6 @@ class ProductDetails extends Component {
           <BtnCart />
           <span data-testid="shopping-cart-size">{ cartsize }</span>
         </div>
-        <Evaluator />
         <BtnAddCart
           source="product-detail"
           title={ title }
@@ -87,6 +86,7 @@ class ProductDetails extends Component {
           id={ id }
           onClick={ this.updateCartSize }
         />
+        <Evaluator />
       </main>
     );
   }

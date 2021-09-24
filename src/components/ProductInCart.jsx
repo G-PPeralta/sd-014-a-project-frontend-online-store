@@ -41,6 +41,7 @@ export class ProductInCart extends Component {
     return (
       <>
         <h1 data-testid="shopping-cart-product-name">{ product.title }</h1>
+        <img src={ product.thumbnail } alt="" />
         <p>{ product.price }</p>
         <p data-testid="shopping-cart-product-quantity">{ `${String(quantity)}` }</p>
         <p>{`Preço total: ${totalPrice}`}</p>
