@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { saver } from '../services/StorageServices';
 
 export class CartProduct extends Component {
-
   render() {
-    const { produto, contador, onClick } = this.props;
+    const { produto, contador, clickHandler } = this.props;
     return (
       <div>
         <h2 data-testid="shopping-cart-product-name">
@@ -15,12 +13,20 @@ export class CartProduct extends Component {
         <p>{produto.price}</p>
         <button
           type="submit"
+          value="+"
           data-testid="product-increase-quantity"
-          onClick={ onClick(produto.id, contador) }
+          onClick={ ({ target }) => clickHandler(produto, target) }
         >
           +
         </button>
-        <button type="submit" data-testid="product-decrease-quantity"> - </button>
+        <button
+          type="submit"
+          value="-"
+          data-testid="product-decrease-quantity"
+          onClick={ ({ target }) => clickHandler(produto, target) }
+        >
+          -
+        </button>
         <button type="submit">Remover</button>
         <p data-testid="shopping-cart-product-quantity">{ contador }</p>
       </div>
@@ -33,6 +39,6 @@ CartProduct.propTypes = {
     PropTypes.any,
   ).isRequired,
   contador: PropTypes.number.isRequired,
-  addCartHandle: PropTypes.func.isRequired,
+  clickHandler: PropTypes.func.isRequired,
 };
 export default CartProduct;

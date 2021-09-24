@@ -1,13 +1,12 @@
 import React from 'react';
 import { CartProduct } from '../components/CartProduct';
-import { getter, counterGetter } from '../services/StorageServices';
+import { getter, saver, subtractor } from '../services/StorageServices';
 
 class shoppingCart extends React.Component {
   constructor() {
     super();
     this.state = {
       produtos: [],
-      contadores: {},
     };
   }
 
@@ -17,20 +16,24 @@ class shoppingCart extends React.Component {
 
   loadFromCart = () => {
     const cart = getter();
-    const counters = counterGetter();
     this.setState({
       produtos: cart,
-      contadores: counters,
     });
   }
 
-  addCartHandle = (contador, produto) => {
-    const { contadores } = this.state;
-    contadores.produto = contador;
-  }
+  clickHandler = (produto, target) => {
+    if (target.value === '+') {
+      saver(produto);
+      this.loadFromCart();
+    }
+    if (target.value === '-') {
+      subtractor(produto);
+      this.loadFromCart();
+    }
+  };
 
   render() {
-    const { produtos, contadores } = this.state;
+    const { produtos } = this.state;
     if (produtos.length === 0) {
       return (<h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>);
     }
@@ -39,8 +42,8 @@ class shoppingCart extends React.Component {
         <CartProduct
           key={ produto.id }
           produto={ produto }
-          contador={ contadores[`${produto.id}`] }
-          onClick={ this.addCartHandle }
+          contador={ produto.quantidade }
+          clickHandler={ this.clickHandler }
         />
       ))
     );

@@ -2,23 +2,40 @@ const produtos = JSON.parse(localStorage.getItem('cartItem'));
 if (!produtos) {
   localStorage.setItem('cartItem', JSON.stringify([]));
 }
+const NOT_FOUND = -1;
 const getter = () => JSON.parse(localStorage.getItem('cartItem'));
-const counterGetter = () => JSON.parse(localStorage.getItem('counters'));
 
-const counters = {};
-
-const cartCounter = () => {
-  const idList = getter().map((prod) => prod.id);
-  idList.forEach((id) => {
-    counters[id] = (idList.filter((n) => id === n)).length;
-  });
-  localStorage.setItem('counters', JSON.stringify(counters));
+const subtractor = (produto) => {
+  if (produto) {
+    const cart = getter();
+    const index = cart.findIndex(({ id }) => id === produto.id);
+    if (index !== NOT_FOUND) {
+      if (produto.quantidade <= 1) {
+        localStorage
+          .setItem('cartItem', JSON
+            .stringify((cart.filter(({ id }) => id !== produto.id))));
+      } else {
+        cart[index].quantidade -= 1;
+        localStorage.setItem('cartItem', JSON.stringify(cart));
+      }
+    }
+  }
 };
 
 const saver = (produto) => {
-  const cart = getter();
-  localStorage.setItem('cartItem', JSON.stringify([...cart, produto]));
-  cartCounter();
+  if (produto) {
+    const cart = getter();
+    const index = cart.findIndex(({ id }) => id === produto.id);
+    if (index === NOT_FOUND) {
+      produto.quantidade = 1;
+      localStorage.setItem('cartItem', JSON.stringify([...cart, produto]));
+    } else {
+      if (cart[index].quantidade < cart[index].available_quantity) {
+        cart[index].quantidade += 1;
+      }
+      localStorage.setItem('cartItem', JSON.stringify(cart));
+    }
+  }
 };
 
-export { getter, saver, counterGetter, cartCounter };
+export { getter, saver, subtractor };
