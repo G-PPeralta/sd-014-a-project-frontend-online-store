@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Comments from '../components/Comments';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -54,9 +53,7 @@ class ProductDetails extends React.Component {
 
     return (
       <div>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ ShoppingCart } alt="shopping cart" />
-        </Link>
+        <ShoppingCartIcon />
         <div>
           <p data-testid="product-detail-name">{findProduct.title}</p>
           <img src={ findProduct.thumbnail } alt="foto-produto" width="250px" />

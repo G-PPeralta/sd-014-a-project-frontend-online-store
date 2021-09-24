@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import LeftArrow from '../services/image/LeftArrow.svg';
 import BoxOpen from '../services/image/package-box-open.svg';
 
@@ -74,9 +74,7 @@ class Cart extends React.Component {
         <Link to="/">
           <img src={ LeftArrow } alt="arrow" />
         </Link>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ ShoppingCart } alt="shopping cart" />
-        </Link>
+        <ShoppingCartIcon />
         <img src={ BoxOpen } alt="Box Open Empty" />
         {storage.length === 0
           && <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}

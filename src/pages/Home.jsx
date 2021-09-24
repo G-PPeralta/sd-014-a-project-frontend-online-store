@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import SearchInput from '../components/inputs/SearchInput';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
 import ProductCard from '../components/ProductCard';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
 class Home extends React.Component {
   constructor() {
@@ -51,9 +50,7 @@ class Home extends React.Component {
             handleChange={ this.handleChange }
             handleClick={ this.handleClick }
           />
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <img src={ ShoppingCart } alt="shopping cart" />
-          </Link>
+          <ShoppingCartIcon />
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
