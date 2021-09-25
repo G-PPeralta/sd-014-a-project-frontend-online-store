@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import AvaluatorForm from '../components/AvaluatorForm';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -43,6 +44,9 @@ class ProductDetails extends React.Component {
             </li>
           ))}
         </ul>
+        *
+        {' '}
+        <AvaluatorForm />
       </section>
     );
   }
