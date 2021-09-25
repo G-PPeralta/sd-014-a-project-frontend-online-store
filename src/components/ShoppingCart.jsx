@@ -9,28 +9,11 @@ class ShoppingCart extends React.Component {
     this.removeProduct = this.removeProduct.bind(this);
 
     this.state = {
-      productQuantity: [{}],
+      productQuantity: {},
     };
   }
 
-  updateProductQuantity(id) {
-    const { productQuantity } = this.state;
-    const allProducts = productQuantity[0];
-    allProducts[id] = 1;
-    console.log(productQuantity);
-  }
-
-  addProduct(id) {
-    const { productQuantity } = this.state;
-    console.log(productQuantity);
-  }
-
-  removeProduct(id) {
-    const { productQuantity } = this.state;
-    console.log(productQuantity);
-  }
-
-  renderQuantityButton = (operation, manipulator) => (
+  quantityButton = (operation, manipulator) => (
     <button
       type="button"
       data-testid={ `product-${operation}-quantity` }
@@ -40,6 +23,24 @@ class ShoppingCart extends React.Component {
       { (operation === 'decrease' ? '-' : '+') }
     </button>
   );
+
+  addProduct(id) {
+    const { productQuantity } = this.state;
+    productQuantity[id] += 1;
+    console.log(productQuantity);
+  }
+
+  removeProduct(id) {
+    const { productQuantity } = this.state;
+    productQuantity[id] -= 1;
+    console.log(productQuantity);
+  }
+
+  updateProductQuantity(id) {
+    const { productQuantity } = this.state;
+    productQuantity[id] = 1;
+    console.log(productQuantity);
+  }
 
   render() {
     const { cartProduct } = this.props;
@@ -59,11 +60,11 @@ class ShoppingCart extends React.Component {
             <p data-testid="shopping-cart-product-name">{product.title}</p>
             <img src={ product.thumbnail } alt={ product.title } />
             <p>{ `R$ ${product.price.toFixed(2)}` }</p>
-            { this.renderQuantityButton('decrease', this.removeProduct) }
+            { this.quantityButton('decrease', () => this.removeProduct(product.id)) }
             <p data-testid="shopping-cart-product-quantity">
-              { productQuantity[0][product.id] }
+              { productQuantity[product.id] }
             </p>
-            { this.renderQuantityButton('increase', this.addProduct) }
+            { this.quantityButton('increase', () => this.addProduct(product.id)) }
           </div>
         ))}
         <Link to="/Checkout" data-testid="checkout-products">
