@@ -73,7 +73,8 @@ export default class CartItem extends Component {
         </button>
         <button
           type="button"
-          style={ { color: 'red', fontWeight: 'bold' } }
+          style={ { color: 'red',
+            fontWeight: 'bold' } }
           onClick={ this.handleDelete }
         >
           DELETE

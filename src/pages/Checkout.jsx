@@ -1,10 +1,7 @@
 import React from 'react';
-// import CartItem from '../components/CartItem';
-// import { getCartItens } from '../services/AddToCart';
 
 class Checkout extends React.Component {
   render() {
-    // const { itens } = this.props;
     return (
       <div>
         <form>

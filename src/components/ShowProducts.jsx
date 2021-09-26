@@ -25,6 +25,8 @@ export default class ShowProducts extends Component {
         >
           Details
         </Link>
+        {product.shipping.free_shipping
+        && <p data-testid="free-shipping">Frete Grátis</p>}
         <button
           data-testid="product-add-to-cart"
           type="button"
