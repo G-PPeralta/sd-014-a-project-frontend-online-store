@@ -7,7 +7,7 @@ class Product extends React.Component {
   freeShip = () => <p data-testid="free-shipping">Frete Grátis</p>
 
   render() {
-    const { product } = this.props;
+    const { product, updateQuantity } = this.props;
     const { shipping: { free_shipping: freeShipping } } = this.props;
 
     return (
@@ -25,7 +25,11 @@ class Product extends React.Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ () => cart.addProductToCart(product) }
+          onClick={ () => {
+            const item = { product, quant: 1 };
+            cart.increaseQuant(item);
+            updateQuantity();
+          } }
         >
           Adicionar ao carrinho
         </button>

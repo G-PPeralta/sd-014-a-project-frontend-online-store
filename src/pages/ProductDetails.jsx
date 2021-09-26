@@ -5,9 +5,27 @@ import CartButton from '../Components/CartButton';
 import * as cart from '../services/cart';
 
 class ProductDetails extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      quant: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.updateQuantity();
+  }
+
+  updateQuantity = () => {
+    this.setState({ quant: cart.getQuantity() });
+  }
+
   render() {
     const { location } = this.props;
-    const { state: { title, price, thumbnail, attributes } } = location;
+    const { state } = location;
+    const { title, price, thumbnail, attributes } = state;
+    const { quant } = this.state;
     return (
       <div>
         <h2 data-testid="product-detail-name">{ title }</h2>
@@ -23,14 +41,18 @@ class ProductDetails extends React.Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => cart.addProductToCart(location.state) }
+          onClick={ () => {
+            const item = { product: state, quant: 1 };
+            cart.increaseQuant(item);
+            this.updateQuantity();
+          } }
         >
           Adicionar ao carrinho
         </button>
         <section>
           <UserReviewForm />
         </section>
-        <CartButton />
+        <CartButton quant={ quant } />
       </div>
     );
   }
