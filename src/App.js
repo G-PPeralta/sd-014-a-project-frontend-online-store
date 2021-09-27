@@ -12,7 +12,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">
-          <FiShoppingCart color="green" />
+          <FiShoppingCart size={ 40 } color="green" />
         </Link>
         <Switch>
           <Route exact path="/" component={ Home } />

@@ -6,7 +6,6 @@ class ListaDeProdutos extends React.Component {
   render() {
     const { searchProduct, productList,
       chamarApi, searchInput, localChanger } = this.props;
-    console.log(productList);
     return (
       <>
         <input

@@ -43,7 +43,6 @@ class Home extends Component {
 
   addCotegory({ target }) {
     const { value } = target;
-    console.log(value);
     this.setState({
       categoriaSelecionada: value,
     });
@@ -51,7 +50,6 @@ class Home extends Component {
 
   localChanger(product) {
     if (localStorage.getItem('Cart') !== null) {
-      console.log('oi');
       let local = JSON.parse(localStorage.getItem('Cart'));
       local = [...local, product];
       localStorage.setItem('Cart', JSON.stringify(local));
@@ -65,7 +63,6 @@ class Home extends Component {
     const { searchInput, chamarApi, addCotegory } = this;
     return (
       <div data-testid="home-initial-message">
-        {/* {console.log(getCategories().results)} */}
         <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
         <ListCategory categoryList={ retornoCategory } addCotegory={ addCotegory } />
         <ListaDeProdutos
