@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProductReview from '../components/ProductReview';
 import { addToCart } from '../services/AddToCart';
+import TotalyProduct from '../components/TotalyProduct';
 
 export default class ProductDetails extends Component {
   handleSubmit = (e) => {
@@ -28,13 +29,21 @@ export default class ProductDetails extends Component {
           >
             Adicionar ao carrinho
           </button>
-          <Link
-            to="/card"
-            className="btn btn-primary"
-            data-testid="shopping-cart-button"
-          >
-            Cart
-          </Link>
+          <div className="carQtd">
+            <Link
+              to="/card"
+              className="btn btn-primary"
+              data-testid="shopping-cart-button"
+            >
+              <img
+                className="btn-primary"
+                alt="shopping-cart"
+                src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
+              />
+              {/* Cart */}
+            </Link>
+            <TotalyProduct />
+          </div>
         </section>
         <form>
           <ProductReview />

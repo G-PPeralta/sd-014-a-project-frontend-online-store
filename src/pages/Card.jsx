@@ -40,6 +40,7 @@ export default class Card extends Component {
 
   render() {
     const { load, itens } = this.state;
+    // console.log(itens);
     if (load) return <Loading />;
     return (
       <div>

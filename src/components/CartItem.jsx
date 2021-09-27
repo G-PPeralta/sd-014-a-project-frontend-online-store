@@ -44,6 +44,8 @@ export default class CartItem extends Component {
   render() {
     const { item: { id, thumbnail, title, price } } = this.props;
     const { quantidade } = this.state;
+    console.log(quantidade);
+
     return (
       <div key={ id }>
         <p data-testid="shopping-cart-product-name">{ title }</p>
@@ -73,7 +75,7 @@ export default class CartItem extends Component {
         </button>
         <button
           type="button"
-          style={ { color: 'red', fontWeight: 'bold' } }
+          style={ { color: 'red', fontWeight: '700' } }
           onClick={ this.handleDelete }
         >
           DELETE

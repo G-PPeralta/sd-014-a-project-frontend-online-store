@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Loading from './Loading';
 import { getCategories } from '../services/api';
+import TotalyProduct from './TotalyProduct';
 
 export default class ListCategories extends Component {
   constructor() {

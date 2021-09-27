@@ -2,47 +2,43 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { addToCart } from '../services/AddToCart';
+import TotalyProduct from './TotalyProduct';
 
 export default class ShowProducts extends Component {
   handleCart = (item) => {
     addToCart(item);
-  }
+  };
 
   showProducts(API) {
-    return (API.map((product) => (
+    return API.map((product) => (
       <>
         <p key={ product.id } data-testid="product">
-          {' '}
-          { product.title }
-          {' '}
+          {product.title}
         </p>
-        <img src={ product.thumbnail } alt={ `Foto de ${product.title}` } />
-        <p>{ `Preço: R$${product.price}` }</p>
+        <img src={ product.thumbnail } alt={ `Foto de ${product.title} ` } />
+        <p>{`Preço: R$${product.price}`}</p>
         <Link
-          to={ { pathname: `/details/${product.id}`,
-            state: product } }
+          to={ { pathname: `/details/${product.id}`, state: product } }
           data-testid="product-detail-link"
         >
           Details
         </Link>
-        <button
-          data-testid="product-add-to-cart"
-          type="button"
-          onClick={ () => this.handleCart(product) }
-        >
-          Add to Cart
-        </button>
+        <div className="carQtd">
+          <button
+            data-testid="product-add-to-cart"
+            type="button"
+            onClick={ () => this.handleCart(product) }
+          >
+            Add to Cart
+          </button>
+        </div>
       </>
-    )));
+    ));
   }
 
   render() {
     const { products } = this.props;
-    return (
-      <div>
-        { this.showProducts(products) }
-      </div>
-    );
+    return <div>{this.showProducts(products)}</div>;
   }
 }
 
