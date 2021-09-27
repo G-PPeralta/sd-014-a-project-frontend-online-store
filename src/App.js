@@ -43,9 +43,9 @@ class App extends React.Component {
 
   saveCart = (cart) => localStorage.setItem('cart', JSON.stringify(cart));
 
-  fetchCart = () => this.setState(() => {
-    return { cart: JSON.parse(localStorage.getItem('cart')) };
-  });
+  fetchCart = () => this.setState(() => (
+    { cart: JSON.parse(localStorage.getItem('cart')) }
+  ));
 
   render() {
     const { cart } = this.state;
