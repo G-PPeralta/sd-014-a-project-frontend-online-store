@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 import { readCartItens } from '../services/AddToCart';
 
@@ -32,6 +33,12 @@ export default class CartList extends Component {
       <div>
         <h1> Carrinho: </h1>
         { this.handleCartList(itens) }
+        <Link
+          to="/checkout"
+          data-testid="checkout-products"
+        >
+          Finalizar a compra
+        </Link>
       </div>
     );
   }
