@@ -11,11 +11,13 @@ class ProductDetail extends Component {
       product: {},
       cartProducts: [],
       itensQuantity: {},
+      textarea: 'Deixe seu comentário',
     };
 
     this.getProductItemFromML = this.getProductItemFromML.bind(this);
     this.getItens = this.getItens.bind(this);
     this.onClickBtn = this.onClickBtn.bind(this);
+    this.textChange = this.textChange.bind(this);
   }
 
   componentDidMount() {
@@ -60,8 +62,14 @@ class ProductDetail extends Component {
     return responseRaw.json();
   }
 
+  textChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value });
+  }
+
   render() {
-    const { product } = this.state;
+    const { product, textarea } = this.state;
     const { attributes } = product;
 
     return (
@@ -98,6 +106,12 @@ class ProductDetail extends Component {
               Adicionar ao carrinho
             </button>
           </div>
+          <textarea
+            name="textarea"
+            value={ textarea }
+            onChange={ this.textChange }
+            data-testid="product-detail-evaluation"
+          />
         </section>
       </>
     );

@@ -54,7 +54,7 @@ class Payment extends Component {
   }
 
   handleClick() {
-    return customAlert('Você efetuou a compra!!');
+    return window.customAlert('Você efetuou a compra!!');
   }
 
   getItens() {
