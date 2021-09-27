@@ -24,6 +24,14 @@ class ProductCard extends Component {
               produto={ produto }
             />
           </div>
+          <Link to="/checkout">
+            <button
+              data-testid="checkout-products"
+              type="button"
+            >
+              Finalizar Compra
+            </button>
+          </Link>
         </div>
       </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CartProduct } from '../components/CartProduct';
 import { getter, saver, subtractor } from '../services/StorageServices';
 
@@ -38,14 +39,25 @@ class shoppingCart extends React.Component {
       return (<h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>);
     }
     return (
-      produtos.map((produto) => (
-        <CartProduct
-          key={ produto.id }
-          produto={ produto }
-          contador={ produto.quantidade }
-          clickHandler={ this.clickHandler }
-        />
-      ))
+
+      <div>
+        {produtos.map((produto) => (
+          <CartProduct
+            key={ produto.id }
+            produto={ produto }
+            contador={ produto.quantidade }
+            clickHandler={ this.clickHandler }
+          />
+        ))}
+        <Link to="/checkout">
+          <button
+            data-testid="checkout-products"
+            type="button"
+          >
+            Finalizar Compra
+          </button>
+        </Link>
+      </div>
     );
   }
 }
