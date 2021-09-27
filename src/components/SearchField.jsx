@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories';
 import ProductList from './ProductList';
@@ -31,6 +32,7 @@ class SearchField extends Component {
 
   render() {
     const { searchTerm, products, category } = this.state;
+    const { handleAddToCart } = this.props;
     return (
       <div>
         <Categories handleCategoryChange={ this.fetchProducts } />
@@ -49,10 +51,14 @@ class SearchField extends Component {
           onChange={ this.handleChange }
           placeholder="Exemplo: produto 'xxx'"
         />
-        <ProductList products={ products } />
+        <ProductList products={ products } handleAddToCart={ handleAddToCart } />
       </div>
     );
   }
 }
+
+SearchField.propTypes = {
+  handleAddToCart: PropTypes.func.isRequired,
+};
 
 export default SearchField;

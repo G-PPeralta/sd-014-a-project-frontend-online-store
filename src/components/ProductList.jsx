@@ -4,6 +4,7 @@ import ProductCard from './ProductCard';
 
 class ProductList extends Component {
   render() {
+    const { handleAddToCart } = this.props;
     const { products } = this.props;
     return (
       <div>
@@ -15,6 +16,7 @@ class ProductList extends Component {
             key={ product.id }
             category={ product.category_id }
             id={ product.id }
+            handleAddToCart={ handleAddToCart }
           />
         )) }
       </div>
@@ -24,6 +26,7 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductList;
