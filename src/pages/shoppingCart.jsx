@@ -39,13 +39,14 @@ class shoppingCart extends React.Component {
       return (<h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>);
     }
     return (
-<<<<<<< HEAD
+
       <div>
         {produtos.map((produto) => (
           <CartProduct
             key={ produto.id }
             produto={ produto }
-            contador={ contadores[`${produto.id}`] }
+            contador={ produto.quantidade }
+            clickHandler={ this.clickHandler }
           />
         ))}
         <Link to="/checkout">
@@ -57,16 +58,6 @@ class shoppingCart extends React.Component {
           </button>
         </Link>
       </div>
-=======
-      produtos.map((produto) => (
-        <CartProduct
-          key={ produto.id }
-          produto={ produto }
-          contador={ produto.quantidade }
-          clickHandler={ this.clickHandler }
-        />
-      ))
->>>>>>> 6a68fd8002d2bfca0310999c983a22d70c961971
     );
   }
 }
