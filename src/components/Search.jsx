@@ -100,27 +100,33 @@ class Search extends React.Component {
   render() {
     const { isLoading, inputSearch, isLoadingProducts } = this.state;
     return (
-      <div>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <form>
-          <input
-            type="text"
-            placeholder="Pesquisa Aqui"
-            name="inputSearch"
-            value={ inputSearch }
-            onChange={ this.handleChange }
-            data-testid="query-input"
-          />
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ this.getProduct }
-          >
-            Pesquisar
-          </button>
-        </form>
+      <div className="container my-4">
+        <div className="row mb-3">
+          <p className="col-xs-12 col-lg-6 m-0 my-1" data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+          <form className="col-xs-12 col-lg-6">
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Buscar produtos"
+                name="inputSearch"
+                value={ inputSearch }
+                onChange={ this.handleChange }
+                data-testid="query-input"
+                className="form-control"
+              />
+              <button
+                type="button"
+                data-testid="query-button"
+                onClick={ this.getProduct }
+                className="btn btn-primary btn-outline-secondary text-dark"
+              >
+                Pesquisar
+              </button>
+            </div>
+          </form>
+        </div>
         {isLoading ? null : this.renderCategories()}
         {isLoadingProducts ? null : this.renderProducts()}
       </div>
