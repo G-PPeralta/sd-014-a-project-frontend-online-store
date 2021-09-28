@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './style/ProductCard.css';
 
 export default class ProductCard extends React.Component {
   render() {
@@ -9,15 +10,15 @@ export default class ProductCard extends React.Component {
       atualizaCarrinho,
     } = this.props;
     return (
-      <>
+      <div className="Produto">
         <Link
           data-testid="product-detail-link"
           to={ `/product-details/${id}` }
         >
           <div data-testid="product" id={ id }>
-            <h2>{title}</h2>
-            <img src={ thumbnail } alt="Produto" />
-            <p>
+            <h2 className="Header">{title}</h2>
+            <img className="Image" src={ thumbnail } alt="Produto" />
+            <p className="Price">
               {`${price.toLocaleString('pt-br', {
                 style: 'currency',
                 currency: 'BRL',
@@ -26,13 +27,14 @@ export default class ProductCard extends React.Component {
           </div>
         </Link>
         <button
+          className="AddCar"
           type="submit"
           data-testid="product-add-to-cart"
           onClick={ (event) => atualizaCarrinho(event, title, price) }
         >
           Adicionar Carrinho
         </button>
-      </>
+      </div>
     );
   }
 }

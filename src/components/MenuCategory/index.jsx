@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MenuItem from './MenuItem';
+import './style/MenuCategory.css';
 
 export default class MenuCategory extends React.Component {
   render() {
     const { categorias, handleRadio, selected } = this.props;
 
     return (
-      <div>
+      <div className="Menu">
         {categorias.map((categoria) => (<MenuItem
           key={ categoria.id }
           categoria={ categoria.name }

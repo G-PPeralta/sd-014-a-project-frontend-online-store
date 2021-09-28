@@ -8,6 +8,8 @@ import {
   getProductsFromCategoryAndQuery,
 } from '../services/api';
 
+import './style/HomePage.css';
+
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -68,20 +70,28 @@ export default class HomePage extends Component {
           Pesquisar
         </button>
         <div>
-          <CartButton
-            produtos={ produtos }
-            addCart={ addCart }
-          />
+          <div className="Carrinho">
+            <CartButton
+              produtos={ produtos }
+              addCart={ addCart }
+            />
+          </div>
+          <div className="Page">
+            {categorias && (
+              <MenuCategory
+                categorias={ categorias }
+                selected={ selectedCategory }
+                handleRadio={ this.handleRadioChange }
+              />
+            )}
+            <div className="ItemList">
+              <h3 className="Title">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </h3>
+              <ProductsView produtos={ produtos } atualizaCarrinho={ addCart } />
+            </div>
+          </div>
         </div>
-        {categorias && (
-          <MenuCategory
-            categorias={ categorias }
-            selected={ selectedCategory }
-            handleRadio={ this.handleRadioChange }
-          />
-        )}
-        <h3>Digite algum termo de pesquisa ou escolha uma categoria.</h3>
-        <ProductsView produtos={ produtos } atualizaCarrinho={ addCart } />
       </div>
     );
   }

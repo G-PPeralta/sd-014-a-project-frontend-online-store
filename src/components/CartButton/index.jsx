@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
+import './style/CartButton.css';
 
 class CartButton extends React.Component {
   render() {
     return (
-      <div>
+      <div className="Cart">
         <Link
           data-testid="shopping-cart-button"
           to="/cart"

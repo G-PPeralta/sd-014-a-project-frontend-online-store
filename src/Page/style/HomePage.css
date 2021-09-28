@@ -1,0 +1,25 @@
+.Carrinho {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 900;
+  margin: 20px;
+  padding: 10px;
+}
+
+.ItemList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  margin: 10px;
+  width: 1000px;
+}
+
+.Page {
+  display: flex;
+  flex-direction: row;
+}
+
+.Title {
+  text-align: center;
+  width: 100%;
+}

@@ -1,0 +1,41 @@
+.Produto {
+  border: black solid 2px;
+  border-radius: 5%;
+  height: 300px;
+  margin: 10px;
+  width: 200px;
+}
+
+.Header {
+  color:darkblue;
+  display: flex;
+  font-size: 10px;
+  width: 200px;
+  height: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.Image {
+  height: 150px;
+  margin-left: 25px;
+  width: 150px;
+}
+
+.Price {
+  background-color: blue;
+  color: aliceblue;
+  text-align: center;
+  text-decoration: none;
+}
+
+.AddCar {
+  background-color: green;
+  color:honeydew;
+  font-weight: 900;
+  text-align: center;
+  padding: 10px;
+  margin-left: 15%;
+  border: 0;
+  border-radius: 50%;
+}
