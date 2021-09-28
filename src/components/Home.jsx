@@ -25,7 +25,7 @@ class Home extends React.Component {
   addtocart = (product) => {
     const { cartProducts } = this.state;
     if (cartProducts.includes(product)) {
-      return (console.log('Produto já adicionado'));
+      return (alert('Produto já adicionado'));
     }
     this.setState((previousState) => ({
       cartProducts: [...previousState.cartProducts, product],
