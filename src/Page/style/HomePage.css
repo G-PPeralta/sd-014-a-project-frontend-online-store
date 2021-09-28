@@ -1,7 +1,7 @@
 .Carrinho {
   display: flex;
-  justify-content: flex-end;
   font-weight: 900;
+  justify-content: flex-end;
   margin: 20px;
   padding: 10px;
 }

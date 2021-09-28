@@ -10,10 +10,10 @@
   color:darkblue;
   display: flex;
   font-size: 10px;
-  width: 200px;
   height: 20px;
   text-align: center;
   text-decoration: none;
+  width: 200px;
 }
 
 .Image {
@@ -31,11 +31,11 @@
 
 .AddCar {
   background-color: green;
-  color:honeydew;
-  font-weight: 900;
-  text-align: center;
-  padding: 10px;
-  margin-left: 15%;
   border: 0;
   border-radius: 50%;
+  color:honeydew;
+  font-weight: 900;
+  margin-left: 15%;
+  padding: 10px;
+  text-align: center;
 }
