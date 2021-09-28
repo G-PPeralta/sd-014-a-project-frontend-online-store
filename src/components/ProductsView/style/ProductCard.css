@@ -7,7 +7,7 @@
 }
 
 .Header {
-  color:darkblue;
+  color: darkblue;
   display: flex;
   font-size: 10px;
   height: 20px;
@@ -33,7 +33,7 @@
   background-color: green;
   border: 0;
   border-radius: 50%;
-  color:honeydew;
+  color: honeydew;
   font-weight: 900;
   margin-left: 15%;
   padding: 10px;
