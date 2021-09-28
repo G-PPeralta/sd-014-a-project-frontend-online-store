@@ -18,9 +18,8 @@ class ProductCard extends Component {
           Detalhes
         </Link>
         <AddCartButton
-          category={ product.category }
+          product={ product }
           handleAddToCart={ handleAddToCart }
-          id={ product.id }
         />
       </div>
     );

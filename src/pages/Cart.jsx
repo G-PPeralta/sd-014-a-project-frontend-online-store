@@ -3,18 +3,39 @@ import PropTypes from 'prop-types';
 
 class Cart extends React.Component {
   render() {
-    const { cart } = this.props;
+    const { cart, handleAddToCart } = this.props;
+    const DECREASE_BY_ONE = -1;
     return (
       <section>
         <h1>Carrinho de compras</h1>
         { cart.length !== 0
           ? (
             <ul>
-              { cart.map(({ title, price, qty, productId }) => (
-                <li key={ productId }>
-                  <span data-testid="shopping-cart-product-name">{ title }</span>
-                  <span data-testid="shopping-cart-product-quantity">{ qty }</span>
-                  <span>{ price }</span>
+              { cart.map((product) => (
+                <li key={ product.id }>
+                  <span data-testid="shopping-cart-product-quantity">
+                    { product.qty }
+                  </span>
+                  <span data-testid="shopping-cart-product-name">
+                    { product.title }
+                  </span>
+                  <span>{ product.price }</span>
+                  <button
+                    type="button"
+                    data-testid="product-increase-quantity"
+                    onClick={ () => handleAddToCart(product) }
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="product-decrease-quantity"
+                    onClick={
+                      () => handleAddToCart(product, DECREASE_BY_ONE)
+                    }
+                  >
+                    -
+                  </button>
                 </li>
               )) }
             </ul>
@@ -31,6 +52,7 @@ class Cart extends React.Component {
 
 Cart.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default Cart;
