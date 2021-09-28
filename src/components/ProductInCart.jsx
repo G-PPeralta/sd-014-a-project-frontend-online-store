@@ -28,9 +28,9 @@ export class ProductInCart extends Component {
     });
   }
 
-  addQuantity({ target: { name, id } }) {
-    if (name === 'sum') addQuantity(id, 'sum');
-    if (name === 'sub') addQuantity(id, 'sub');
+  addQuantity(name, id, quantidade) {
+    if (name === 'sum') addQuantity(id, 'sum', quantidade);
+    if (name === 'sub') addQuantity(id, 'sub', quantidade);
     this.getCartItem();
   }
 
@@ -48,17 +48,19 @@ export class ProductInCart extends Component {
         <BtnAddQuantity
           id={ product.id }
           name="sub"
-          onClick={ this.addQuantity }
+          onClick={ () => this.addQuantity('sub', product.id, product.quantity) }
           testid="product-decrease-quantity"
           operation="-"
+          quantidade={ product.quantity }
         />
 
         <BtnAddQuantity
           id={ product.id }
           name="sum"
-          onClick={ this.addQuantity }
+          onClick={ () => this.addQuantity('sum', product.id, product.quantity) }
           testid="product-increase-quantity"
           operation="+"
+          quantidade={ product.quantity }
         />
       </>
     );
