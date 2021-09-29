@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { addToCart } from '../services/AddToCart';
+import { addToCart, getNumberOfProductsInCart } from '../services/AddToCart';
 import TotalyProduct from './TotalyProduct';
 
 export default class ShowProducts extends Component {
+  constructor() {
+    super();
+    this.state = {
+      itemsInCart: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.updateItemsIncart();
+  }
+
+  updateItemsIncart =() => {
+    const items = getNumberOfProductsInCart();
+    this.setState({
+      itemsInCart: items,
+    });
+  }
+
   handleCart = (item) => {
     addToCart(item);
+    this.updateItemsIncart();
   };
 
   showProducts(API) {
@@ -37,8 +56,27 @@ export default class ShowProducts extends Component {
   }
 
   render() {
+    const { itemsInCart } = this.state;
     const { products } = this.props;
-    return <div>{this.showProducts(products)}</div>;
+    return (
+      <>
+        <div className="carQtd">
+          <Link
+            to="/card"
+            className="btn btn-primary"
+            data-testid="shopping-cart-button"
+          >
+            <img
+              className="btn-primary"
+              alt="shopping-cart"
+              src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
+            />
+          </Link>
+          <TotalyProduct itemsInCart={ itemsInCart } />
+        </div>
+        <div>{this.showProducts(products)}</div>
+      </>
+    );
   }
 }
 

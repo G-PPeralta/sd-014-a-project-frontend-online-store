@@ -2,16 +2,38 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProductReview from '../components/ProductReview';
-import { addToCart } from '../services/AddToCart';
+import { addToCart, getNumberOfProductsInCart } from '../services/AddToCart';
 import TotalyProduct from '../components/TotalyProduct';
 
 export default class ProductDetails extends Component {
+  constructor() {
+    super();
+    this.state = {
+      itemsInCart: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.updateItemsIncart();
+  }
+
+  updateItemsIncart =() => {
+    const { location: { state } } = this.props;
+    const items = getNumberOfProductsInCart();
+    this.setState({
+      itemsInCart: items,
+    });
+    addToCart(state);
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
   }
 
   render() {
     const { location: { state } } = this.props;
+
+    const { itemsInCart } = this.state;
     return (
       <div>
         <p data-testid="product-detail-name">
@@ -25,7 +47,7 @@ export default class ProductDetails extends Component {
           <button
             type="button"
             data-testid="product-detail-add-to-cart"
-            onClick={ () => addToCart(state) }
+            onClick={ this.updateItemsIncart }
           >
             Adicionar ao carrinho
           </button>
@@ -42,7 +64,7 @@ export default class ProductDetails extends Component {
               />
               {/* Cart */}
             </Link>
-            <TotalyProduct />
+            <TotalyProduct itemsInCart={ itemsInCart } />
           </div>
         </section>
         <form>

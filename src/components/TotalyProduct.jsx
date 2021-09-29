@@ -1,45 +1,19 @@
 import React, { Component } from 'react';
-import { getCartItens } from '../services/AddToCart';
+import PropTypes from 'prop-types';
 
-export default class totalyProduct extends Component {
-  constructor() {
-    super();
-    this.state = {
-      // totalProducts: 0,
-    };
-  }
-  getNumberOfProductsInCar() {
-    let totalProducts = 0;
-    // const { totalProducts } = this.state
-    console.log(totalProducts);
-    const cartProducts = getCartItens();
-    console.log(cartProducts);
-
-    // this.setState((estadoAnterior,_props) => {
-    //   console.log(cartProducts);
-
-    //   cartProducts.forEach((product) => {
-    //     totalProducts:  estadoAnterior.totalProducts += product.quantidade;
-    //     });
-    //     console.log(totalProducts);
-
-    // })
-
-    cartProducts.forEach((product) => {
-      totalProducts += product.quantidade;
-      console.log(totalProducts);
-    });
-    // console.log(totalProducts);
-    return totalProducts;
-  }
-
+export default class TotalyProduct extends Component {
   render() {
+    const { itemsInCart } = this.props;
     return (
       <div>
         <div data-testid="shopping-cart-size" className="total-products">
-          {this.getNumberOfProductsInCar()}
+          <p>{itemsInCart}</p>
         </div>
       </div>
     );
   }
 }
+
+TotalyProduct.propTypes = {
+  itemsInCart: PropTypes.number.isRequired,
+};

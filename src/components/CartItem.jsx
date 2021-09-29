@@ -14,11 +14,10 @@ export default class CartItem extends Component {
     };
   }
 
-  handleDelete=() => {
-    const { item } = this.props;
-    console.log(item);
-    this.updateState();
-  }
+  // handleDelete=() => {
+  //   const { item } = this.props;
+  //   this.updateState();
+  // }
 
   handleDecrease = () => {
     const { item } = this.props;
@@ -44,7 +43,6 @@ export default class CartItem extends Component {
   render() {
     const { item: { id, thumbnail, title, price } } = this.props;
     const { quantidade } = this.state;
-    console.log(quantidade);
 
     return (
       <div key={ id }>

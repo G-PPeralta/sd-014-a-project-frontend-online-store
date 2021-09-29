@@ -13,7 +13,17 @@ export const getCartItens = () => {
   const cart = readCartItens();
   return cart;
 };
-
+export const getNumberOfProductsInCart = () => {
+  let totalProducts = 0;
+  const cartProducts = getCartItens();
+  cartProducts.forEach((product) => {
+    if (product.quantidade === undefined) {
+      product.quantidade = 1;
+    }
+    totalProducts += product.quantidade;
+  });
+  return totalProducts;
+};
 export const addToCart = (item) => {
   const cart = readCartItens();
   if (cart.some((cartItem) => cartItem.id === item.id)) {
@@ -40,7 +50,7 @@ export const subFromCart = (item) => {
     const map = cart.map((cartItem) => {
       if (cartItem.id === item.id) {
         cartItem.quantidade -= 1;
-        if (cartItem.quantidade === 0) {
+        if (cartItem.quantidade <= 0) {
           cartItem.quantidade = 1;
         }
       }
