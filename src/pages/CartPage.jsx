@@ -33,10 +33,13 @@ export default class CartPage extends Component {
   render() {
     const { cartItems } = this.state;
     return (
-      <div>
-        {cartItems.length > 0
-          ? this.renderCartItems(cartItems)
-          : this.renderEmptyCart()}
+      <div className="cart-page">
+        <div className="cart-items-container">
+          {cartItems.length > 0
+            ? this.renderCartItems(cartItems)
+            : this.renderEmptyCart()}
+        </div>
+
         <Link
           data-testid="checkout-products"
           to="/checkout"

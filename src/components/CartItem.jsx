@@ -29,24 +29,33 @@ class CartItem extends Component {
 
   render() {
     const { product } = this.props;
-    const { id, price, title } = product;
+    const { id, price, title, thumbnail } = product;
     const { quant } = this.state;
     return (
-      <div>
-        <div key={ id }>
-          <h2 data-testid="shopping-cart-product-name">{title}</h2>
-          <h2>{`R$ ${(price * quant).toFixed(2)}`}</h2>
-          <Plus
-            data-testid="product-increase-quantity"
-            onClick={ () => this.handleQuant(true, product) }
-          />
-          <h2 data-testid="shopping-cart-product-quantity">{quant}</h2>
+
+      <div key={ id } className="cart-item rounded shadow">
+        <img src={ thumbnail } alt="cart product" className="w-25" />
+
+        <div className="w-50 d-flex align-items-center">
+          <span data-testid="shopping-cart-product-name">{title}</span>
+        </div>
+        <div className="d-flex align-items-baseline mx-3">
           <Dash
             data-testid="product-decrease-quantity"
             onClick={ () => this.handleQuant(false, product) }
           />
+          <p data-testid="shopping-cart-product-quantity">{quant}</p>
+          <Plus
+            data-testid="product-increase-quantity"
+            onClick={ () => this.handleQuant(true, product) }
+          />
+
         </div>
+
+        <p>{`R$ ${(price * quant).toFixed(2)}`}</p>
+
       </div>
+
     );
   }
 }
@@ -57,6 +66,7 @@ CartItem.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
   }).isRequired,
 };
 

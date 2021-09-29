@@ -26,7 +26,7 @@ class Category extends Component {
   handleElements(arrObj) {
     const { onChange } = this.props;
     return (
-      <div className="d-flex flex-column">
+      <div className="rounded shadow" id="categories-container">
         {arrObj.map(({ name, id }) => (
           <label htmlFor={ id } key={ id }>
             <input
@@ -46,7 +46,7 @@ class Category extends Component {
 
   render() {
     const { fetched, categorys } = this.state;
-    return <div>{fetched && this.handleElements(categorys)}</div>;
+    return fetched && this.handleElements(categorys);
   }
 }
 Category.propTypes = { onChange: PropTypes.func.isRequired };
