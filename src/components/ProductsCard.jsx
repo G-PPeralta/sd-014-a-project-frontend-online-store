@@ -6,7 +6,7 @@ import BtnAddCart from './BtnAddCart';
 class ProductsCard extends Component {
   render() {
     const {
-      product: { title, price, thumbnail },
+      product: { title, price, thumbnail, available_quantity: available },
       id,
       query,
       categoryId,
@@ -29,6 +29,7 @@ class ProductsCard extends Component {
           id={ id }
           source="product"
           onClick={ onClick }
+          quantity={ available }
         />
       </li>
     );
@@ -40,6 +41,7 @@ ProductsCard.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    available_quantity: PropTypes.number.isRequired,
   }).isRequired,
   id: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired,
