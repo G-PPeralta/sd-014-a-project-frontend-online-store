@@ -21,6 +21,11 @@ class Search extends React.Component {
     this.pegarCategorias();
   }
 
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   pegarCategorias = async () => {
     const categories = await getCategories();
     this.setState({ categories, isLoading: false });
@@ -31,11 +36,6 @@ class Search extends React.Component {
     const { inputSearch, category } = this.state;
     const products = await getProductsFromCategoryAndQuery(category, inputSearch);
     this.setState({ products: products.results, isLoadingProducts: false });
-  }
-
-  handleChange = (event) => {
-    event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleClick = async (event) => {
@@ -105,7 +105,7 @@ class Search extends React.Component {
           <p className="col-xs-12 col-lg-6 m-0 my-1" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <form className="col-xs-12 col-lg-6">
+          <div className="col-xs-12 col-lg-6" role="form">
             <div className="input-group">
               <input
                 type="text"
@@ -125,7 +125,7 @@ class Search extends React.Component {
                 Pesquisar
               </button>
             </div>
-          </form>
+          </div>
         </div>
         {isLoading ? null : this.renderCategories()}
         {isLoadingProducts ? null : this.renderProducts()}
