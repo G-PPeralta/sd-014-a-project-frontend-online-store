@@ -16,7 +16,9 @@ class Checkout extends Component {
   }
 
   renderCartList = (cartList) => (
-    <div>
+    <div className="checkout-items rounded shadow">
+      <h5>Revise seus produtos</h5>
+
       {localStorage.setItem('totalPrice', 0)}
       {cartList.map((item) => {
         const totalProductPrice = item.quant * item.price;
@@ -24,7 +26,7 @@ class Checkout extends Component {
         console.log(totalProductPrice);
         return <ChekoutItems key={ item.id } product={ item } />;
       })}
-      <h2>{`Total: R$${JSON.parse(localStorage.getItem('totalPrice')).toFixed(2)}`}</h2>
+      <h5>{`Total: R$${JSON.parse(localStorage.getItem('totalPrice')).toFixed(2)}`}</h5>
     </div>
   );
 
@@ -44,8 +46,10 @@ class Checkout extends Component {
 
     return (
 
-      <div>
+      <div className="d-flex flex-column align-items-center p-4">
+
         {cartList && this.renderCartList(cartList)}
+
         <ChekoutForm />
       </div>
 

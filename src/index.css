@@ -129,3 +129,30 @@ code {
   padding: 10px;
   margin: 10px 0;
 }
+
+.checkout-items{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  background-color: white;
+  padding: 20px;
+}
+
+.checkout-items h6{
+  width: 50%;
+  text-align: start;
+}
+
+.checkout-items p{
+  text-align: start;
+  width: 10%;
+}
+
+.checkout-form{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  background-color: white;
+  margin: 10px 0;
+  padding: 20px;
+}

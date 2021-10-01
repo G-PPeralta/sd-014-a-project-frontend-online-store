@@ -7,10 +7,10 @@ class ChekoutItems extends Component {
       product: { title, quant, price },
     } = this.props;
     return (
-      <div>
-        <h3>{title}</h3>
-        <h4>{quant}</h4>
-        <h4>{`Preco Unitario: R$ ${price}`}</h4>
+      <div className="d-flex w-100 justify-content-between my-2">
+        <h6>{title}</h6>
+        <p>{`R$ ${price}`}</p>
+        <p>{`Qtd: ${quant}`}</p>
       </div>
     );
   }
