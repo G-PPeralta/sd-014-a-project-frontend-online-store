@@ -21,7 +21,20 @@ export default class CartPage extends Component {
   };
 
   renderCartItems(cartItems) {
-    return cartItems.map((item) => <CartItem key={ item.id } product={ item } />);
+    return (
+      <>
+        <div className="cart-items-container">
+          {cartItems.map((item) => <CartItem key={ item.id } product={ item } />)}
+        </div>
+        <Link
+          data-testid="checkout-products"
+          to="/checkout"
+          className="btn btn-primary"
+        >
+          Finalizar Compra
+        </Link>
+      </>
+    );
   }
 
   renderEmptyCart() {
@@ -34,19 +47,11 @@ export default class CartPage extends Component {
     const { cartItems } = this.state;
     return (
       <div className="cart-page">
-        <div className="cart-items-container">
-          {cartItems.length > 0
-            ? this.renderCartItems(cartItems)
-            : this.renderEmptyCart()}
-        </div>
 
-        <Link
-          data-testid="checkout-products"
-          to="/checkout"
-          className="btn btn-primary"
-        >
-          Finalizar Compra
-        </Link>
+        {cartItems.length > 0
+          ? this.renderCartItems(cartItems)
+          : this.renderEmptyCart()}
+
       </div>
     );
   }

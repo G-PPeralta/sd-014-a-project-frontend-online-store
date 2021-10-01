@@ -73,8 +73,8 @@ export default class Rating extends Component {
 
 Rating.propTypes = {
   rate: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   showOnly: PropTypes.bool,
 };
 
-Rating.defaultProps = { showOnly: false };
+Rating.defaultProps = { showOnly: false, onClick: () => null };

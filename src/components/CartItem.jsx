@@ -34,7 +34,7 @@ class CartItem extends Component {
     return (
 
       <div key={ id } className="cart-item rounded shadow">
-        <img src={ thumbnail } alt="cart product" className="w-25" />
+        <img src={ thumbnail } alt="cart product" className="w-25 h-100" />
 
         <div className="w-50 d-flex align-items-center">
           <span data-testid="shopping-cart-product-name">{title}</span>

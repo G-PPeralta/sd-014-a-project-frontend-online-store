@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BagPlusFill } from 'react-bootstrap-icons';
+import { ArrowLeft } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 import FeedbackForm from '../components/FeedbackForm';
 import { addToCart } from '../services/cartAPI';
 import CartButton from '../components/CartButton';
@@ -13,7 +14,7 @@ class ProductDetails extends Component {
 
   renderFreeShipping() {
     return (
-      <h2 data-testid="free-shipping">FRETE GRÁTIS!</h2>
+      <h2 data-testid="free-shipping" className="text-success">FRETE GRÁTIS!</h2>
     );
   }
 
@@ -21,25 +22,49 @@ class ProductDetails extends Component {
     const { location: { state: { product: { title, price, thumbnail,
       id, shipping: { free_shipping: freeShipping } } } } } = this.props;
     return (
-      <div>
-        <h2 data-testid="product-detail-name">{title}</h2>
-        <img src={ thumbnail } alt={ title } />
-        <h3>
-          R$
-          {price}
-        </h3>
-        { freeShipping && this.renderFreeShipping() }
-        <button type="button"> Comprar </button>
-        <button
-          type="button"
-          className="btn btn-outline-primary"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.handleClick }
-        >
-          <BagPlusFill />
-        </button>
-        <CartButton />
+      <div className="d-flex flex-column align-items-center">
+        <div className="d-flex justify-content-between w-100 p-3">
+          <Link to="/"><ArrowLeft size={ 30 } /></Link>
+          <CartButton />
+        </div>
+        <div className="details-container rounded shadow">
+          <div className="d-flex justify-content-start w-100">
+            <h4 data-testid="product-detail-name">
+              {title}
+              {' '}
+              - R$
+              {' '}
+              {price}
+            </h4>
+          </div>
+          <div className="details">
+            <div className="image-container">
+              <img src={ thumbnail } alt={ title } className="details-image" />
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                data-testid="product-detail-add-to-cart"
+                onClick={ this.handleClick }
+              >
+                Comprar
+              </button>
+
+            </div>
+            <div className="d-flex flex-column justify-content-between">
+              <h6>Especificações técnicas</h6>
+              <ul>
+                <li>Info 1</li>
+                <li>Info 2</li>
+                <li>Info 3</li>
+              </ul>
+              { freeShipping && this.renderFreeShipping() }
+            </div>
+
+          </div>
+
+        </div>
         <FeedbackForm id={ id } />
+
       </div>
     );
   }

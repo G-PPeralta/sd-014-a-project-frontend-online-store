@@ -49,7 +49,6 @@ const addFeedback = (feedback, id) => {
   } else {
     feedbacks[id] = [...feedbacks[id], feedback];
   }
-  console.log(feedbacks);
 
   localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
 };

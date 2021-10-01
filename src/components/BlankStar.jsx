@@ -23,6 +23,6 @@ export default class BlankStar extends Component {
   }
 }
 BlankStar.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
 };

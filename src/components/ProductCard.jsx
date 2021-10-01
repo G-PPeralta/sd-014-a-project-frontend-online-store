@@ -13,7 +13,7 @@ export default class ProductCard extends Component {
 
   renderFreeShipping() {
     return (
-      <h2 data-testid="free-shipping">FRETE GRÁTIS!</h2>
+      <p data-testid="free-shipping" className="text-success">FRETE GRÁTIS!</p>
     );
   }
 
@@ -33,7 +33,7 @@ export default class ProductCard extends Component {
           alt={ `foto do produto ${title}` }
           className="h-50"
         />
-        <Card.Body>
+        <Card.Body className="h-25">
           <Card.Title>
             <Link
               data-testid="product-detail-link"

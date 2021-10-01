@@ -20,6 +20,6 @@ export default class YellowStar extends Component {
 }
 
 YellowStar.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
 };

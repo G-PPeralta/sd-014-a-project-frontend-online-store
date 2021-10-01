@@ -35,10 +35,13 @@ export default class FeedbackForm extends Component {
 
   handleButton() {
     const { feedback, rate, email } = this.state;
-    console.log(feedback, rate, email);
-
     const { id } = this.props;
     addFeedback({ email, rate, feedback }, id);
+    this.setState({
+      rate: 0,
+      email: '',
+      feedback: '',
+    }, this.fetchFeedbacks);
   }
 
   fetchFeedbacks() {
@@ -51,9 +54,12 @@ export default class FeedbackForm extends Component {
   renderFeedbacks() {
     const { feedbacks } = this.state;
     return feedbacks.map((({ email, rate, feedback }, index) => (
-      <div key={ index }>
-        <p>{ email }</p>
-        <span>{rate}</span>
+      <div key={ index } className="comment">
+        <div className="d-flex w-50 justify-content-between">
+          <p>{ email }</p>
+          <Rating rate={ rate } showOnly />
+        </div>
+
         <p>{feedback}</p>
       </div>
     )));
@@ -62,42 +68,41 @@ export default class FeedbackForm extends Component {
   render() {
     const { email, feedback, rate, feedbacks } = this.state;
     return (
-      <>
-        <Form>
-          <Form.Group>
-            <h3>Avaliações</h3>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              required
-              name="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-            <Rating rate={ rate } onClick={ this.handleRate } />
-          </Form.Group>
+      <Form className="feedback-form rounded shadow">
+        <Form.Group>
+          <h3>Avaliações</h3>
+        </Form.Group>
+        <Form.Group className="mb-3 d-flex" controlId="formBasicEmail">
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            required
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+            className="w-50 me-5"
+          />
+          <Rating rate={ rate } onClick={ this.handleRate } />
+        </Form.Group>
 
-          <FloatingLabel controlId="floatingTextarea2" label="Comments">
-            <Form.Control
-              as="textarea"
-              placeholder="Leave a comment here"
-              style={ { height: '100px' } }
-              data-testid="product-detail-evaluation"
-              name="feedback"
-              value={ feedback }
-              onChange={ this.handleChange }
-            />
-          </FloatingLabel>
-          <Button variant="primary" type="button" onClick={ this.handleButton }>
-            Avaliar
-          </Button>
-        </Form>
-        <div id="feedbacks">
-          { feedbacks.length > 0 && this.renderFeedbacks()}
-        </div>
-      </>
+        <FloatingLabel controlId="floatingTextarea2" label="Comments">
+          <Form.Control
+            as="textarea"
+            placeholder="Leave a comment here"
+            style={ { height: '100px' } }
+            data-testid="product-detail-evaluation"
+            name="feedback"
+            value={ feedback }
+            onChange={ this.handleChange }
+            className="my-2"
+          />
+        </FloatingLabel>
+        <Button variant="primary" type="button" onClick={ this.handleButton }>
+          Avaliar
+        </Button>
+        { feedbacks.length > 0 && this.renderFeedbacks()}
+
+      </Form>
     );
   }
 }
