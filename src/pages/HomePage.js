@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ListCategories from '../components/ListCategories';
 import ShowProducts from '../components/ShowProducts';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-
+import { getNumberOfProductsInCart } from '../services/AddToCart';
 import '../App.css';
+import TotalyProductHome from '../components/TotalyProductHome';
 
 export default class HomePage extends Component {
   constructor() {
@@ -11,7 +13,19 @@ export default class HomePage extends Component {
     this.state = {
       queryInput: '',
       products: [],
+      itemsInCart: 0,
     };
+  }
+
+  componentDidMount() {
+    this.updateItemsIncart();
+  }
+
+  updateItemsIncart =() => {
+    const items = getNumberOfProductsInCart();
+    this.setState({
+      itemsInCart: items,
+    });
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -30,9 +44,11 @@ export default class HomePage extends Component {
   }
 
   render() {
+    const { itemsInCart } = this.state;
     const { products } = this.state;
     return (
       <div>
+
         <ListCategories handleClick={ this.handleClick } />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -54,7 +70,21 @@ export default class HomePage extends Component {
         </button>
         { products.length > 0 ? <ShowProducts products={ products } />
           : <p>Nenhum Produto Encontrado</p> }
+        <Link
+          to="/card"
+          className="btn btn-primary"
+          data-testid="shopping-cart-button"
+        >
+          <img
+            className="btn-primary"
+            alt="shopping-cart"
+            src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
+          />
+          <TotalyProductHome itemsInCart={ itemsInCart } />
+        </Link>
+
       </div>
+
     );
   }
 }

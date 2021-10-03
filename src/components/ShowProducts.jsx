@@ -66,15 +66,14 @@ export default class ShowProducts extends Component {
           <Link
             to="/card"
             className="btn btn-primary"
-            data-testid="shopping-cart-button"
           >
             <img
               className="btn-primary"
               alt="shopping-cart"
               src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
             />
+            <TotalyProduct itemsInCart={ itemsInCart } />
           </Link>
-          <TotalyProduct itemsInCart={ itemsInCart } />
         </div>
         <div>{this.showProducts(products)}</div>
       </>

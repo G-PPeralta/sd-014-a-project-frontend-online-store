@@ -17,13 +17,20 @@ export default class ProductDetails extends Component {
     this.updateItemsIncart();
   }
 
-  updateItemsIncart =() => {
-    const { location: { state } } = this.props;
+  updateItemsIncart=() => {
     const items = getNumberOfProductsInCart();
     this.setState({
       itemsInCart: items,
     });
+  }
+
+  addItemsIncart =() => {
+    const { location: { state } } = this.props;
     addToCart(state);
+    const items = getNumberOfProductsInCart();
+    this.setState({
+      itemsInCart: items,
+    });
   }
 
   handleSubmit = (e) => {
@@ -47,7 +54,7 @@ export default class ProductDetails extends Component {
           <button
             type="button"
             data-testid="product-detail-add-to-cart"
-            onClick={ this.updateItemsIncart }
+            onClick={ this.addItemsIncart }
           >
             Adicionar ao carrinho
           </button>
@@ -62,9 +69,8 @@ export default class ProductDetails extends Component {
                 alt="shopping-cart"
                 src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
               />
-              {/* Cart */}
+              <TotalyProduct itemsInCart={ itemsInCart } />
             </Link>
-            <TotalyProduct itemsInCart={ itemsInCart } />
           </div>
         </section>
         <form>
