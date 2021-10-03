@@ -8,7 +8,7 @@ export default class CartButton extends Component {
       <div id="cart-button-container">
         <Link
           to="/cart"
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary btn-large"
           data-testid="shopping-cart-button"
         >
           <Cart />

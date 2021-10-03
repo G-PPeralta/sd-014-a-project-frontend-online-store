@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import Category from '../components/Category';
-import CartButton from '../components/CartButton';
 
 // agora vai
 class Home extends Component {
@@ -83,7 +82,7 @@ class Home extends Component {
           </div>
         </div>
         <div className="d-flex p-3">
-          <CartButton />
+          {/* <CartButton /> */}
 
         </div>
 

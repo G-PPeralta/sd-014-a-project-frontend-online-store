@@ -10,8 +10,8 @@ import Header from './components/Header';
 function App() {
   return (
     <div className="App">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route path="/cart" component={ CartPage } />
           <Route exact path="/" component={ Home } />

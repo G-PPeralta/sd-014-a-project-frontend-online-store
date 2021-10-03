@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ArrowLeft } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
 import FeedbackForm from '../components/FeedbackForm';
 import { addToCart } from '../services/cartAPI';
-import CartButton from '../components/CartButton';
 
 class ProductDetails extends Component {
   handleClick = () => {
@@ -22,11 +19,7 @@ class ProductDetails extends Component {
     const { location: { state: { product: { title, price, thumbnail,
       id, shipping: { free_shipping: freeShipping } } } } } = this.props;
     return (
-      <div className="d-flex flex-column align-items-center">
-        <div className="d-flex justify-content-between w-100 p-3">
-          <Link to="/"><ArrowLeft size={ 30 } /></Link>
-          <CartButton />
-        </div>
+      <div className="d-flex flex-column align-items-center my-3">
         <div className="details-container rounded shadow">
           <div className="d-flex justify-content-start w-100">
             <h4 data-testid="product-detail-name">
@@ -52,11 +45,7 @@ class ProductDetails extends Component {
             </div>
             <div className="d-flex flex-column justify-content-between">
               <h6>Especificações técnicas</h6>
-              <ul>
-                <li>Info 1</li>
-                <li>Info 2</li>
-                <li>Info 3</li>
-              </ul>
+
               { freeShipping && this.renderFreeShipping() }
             </div>
 
