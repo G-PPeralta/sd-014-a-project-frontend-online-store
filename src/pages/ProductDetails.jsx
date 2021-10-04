@@ -2,15 +2,45 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProductReview from '../components/ProductReview';
-import { addToCart } from '../services/AddToCart';
+import { addToCart, getNumberOfProductsInCart } from '../services/AddToCart';
+import TotalyProduct from '../components/TotalyProduct';
 
 export default class ProductDetails extends Component {
+  constructor() {
+    super();
+    this.state = {
+      itemsInCart: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.updateItemsIncart();
+  }
+
+  updateItemsIncart=() => {
+    const items = getNumberOfProductsInCart();
+    this.setState({
+      itemsInCart: items,
+    });
+  }
+
+  addItemsIncart =() => {
+    const { location: { state } } = this.props;
+    addToCart(state);
+    const items = getNumberOfProductsInCart();
+    this.setState({
+      itemsInCart: items,
+    });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
   }
 
   render() {
     const { location: { state } } = this.props;
+
+    const { itemsInCart } = this.state;
     return (
       <div>
         <p data-testid="product-detail-name">
@@ -24,17 +54,24 @@ export default class ProductDetails extends Component {
           <button
             type="button"
             data-testid="product-detail-add-to-cart"
-            onClick={ () => addToCart(state) }
+            onClick={ this.addItemsIncart }
           >
             Adicionar ao carrinho
           </button>
-          <Link
-            to="/card"
-            className="btn btn-primary"
-            data-testid="shopping-cart-button"
-          >
-            Cart
-          </Link>
+          <div className="carQtd">
+            <Link
+              to="/card"
+              className="btn btn-primary"
+              data-testid="shopping-cart-button"
+            >
+              <img
+                className="btn-primary"
+                alt="shopping-cart"
+                src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
+              />
+              <TotalyProduct itemsInCart={ itemsInCart } />
+            </Link>
+          </div>
         </section>
         <form>
           <ProductReview />

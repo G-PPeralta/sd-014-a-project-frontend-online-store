@@ -29,6 +29,7 @@ export default class CartList extends Component {
 
   render() {
     const { itens } = this.state;
+
     return (
       <div>
         <h1> Carrinho: </h1>
