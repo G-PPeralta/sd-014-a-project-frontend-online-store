@@ -9,6 +9,26 @@
   padding-top: 20px;
 }
 
+.product-img {
+  width: 175px;
+}
+
+.product-card {
+  height: 230px;
+}
+
+.product-border {
+  margin-top: -1px;
+  margin-bottom: -1px;
+  border-top: 1px solid #c1c6cf;
+  border-bottom: 1px solid #c1c6cf;
+}
+
+.product-container-border {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 @media screen and ( max-width : 991px ) {
 
   .category-dropdown, .dropdown-button {
@@ -19,6 +39,10 @@
     border: 0;
     min-height: auto;
     padding-top: 10px;
+  }
+
+  .point {
+    display: none;
   }
 }
 

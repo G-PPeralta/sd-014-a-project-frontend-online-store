@@ -79,7 +79,7 @@ class Search extends React.Component {
   renderProducts = () => {
     const { products } = this.state;
     return (
-      <div className="row">
+      <div className="row border border-secondary rounded product-container-border">
         {products.map((product) => {
           const {
             id,
@@ -92,17 +92,26 @@ class Search extends React.Component {
           return (
             <div
               key={ id }
-              className="border border-secondary rounded col-xs-12 col-lg-4"
+              className="rounded product-border product-card bg-light"
             >
               <Link
                 to={ `/product/${cat}/${name.replace('%', '').replace('/', '')}/${id}` }
                 data-testid="product-detail-link"
+                className="text-decoration-none text-dark"
               >
-                <div data-testid="product">
-                  <img src={ thumbnail } alt="imagem do produto" />
-                  <p>{name}</p>
-                  <p>{`R$:${price}`}</p>
-                  { freeShipping ? <FreeShipping /> : null}
+                <div data-testid="product" className="row justify-content-between">
+                  <div className="col-3 py-2">
+                    <img
+                      src={ thumbnail }
+                      alt="imagem do produto"
+                      className="product-img"
+                    />
+                  </div>
+                  <div className="col-8 py-2 overflow-hidden">
+                    <p>{name}</p>
+                    <p>{`R$:${price.toFixed(2)}`}</p>
+                    {freeShipping ? <FreeShipping /> : null}
+                  </div>
                 </div>
               </Link>
               <AddCartButton product={ product } dataTestId="product-add-to-cart" />
@@ -114,7 +123,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { isLoading, inputSearch, isLoadingProducts } = this.state;
+    const { isLoading, inputSearch, isLoadingProducts, products } = this.state;
     return (
       <div className="container my-4">
         <div className="row mb-3">
@@ -143,7 +152,7 @@ class Search extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row justify-content-between">
           <div className="col-xs-12 col-lg-2 category-container">
             {isLoading ? null : this.renderCategories()}
             <h6 className="pt-3">Outros filtros</h6>
@@ -152,12 +161,12 @@ class Search extends React.Component {
               Frete gratis
               <input type="checkbox" id="free-shipping" className="ms-1" />
             </label>
-            <h1 className="text-center pe-3">.</h1>
-            <h1 className="text-center pe-3">.</h1>
-            <h1 className="text-center pe-3">.</h1>
+            <h1 className="text-center pe-3 point">.</h1>
+            <h1 className="text-center pe-3 point">.</h1>
+            <h1 className="text-center pe-3 point">.</h1>
           </div>
-          <div className="col-xs-12 col-lg-10">
-            {isLoadingProducts ? null : this.renderProducts()}
+          <div className="col-xs-12 col-lg-9 pt-3">
+            {isLoadingProducts || products.length === 0 ? null : this.renderProducts()}
           </div>
         </div>
       </div>
