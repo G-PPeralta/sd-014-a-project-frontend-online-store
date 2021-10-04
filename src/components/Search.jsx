@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import FreeShipping from './FreeShipping';
+import '../style/search.css';
 
 class Search extends React.Component {
   constructor(props) {
@@ -47,18 +48,30 @@ class Search extends React.Component {
   renderCategories() {
     const { categories } = this.state;
     return (
-      <div>
-        {categories.map((cat) => (
-          <input
-            key={ cat.id }
-            id={ cat.id }
-            data-testid="category"
-            name="category"
-            onClick={ this.handleClick }
-            value={ cat.name }
-            type="button"
-          />
-        ))}
+      <div className="btn-group dropdown-button">
+        <button
+          type="button"
+          className="btn btn-secondary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Categoria
+        </button>
+        <ul className="dropdown-menu category-dropdown">
+          {categories.map((cat) => (
+            <li key={ cat.id }>
+              <input
+                id={ cat.id }
+                className="dropdown-item"
+                data-testid="category"
+                name="category"
+                onClick={ this.handleClick }
+                value={ cat.name }
+                type="button"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -66,7 +79,7 @@ class Search extends React.Component {
   renderProducts = () => {
     const { products } = this.state;
     return (
-      <div>
+      <div className="row">
         {products.map((product) => {
           const {
             id,
@@ -77,7 +90,10 @@ class Search extends React.Component {
             shipping: { free_shipping: freeShipping },
           } = product;
           return (
-            <div key={ id }>
+            <div
+              key={ id }
+              className="border border-secondary rounded col-xs-12 col-lg-4"
+            >
               <Link
                 to={ `/product/${cat}/${name.replace('%', '').replace('/', '')}/${id}` }
                 data-testid="product-detail-link"
@@ -127,8 +143,23 @@ class Search extends React.Component {
             </div>
           </div>
         </div>
-        {isLoading ? null : this.renderCategories()}
-        {isLoadingProducts ? null : this.renderProducts()}
+        <div className="row">
+          <div className="col-xs-12 col-lg-2 category-container">
+            {isLoading ? null : this.renderCategories()}
+            <h6 className="pt-3">Outros filtros</h6>
+            <p>(not working)</p>
+            <label htmlFor="free-shipping" className="pt-1">
+              Frete gratis
+              <input type="checkbox" id="free-shipping" className="ms-1" />
+            </label>
+            <h1 className="text-center pe-3">.</h1>
+            <h1 className="text-center pe-3">.</h1>
+            <h1 className="text-center pe-3">.</h1>
+          </div>
+          <div className="col-xs-12 col-lg-10">
+            {isLoadingProducts ? null : this.renderProducts()}
+          </div>
+        </div>
       </div>
     );
   }
