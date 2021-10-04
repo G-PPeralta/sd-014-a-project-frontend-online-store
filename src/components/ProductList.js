@@ -13,7 +13,7 @@ export default class ProductList extends Component {
       );
     }
     return (
-      <section className="d-flex flex-wrap">
+      <section className="d-flex flex-wrap justify-content-evenly">
         { lista.map((produto, id) => (<CardProduct
           key={ id }
           product={ produto }

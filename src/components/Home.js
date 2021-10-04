@@ -63,10 +63,11 @@ class Home extends Component {
         listCategories: categories,
       });
     });
+    this.handleClick();
   }
 
-  clickCategories({ target: { id } }) {
-    this.setState({
+  async clickCategories({ target: { id } }) {
+    await this.setState({
       category: id,
     });
     this.getListFromAPI();
@@ -76,7 +77,7 @@ class Home extends Component {
     const { input, lista, listCategories, carShop } = this.state;
     return (
       <div data-testid="home-initial-message">
-        <div className="d-flex justify-content-between home-container">
+        <div className="d-flex justify-content-between navbar py-0">
           <div />
           <div className="text-center my-3">
             <p className="d-none">
@@ -90,17 +91,19 @@ class Home extends Component {
           </div>
           <ToShoppingCart carShop={ carShop } />
         </div>
-        <div className="d-flex">
-          <Categories
-            listCategories={ listCategories }
-            clickCategories={ this.clickCategories }
-          />
-
-          <ProductList
-            lista={ lista }
-            carShop={ this.carShop }
-          />
-
+        <div className="d-flex home-container mt-4">
+          <div className="overflow-auto category mx-2">
+            <Categories
+              listCategories={ listCategories }
+              clickCategories={ this.clickCategories }
+            />
+          </div>
+          <div className="product-list">
+            <ProductList
+              lista={ lista }
+              carShop={ this.carShop }
+            />
+          </div>
         </div>
       </div>
     );

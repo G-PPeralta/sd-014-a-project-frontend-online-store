@@ -14,7 +14,6 @@ code {
 
 .icon-cart {
   width: 60px;
-  height: 60px;
   color: black;
   transition: 0.5s;
 }
@@ -36,4 +35,9 @@ code {
   position: relative;
   right: 10px;
   bottom: 3px;
+}
+
+.navbar {
+  background-color: yellow;
+  flex-basis: 20vh;
 }

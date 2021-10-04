@@ -13,7 +13,7 @@ export default class ToShoppingCart extends Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-end me-4">
+      <div className="d-flex justify-content-end navbar">
         <Link
           data-testid="shopping-cart-button"
           to={ {
