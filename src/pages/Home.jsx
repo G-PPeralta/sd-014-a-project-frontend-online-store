@@ -3,7 +3,6 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import Category from '../components/Category';
 
-// agora vai
 class Home extends Component {
   constructor() {
     super();

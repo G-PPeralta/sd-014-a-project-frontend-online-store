@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { CodeSquare } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
+import { CodeSquare, House } from 'react-bootstrap-icons';
 import CartButton from './CartButton';
 
 export default class Header extends Component {
@@ -8,15 +9,16 @@ export default class Header extends Component {
       <header
         data-testid="header-component"
         id="header"
-        className="d-flex justify-content-between"
       >
-        <div className="d-flex">
-          <CodeSquare size={ 35 } color="#2fc18c" className="m-1" />
+        <div className="d-flex align-items-start w-100">
+          <CodeSquare size={ 35 } color="#2fc18c" />
 
           <h2 className="text-white">Frontend online store</h2>
         </div>
-        <CartButton />
-
+        <div className="d-flex justify-content-between">
+          <Link to="/" className="nav-link"><House size={ 30 } /></Link>
+          <CartButton />
+        </div>
       </header>
     );
   }

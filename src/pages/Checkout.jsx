@@ -23,7 +23,6 @@ class Checkout extends Component {
       {cartList.map((item) => {
         const totalProductPrice = item.quant * item.price;
         this.updatePrice(totalProductPrice);
-        console.log(totalProductPrice);
         return <ChekoutItems key={ item.id } product={ item } />;
       })}
       <h5>{`Total: R$${JSON.parse(localStorage.getItem('totalPrice')).toFixed(2)}`}</h5>
