@@ -79,7 +79,7 @@ class Search extends React.Component {
   renderProducts = () => {
     const { products } = this.state;
     return (
-      <div>
+      <div className="row">
         {products.map((product) => {
           const {
             id,
@@ -90,7 +90,10 @@ class Search extends React.Component {
             shipping: { free_shipping: freeShipping },
           } = product;
           return (
-            <div key={ id }>
+            <div
+              key={ id }
+              className="border border-secondary rounded col-xs-12 col-lg-4"
+            >
               <Link
                 to={ `/product/${cat}/${name.replace('%', '').replace('/', '')}/${id}` }
                 data-testid="product-detail-link"
