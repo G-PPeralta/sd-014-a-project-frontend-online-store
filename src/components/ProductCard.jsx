@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   render() {
     const { product, onClick } = this.props;
-    const { title, thumbnail, price, address, id } = product;
+    const { title, thumbnail, price, address, id,
+      shipping } = product;
+    const freeShipping = shipping.free_shipping;
     return (
       <div data-testid="product" className="card">
         <Link data-testid="product-detail-link" to={ `product/${id}` }>
@@ -16,6 +18,7 @@ class ProductCard extends Component {
             <h4>{ title }</h4>
             <h5>{`R${price}`}</h5>
             <p>{`De ${address.state_name}, ${address.city_name}`}</p>
+            {freeShipping && <p data-testid="free-shipping">Frete Grátis</p>}
           </div>
         </Link>
         <div>
@@ -41,6 +44,9 @@ ProductCard.propTypes = {
     available_quantity: PropTypes.number,
     address: PropTypes.objectOf(PropTypes.string),
     id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
   onClick: PropTypes.func.isRequired,
 };
