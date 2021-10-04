@@ -10,11 +10,12 @@
 }
 
 .product-img {
-  width: 175px;
+  height: 175px;
+  max-width: 230px;
 }
 
 .product-card {
-  height: 230px;
+  height: 240px;
 }
 
 .product-border {
@@ -27,6 +28,10 @@
 .product-container-border {
   padding-top: 1px;
   padding-bottom: 1px;
+}
+
+.hr-pos-filters {
+  display: none;
 }
 
 @media screen and ( max-width : 991px ) {
@@ -44,5 +49,20 @@
   .point {
     display: none;
   }
+
+  .hr-pos-filters {
+    display: block;
+  }
 }
 
+@media screen and ( max-width: 535px) {
+  
+  .product-img {
+    height: 130px;
+    width: 100px;
+  }
+
+  .product-card {
+    height: 200px;
+  }
+}

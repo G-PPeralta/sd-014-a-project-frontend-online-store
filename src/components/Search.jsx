@@ -108,8 +108,8 @@ class Search extends React.Component {
                     />
                   </div>
                   <div className="col-8 py-2 overflow-hidden">
-                    <p>{name}</p>
-                    <p>{`R$:${price.toFixed(2)}`}</p>
+                    <h1 className="h6">{name}</h1>
+                    <h2 className="h5">{`R$  ${price.toFixed(2)}`}</h2>
                     {freeShipping ? <FreeShipping /> : null}
                   </div>
                 </div>
@@ -164,6 +164,7 @@ class Search extends React.Component {
             <h1 className="text-center pe-3 point">.</h1>
             <h1 className="text-center pe-3 point">.</h1>
             <h1 className="text-center pe-3 point">.</h1>
+            <hr className="hr-pos-filters" />
           </div>
           <div className="col-xs-12 col-lg-9 pt-3">
             {isLoadingProducts || products.length === 0 ? null : this.renderProducts()}
