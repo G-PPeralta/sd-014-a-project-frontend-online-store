@@ -41,7 +41,7 @@ export default class CartItem extends Component {
   }
 
   render() {
-    const { item: { id, thumbnail, title, price } } = this.props;
+    const { item: { id, thumbnail, title, price, available_quantity: av } } = this.props;
     const { quantidade } = this.state;
 
     return (
@@ -56,6 +56,7 @@ export default class CartItem extends Component {
           { quantidade }
         </p>
         <button
+          disabled={ quantidade === 1 }
           data-testid="product-decrease-quantity"
           type="button"
           onClick={ this.handleDecrease }
@@ -64,6 +65,7 @@ export default class CartItem extends Component {
           -
         </button>
         <button
+          disabled={ quantidade === av }
           data-testid="product-increase-quantity"
           type="button"
           onClick={ this.handleIncrease }
@@ -91,5 +93,6 @@ CartItem.propTypes = {
     condition: PropTypes.string,
     id: PropTypes.string,
     quantidade: PropTypes.number,
+    available_quantity: PropTypes.number,
   }).isRequired,
 };
