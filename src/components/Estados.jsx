@@ -36,5 +36,5 @@ class Estados extends React.Component {
     );
   }
 }
-
+// https://gist.github.com/letanure/3012978
 export default Estados;

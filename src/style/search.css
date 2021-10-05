@@ -9,25 +9,20 @@
   padding-top: 20px;
 }
 
-.product-img {
-  height: 175px;
-  max-width: 230px;
-}
-
 .product-card {
   height: 240px;
 }
 
 .product-border {
-  margin-top: -1px;
-  margin-bottom: -1px;
-  border-top: 1px solid #c1c6cf;
   border-bottom: 1px solid #c1c6cf;
+  border-top: 1px solid #c1c6cf;
+  margin-bottom: -1px;
+  margin-top: -1px;
 }
 
 .product-container-border {
-  padding-top: 1px;
   padding-bottom: 1px;
+  padding-top: 1px;
 }
 
 .hr-pos-filters {
@@ -55,8 +50,8 @@
   }
 }
 
-@media screen and ( max-width: 535px) {
-  
+@media screen and ( max-width : 535px ) {
+
   .product-img {
     height: 130px;
     width: 100px;

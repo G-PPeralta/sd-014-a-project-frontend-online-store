@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import FreeShipping from './FreeShipping';
+import ProductCard from './ProductCard';
+// import FreeShipping from './FreeShipping';
 import '../style/search.css';
 
 class Search extends React.Component {
@@ -84,10 +85,7 @@ class Search extends React.Component {
           const {
             id,
             title: name,
-            thumbnail,
-            price,
             category_id: cat,
-            shipping: { free_shipping: freeShipping },
           } = product;
           return (
             <div
@@ -99,20 +97,7 @@ class Search extends React.Component {
                 data-testid="product-detail-link"
                 className="text-decoration-none text-dark"
               >
-                <div data-testid="product" className="row justify-content-between">
-                  <div className="col-3 py-2">
-                    <img
-                      src={ thumbnail }
-                      alt="imagem do produto"
-                      className="product-img"
-                    />
-                  </div>
-                  <div className="col-8 py-2 overflow-hidden">
-                    <h1 className="h6">{name}</h1>
-                    <h2 className="h5">{`R$  ${price.toFixed(2)}`}</h2>
-                    {freeShipping ? <FreeShipping /> : null}
-                  </div>
-                </div>
+                <ProductCard product={ product } />
               </Link>
               <AddCartButton product={ product } dataTestId="product-add-to-cart" />
             </div>
