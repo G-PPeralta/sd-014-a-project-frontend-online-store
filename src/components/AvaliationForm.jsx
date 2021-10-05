@@ -35,14 +35,13 @@ class AvaliationForm extends React.Component {
         <div className="row justify-content-around pt-3 pb-2">
           <div className="col-sm-12 col-md-7">
             <div className="input-group mb-3">
-              <span className="input-group-text" id="email-group">Email</span>
+              <span className="input-group-text">Email</span>
               <input
                 type="email"
                 name="email"
                 className="form-control"
                 placeholder="Email"
                 aria-label="Email"
-                aria-describedby="email-group"
                 value={ email }
                 onChange={ handleChange }
               />
@@ -67,7 +66,7 @@ class AvaliationForm extends React.Component {
           </div>
           <div className="col-12 pb-3">
             <textarea
-              className="form-control"
+              className="form-control text-area"
               name="comment"
               value={ comment }
               onChange={ handleChange }
