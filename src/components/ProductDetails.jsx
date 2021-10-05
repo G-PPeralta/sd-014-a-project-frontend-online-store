@@ -81,10 +81,11 @@ class ProductDetails extends React.Component {
           rating={ rating }
           comment={ comment }
         />
-        { ratingsArray.map((user) => (
+        <hr />
+        {ratingsArray.map((user, index) => (
           <RenderAvaliation
-            rating={ rating }
-            key={ user.email }
+            rating={ user.rating }
+            key={ user.email + index }
             storedEmail={ user.email }
             storedComment={ user.comment }
           />))}

@@ -54,8 +54,9 @@ class AvaliationForm extends React.Component {
               name="rating"
               className="form-select"
               aria-label="Nota"
+              defaultValue="Nota"
             >
-              <option selected>Nota</option>
+              <option value="Nota" disabled>Nota</option>
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>

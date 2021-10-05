@@ -23,7 +23,7 @@ class AddCartButton extends React.Component {
     return (
       <Context.Consumer>
         {(({ cartLength, setCartLength }) => (
-          <div className="d-grid gap-2 col-6 mx-auto pb-2">
+          <div className="d-grid gap-2 col-12 mx-auto pb-2">
             <input
               className="btn btn-success"
               type="button"
