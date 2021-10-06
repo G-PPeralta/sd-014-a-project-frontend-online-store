@@ -3,8 +3,32 @@
   width: 80px;
 }
 
+/* .card-product {
+  width: 220px;
+} */
+
 .card-product {
-  border: 1px solid black;
-  height: 280px;
-  width: 240px;
+  height: 150px;
+  width: 100%;
 }
+
+.home-container {
+  height: 80vh;
+}
+
+.category {
+  width: max-content;
+}
+
+.product-list {
+  flex-basis: 80%;
+}
+
+.cart-element .name {
+  vertical-align: middle;
+  width: 400px;
+}
+
+/* .cart-element h5 {
+  width: 40%;
+} */

@@ -12,34 +12,48 @@ export default class CardProduct extends Component {
     return (
       <div
         data-testid="product"
-        className="d-flex
-        flex-column
-        m-3 p-2 justify-content-around
-        align-items-center card-product"
+        // className="d-flex
+        // flex-column
+        // p-2 justify-content-between mb-2
+        // align-items-center card-product
+        // border rounded border-dark"
+        className="d-flex p-2 mb-2 me-2 border rounded border-dark card-product
+        justify-content-between flex-wrap align-items-center"
       >
         <Link
           to={ {
             pathname: `/ProductDetails/${id}`,
             state: { product },
           } }
+          className=" d-flex text-decoration-none text-center justify-content-between"
         >
-          <div data-testid="product-detail-link">
-            { freeShiping(product) && <FreteGratis />}
+          <div
+            data-testid="product-detail-link"
+            className="d-flex cart-element align-items-center justify-content-around"
+          >
             <img src={ thumbnail } alt={ title } />
-            <h5>{title}</h5>
-            <p>{`R$${price}`}</p>
+            <div className="name">
+              <h6 className="text-dark name">{title}</h6>
+              { freeShiping(product) ? <FreteGratis /> : <div />}
+            </div>
           </div>
         </Link>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => {
-            saveLocalStorage(product);
-            carShop();
-          } }
-        >
-          Adicionar ao Carrinho
-        </button>
+        <div className="align-self-center justify-self-center">
+          <h5 className="text-danger">{`R$${price.toFixed(2)}`}</h5>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn btn-success me-3"
+            data-testid="product-add-to-cart"
+            onClick={ () => {
+              saveLocalStorage(product);
+              carShop();
+            } }
+          >
+            <i className="fas fa-cart-plus" />
+          </button>
+        </div>
       </div>
     );
   }

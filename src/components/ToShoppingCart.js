@@ -13,16 +13,26 @@ export default class ToShoppingCart extends Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-end me-4">
+      <div className="d-flex justify-content-end navbar">
         <Link
           data-testid="shopping-cart-button"
           to={ {
             pathname: '/ShoppingCart',
             state: { },
           } }
+          className="d-flex align-items
+          -center text-decoration-none
+          icon-cart justify-content-center"
         >
-          <i className="fas fa-shopping-cart" />
-          <p data-testid="shopping-cart-size">{this.updateCart()}</p>
+          <div className="d-flex align-items-center">
+            <i className="fas fa-shopping-cart fs-4" />
+            <p
+              className="m-0 align-self-end mb-2 cart-number"
+              data-testid="shopping-cart-size"
+            >
+              {this.updateCart()}
+            </p>
+          </div>
         </Link>
       </div>
     );
