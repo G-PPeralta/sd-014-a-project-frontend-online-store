@@ -30,10 +30,10 @@ class Header extends React.Component {
           <header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
               <div className="container-fluid container">
-                <div className="d-flex align-items-center">
+                <Link to="/" className="d-flex align-items-center text-decoration-none">
                   <img src={ logo } width="40px" alt="site logo" />
                   <h4 className="m-0 ms-2 me-5 text-white">Store</h4>
-                </div>
+                </Link>
                 <button
                   className="navbar-toggler"
                   type="button"

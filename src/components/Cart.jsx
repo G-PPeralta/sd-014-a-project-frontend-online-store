@@ -72,7 +72,7 @@ class Cart extends React.Component {
         className="rounded product-border product-card bg-light"
       >
         <ProductCard product={ product } />
-        <div className="row justify-content-sm-end">
+        <div className="row justify-content-end">
           <input
             id={ id }
             type="button"
@@ -83,10 +83,10 @@ class Cart extends React.Component {
             } }
             data-testid="product-increase-quantity"
             disabled={ avaliable <= quantity }
-            className="btn btn-success btn-sm col-sm-2 col-md-1"
+            className="btn btn-success btn-sm col-2 col-lg-1 fw-bold"
           />
           <span
-            className="col-sm-1 col-xs-2 text-center negative-margin"
+            className="col-lg-1 col-2 text-center negative-margin fw-bold"
             data-testid="shopping-cart-product-quantity"
           >
             {quantity}
@@ -101,7 +101,7 @@ class Cart extends React.Component {
             } }
             data-testid="product-decrease-quantity"
             disabled={ quantity === 0 }
-            className="btn btn-warning btn-sm col-sm-2 col-md-1 me-3"
+            className="btn btn-warning btn-sm col-2 col-lg-1 me-3 fw-bold"
           />
           <input
             id={ id }
@@ -110,7 +110,7 @@ class Cart extends React.Component {
             onClick={ (event) => {
               this.removeItem(event, globalChanger);
             } }
-            className="btn btn-danger btn-sm col-sm-2 col-md-1 mx-3"
+            className="btn btn-danger btn-sm col-2 col-lg-1 mx-3 fw-bold"
           />
         </div>
       </div>
@@ -134,9 +134,18 @@ class Cart extends React.Component {
                       this.productCard(product, index, setCartLength)))}
                   </div>
                   <hr />
-                  <div>
-                    <Link to="/checkout" data-testid="checkout-products">
-                      <button type="button">Finalizar Compra</button>
+                  <div className="d-flex justify-content-around pb-3 mb-3">
+                    <Link
+                      to="/checkout"
+                      data-testid="checkout-products"
+                      className="col-4"
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-success col-12"
+                      >
+                        Finalizar Compra
+                      </button>
                     </Link>
                     <input
                       type="button"
@@ -144,6 +153,7 @@ class Cart extends React.Component {
                         this.removeAllItems(setCartLength);
                       } }
                       value="Esvaziar Carrinho"
+                      className="btn btn-danger col-4"
                     />
                   </div>
                 </div>

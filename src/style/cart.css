@@ -18,3 +18,10 @@
   margin-left: -14px;
   margin-right: -14px;
 }
+
+@media screen and ( max-width : 535px ) {
+  
+  .product-card {
+    height: 195px;
+  }
+}
