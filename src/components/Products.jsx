@@ -42,12 +42,14 @@ class Products extends Component {
             type="text"
             data-testid="query-input"
             id="input-search"
+            className="input-search"
             value={ search }
             onChange={ this.handleChange }
           />
           <button
             type="button"
             id="btn-search"
+            className="btn-search"
             data-testid="query-button"
             onClick={ this.fetchAPI }
           >

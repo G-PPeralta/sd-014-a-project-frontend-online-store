@@ -25,6 +25,7 @@ class AddButton extends Component {
       <button
         type="submit"
         id="btn-addCart-product"
+        className="btn-addCart-product"
         data-testid={ testeid }
         onClick={ this.handleClick }
       >
