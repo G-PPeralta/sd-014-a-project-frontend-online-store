@@ -1,5 +1,4 @@
 import React from 'react';
-// import Estados from './Estados';
 import cityAndStates from '../cityAndStates';
 
 class InfoUser extends React.Component {
@@ -49,7 +48,7 @@ class InfoUser extends React.Component {
             </option>
           ))}
         </datalist>
-        <input type="text" list="city" />
+        <input type="text" list="city" placeholder="Cidade" />
         <datalist id="city">
           {cityAndStates.filter((state) => curState === '' || state.sigla === curState)
             .map((state) => state.cidades.map((city, index) => (
@@ -61,8 +60,6 @@ class InfoUser extends React.Component {
               </option>
             )))}
         </datalist>
-        {/* <input type="text" placeholder="Cidade" /> */}
-        {/* <Estados /> */}
       </form>
     );
   }
