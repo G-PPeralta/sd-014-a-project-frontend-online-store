@@ -5,6 +5,7 @@ import Evaluator from '../components/Evaluator';
 import BtnCart from '../components/BtnCart';
 import BtnAddCart from '../components/BtnAddCart';
 import { cartSize } from '../services/localstorage';
+import FreeShipping from '../components/FreeShipping';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class ProductDetails extends Component {
       // attributes,
       id: '',
       cartsize: 0,
+      freeShipping: false,
     };
     this.getResults = this.getResults.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
@@ -47,6 +49,7 @@ class ProductDetails extends Component {
       thumbnail,
       price,
       // attributes,
+      shipping: { free_shipping: freeShipping },
       id } = results.find((item) => item.id === productId);
     this.setState({
       title,
@@ -54,6 +57,7 @@ class ProductDetails extends Component {
       price,
       // attributes,
       id,
+      freeShipping,
     });
   }
 
@@ -65,7 +69,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { title, thumbnail, price, id, cartsize } = this.state;
+    const { title, thumbnail, price, id, cartsize, freeShipping } = this.state;
     return (
       <main>
         <div>
@@ -86,6 +90,7 @@ class ProductDetails extends Component {
           id={ id }
           onClick={ this.updateCartSize }
         />
+        { freeShipping && <FreeShipping />}
         <Evaluator />
       </main>
     );
