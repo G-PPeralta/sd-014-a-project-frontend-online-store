@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CartProduct from './CartProduct';
+import Products from './Products';
 
 /* Pra formaatar o preço do produto, segui os passos de: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat */
 
@@ -47,9 +49,25 @@ class Cart extends Component {
     }
     return (
       <div>
-        {cart.map((item) => (
-          <CartProduct key={ item.id } item={ item } />
-        ))}
+        <header>
+          <img className="img-logo" src="https://logodownload.org/wp-content/uploads/2017/11/kabum-logo-4.png" alt="logo" />
+          <div className="pesquisa">
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+            <Products />
+          </div>
+          <Link data-testid="shopping-cart-button" to="/cart">
+            <img className="img-cart" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-shopping-cart-interface-kiranshastry-solid-kiranshastry.png" alt="cart" />
+          </Link>
+        </header>
+        <div className="content-cart">
+          <div className="page-cart">
+            {cart.map((item) => (
+              <CartProduct key={ item.id } item={ item } />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

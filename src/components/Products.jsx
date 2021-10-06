@@ -37,19 +37,23 @@ class Products extends Component {
     const { search, productsList } = this.state;
     return (
       <div>
-        <input
-          type="text"
-          data-testid="query-input"
-          value={ search }
-          onChange={ this.handleChange }
-        />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.fetchAPI }
-        >
-          Pesquisar
-        </button>
+        <div className="input-button">
+          <input
+            type="text"
+            data-testid="query-input"
+            id="input-search"
+            value={ search }
+            onChange={ this.handleChange }
+          />
+          <button
+            type="button"
+            id="btn-search"
+            data-testid="query-button"
+            onClick={ this.fetchAPI }
+          >
+            Pesquisar
+          </button>
+        </div>
         {productsList.map((product) => (
           <div key={ product.id }>
             <Link

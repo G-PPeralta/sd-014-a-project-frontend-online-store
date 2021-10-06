@@ -32,24 +32,28 @@ class CartProduct extends Component {
     const { item } = this.props;
     const { qtde } = this.state;
     return (
-      <div key={ item.id }>
+      <div className="cart-product" key={ item.id }>
         <p data-testid="shopping-cart-product-name">{item.id}</p>
-        <p>{ formatPrice(item.price) }</p>
-        <button
-          type="button"
-          onClick={ this.decrease }
-          data-testid="product-decrease-quantity"
-        >
-          -
-        </button>
-        <p data-testid="shopping-cart-product-quantity">{ qtde }</p>
-        <button
-          type="button"
-          onClick={ this.increase }
-          data-testid="product-increase-quantity"
-        >
-          +
-        </button>
+        <div>
+          <p className="price-product">{ formatPrice(item.price) }</p>
+          <div className="btn-add-remove">
+            <button
+              type="button"
+              onClick={ this.decrease }
+              data-testid="product-decrease-quantity"
+            >
+              -
+            </button>
+            <p data-testid="shopping-cart-product-quantity">{ qtde }</p>
+            <button
+              type="button"
+              onClick={ this.increase }
+              data-testid="product-increase-quantity"
+            >
+              +
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

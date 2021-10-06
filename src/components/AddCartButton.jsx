@@ -24,10 +24,12 @@ class AddButton extends Component {
     return (
       <button
         type="submit"
+        id="btn-addCart-product"
         data-testid={ testeid }
         onClick={ this.handleClick }
       >
-        Adicionar ao Carrinho
+        <p className="text-btn-addCart">Adicionar ao Carrinho</p>
+        <img className="img-cart-product" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-shopping-cart-interface-kiranshastry-solid-kiranshastry.png" alt="cart" />
       </button>
     );
   }
