@@ -18,16 +18,10 @@ class Comments extends React.Component {
   }
 
   componentDidMount() {
-    const parseComments = JSON.parse(localStorage.getItem('comments'))
-    if(parseComments !== null){
+    const parseComments = JSON.parse(localStorage.getItem('comments'));
+    if (parseComments !== null) {
       return this.setItemsToState(parseComments);
     }
-  }
-
-  setItemsToState(array) {
-    this.setState({
-      comments: array
-    });
   }
 
   handleClick(e) {
@@ -36,17 +30,26 @@ class Comments extends React.Component {
       comments: [...comments, { inputEmail, inputText, stars }],
       inputEmail: '',
       inputText: '',
-    }))
-    localStorage.setItem('comments', JSON.stringify([...comments, { inputEmail, inputText, stars}]));
+    }));
+    localStorage.setItem('comments', JSON.stringify([...comments, {
+      inputEmail,
+      inputText,
+      stars,
+    }]));
     e.preventDefault();
   }
 
   handleChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-  
     this.setState({
       [name]: value,
+    });
+  }
+
+  setItemsToState(array) {
+    this.setState({
+      comments: array,
     });
   }
 
@@ -66,15 +69,15 @@ class Comments extends React.Component {
               required
             />
             <label htmlFor="stars" onChange={ this.handleChange }>
-              <input type="radio" value={1} id="one" name="stars" required />
+              <input type="radio" value={ 1 } id="one" name="stars" required />
               1
-              <input type="radio" value={2} id="two" name="stars" />
+              <input type="radio" value={ 2 } id="two" name="stars" />
               2
-              <input type="radio" value={3} id="thre" name="stars" />
+              <input type="radio" value={ 3 } id="thre" name="stars" />
               3
-              <input type="radio" value={4} id="four" name="stars" />
+              <input type="radio" value={ 4 } id="four" name="stars" />
               4
-              <input type="radio" value={5} id="five" name="stars" />
+              <input type="radio" value={ 5 } id="five" name="stars" />
               5
             </label>
           </div>
@@ -94,13 +97,13 @@ class Comments extends React.Component {
         </form>
 
         <section>
-          {comments && comments.map((comment) => (
-          <CreateComments
-            key={ comment.inputEmail }
-            comments={ comment }
-            stars={ comment.stars }
+          { comments && comments.map((comment) => (
+            <CreateComments
+              key={ comment.inputEmail }
+              comments={ comment }
+              stars={ comment.stars }
             />
-          ))} 
+          ))}
         </section>
       </div>
     );

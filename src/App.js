@@ -9,15 +9,15 @@ class App extends React.Component {
 
     this.state = {
       cartItems: '',
-    }
+    };
   }
 
   render() {
     const { cartItems } = this.state;
     return (
       <BrowserRouter>
-        <Header cartItems={cartItems}/>
-        <Switchers cartItems={cartItems}/>
+        <Header cartItems={ cartItems } />
+        <Switchers cartItems={ cartItems } />
       </BrowserRouter>
     );
   }

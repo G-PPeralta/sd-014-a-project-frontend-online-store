@@ -1,16 +1,16 @@
 import React from 'react';
-import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
 class Header extends React.Component {
   // constructor() {
-    // const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
-    // super();
-    // this.state = {
-    //   storage: cartStorage,
-    // };
+  // const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
+  // super();
+  // this.state = {
+  //   storage: cartStorage,
+  // };
 
-    // this.productQuantity = this.productQuantity.bind(this);
+  // this.productQuantity = this.productQuantity.bind(this);
   // }
 
   // productQuantity() {

@@ -7,7 +7,7 @@ class CreateComments extends React.Component {
     const { comments: { inputText, stars } } = this.props;
 
     this.state = {
-      [`stars-${inputText}`]: stars
+      [`stars-${inputText}`]: stars,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,7 +16,7 @@ class CreateComments extends React.Component {
   handleChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-  
+
     this.setState({
       [name]: value,
     });
@@ -25,25 +25,53 @@ class CreateComments extends React.Component {
   render() {
     const { comments: { inputEmail, inputText, stars } } = this.props;
     const numberStars = Number(stars);
+    const STAR_THREE = 3;
+    const STAR_FOUR = 4;
+    const STAR_FIVE = 5;
     return (
       <div>
         <h4>{inputEmail}</h4>
         <p>{inputText}</p>
-        <label htmlFor={`stars-${inputText}`} onChange={ this.handleChange }>
-          <input type="radio" id="one" value={1} name={`stars-${inputText}`}
-          checked={ numberStars === 1 ? true : false }/>
+        <label htmlFor={ `stars-${inputText}` } onChange={ this.handleChange }>
+          <input
+            type="radio"
+            id="one"
+            value={ 1 }
+            name={ `stars-${inputText}` }
+            checked={ numberStars === 1 }
+          />
           1
-          <input type="radio" id="two" value={2} name={`stars-${inputText}`}
-          checked={ numberStars === 2 ? true : false }/>
+          <input
+            type="radio"
+            id="two"
+            value={ 2 }
+            name={ `stars-${inputText}` }
+            checked={ numberStars === 2 }
+          />
           2
-          <input type="radio" id="thre" value={3} name={`stars-${inputText}`}
-          checked={ numberStars === 3 ? true : false }/>
+          <input
+            type="radio"
+            id="thre"
+            value={ 3 }
+            name={ `stars-${inputText}` }
+            checked={ numberStars === STAR_THREE }
+          />
           3
-          <input type="radio" id="four" value={4} name={`stars-${inputText}`}
-          checked={ numberStars === 4 ? true : false }/>
+          <input
+            type="radio"
+            id="four"
+            value={ 4 }
+            name={ `stars-${inputText}` }
+            checked={ numberStars === STAR_FOUR }
+          />
           4
-          <input type="radio" id="five" value={5} name={`stars-${inputText}`}
-          checked={ numberStars === 5 ? true : false }/>
+          <input
+            type="radio"
+            id="five"
+            value={ 5 }
+            name={ `stars-${inputText}` }
+            checked={ numberStars === STAR_FIVE }
+          />
           5
         </label>
       </div>
@@ -52,8 +80,11 @@ class CreateComments extends React.Component {
 }
 
 CreateComments.propTypes = {
-  email: propTypes.string.isRequired,
-  text: propTypes.string.isRequired,
+  comments: propTypes.shape({
+    inputText: propTypes.string.isRequired,
+    inputEmail: propTypes.string.isRequired,
+    stars: propTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CreateComments;
