@@ -1,0 +1,39 @@
+.search-container {
+  align-items: center;
+  float:right;
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between;
+  margin-right: 25%;
+  margin-left: 25%;
+  position:absolute;
+  max-width: 90%;
+}
+
+.home-initial-message {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  z-index: 1;
+  margin-left: 85%;
+}
+
+.search-input {
+  border: 1px solid black;
+  padding-top: 0.5rem;
+  outline: none;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  height: 1.2em;
+  border-radius: 50em;
+  background: url(https://img.icons8.com/search)
+  no-repeat 98.8% 1.2%;
+  background-size:contain;
+  opacity: 1;
+  cursor: pointer;
+  font-size:1.5rem;
+  user-select: none;
+}
+

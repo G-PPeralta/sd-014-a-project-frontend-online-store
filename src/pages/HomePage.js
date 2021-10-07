@@ -5,6 +5,7 @@ import ShowProducts from '../components/ShowProducts';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { getNumberOfProductsInCart } from '../services/AddToCart';
 import '../App.css';
+import '../styles/home.css';
 import TotalyProductHome from '../components/TotalyProductHome';
 
 export default class HomePage extends Component {
@@ -47,10 +48,10 @@ export default class HomePage extends Component {
     const { itemsInCart } = this.state;
     const { products } = this.state;
     return (
-      <div>
+      <div className="search-container">
 
         <ListCategories handleClick={ this.handleClick } />
-        <p data-testid="home-initial-message">
+        <p data-testid="home-initial-message" className="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
 
@@ -59,6 +60,7 @@ export default class HomePage extends Component {
           name="queryInput"
           onChange={ this.handleChange }
           type="text"
+          className="search-input"
         />
         <button
           data-testid="query-button"
@@ -82,7 +84,6 @@ export default class HomePage extends Component {
           />
           <TotalyProductHome itemsInCart={ itemsInCart } />
         </Link>
-
       </div>
 
     );

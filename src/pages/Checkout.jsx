@@ -1,10 +1,12 @@
 import React from 'react';
+import '../styles/checkout.css';
+import Button from 'react-bootstrap/Button';
 
 class Checkout extends React.Component {
   render() {
     return (
-      <div>
-        <form>
+      <div className="form-container">
+        <form className="checkout-info">
           Dados pessoais:
           <label htmlFor="name">
             Nome Completo:
@@ -30,8 +32,9 @@ class Checkout extends React.Component {
             CEP:
             <input type="text" name="cep" data-testid="checkout-cep" />
           </label>
-          <input type="submit" value="Enviar" />
         </form>
+        <Button as="input" type="submit" value="Submit" variant="success" />
+        {' '}
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 import { readCartItens } from '../services/AddToCart';
+import '../styles/products.css';
 
 export default class CartList extends Component {
   constructor() {
@@ -17,7 +18,10 @@ export default class CartList extends Component {
   }
 
   handleCartList(itens) {
-    return itens.map((item) => <CartItem key={ item.id } item={ item } />);
+    return itens.map((item) => (
+      <ul key={ item } className="product-list">
+        <CartItem key={ item.id } item={ item } />
+      </ul>));
   }
 
   getCartItens = () => {
@@ -37,6 +41,7 @@ export default class CartList extends Component {
         <Link
           to="/checkout"
           data-testid="checkout-products"
+          className="checkout-btn"
         >
           Finalizar a compra
         </Link>

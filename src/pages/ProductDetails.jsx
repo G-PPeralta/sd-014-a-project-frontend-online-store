@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ProductReview from '../components/ProductReview';
 import { addToCart, getNumberOfProductsInCart } from '../services/AddToCart';
 import TotalyProduct from '../components/TotalyProduct';
+import '../styles/products.css';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -42,7 +43,7 @@ export default class ProductDetails extends Component {
 
     const { itemsInCart } = this.state;
     return (
-      <div>
+      <div className="product">
         <p data-testid="product-detail-name">
           { state.title }
         </p>
