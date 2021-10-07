@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import AddCartButton from './AddCartButton';
 
 class AvaluatorForm extends React.Component {
   constructor() {
@@ -31,12 +34,17 @@ class AvaluatorForm extends React.Component {
 
   render() {
     const { email, avaliacao, mensagem } = this.state;
+    const { productId, category, handleAddToCart } = this.props;
     return (
       <section>
         <h1>Quantidade</h1>
         <button type="button">+</button>
         <button type="button">-</button>
-        <button type="submit">Adicionar ao Carrinho</button>
+        <AddCartButton
+          product={ { productId, category } }
+          handleAddToCart={ handleAddToCart }
+          testId="product-detail-add-to-cart"
+        />
         <form>
           <input
             type="email"
@@ -70,4 +78,11 @@ class AvaluatorForm extends React.Component {
     );
   }
 }
+
+AvaluatorForm.propTypes = {
+  productId: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+};
+
 export default AvaluatorForm;

@@ -20,6 +20,7 @@ class ProductCard extends Component {
         <AddCartButton
           product={ product }
           handleAddToCart={ handleAddToCart }
+          testId="product-add-to-cart"
         />
       </div>
     );

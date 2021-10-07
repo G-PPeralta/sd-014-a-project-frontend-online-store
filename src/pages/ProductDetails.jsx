@@ -32,6 +32,10 @@ class ProductDetails extends React.Component {
 
   render() {
     const { price, image, attributes, name } = this.state;
+    const {
+      match: { params: { id: productId, category } },
+      handleAddToCart,
+    } = this.props;
     return (
       <section>
         <h1 data-testid="product-detail-name">{name}</h1>
@@ -46,7 +50,11 @@ class ProductDetails extends React.Component {
         </ul>
         *
         {' '}
-        <AvaluatorForm />
+        <AvaluatorForm
+          productId={ productId }
+          category={ category }
+          handleAddToCart={ handleAddToCart }
+        />
       </section>
     );
   }
@@ -59,6 +67,7 @@ ProductDetails.propTypes = {
       category: PropTypes.string,
     }),
   }).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

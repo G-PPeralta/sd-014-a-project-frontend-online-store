@@ -55,6 +55,9 @@ class App extends React.Component {
     const renderCart = (props) => (
       <Cart { ...props } cart={ cart } handleAddToCart={ this.handleAddToCart } />
     );
+    const renderProductDetails = (props) => (
+      <ProductDetails { ...props } handleAddToCart={ this.handleAddToCart } />
+    );
     return (
       <div className="App">
         <BrowserRouter>
@@ -63,7 +66,7 @@ class App extends React.Component {
             <Route path="/Cart" render={ renderCart } />
             <Route
               path="/productDetails/:category/:id"
-              component={ ProductDetails }
+              render={ renderProductDetails }
             />
           </Switch>
         </BrowserRouter>
