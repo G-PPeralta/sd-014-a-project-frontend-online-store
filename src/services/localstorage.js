@@ -13,16 +13,20 @@ export function addToCart(product) {
     if (!cartProducts[product.id]) {
       cartProducts[product.id] = { product, quantity: 0 };
     }
-    cartProducts[product.id].quantity += 1;
+    if (product.quantity > cartProducts[product.id].quantity) {
+      cartProducts[product.id].quantity += 1;
+    }
   } else {
     cartProducts = { [product.id]: { product, quantity: 1 } };
   }
   localStorage.setObj('products', cartProducts);
 }
 
-export function addQuantity(id, operation) {
+export function addQuantity(id, operation, available) {
   const products = localStorage.getObj('products');
-  if (operation === 'sum') products[id].quantity += 1;
+  if (operation === 'sum' && products[id].quantity < available) {
+    products[id].quantity += 1;
+  }
   if (operation === 'sub' && products[id].quantity !== 1) products[id].quantity -= 1;
   localStorage.setObj('products', products);
 }
