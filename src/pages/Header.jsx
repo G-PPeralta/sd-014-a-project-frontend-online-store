@@ -1,8 +1,24 @@
 import React from 'react';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import { Link } from 'react-router-dom';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
 
 class Header extends React.Component {
+  constructor() {
+    const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
+    super();
+    this.state = {
+      storage: cartStorage,
+    };
+
+    this.productQuantity = this.productQuantity.bind(this);
+  }
+
+  productQuantity() {
+    const { storage } = this.state;
+    const quant = storage.reduce((quantidade, soma) => quantidade + soma.quantity, 0);
+    return quant;
+  }
+
   render() {
     return (
       <div className="home">
@@ -12,9 +28,7 @@ class Header extends React.Component {
         <Link to="/checkout">
           <p>Pedidos</p>
         </Link>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ ShoppingCart } alt="shopping cart" />
-        </Link>
+        <ShoppingCartIcon cart={ this.productQuantity() } />
       </div>
     );
   }

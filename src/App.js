@@ -4,10 +4,19 @@ import Header from './pages/Header';
 import Switchers from './Switchers';
 
 class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      items: '',
+    }
+  }
+
   render() {
+    const { items } = this.state;
     return (
       <BrowserRouter>
-        <Header />
+        <Header cartItems=""/>
         <Switchers />
       </BrowserRouter>
     );

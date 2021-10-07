@@ -6,57 +6,82 @@ class Comments extends React.Component {
     super();
 
     this.state = {
-      email: '',
-      text: '',
-      // commentLine: [],
+      inputEmail: '',
+      inputText: '',
+      comments: [],
+      stars: 0,
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setItemsToState = this.setItemsToState.bind(this);
+  }
+
+  componentDidMount() {
+    const parseComments = JSON.parse(localStorage.getItem('comments'))
+    if(parseComments !== null){
+      return this.setItemsToState(parseComments);
+    }
+  }
+
+  setItemsToState(array) {
+    this.setState({
+      comments: array
+    });
   }
 
   handleClick(e) {
+    const { inputEmail, inputText, comments, stars } = this.state;
+    this.setState(() => ({
+      comments: [...comments, { inputEmail, inputText, stars }],
+      inputEmail: '',
+      inputText: '',
+    }))
+    localStorage.setItem('comments', JSON.stringify([...comments, { inputEmail, inputText, stars}]));
     e.preventDefault();
   }
 
-  handleChange(event) {
+  handleChange({ target }) {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+  
     this.setState({
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   }
 
   render() {
-    const { email, text } = this.state;
+    const { inputEmail, inputText, comments } = this.state;
     return (
       <div>
         <h3>Avaliações</h3>
         <form>
           <div>
             <input
-              name="email"
-              value={ email }
+              name="inputEmail"
+              value={ inputEmail }
               type="email"
               placeholder="Email"
               onChange={ this.handleChange }
               required
             />
-            <label htmlFor="stars">
-              <input type="radio" id="one" name="stars" required />
+            <label htmlFor="stars" onChange={ this.handleChange }>
+              <input type="radio" value={1} id="one" name="stars" required />
               1
-              <input type="radio" id="two" name="stars" />
+              <input type="radio" value={2} id="two" name="stars" />
               2
-              <input type="radio" id="thre" name="stars" />
+              <input type="radio" value={3} id="thre" name="stars" />
               3
-              <input type="radio" id="four" name="stars" />
+              <input type="radio" value={4} id="four" name="stars" />
               4
-              <input type="radio" id="five" name="stars" />
+              <input type="radio" value={5} id="five" name="stars" />
               5
             </label>
           </div>
           <div>
             <textarea
-              name="text"
-              value={ text }
+              name="inputText"
+              value={ inputText }
               onChange={ this.handleChange }
               data-testid="product-detail-evaluation"
               id=""
@@ -69,13 +94,13 @@ class Comments extends React.Component {
         </form>
 
         <section>
-          {/* {comments.map((comment) => ( */}
+          {comments && comments.map((comment) => (
           <CreateComments
-            // key={ email }
-            email={ email }
-            text={ text }
-          />
-          {/* ))} */}
+            key={ comment.inputEmail }
+            comments={ comment }
+            stars={ comment.stars }
+            />
+          ))} 
         </section>
       </div>
     );
