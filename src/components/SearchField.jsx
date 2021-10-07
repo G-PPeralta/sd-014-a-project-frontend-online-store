@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 class SearchField extends Component {
   render() {
-    const { searchTerm, category, handleChange } = this.props;
+    const { searchTerm, category, handleChange, fetchProducts } = this.props;
     return (
       <div>
         <button
           type="button"
           data-testid="query-button"
-          onClick={ () => this.fetchProducts(category) }
+          onClick={ () => fetchProducts(category) }
         >
           Buscar
         </button>
@@ -30,6 +30,7 @@ SearchField.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  fetchProducts: PropTypes.func.isRequired,
 };
 
 export default SearchField;

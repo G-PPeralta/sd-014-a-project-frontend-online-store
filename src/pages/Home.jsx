@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Categories from '../components/Categories';
@@ -34,6 +35,7 @@ class Home extends React.Component {
 
   render() {
     const { searchTerm, products, category } = this.state;
+    const { handleAddToCart } = this.props;
 
     return (
       <section>
@@ -42,12 +44,13 @@ class Home extends React.Component {
           searchTerm={ searchTerm }
           category={ category }
           handleChange={ this.handleChange }
+          fetchProducts={ this.fetchProducts }
         />
         <main>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <ProductList products={ products } />
+          <ProductList products={ products } handleAddToCart={ handleAddToCart } />
         </main>
         <Link to="/Cart" data-testid="shopping-cart-button">
           <button type="submit">Icone do Carrinho</button>
@@ -56,5 +59,9 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  handleAddToCart: PropTypes.func.isRequired,
+};
 
 export default Home;
