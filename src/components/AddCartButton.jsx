@@ -18,8 +18,11 @@ class AddCartButton extends React.Component {
 
 AddCartButton.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.string,
-    category: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    productId: PropTypes.string.isRequired,
   }).isRequired,
   handleAddToCart: PropTypes.func.isRequired,
   testId: PropTypes.string.isRequired,

@@ -13,7 +13,7 @@ class ProductCard extends Component {
         <p>{ product.price }</p>
         <Link
           data-testid="product-detail-link"
-          to={ `/productDetails/${product.category}/${product.id}` }
+          to={ `/productDetails/${product.category}/${product.productId}` }
         >
           Detalhes
         </Link>
@@ -32,7 +32,7 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  productId: PropTypes.string.isRequired,
   handleAddToCart: PropTypes.func.isRequired,
 };
 

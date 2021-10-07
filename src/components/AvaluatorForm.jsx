@@ -34,14 +34,14 @@ class AvaluatorForm extends React.Component {
 
   render() {
     const { email, avaliacao, mensagem } = this.state;
-    const { productId, category, handleAddToCart } = this.props;
+    const { product, handleAddToCart } = this.props;
     return (
       <section>
         <h1>Quantidade</h1>
         <button type="button">+</button>
         <button type="button">-</button>
         <AddCartButton
-          product={ { productId, category } }
+          product={ product }
           handleAddToCart={ handleAddToCart }
           testId="product-detail-add-to-cart"
         />
@@ -80,8 +80,13 @@ class AvaluatorForm extends React.Component {
 }
 
 AvaluatorForm.propTypes = {
-  productId: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  product: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    productId: PropTypes.string.isRequired,
+  }).isRequired,
   handleAddToCart: PropTypes.func.isRequired,
 };
 

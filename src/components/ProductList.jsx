@@ -15,7 +15,7 @@ class ProductList extends Component {
             thumbnail={ product.thumbnail }
             key={ product.id }
             category={ product.category_id }
-            id={ product.id }
+            productId={ product.id }
             handleAddToCart={ handleAddToCart }
           />
         )) }

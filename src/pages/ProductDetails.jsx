@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import AvaluatorForm from '../components/AvaluatorForm';
 
@@ -8,9 +9,9 @@ class ProductDetails extends React.Component {
     super();
     this.state = {
       price: 0,
-      image: '',
+      thumbnail: '',
       attributes: [],
-      name: '',
+      title: '',
     };
   }
 
@@ -22,24 +23,28 @@ class ProductDetails extends React.Component {
     const { match: { params: { id: productId, category } } } = this.props;
     const result = await getProductsFromCategoryAndQuery(category, productId);
     const details = result.results.find(({ id }) => id === productId);
-    this.setState({
-      price: details.price,
-      image: details.thumbnail,
-      attributes: details.attributes,
-      name: details.title,
-    });
+    const { price, thumbnail, attributes, title } = details;
+    this.setState({ price, thumbnail, attributes, title });
   }
 
   render() {
-    const { price, image, attributes, name } = this.state;
+    const { price, thumbnail, attributes, title } = this.state;
     const {
       match: { params: { id: productId, category } },
       handleAddToCart,
     } = this.props;
+    const product = {
+      ...this.state,
+      productId,
+      category,
+    };
     return (
       <section>
-        <h1 data-testid="product-detail-name">{name}</h1>
-        <img src={ image } alt={ name } />
+        <Link to="/Cart" data-testid="shopping-cart-button">
+          <button type="button">Icone do Carrinho</button>
+        </Link>
+        <h1 data-testid="product-detail-name">{title}</h1>
+        <img src={ thumbnail } alt={ title } />
         <p>{price}</p>
         <ul>
           {attributes.map((attr) => (
@@ -51,8 +56,7 @@ class ProductDetails extends React.Component {
         *
         {' '}
         <AvaluatorForm
-          productId={ productId }
-          category={ category }
+          product={ product }
           handleAddToCart={ handleAddToCart }
         />
       </section>

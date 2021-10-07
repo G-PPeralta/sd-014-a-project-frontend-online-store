@@ -30,9 +30,9 @@ class App extends React.Component {
   handleAddToCart = (product, qty = 1) => {
     const { cart } = this.state;
     // se o item já existe, e só alterar o qty, senão cria um novo item no cart
-    const updatedCart = cart.find(({ id }) => id === product.id)
+    const updatedCart = cart.find(({ productId }) => productId === product.productId)
       ? cart.map((item) => (
-        item.id === product.id ? { ...item, qty: item.qty + qty } : item
+        item.productId === product.productId ? { ...item, qty: item.qty + qty } : item
       ))
       : [...cart, { ...product, qty }];
     // filtra itens zerados ou negativados

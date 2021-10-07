@@ -12,7 +12,7 @@ class Cart extends React.Component {
           ? (
             <ul>
               { cart.map((product) => (
-                <li key={ product.id }>
+                <li key={ product.productId }>
                   <span data-testid="shopping-cart-product-quantity">
                     { product.qty }
                   </span>
