@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { GrCart } from 'react-icons/gr';
+import { HiShoppingCart } from 'react-icons/hi';
 
 class CartButton extends React.Component {
   render() {
@@ -10,9 +10,14 @@ class CartButton extends React.Component {
       <Link
         to="/cart"
         data-testid="shopping-cart-button"
+        className="text-white text-decoration-none ms-auto"
       >
-        <GrCart className="h1" />
-        <span data-testid="shopping-cart-size">{children}</span>
+        <HiShoppingCart className="m-0 h2 text-white" />
+        <span
+          data-testid="shopping-cart-size"
+        >
+          {children}
+        </span>
       </Link>
     );
   }

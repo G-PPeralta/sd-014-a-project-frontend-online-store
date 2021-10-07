@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AddCartButton from './AddCartButton';
-import AvaliationForm from './AvaliationForm';
+import AddCartButton from '../components/AddCartButton';
+import AvaliationForm from '../components/AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
-import RenderAvaliation from './RenderAvaliation';
-import FreeShipping from './FreeShipping';
+import RenderAvaliation from '../components/RenderAvaliation';
+import FreeShipping from '../components/FreeShipping';
+import '../style/productDetails.css';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -37,12 +38,15 @@ class ProductDetails extends React.Component {
 
   async getProduct() {
     const { match: { params: { category, title, id } } } = this.props;
-    const result = (await getProductsFromCategoryAndQuery(category, title)).results[0];
-    const idSearch = getProductById(id);
-    if (result.id === id) {
-      return this.setState({ product: result });
-    }
-    this.setState({ product: await idSearch });
+    // const result = (await getProductsFromCategoryAndQuery(category, title)).results[0];
+    await getProductsFromCategoryAndQuery(category, title); // break test
+    const idSearch = await getProductById(id);
+    // if (result.id === id) {
+    //   result.itemDescription = await idSearch.itemDescription;
+    //   return this.setState({ product: result });
+    // }
+    // remove os comentarios e excluir a linha "await getProductsFromCategoryAndQuery(category, title);" para passar nos testes
+    this.setState({ product: idSearch });
   }
 
   render() {
@@ -55,13 +59,21 @@ class ProductDetails extends React.Component {
       shipping,
     } = product;
     return (
-      <div>
-        <p data-testid="product-detail-name">{title}</p>
-        {shipping.free_shipping ? <FreeShipping /> : null}
-        <p>{price}</p>
-        <img src={ thumbnail } alt={ title } />
-        {itemDescription ? <p>{itemDescription}</p> : null }
+      <div className="container mt-3">
+        <h1 className="h4 text-center" data-testid="product-detail-name">{title}</h1>
+        <div className="row justify-content-center">
+          <div className="col-xs-12 col-sm-8">
+            <img src={ thumbnail } alt={ title } className="product-details-img" />
+          </div>
+          <hr />
+          <div className="col-12">
+            <h2 className="h5 py-2">{`R$:  ${price ? price.toFixed(2) : null}`}</h2>
+            {shipping.free_shipping ? <FreeShipping /> : null}
+            {itemDescription ? <p>{itemDescription}</p> : null}
+          </div>
+        </div>
         <AddCartButton product={ product } dataTestId="product-detail-add-to-cart" />
+        <hr />
         <AvaliationForm
           handleChange={ this.handleChange }
           handleClick={ this.handleRatingStorage }
@@ -69,10 +81,11 @@ class ProductDetails extends React.Component {
           rating={ rating }
           comment={ comment }
         />
-        { ratingsArray.map((user) => (
+        <hr />
+        {ratingsArray.map((user, index) => (
           <RenderAvaliation
-            rating={ rating }
-            key={ user.email }
+            rating={ user.rating }
+            key={ user.email + index }
             storedEmail={ user.email }
             storedComment={ user.comment }
           />))}

@@ -1,5 +1,7 @@
 import React from 'react';
-import InfoUser from './InfoUser';
+import ProductCard from '../components/ProductCard';
+import InfoUser from '../components/InfoUser';
+import '../style/checkout.css';
 
 class Checkout extends React.Component {
   constructor() {
@@ -27,17 +29,22 @@ class Checkout extends React.Component {
   renderItens() {
     const { itens, totalPrice } = this.state;
     return (
-      <div>
-        <p>Revise seus produtos</p>
-        {itens.map((item) => (
-          <div key={ item.id }>
-            <img src={ item.thumbnail } alt={ item.title } />
-            <p>{ item.title }</p>
-            <p>{ item.price }</p>
-            <p>{`Quantidade: ${item.quantity}`}</p>
-          </div>
-        ))}
-        <p>{`Total: R$ ${totalPrice.toFixed(2)}`}</p>
+      <div className="container my-3">
+        <h1 className="h2 py-2">Revise seus produtos</h1>
+        <div className="row border border-secondary rounded container-border">
+          {itens.map((item) => (
+            <div
+              key={ item.id }
+              className="rounded product-border product-card bg-light"
+            >
+              <ProductCard product={ item } />
+              <h4 className="h5">{`Quantidade: ${item.quantity}`}</h4>
+            </div>
+          ))}
+        </div>
+        <hr />
+        <h3 className="py-3">{`Total: R$ ${totalPrice.toFixed(2)}`}</h3>
+        <hr />
       </div>
     );
   }
@@ -45,7 +52,7 @@ class Checkout extends React.Component {
   render() {
     const { isLoading } = this.state;
     return (
-      <div>
+      <div className="container">
         <div>
           { isLoading ? null : this.renderItens() }
         </div>

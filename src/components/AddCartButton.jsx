@@ -23,15 +23,18 @@ class AddCartButton extends React.Component {
     return (
       <Context.Consumer>
         {(({ cartLength, setCartLength }) => (
-          <input
-            type="button"
-            value="Adicionar item no carrinho"
-            data-testid={ dataTestId }
-            onClick={ () => {
-              this.addItem();
-              setCartLength(product.quantity + cartLength);
-            } }
-          />
+          <div className="d-grid gap-2 col-12 mx-auto pb-2">
+            <input
+              className="btn btn-success"
+              type="button"
+              value="Adicionar item no carrinho"
+              data-testid={ dataTestId }
+              onClick={ () => {
+                this.addItem();
+                setCartLength(product.quantity + cartLength);
+              } }
+            />
+          </div>
         )) }
       </Context.Consumer>
     );
