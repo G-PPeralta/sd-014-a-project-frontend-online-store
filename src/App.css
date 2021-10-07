@@ -1,26 +1,26 @@
 .carQtd {
-  position: relative;
   float: right;
+  position: relative;
   top: 10px;
 }
 
 .total-products {
-  opacity: 0.7;
-  font-weight:900;
   border-radius: 100%;
+  font-weight: 900;
+  opacity: 0.7;
   left: 205px;
   padding: 4px;
   position: absolute;
   top: 10px;
-  width: 20px;
   height: 20px;
+  width: 20px;
   z-index: 2;
 }
 
 .btn-primary {
   position: absolute;
-  z-index: 1;
   left: 170px;
+  z-index: 1;
   padding: 10px;
 }
 

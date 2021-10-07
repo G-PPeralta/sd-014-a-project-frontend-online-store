@@ -1,20 +1,20 @@
 .category-itens {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.4rem 2rem;
   align-items: left;
+  padding: 0.4rem 2rem;
 }
 
 .list-group {
   border: 1px solid black;
   border-radius: 14px;
   max-width: 30%;
-  padding: 0.2rem;
-  margin: 1rem;
   height: 600px;
+  margin: 1rem;
+  padding: 0.2rem;
   overflow-x: hidden;
   overflow-y: auto;
   position: fixed;
-  top: 0.5;
   left: 0;
+  top: 0.5;
 }

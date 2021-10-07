@@ -2,13 +2,12 @@
   align-content: space-between;
   display: flex;
   flex-flow: row wrap;
-  padding: 1rem 1rem
-
+  padding: 1rem;
 }
 
 .checkout-btn {
   margin-left: 80%;
-  padding-bottom: 180px; 
+  padding-bottom: 180px;
 }
 
 .total-products {
@@ -18,49 +17,49 @@
 
 .product {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  flex-direction:column; 
-  list-style: none;
   border: 1px solid;
+  list-style: none;
   border-radius: 1rem;
   padding: 2rem;
-  width: 421px;
   height: 400px;
+  width: 421px;
   margin-left: 35%;
 }
 
 .btn-list {
   display: flex;
+  font-weight: 900;
   justify-content: space-around;
-  font-weight: bolder;
 }
 
 .product-pos:hover {
-  background-color:lightgreen;
+  background-color: lightgreen;
   transition: 0.5s;
 }
 
 .product-neg:hover {
-  background-color:rgb(214, 90, 90);
+  background-color: rgb(214, 90, 90);
   transition: 0.3s;
 }
 
 .product img {
   height: 50%;
-  width: 40%;  
+  width: 40%;
 }
 
 .product-cart {
   border: 100px solid;
   border-radius: 1rem;
-  padding: 1rem;
   margin: 1rem;
+  padding: 1rem;
   max-width: 800px;
 }
 
 .product-name {
   font-size: 20px;
-  font-weight: bold;
-  max-width: 500px;
+  font-weight: 900;
   align-items: stretch;
+  max-width: 500px;
 }
