@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout';
+import About from './components/About';
 
 function getCartLength() {
   const { cartItems } = localStorage;
@@ -31,6 +32,7 @@ function App() {
             component={ ProductDetails }
           />
           <Route exact path="/checkout" component={ Checkout } />
+          <Route exact path="/about" component={ About } />
         </Switch>
       </BrowserRouter>
     </Context.Provider>

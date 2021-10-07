@@ -17,6 +17,9 @@ class Header extends React.Component {
           <li className="nav-item">
             <Link className="nav-link active" to="/">Home</Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link active" to="/about">Sobre</Link>
+          </li>
         </ul>
         <CartButton>{cartLength}</CartButton>
       </div>
