@@ -3,21 +3,21 @@ import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
-  constructor() {
-    const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
-    super();
-    this.state = {
-      storage: cartStorage,
-    };
+  // constructor() {
+    // const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
+    // super();
+    // this.state = {
+    //   storage: cartStorage,
+    // };
 
-    this.productQuantity = this.productQuantity.bind(this);
-  }
+    // this.productQuantity = this.productQuantity.bind(this);
+  // }
 
-  productQuantity() {
-    const { storage } = this.state;
-    const quant = storage.reduce((quantidade, soma) => quantidade + soma.quantity, 0);
-    return quant;
-  }
+  // productQuantity() {
+  //   const { storage } = this.state;
+  //   const quant = storage.reduce((quantidade, soma) => quantidade + soma.quantity, 0);
+  //   return quant;
+  // }
 
   render() {
     return (
@@ -28,7 +28,7 @@ class Header extends React.Component {
         <Link to="/checkout">
           <p>Pedidos</p>
         </Link>
-        <ShoppingCartIcon cart={ this.productQuantity() } />
+        <ShoppingCartIcon cart="" />
       </div>
     );
   }
