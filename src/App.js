@@ -8,16 +8,16 @@ class App extends React.Component {
     super();
 
     this.state = {
-      items: '',
+      cartItems: '',
     }
   }
 
   render() {
-    const { items } = this.state;
+    const { cartItems } = this.state;
     return (
       <BrowserRouter>
-        <Header cartItems=""/>
-        <Switchers />
+        <Header cartItems={cartItems}/>
+        <Switchers cartItems={cartItems}/>
       </BrowserRouter>
     );
   }
