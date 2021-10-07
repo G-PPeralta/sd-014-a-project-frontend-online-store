@@ -42,7 +42,9 @@ class Checkout extends React.Component {
             </div>
           ))}
         </div>
-        <h3>{`Total: R$ ${totalPrice.toFixed(2)}`}</h3>
+        <hr />
+        <h3 className="py-3">{`Total: R$ ${totalPrice.toFixed(2)}`}</h3>
+        <hr />
       </div>
     );
   }
