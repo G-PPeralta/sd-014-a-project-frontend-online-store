@@ -161,14 +161,15 @@ class Cart extends React.Component {
                         Finalizar Compra
                       </button>
                     </Link>
-                    <input
+                    <button
                       type="button"
                       onClick={ () => {
                         this.removeAllItems(setCartLength);
                       } }
-                      value="Esvaziar Carrinho"
                       className="btn btn-danger col-4"
-                    />
+                    >
+                      Esvaziar Carrinho
+                    </button>
                   </div>
                 </div>
               )}
