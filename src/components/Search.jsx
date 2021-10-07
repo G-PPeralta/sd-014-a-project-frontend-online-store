@@ -33,7 +33,8 @@ class Search extends React.Component {
     this.setState({ categories, isLoading: false });
   }
 
-  getProduct = async () => {
+  getProduct = async (event) => {
+    if (event) event.preventDefault();
     this.setState({ isLoadingProducts: true });
     const { inputSearch, category } = this.state;
     const products = await getProductsFromCategoryAndQuery(category, inputSearch);
@@ -116,7 +117,7 @@ class Search extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <div className="col-xs-12 col-lg-6" role="form">
-            <div className="input-group">
+            <form className="input-group" onSubmit={ this.getProduct }>
               <input
                 type="text"
                 placeholder="Buscar produtos"
@@ -134,7 +135,7 @@ class Search extends React.Component {
               >
                 Pesquisar
               </button>
-            </div>
+            </form>
           </div>
         </div>
         <div className="row justify-content-between">
