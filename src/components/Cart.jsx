@@ -9,12 +9,14 @@ class Cart extends React.Component {
     super();
     this.state = {
       cart: [],
+      totalPrice: 0,
     };
     this.getCartItems = this.getCartItems.bind(this);
     this.productCard = this.productCard.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.updateGlobal = this.updateGlobal.bind(this);
+    this.getTotal = this.getTotal.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +26,16 @@ class Cart extends React.Component {
   getCartItems() {
     const { cartItems } = localStorage;
     if (cartItems) this.setState({ cart: JSON.parse(cartItems) });
+    this.getTotal();
+  }
+
+  getTotal() {
+    const cart = JSON.parse(localStorage.cartItems);
+    let totalPrice = 0;
+    cart.forEach(({ price, quantity }) => {
+      totalPrice += price * quantity;
+    });
+    this.setState({ totalPrice });
   }
 
   removeAllItems(globalChanger) {
@@ -118,7 +130,7 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { cart } = this.state;
+    const { cart, totalPrice } = this.state;
     return (
       <Context.Consumer>
         {({ setCartLength }) => (
@@ -133,6 +145,8 @@ class Cart extends React.Component {
                     {cart.map((product, index) => (
                       this.productCard(product, index, setCartLength)))}
                   </div>
+                  <hr />
+                  <h4>{`R$: ${totalPrice.toFixed(2)}`}</h4>
                   <hr />
                   <div className="d-flex justify-content-around pb-3 mb-3">
                     <Link
