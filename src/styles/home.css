@@ -1,8 +1,8 @@
 .search-container {
   align-items: center;
   display: flex;
-  float: right;
   flex-direction: column;
+  float: right;
   justify-content: space-between;
   margin-left: 25%;
   margin-right: 25%;
@@ -24,14 +24,14 @@
   border: 1px solid black;
   margin-bottom: 0.5rem;
   outline: none;
-  padding-top: 0.5rem;
   background: url('https://img.icons8.com/search') no-repeat 98.8% 1.2%;
+  padding-top: 0.5rem;
   border-radius: 50em;
   height: 1.2em;
-  width: 100%;
   background-size: contain;
+  width: 100%;
   cursor: pointer;
-  opacity: 1;
   font-size: 1.5rem;
+  opacity: 1;
   user-select: none;
 }

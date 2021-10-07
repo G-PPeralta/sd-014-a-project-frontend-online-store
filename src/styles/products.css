@@ -18,14 +18,14 @@
 .product {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   border: 1px solid;
-  list-style: none;
+  justify-content: space-around;
   border-radius: 1rem;
-  padding: 2rem;
+  list-style: none;
   height: 400px;
-  width: 421px;
+  padding: 2rem;
   margin-left: 35%;
+  width: 421px;
 }
 
 .btn-list {
@@ -53,13 +53,13 @@
   border: 100px solid;
   border-radius: 1rem;
   margin: 1rem;
-  padding: 1rem;
   max-width: 800px;
+  padding: 1rem;
 }
 
 .product-name {
   font-size: 20px;
-  font-weight: 900;
   align-items: stretch;
+  font-weight: 900;
   max-width: 500px;
 }
