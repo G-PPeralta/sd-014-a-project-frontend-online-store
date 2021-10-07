@@ -1,5 +1,6 @@
 import React from 'react';
 import cityAndStates from '../cityAndStates';
+import '../style/infoUser.css';
 
 class InfoUser extends React.Component {
   constructor() {
@@ -20,7 +21,7 @@ class InfoUser extends React.Component {
       <form className="py-3 mt-3">
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="name">Nome</span>
+            <span className="input-group-text form-span" id="name">Nome</span>
           </div>
           <input
             type="text"
@@ -32,7 +33,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="cpf">CPF</span>
+            <span className="input-group-text form-span" id="cpf">CPF</span>
           </div>
           <input
             type="text"
@@ -44,7 +45,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="email">Email</span>
+            <span className="input-group-text form-span" id="email">Email</span>
           </div>
           <input
             type="email"
@@ -56,7 +57,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="phone">Telefone</span>
+            <span className="input-group-text form-span" id="phone">Telefone</span>
           </div>
           <input
             type="text"
@@ -68,7 +69,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="cep">CEP</span>
+            <span className="input-group-text form-span" id="cep">CEP</span>
           </div>
           <input
             type="text"
@@ -80,7 +81,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="state">Estado</span>
+            <span className="input-group-text form-span" id="state">Estado</span>
           </div>
           <input
             type="text"
@@ -105,7 +106,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="city-input">Cidade</span>
+            <span className="input-group-text form-span" id="city-input">Cidade</span>
           </div>
           <input
             type="text"
@@ -128,7 +129,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="address">Endereco</span>
+            <span className="input-group-text form-span" id="address">Endereco</span>
           </div>
           <input
             type="text"
@@ -140,7 +141,12 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="address-add">Complemento</span>
+            <span
+              className="input-group-text form-span"
+              id="address-add"
+            >
+              Complemento
+            </span>
           </div>
           <input
             type="text"
@@ -151,7 +157,7 @@ class InfoUser extends React.Component {
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="number">Número</span>
+            <span className="input-group-text form-span" id="number">Número</span>
           </div>
           <input
             type="text"
