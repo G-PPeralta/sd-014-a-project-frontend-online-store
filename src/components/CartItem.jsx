@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addToCart, readCartItens, subFromCart } from '../services/AddToCart';
+import '../styles/products.css';
 // Consulta: https://pt.stackoverflow.com/questions/78504/arredondando-um-n%C3%BAmero-decimal-para-um-n%C3%BAmero-decimal-mais-baixo
 
 export default class CartItem extends Component {
@@ -13,11 +14,6 @@ export default class CartItem extends Component {
       quantidade,
     };
   }
-
-  // handleDelete=() => {
-  //   const { item } = this.props;
-  //   this.updateState();
-  // }
 
   handleDecrease = () => {
     const { item } = this.props;
@@ -45,41 +41,46 @@ export default class CartItem extends Component {
     const { quantidade } = this.state;
 
     return (
-      <div key={ id }>
-        <p data-testid="shopping-cart-product-name">{ title }</p>
+      <div key={ id } className="product">
+        <p data-testid="shopping-cart-product-name product-name">{ title }</p>
         <img src={ thumbnail } alt={ `Foto de ${title}` } />
         <p>
           {`Preço: R$${Math.floor(parseFloat(price * quantidade) * 100) / 100}`}
 
         </p>
-        <p data-testid="shopping-cart-product-quantity">
-          { quantidade }
-        </p>
-        <button
-          disabled={ quantidade === 1 }
-          data-testid="product-decrease-quantity"
-          type="button"
-          onClick={ this.handleDecrease }
-          style={ { color: 'red' } }
-        >
-          -
-        </button>
-        <button
-          disabled={ quantidade === av }
-          data-testid="product-increase-quantity"
-          type="button"
-          onClick={ this.handleIncrease }
-          style={ { color: 'green' } }
-        >
-          +
-        </button>
-        <button
-          type="button"
-          style={ { color: 'red', fontWeight: '700' } }
-          onClick={ this.handleDelete }
-        >
-          DELETE
-        </button>
+        <div className="btn-list">
+          <button
+            className="product-neg"
+            disabled={ quantidade === 1 }
+            data-testid="product-decrease-quantity"
+            type="button"
+            onClick={ this.handleDecrease }
+            style={ { color: 'red' } }
+          >
+            -
+          </button>
+          <p data-testid="shopping-cart-product-quantity">
+            { quantidade }
+          </p>
+          <button
+            className="product-pos"
+            disabled={ quantidade === av }
+            data-testid="product-increase-quantity"
+            type="button"
+            onClick={ this.handleIncrease }
+            style={ { color: 'green' } }
+          >
+            +
+          </button>
+          <button
+            className="product-neg"
+            type="button"
+            style={ { color: 'red', fontWeight: '700' } }
+            onClick={ this.handleDelete }
+          >
+            DELETE
+          </button>
+        </div>
       </div>
     );
   }

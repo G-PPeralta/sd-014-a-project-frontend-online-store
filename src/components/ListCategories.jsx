@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { getCategories } from '../services/api';
+import '../styles/categories.css';
 
 export default class ListCategories extends Component {
   constructor() {
@@ -28,17 +29,19 @@ export default class ListCategories extends Component {
     const { handleClick } = this.props;
 
     return (
-      <aside>
+      <aside className="list-group">
+        <h2 className="category-itens">Categorias:</h2>
         {categories.map(({ id, name }) => (
-          <label key={ id } htmlFor={ id }>
+          <label key={ id } htmlFor={ id } className="category-itens">
             <input
+              id={ id }
               data-testid="category"
               type="radio"
               onClick={ handleClick }
               name="category"
               value={ id }
             />
-            {name}
+            <label htmlFor={ id }>{name}</label>
           </label>
         ))}
       </aside>
@@ -50,7 +53,6 @@ export default class ListCategories extends Component {
     return (
       <div>
         <section>
-          <h2>Categorias:</h2>
           {loading ? <Loading /> : this.categoriesList()}
         </section>
       </div>

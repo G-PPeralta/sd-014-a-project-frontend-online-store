@@ -1,0 +1,30 @@
+.checkout-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+.checkout-info label {
+  display: flex;
+  flex-direction: column;
+  margin: 11px;
+  padding-right: 75%;
+}
+
+.checkout-info label input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+  outline: none;
+  padding: 0;
+}
+

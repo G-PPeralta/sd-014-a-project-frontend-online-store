@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { addToCart, getNumberOfProductsInCart } from '../services/AddToCart';
+import '../App.css';
+import '../styles/products.css';
 import TotalyProduct from './TotalyProduct';
 
 export default class ShowProducts extends Component {
@@ -30,8 +32,8 @@ export default class ShowProducts extends Component {
 
   showProducts(API) {
     return API.map((product) => (
-      <>
-        <p key={ product.id } data-testid="product">
+      <li key={ product.id } className="product">
+        <p data-testid="product" className="product-name">
           {product.title}
         </p>
         <img src={ product.thumbnail } alt={ `Foto de ${product.title} ` } />
@@ -44,38 +46,26 @@ export default class ShowProducts extends Component {
         </Link>
         {product.shipping.free_shipping
         && <p data-testid="free-shipping">Frete Grátis</p>}
-        <div className="carQtd">
-          <button
-            data-testid="product-add-to-cart"
-            type="button"
-            onClick={ () => this.handleCart(product) }
-          >
-            Add to Cart
-          </button>
-        </div>
-      </>
+        <button
+          className="carQtd"
+          data-testid="product-add-to-cart"
+          type="button"
+          onClick={ () => this.handleCart(product) }
+        >
+          Add to Cart
+        </button>
+      </li>
     ));
   }
 
   render() {
-    const { itemsInCart } = this.state;
     const { products } = this.props;
+    const { itemsInCart } = this.state;
+
     return (
       <>
-        <div className="carQtd">
-          <Link
-            to="/card"
-            className="btn btn-primary"
-          >
-            <img
-              className="btn-primary"
-              alt="shopping-cart"
-              src="https://img.icons8.com/ios/50/000000/shopping-cart.png"
-            />
-            <TotalyProduct itemsInCart={ itemsInCart } />
-          </Link>
-        </div>
-        <div>{this.showProducts(products)}</div>
+        <TotalyProduct itemsInCart={ itemsInCart } />
+        <ul className="product-list">{this.showProducts(products)}</ul>
       </>
     );
   }
