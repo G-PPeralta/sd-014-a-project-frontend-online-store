@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddCartButton from './AddCartButton';
+import AddCartButton from '../components/AddCartButton';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import ProductCard from './ProductCard';
-// import FreeShipping from './FreeShipping';
+import ProductCard from '../components/ProductCard';
 import '../style/search.css';
 
 class Search extends React.Component {

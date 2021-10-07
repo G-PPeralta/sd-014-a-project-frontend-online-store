@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductCard from './ProductCard';
-import InfoUser from './InfoUser';
+import ProductCard from '../components/ProductCard';
+import InfoUser from '../components/InfoUser';
 import '../style/checkout.css';
 
 class Checkout extends React.Component {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Context from './Context';
-import Search from './components/Search';
+import Search from './pages/Search';
+import Cart from './pages/Cart';
+import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
+import About from './pages/About';
 import Header from './components/Header';
-import Cart from './components/Cart';
-import ProductDetails from './components/ProductDetails';
-import Checkout from './components/Checkout';
-import About from './components/About';
 
 function getCartLength() {
   const { cartItems } = localStorage;

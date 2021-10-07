@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AddCartButton from './AddCartButton';
-import AvaliationForm from './AvaliationForm';
+import AddCartButton from '../components/AddCartButton';
+import AvaliationForm from '../components/AvaliationForm';
 import { getProductsFromCategoryAndQuery, getProductById } from '../services/api';
-import RenderAvaliation from './RenderAvaliation';
-import FreeShipping from './FreeShipping';
+import RenderAvaliation from '../components/RenderAvaliation';
+import FreeShipping from '../components/FreeShipping';
 import '../style/productDetails.css';
 
 class ProductDetails extends React.Component {
