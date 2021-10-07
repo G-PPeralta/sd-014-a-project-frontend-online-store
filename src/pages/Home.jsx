@@ -14,7 +14,7 @@ class Home extends React.Component {
     this.state = {
       searchTerm: '',
       category: 'MLB5672',
-      products: [],
+      products: undefined,
     };
   }
 
@@ -38,24 +38,36 @@ class Home extends React.Component {
     const { handleAddToCart } = this.props;
 
     return (
-      <section>
-        <Categories handleCategoryChange={ this.fetchProducts } />
-        <SearchField
-          searchTerm={ searchTerm }
-          category={ category }
-          handleChange={ this.handleChange }
-          fetchProducts={ this.fetchProducts }
-        />
-        <main>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <ProductList products={ products } handleAddToCart={ handleAddToCart } />
-        </main>
-        <Link to="/Cart" data-testid="shopping-cart-button">
-          <button type="submit">Icone do Carrinho</button>
-        </Link>
-      </section>
+      <>
+        <header>
+          <SearchField
+            searchTerm={ searchTerm }
+            category={ category }
+            handleChange={ this.handleChange }
+            fetchProducts={ this.fetchProducts }
+          />
+          <Link to="/Cart" data-testid="shopping-cart-button">
+            <button type="submit">Icone do Carrinho</button>
+          </Link>
+        </header>
+        <section>
+          <Categories handleCategoryChange={ this.fetchProducts } />
+          <main>
+            { products
+              ? (
+                <ProductList
+                  products={ products }
+                  handleAddToCart={ handleAddToCart }
+                />
+              )
+              : (
+                <p data-testid="home-initial-message">
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+                </p>
+              )}
+          </main>
+        </section>
+      </>
     );
   }
 }

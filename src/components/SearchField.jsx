@@ -5,7 +5,7 @@ class SearchField extends Component {
   render() {
     const { searchTerm, category, handleChange, fetchProducts } = this.props;
     return (
-      <div>
+      <form className="search-form">
         <button
           type="button"
           data-testid="query-button"
@@ -21,7 +21,7 @@ class SearchField extends Component {
           onChange={ handleChange }
           placeholder="Exemplo: produto 'xxx'"
         />
-      </div>
+      </form>
     );
   }
 }
