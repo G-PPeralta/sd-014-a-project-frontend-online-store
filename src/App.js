@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Home from './components/Home';
-import NotFound from './components/NotFound';
-import ShopCart from './components/ShopCart';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import ShopCart from './pages/ShopCart';
 
 function App() {
   return (
