@@ -16,9 +16,9 @@ class QueryResult extends Component {
             <h4>
               { result.title }
             </h4>
-            <h5>
+            <h4>
               { result.price }
-            </h5>
+            </h4>
           </div>
         )) }
       </div>

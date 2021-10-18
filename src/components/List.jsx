@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories } from '../services/api';
 
 class List extends React.Component {
@@ -26,7 +27,11 @@ class List extends React.Component {
     return (
       <div>
         {categories
-          .map(({ name, id }) => <li data-testid="category" key={ id }>{name}</li>)}
+          .map(({ name, id }) => (
+            <Link to={ `/category/${id}` } key={ id } data-testid="category" >
+              <li>{name}</li>
+            </Link>
+          ))}
       </div>
     );
   }

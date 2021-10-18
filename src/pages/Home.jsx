@@ -15,6 +15,7 @@ class Home extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.queryApi = this.queryApi.bind(this);
+    this.cartHistory = this.cartHistory.bind(this);
   }
 
   handleChange(event) {
@@ -49,6 +50,8 @@ class Home extends React.Component {
   }
 
   render() {
+    const { history } = this.props;
+    console.log(history);
     const { search, queryResponse } = this.state;
     return (
       <main>
