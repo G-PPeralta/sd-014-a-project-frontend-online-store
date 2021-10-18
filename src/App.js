@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import ShopCart from './pages/ShopCart';
 import CategoryPage from './pages/CategoryPage';
+import ProductCard from './pages/ProductCard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/" component={ Home } />
           <Route path="/shopCart" component={ ShopCart } />
           <Route path="/category/:id" component={ CategoryPage } />
+          <Route path="/card/:id/:idCategory" component={ ProductCard } />
           <Route component={ NotFound } />
         </Switch>
       </BrowserRouter>

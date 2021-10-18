@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class CategoryPage extends Component {
@@ -27,22 +28,27 @@ class CategoryPage extends Component {
   }
 
   render() {
+    const { match } = this.props;
+    const { id } = match.params;
     const { responseState } = this.state;
     return (
       <div>
         { responseState.map((result) => (
-          <div
+          <Link
+            to={ `/card/${result.id}/${id}` }
             key={ result.id }
-            data-testid="product"
+            data-testid="product-detail-link"
           >
-            <img src={ result.thumbnail } alt={ result.title } />
-            <h4>
-              { result.title }
-            </h4>
-            <h4>
-              { result.price }
-            </h4>
-          </div>
+            <div data-testid="product">
+              <img src={ result.thumbnail } alt={ result.title } />
+              <h4>
+                { result.title }
+              </h4>
+              <h4>
+                { result.price }
+              </h4>
+            </div>
+          </Link>
         )) }
       </div>
     );

@@ -28,7 +28,7 @@ class List extends React.Component {
       <div>
         {categories
           .map(({ name, id }) => (
-            <Link to={ `/category/${id}` } key={ id } data-testid="category" >
+            <Link to={ `/category/${id}` } key={ id } data-testid="category">
               <li>{name}</li>
             </Link>
           ))}

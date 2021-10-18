@@ -41,7 +41,8 @@ class Home extends React.Component {
     history.push('/shopCart');
   }
 
-  async queryApi() {
+  async queryApi(event) {
+    event.preventDefault();
     const { search } = this.state;
     const categoryRequest = await getProductsFromCategoryAndQuery(null, search);
     this.setState({
@@ -50,26 +51,24 @@ class Home extends React.Component {
   }
 
   render() {
-    const { history } = this.props;
-    console.log(history);
     const { search, queryResponse } = this.state;
     return (
       <main>
         <section className="main">
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
-            {/* { this.requestApi() } */}
           </p>
-          <label htmlFor="search">
-            { this.inputGenerator('query-input', 'text', 'search', search) }
-          </label>
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ this.queryApi }
-          >
-            Buscar
-          </button>
+          <form onSubmit={ this.queryApi }>
+            <label htmlFor="search">
+              { this.inputGenerator('query-input', 'text', 'search', search) }
+            </label>
+            <button
+              data-testid="query-button"
+              type="submit"
+            >
+              Buscar
+            </button>
+          </form>
           <button
             type="button"
             data-testid="shopping-cart-button"
