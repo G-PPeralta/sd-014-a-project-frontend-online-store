@@ -72,6 +72,12 @@ class ProductCard extends Component {
         >
           Adcionar
         </button>
+        <textarea
+          data-testid="product-detail-evaluation"
+          cols="30"
+          rows="10"
+          placeholder="Avalie o Produto como bem quiser"
+        />
       </div>
     );
   }
