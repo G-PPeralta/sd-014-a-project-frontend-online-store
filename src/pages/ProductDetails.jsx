@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ShoppingIcon from '../components/ShoppingIcon';
 import { addProduct } from '../services/addFunctions';
-import ProductEvaluation from '../components/ProductEvaluation';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -35,13 +34,11 @@ export default class ProductDetails extends Component {
         >
           Comprar
         </button>
-        <ProductEvaluation />
       </div>
     );
   }
-  <ShoppingIcon />
 }
 
 ProductDetails.propTypes = {
-  location: PropTypes.objectOf(PropTypes.any).isRequired,
-};
+  location: PropTypes.object,
+}.isRequired;
