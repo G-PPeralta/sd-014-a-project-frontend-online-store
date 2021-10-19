@@ -75,13 +75,6 @@ class CategoryPage extends Component {
             </button>
           </div>
         )) }
-        <button
-          type="button"
-          data-testid="shopping-cart-button"
-          onClick={ this.cartHistory }
-        >
-          Ir para o carrinho.
-        </button>
       </div>
     );
   }
