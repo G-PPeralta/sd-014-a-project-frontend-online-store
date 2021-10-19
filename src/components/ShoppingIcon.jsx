@@ -6,6 +6,7 @@ export default class ShoppingIcon extends Component {
     super(props);
     this.getNumberOfProductsInCart = this.getNumberOfProductsInCart.bind(this);
   }
+
   getNumberOfProductsInCart() {
     let totalProducts = 0;
     const cartProducts = JSON.parse(localStorage.getItem('cart-products'));
@@ -18,6 +19,7 @@ export default class ShoppingIcon extends Component {
     }
     return 0;
   }
+  
   render() {
     return (
       <div>
