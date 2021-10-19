@@ -19,7 +19,7 @@ export default class ShoppingIcon extends Component {
     }
     return 0;
   }
-  
+
   render() {
     return (
       <div>

@@ -19,7 +19,6 @@ export default class ShoppingCart extends Component {
   setCartItems = (storage) => {
     this.setState({ items: storage });
   }
-
   render() {
     const { items } = this.state;
     return (
