@@ -10,16 +10,18 @@ class ProductCard extends Component {
       resultCategory: [], // guadar a resposta da api
       idProduct: '',
     };
-    // ideia: passar id da categoria e do id por params.
-    // ideia atual: pegar history anterior e joga agora, faz um find pelo id atual(location.path.id)
     this.cardRender = this.cardRender.bind(this);
+    this.cartHistory = this.cartHistory.bind(this);
   }
 
   componentDidMount() {
     this.cardRender();
   }
 
-  // category = MLB1367 query
+  cartHistory() {
+    const { history } = this.props;
+    history.push('/shopCart');
+  }
 
   async cardRender() {
     const { match } = this.props;
@@ -43,13 +45,33 @@ class ProductCard extends Component {
     }
     return (
       <div>
-        <img src={ productResults.thumbnail } alt="Product" />
-        <h2 data-testid="product-detail-name">
-          { productResults.title }
-        </h2>
-        <h3>
-          { productResults.price }
-        </h3>
+        <button
+          type="button"
+          data-testid="shopping-cart-button"
+          onClick={ this.cartHistory }
+        >
+          Ir para o carrinho.
+        </button>
+        <div>
+          <img src={ productResults.thumbnail } alt="Product" />
+          <h2 data-testid="product-detail-name">
+            { productResults.title }
+          </h2>
+          <h3>
+            { productResults.price }
+          </h3>
+        </div>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => {
+            const storageValue = JSON.parse(localStorage.getItem('cartList'));
+            const saveList = [...storageValue, productResults];
+            localStorage.setItem('cartList', JSON.stringify(saveList));
+          } }
+        >
+          Adcionar
+        </button>
       </div>
     );
   }
@@ -57,6 +79,9 @@ class ProductCard extends Component {
 
 ProductCard.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default ProductCard;

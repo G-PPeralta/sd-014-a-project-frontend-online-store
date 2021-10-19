@@ -12,10 +12,16 @@ class CategoryPage extends Component {
     };
 
     this.renderCategories = this.renderCategories.bind(this);
+    this.cartHistory = this.cartHistory.bind(this);
   }
 
   componentDidMount() {
     this.renderCategories();
+  }
+
+  cartHistory() {
+    const { history } = this.props;
+    history.push('/shopCart');
   }
 
   async renderCategories() {
@@ -33,23 +39,49 @@ class CategoryPage extends Component {
     const { responseState } = this.state;
     return (
       <div>
+        <button
+          type="button"
+          data-testid="shopping-cart-button"
+          onClick={ this.cartHistory }
+        >
+          Ir para o carrinho.
+        </button>
         { responseState.map((result) => (
-          <Link
-            to={ `/card/${result.id}/${id}` }
-            key={ result.id }
-            data-testid="product-detail-link"
-          >
-            <div data-testid="product">
-              <img src={ result.thumbnail } alt={ result.title } />
-              <h4>
-                { result.title }
-              </h4>
-              <h4>
-                { result.price }
-              </h4>
-            </div>
-          </Link>
+          <div key={ result.id }>
+            <Link
+              to={ `/card/${result.id}/${id}` }
+              data-testid="product-detail-link"
+            >
+              <div data-testid="product">
+                <img src={ result.thumbnail } alt={ result.title } />
+                <h4>
+                  { result.title }
+                </h4>
+                <h4>
+                  { result.price }
+                </h4>
+              </div>
+            </Link>
+            <button
+              data-testid="product-add-to-cart"
+              type="button"
+              onClick={ () => {
+                const storageValue = JSON.parse(localStorage.getItem('cartList'));
+                const saveList = [...storageValue, result];
+                localStorage.setItem('cartList', JSON.stringify(saveList));
+              } }
+            >
+              Adicionar
+            </button>
+          </div>
         )) }
+        <button
+          type="button"
+          data-testid="shopping-cart-button"
+          onClick={ this.cartHistory }
+        >
+          Ir para o carrinho.
+        </button>
       </div>
     );
   }
@@ -57,6 +89,9 @@ class CategoryPage extends Component {
 
 CategoryPage.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default CategoryPage;

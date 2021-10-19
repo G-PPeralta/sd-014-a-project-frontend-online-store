@@ -16,6 +16,10 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.queryApi = this.queryApi.bind(this);
     this.cartHistory = this.cartHistory.bind(this);
+
+    if (!localStorage.getItem('cartList')) {
+      localStorage.setItem('cartList', JSON.stringify([]));
+    }
   }
 
   handleChange(event) {
