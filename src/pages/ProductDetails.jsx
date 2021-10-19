@@ -39,6 +39,7 @@ export default class ProductDetails extends Component {
       </div>
     );
   }
+  <ShoppingIcon />
 }
 
 ProductDetails.propTypes = {
