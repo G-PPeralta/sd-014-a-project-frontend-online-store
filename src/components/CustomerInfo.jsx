@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/CustomerInfo.css';
+import '...src/style/CustomerInfo.css';
 
 export default class CustomerInfo extends Component {
   renderCustomInput = (id, type) => (
