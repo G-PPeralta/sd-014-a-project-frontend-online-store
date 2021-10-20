@@ -13,6 +13,7 @@ class CategoryPage extends Component {
 
     this.renderCategories = this.renderCategories.bind(this);
     this.cartHistory = this.cartHistory.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +23,24 @@ class CategoryPage extends Component {
   cartHistory() {
     const { history } = this.props;
     history.push('/shopCart');
+  }
+
+  addItem(parmCategory) {
+    const storageValue = JSON.parse(localStorage.getItem('cartList'));
+    const find = storageValue.find((product) => product.id === parmCategory.id);
+    if (find === undefined) {
+      const saveList = [...storageValue, { ...parmCategory, quantity: 1 }];
+      localStorage.setItem('cartList', JSON.stringify(saveList));
+    } else {
+      const map = storageValue.map((exam) => {
+        if (exam.id === parmCategory.id) {
+          const newProduct = { ...find, quantity: find.quantity + 1 };
+          return newProduct;
+        }
+        return exam;
+      });
+      localStorage.setItem('cartList', JSON.stringify([...map]));
+    }
   }
 
   async renderCategories() {
@@ -34,6 +53,7 @@ class CategoryPage extends Component {
   }
 
   render() {
+    const storage = JSON.parse(localStorage.getItem('cartList'));
     const { match } = this.props;
     const { id } = match.params;
     const { responseState } = this.state;
@@ -70,11 +90,9 @@ class CategoryPage extends Component {
             <button
               data-testid="product-add-to-cart"
               type="button"
-              onClick={ () => {
-                const storageValue = JSON.parse(localStorage.getItem('cartList'));
-                const saveList = [...storageValue, result];
-                localStorage.setItem('cartList', JSON.stringify(saveList));
-              } }
+              onClick={ () => this.addItem(result) }
+              disabled={ storage.map((max) => max
+                .quantity >= result.avaliable_quantity) }
             >
               Adicionar
             </button>

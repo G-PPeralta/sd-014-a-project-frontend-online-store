@@ -9,9 +9,11 @@ class ProductCard extends Component {
     this.state = {
       resultCategory: [], // guadar a resposta da api
       idProduct: '',
+      // storage: storage,
     };
     this.cardRender = this.cardRender.bind(this);
     this.cartHistory = this.cartHistory.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +23,26 @@ class ProductCard extends Component {
   cartHistory() {
     const { history } = this.props;
     history.push('/shopCart');
+  }
+
+  addItem(paramAdd) {
+    const storageValue = JSON.parse(localStorage.getItem('cartList'));
+    const find = storageValue.find((product) => product.id === paramAdd.id);
+    if (find === undefined) {
+      const saveList = [...storageValue, { ...paramAdd, quantity: 1 }];
+      localStorage.setItem('cartList', JSON.stringify(saveList));
+    } else {
+      const map = storageValue.map((exam) => {
+        if (exam.id === paramAdd.id) {
+          const newProduct = { ...find, quantity: find.quantity + 1 };
+          return newProduct;
+        }
+        return exam;
+      });
+      localStorage.setItem('cartList', JSON.stringify([...map]));
+      this.setState({
+      });
+    }
   }
 
   async cardRender() {
@@ -34,6 +56,7 @@ class ProductCard extends Component {
   }
 
   render() {
+    // const storage = JSON.parse(localStorage.getItem('cartList'));
     const { resultCategory, idProduct } = this.state;
     const productResults = resultCategory.find((product) => product.id === idProduct);
     if (productResults === undefined) {
@@ -69,11 +92,9 @@ class ProductCard extends Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => {
-            const storageValue = JSON.parse(localStorage.getItem('cartList'));
-            const saveList = [...storageValue, productResults];
-            localStorage.setItem('cartList', JSON.stringify(saveList));
-          } }
+          onClick={ () => this.addItem(productResults) }
+          // disabled={ storage.map((max) => max
+          //   .quantity >= productResults.avaliable_quantity) }
         >
           Adcionar
         </button>
