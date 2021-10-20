@@ -60,6 +60,11 @@ class ProductCard extends Component {
           <h3>
             { productResults.price }
           </h3>
+          {
+            productResults.shipping.free_shipping
+              ? <h5 data-testid="free-shipping">Frete Grátis</h5>
+              : false
+          }
         </div>
         <button
           data-testid="product-detail-add-to-cart"

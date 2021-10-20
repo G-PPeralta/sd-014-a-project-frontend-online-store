@@ -60,6 +60,11 @@ class CategoryPage extends Component {
                 <h4>
                   { result.price }
                 </h4>
+                {
+                  result.shipping.free_shipping
+                    ? <h5 data-testid="free-shipping">Frete Grátis</h5>
+                    : false
+                }
               </div>
             </Link>
             <button
