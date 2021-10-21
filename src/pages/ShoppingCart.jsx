@@ -11,7 +11,6 @@ export default class ShoppingCart extends Component {
 
     this.state = {
       cartProducts: [],
-      loading: false,
     };
 
     this.showProducts = this.showProducts.bind(this);
