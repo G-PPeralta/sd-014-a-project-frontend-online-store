@@ -11,7 +11,7 @@ export default class ShoppingIcon extends Component {
   getNumberOfProductsInCart() {
     let totalProducts = 0;
     const cartProducts = JSON.parse(localStorage.getItem('cart-products'));
-    if(cartProducts) {
+    if (cartProducts) {
       cartProducts.forEach((p) => {
         totalProducts += p.productQty;
       });
