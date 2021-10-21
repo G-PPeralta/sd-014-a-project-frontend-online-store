@@ -67,7 +67,6 @@ class ShopCart extends React.Component {
         atualize: map,
       });
     }
-    console.log(parmCart);
   }
 
   remove(parm) {
@@ -122,7 +121,7 @@ class ShopCart extends React.Component {
                 type="button"
                 data-testid="product-increase-quantity"
                 onClick={ () => this.addItem(product) }
-                disabled={ product.quantity >= product.avaliable_quantity }
+                disabled={ product.quantity >= product.available_quantity }
               >
                 +
               </button>

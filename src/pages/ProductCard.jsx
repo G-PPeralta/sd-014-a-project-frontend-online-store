@@ -7,9 +7,7 @@ class ProductCard extends Component {
     super(props);
 
     this.state = {
-      resultCategory: [], // guadar a resposta da api
-      idProduct: '',
-      // storage: storage,
+      resultCategory: [],
     };
     this.cardRender = this.cardRender.bind(this);
     this.cartHistory = this.cartHistory.bind(this);
@@ -56,7 +54,6 @@ class ProductCard extends Component {
   }
 
   render() {
-    // const storage = JSON.parse(localStorage.getItem('cartList'));
     const { resultCategory, idProduct } = this.state;
     const productResults = resultCategory.find((product) => product.id === idProduct);
     if (productResults === undefined) {
@@ -93,8 +90,6 @@ class ProductCard extends Component {
           data-testid="product-detail-add-to-cart"
           type="button"
           onClick={ () => this.addItem(productResults) }
-          // disabled={ storage.map((max) => max
-          //   .quantity >= productResults.avaliable_quantity) }
         >
           Adcionar
         </button>

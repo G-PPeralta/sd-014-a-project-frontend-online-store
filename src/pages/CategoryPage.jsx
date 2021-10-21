@@ -53,7 +53,6 @@ class CategoryPage extends Component {
   }
 
   render() {
-    // const storage = JSON.parse(localStorage.getItem('cartList'));
     const { match } = this.props;
     const { id } = match.params;
     const { responseState } = this.state;
@@ -91,8 +90,6 @@ class CategoryPage extends Component {
               data-testid="product-add-to-cart"
               type="button"
               onClick={ () => this.addItem(result) }
-              // disabled={ storage.map((max) => max
-              //   .quantity >= result.avaliable_quantity) }
             >
               Adicionar
             </button>
