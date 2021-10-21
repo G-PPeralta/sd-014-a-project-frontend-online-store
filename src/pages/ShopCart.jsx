@@ -31,7 +31,7 @@ class ShopCart extends React.Component {
     const storageValue = JSON.parse(localStorage.getItem('cartList'));
     const find = storageValue.find((product) => product.id === parmCart.id);
     if (find === undefined) {
-      const saveList = [...storageValue, { ...parmCart, quantity: 1 }];
+      const saveList = [...storageValue, { ...parmCart, quantity: 0 }];
       localStorage.setItem('cartList', JSON.stringify(saveList));
     } else {
       const map = storageValue.map((exam) => {
@@ -46,7 +46,6 @@ class ShopCart extends React.Component {
         atualize: map,
       });
     }
-    console.log(parmCart);
   }
 
   remvItem(parmCart) {
@@ -65,7 +64,7 @@ class ShopCart extends React.Component {
       });
       localStorage.setItem('cartList', JSON.stringify([...map]));
       this.setState({
-        atualize: find.quantity,
+        atualize: map,
       });
     }
     console.log(parmCart);
@@ -111,7 +110,14 @@ class ShopCart extends React.Component {
               key={ product.id }
               data-testid="shopping-cart-product-name"
             >
-              { product.title }
+              <span
+                data-testid="shopping-cart-product-quantity"
+              >
+                { product.quantity }
+              </span>
+              <span>
+                { product.title }
+              </span>
               <button
                 type="button"
                 data-testid="product-increase-quantity"
@@ -135,9 +141,8 @@ class ShopCart extends React.Component {
               </button>
             </li>))}
         </ul>
-        <p
-          data-testid="shopping-cart-product-quantity"
-        >
+        <p>
+          Total de Produtos:
           { this.quantityScore() }
         </p>
         <button
